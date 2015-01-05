@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="linux"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-05T13:20+0800"/>
+<meta name="generated" content="2015-01-05T20:28+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -115,6 +115,7 @@ Use "." command to run a bash file in current shell instead of its child. The ".
 <tr><td class="left">egrep</td><td class="left">egrep regex document</td><td class="left">Faster than grep &amp; support group</td></tr>
 <tr><td class="left">awk</td><td class="left">awk '{printf "%s %s\n", $1, $3}' file</td><td class="left">Read lines from file, for each line use command, printf is same as printf in c.</td></tr>
 <tr><td class="left">iconv</td><td class="left">iconv -f gbk -t utf-8 -o out file</td><td class="left">Convert file encoding</td></tr>
+<tr><td class="left">cal</td><td class="left">cal</td><td class="left">Display calendar</td></tr>
 </tbody>
 </table>
 
@@ -127,6 +128,14 @@ Use "." command to run a bash file in current shell instead of its child. The ".
 <h3 id="sec-2-2"><span class="section-number-3">2.2</span> Programming</h3>
 <div class="outline-text-3" id="text-2-2">
 
+<p>Return value:
+</p>
+<p>
+exit 0; "execution succeed"
+</p>
+<p>
+exit 1; "execution failed"(any number except 0 are stand for false)
+</p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" />
 </colgroup>
@@ -153,6 +162,11 @@ Use "." command to run a bash file in current shell instead of its child. The ".
 <tr><td class="left">$1 $2 $3 &hellip;</td><td class="left">Parameters</td></tr>
 <tr><td class="left">$*</td><td class="left">All the parameters</td></tr>
 <tr><td class="left">$0</td><td class="left">Name of current command</td></tr>
+<tr><td class="left">$#</td><td class="left">Parameter count</td></tr>
+<tr><td class="left">${var-something}</td><td class="left">x = ${var-something}; x = $var if $var is not null, else x = something</td></tr>
+<tr><td class="left">${var=something}</td><td class="left">var = something if var is null</td></tr>
+<tr><td class="left">${var? something}</td><td class="left">print something and exit if var is null.</td></tr>
+<tr><td class="left">${var+something}</td><td class="left">var = something if var is not null.</td></tr>
 </tbody>
 </table>
 
@@ -170,6 +184,60 @@ Use "." command to run a bash file in current shell instead of its child. The ".
 
 <pre class="src src-bash"># Iterate all files in the directory.
 for i in *; do echo $i; done
+until who | egrep 'rex'; do sleep 10; done # Wait rex login
+while who | egrep 'rex'; do sleep 10; done # Wait rex logout
+</pre>
+
+
+<p>
+Switch case
+</p>
+
+
+<pre class="src src-bash">case $# in
+0)  set `date`; m=$2; y=$1;; # Use set to set positional parameters
+1)  m=$1; set `date`; y=$1;;
+*)  m=$1; y=$2;;
+esac
+
+echo $m
+</pre>
+
+
+<p>
+If then else
+</p>
+
+
+<pre class="src src-bash">if test $1 = 'hello' # Blank is required around <span style="color: #2aa198;">"="</span>.
+then
+   # do something
+else
+   # do something
+fi
+</pre>
+
+
+<p>
+Use trap to catch exit singnal
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="right" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="right">Singnal</td><td class="left">Meaning</td></tr>
+<tr><td class="right">0</td><td class="left">Exit normally</td></tr>
+<tr><td class="right">1</td><td class="left">parse</td></tr>
+<tr><td class="right">2</td><td class="left">ctrl+d</td></tr>
+<tr><td class="right">3</td><td class="left">exit</td></tr>
+<tr><td class="right">9</td><td class="left">kill -9</td></tr>
+<tr><td class="right">15</td><td class="left">kill -15</td></tr>
+</tbody>
+</table>
+
+
+
+
+<pre class="src src-bash">trap 'rm -rf tmp.file; exit 1' 1 2 15
 </pre>
 
 
@@ -246,7 +314,7 @@ inode保存文件的的字节数，userid，groupid，authorize，timestamp，�
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-05T13:20+0800</p>
+<p class="date">Date: 2015-01-05T20:28+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
