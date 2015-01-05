@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+							 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>sql</title>
+<meta http-equiv="Content-Type" content="text/html;charset=gbk"/>
+<meta name="title" content="sql"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-02-07T00:07+0900"/>
+<meta name="author" content="rex.houy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">sql</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 函数</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 函数</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>1.minus作用：获取A中有而B中没有的数据。(只支持oracle)
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">select</span> a <span style="color: #e5786d;">from</span> A minus <span style="color: #8ac6f2; font-weight: bold;">select</span> b <span style="color: #e5786d;">from</span> B;
+</pre>
+
+
+<p>
+2.intersect作用：获取A中和B中相同的数据。
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">select</span> a <span style="color: #e5786d;">from</span> A <span style="color: #8ac6f2; font-weight: bold;">intersect</span> <span style="color: #8ac6f2; font-weight: bold;">select</span> b <span style="color: #e5786d;">from</span> B;
+</pre>
+
+
+<p>
+3.coalesce作用：将null值转为需要的值。
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">select</span> <span style="color: #e5786d;">coalesce</span>(a, 0) <span style="color: #e5786d;">from</span> A;
+</pre>
+
+
+<p>
+4.length作用：获取字符串长度。
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">select</span> <span style="color: #e5786d;">length</span>(a) <span style="color: #e5786d;">from</span> A;
+</pre>
+
+
+<p>
+5.replace作用：替换字符串。(替换a中的‘1’为‘0’)
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">select</span> <span style="color: #e5786d;">replace</span>(a, <span style="color: #95e454;">'1'</span>, <span style="color: #95e454;">'0'</span>) <span style="color: #e5786d;">from</span> A;
+</pre>
+
+
+<p>
+6.case when &hellip; then &hellip; else &hellip; end作用：相当于if else语句
+</p>
+<p>
+7.substr作用：获取子字符串。(substr(a, start, length))
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">select</span> substr(a, 1, 2) <span style="color: #e5786d;">from</span> A;
+</pre>
+
+
+<p>
+8.avg()  sum()   min()  max()
+</p></div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2014-02-07T00:07+0900</p>
+<p class="author">Author: rex.houy</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

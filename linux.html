@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>linux</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="linux"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2015-01-05T08:51+0800"/>
+<meta name="author" content="Rex.Houy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">linux</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Hot-keys</a></li>
+<li><a href="#sec-2">2 Shell</a>
+<ul>
+<li><a href="#sec-2-1">2.1 Command</a></li>
+<li><a href="#sec-2-2">2.2 Programming</a></li>
+<li><a href="#sec-2-3">2.3 Control structures</a></li>
+<li><a href="#sec-2-4">2.4 Priority</a></li>
+<li><a href="#sec-2-5">2.5 tee</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3 File system</a>
+<ul>
+<li><a href="#sec-3-1">3.1 inode</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Hot-keys</h2>
+<div class="outline-text-2" id="text-1">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">key</td><td class="left">Command</td></tr>
+<tr><td class="left">C-h</td><td class="left">backspace</td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Shell</h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p>
+Shell searching path is defined in enviroment variable PATH.
+</p>
+<p>
+Child shell would not change the variable in parents.
+</p>
+<p>
+When running a bash file, the commands will execute in a child shell.
+</p>
+<p>
+Use "." command to run a bash file in current shell instead of its child. The "." command does not run commands in the file, but make the file content as the input for current shell. So the "." command can run a bash file if the file is authentirized for read, execute authority is not needed.
+</p>
+<p>
+3 files are created when start a program, these files are stdin, stdout, stderr, the file descripters are 0, 1, 2
+</p>
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Command</h3>
+<div class="outline-text-3" id="text-2-1">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">Shell</td><td class="left">Usage</td><td class="left">Function</td></tr>
+<tr><td class="left">write</td><td class="left">write user<sub>name</sub></td><td class="left">Send message to someone</td></tr>
+<tr><td class="left">ll</td><td class="left">ll -t</td><td class="left">List order by time</td></tr>
+<tr><td class="left">who</td><td class="left">who</td><td class="left">Show who is logged on</td></tr>
+<tr><td class="left">date</td><td class="left">date</td><td class="left">Show current date</td></tr>
+<tr><td class="left">nice</td><td class="left">nice eclipse &gt; e.out &amp;</td><td class="left">Run command in lower priority</td></tr>
+<tr><td class="left">nohup</td><td class="left">nohup eclipse &gt; /dev/null &amp;</td><td class="left">Run command in background, don't hang up even the shell is closed</td></tr>
+<tr><td class="left">od</td><td class="left">od file</td><td class="left">Dump files in octal and other formats</td></tr>
+<tr><td class="left">file</td><td class="left">file *</td><td class="left">Show files type info</td></tr>
+<tr><td class="left">df</td><td class="left">df</td><td class="left">Show disk info</td></tr>
+<tr><td class="left">sleep</td><td class="left">sleep 5</td><td class="left">Sleep n seconds</td></tr>
+<tr><td class="left">uniq</td><td class="left">uniq -d file</td><td class="left">Find uniq lines in file -d for repeated lines only, -u for uniq lines only, -c for count</td></tr>
+<tr><td class="left">comm</td><td class="left">comm -3 file1 file2</td><td class="left">Compare sorted files</td></tr>
+<tr><td class="left">tr</td><td class="left">tr A-Z a-z</td><td class="left">Translate characters. 'tr -sc A-Za-z '"\012"' translate none alphabet into change line.</td></tr>
+<tr><td class="left">fgrep</td><td class="left">fgrep regex document</td><td class="left">Useful when handling large sets of files</td></tr>
+<tr><td class="left">egrep</td><td class="left">egrep regex document</td><td class="left">Faster than grep &amp; support group</td></tr>
+<tr><td class="left">awk</td><td class="left">awk '{printf "%s %s\n", $1, $3}' file</td><td class="left">Read lines from file, for each line use command, printf is same as printf in c.</td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Programming</h3>
+<div class="outline-text-3" id="text-2-2">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">Operator</td><td class="left">Functionality</td></tr>
+<tr><td class="left">&gt;</td><td class="left">Redirect stdin to file</td></tr>
+<tr><td class="left">&gt;&gt;</td><td class="left">Redirect stdin to file(append)</td></tr>
+<tr><td class="left">&lt;</td><td class="left">Read file into stdin</td></tr>
+<tr><td class="left">p1 &#124; p2</td><td class="left">Output of p1 as input of p2</td></tr>
+<tr><td class="left">*</td><td class="left">Match 0 or many chars</td></tr>
+<tr><td class="left">?</td><td class="left">Match any char</td></tr>
+<tr><td class="left">{0-9}</td><td class="left">Match char in range</td></tr>
+<tr><td class="left">p1; p2</td><td class="left">run p2 after p1</td></tr>
+<tr><td class="left">p1 &amp;</td><td class="left">Do not wait p1's execution</td></tr>
+<tr><td class="left">`command`</td><td class="left">Run command in `` use the result as output</td></tr>
+<tr><td class="left">(command)</td><td class="left">Run in child shell</td></tr>
+<tr><td class="left">$var</td><td class="left">Variable value</td></tr>
+<tr><td class="left">'string'</td><td class="left">String</td></tr>
+<tr><td class="left">"string$var"</td><td class="left">"string#{var}"</td></tr>
+<tr><td class="left">#</td><td class="left">Comment</td></tr>
+<tr><td class="left">var = 'value'</td><td class="left"></td></tr>
+<tr><td class="left">p1 &amp;&amp; p2</td><td class="left">Run p2 if p1 succeed</td></tr>
+<tr><td class="left">p1 &#124;&#124; p2</td><td class="left">Run p2 if p1 failed</td></tr>
+<tr><td class="left">$1 $2 $3 &hellip;</td><td class="left">Parameters</td></tr>
+<tr><td class="left">$*</td><td class="left">All the parameters</td></tr>
+<tr><td class="left">$0</td><td class="left">Name of current command</td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Control structures</h3>
+<div class="outline-text-3" id="text-2-3">
+
+
+
+
+<pre class="src src-bash"># Iterate all files in the directory.
+for i in *; do echo $i; done
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Priority</h3>
+<div class="outline-text-3" id="text-2-4">
+
+<p>Use bracket to change command execute priority.
+</p>
+
+
+<pre class="src src-bash">(date; ls) | wc
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> tee</h3>
+<div class="outline-text-3" id="text-2-5">
+
+<p>Save the result to file and then use the result as output
+</p>
+
+
+<pre class="src src-bash">date | tee file | wc
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> File system</h2>
+<div class="outline-text-2" id="text-3">
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> inode</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<p>每个分区都被分为两部分，一部分用于保存meta data（inode）另一部分用于保存文件。
+</p>
+<p>
+通过「df -i」可以查看inode的总数以及使用情况。
+</p>
+<p>
+inode保存文件的的字节数，userid，groupid，authorize，timestamp，链接数，文件block的位置。
+</p>
+<p>
+每个inode都有一个编号，打开一个文件时，系统先根据文件名找到对应的inode编号（在当前目录中可以找到对应关系，当前目录也是一个文件）;获取inode信息;找到文件所在的block并读取文件信息。
+</p>
+<p>
+目录是一个文件，该文件保存了目录中所有文件的文件名及其对应的inode编号。所以拥有一个目录的r权限只能读取到该目录包含的文件名，如果要获取文件信息，还需要获取inode中保存的信息，而这需要x权限。
+</p>
+<p>
+可以有多个文件名指向同一个inode，在删除时只有指向该inode的所有链接都被删除后文件才会被删除。
+</p>
+<p>
+硬链接就是创建一个指向某inode的链接，而软链接则只是指向了该文件的文件名。
+</p></div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2015-01-05T08:51+0800</p>
+<p class="author">Author: Rex.Houy</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

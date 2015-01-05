@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+							 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>spring</title>
+<meta http-equiv="Content-Type" content="text/html;charset=gbk"/>
+<meta name="title" content="spring"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-12-02T23:12+0800"/>
+<meta name="author" content="Rex.Houy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">spring</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Bean配置</a></li>
+<li><a href="#sec-2">2 scope</a></li>
+<li><a href="#sec-3">3 事务管理</a></li>
+<li><a href="#sec-4">4 other</a>
+<ul>
+<li><a href="#sec-4-1">4.1 获取applicationContext</a></li>
+<li><a href="#sec-4-2">4.2 获取webapplicationcontext</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 annotation</a></li>
+<li><a href="#sec-6">6 MVC</a>
+<ul>
+<li><a href="#sec-6-1">6.1 annotation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Bean配置</h2>
+<div class="outline-text-2" id="text-1">
+
+
+
+
+<pre class="src src-xml"><span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">&#20351;&#29992;&#26500;&#36896;&#20989;&#25968;&#21019;&#24314;</span><span style="color: #99968b;">--&gt;</span>
+&lt;<span style="color: #cae682;">bean</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">class</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>/&gt;
+<span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">&#20351;&#29992;factory-method&#20013;&#23450;&#20041;&#30340;&#38745;&#24577;&#24037;&#21378;&#26041;&#27861;&#21019;&#24314;</span><span style="color: #99968b;">--&gt;</span>
+&lt;<span style="color: #cae682;">bean</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">class</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">factory-method</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">method_name</span><span style="color: #95e454;">"</span>/&gt;
+<span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">&#20351;&#29992;&#23454;&#20363;&#21270;&#30340;&#24037;&#21378;&#26041;&#27861;&#21019;&#24314;</span><span style="color: #99968b;">--&gt;</span>
+&lt;<span style="color: #cae682;">bean</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">factory-bean</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">factory-method</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">method_name</span><span style="color: #95e454;">"</span>/&gt;
+<span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">&#24102;&#21442;&#25968;&#30340;&#26500;&#36896;&#27880;&#20837;</span><span style="color: #99968b;">--&gt;</span>
+&lt;<span style="color: #cae682;">bean</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">class</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>&gt;
+	&lt;<span style="color: #cae682;">constructor-arg</span>&gt;&lt;<span style="color: #cae682;">bean</span> <span style="color: #cae682;">class</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>&gt;&lt;/<span style="color: #cae682;">constructor-arg</span>&gt;
+	&lt;<span style="color: #cae682;">constructor-arg</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">int</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">value</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>&gt;&lt;/<span style="color: #cae682;">constructor-arg</span>&gt; <span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">type&#26631;&#26126;&#21442;&#25968;&#31867;&#22411;</span><span style="color: #99968b;">--&gt;</span>
+	&lt;<span style="color: #cae682;">constructor-arg</span> <span style="color: #cae682;">index</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">2</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">value</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>&gt;&lt;/<span style="color: #cae682;">constructor-arg</span>&gt;  <span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">index&#26631;&#26126;&#26159;&#31532;&#20960;&#20010;&#21442;&#25968;</span><span style="color: #99968b;">--&gt;</span>
+&lt;/<span style="color: #cae682;">bean</span>&gt;
+<span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">&#35774;&#20540;&#27880;&#20837;</span><span style="color: #99968b;">--&gt;</span>
+&lt;<span style="color: #cae682;">bean</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">class</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>&gt;
+	&lt;<span style="color: #cae682;">property</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">ref</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>&gt;&lt;/<span style="color: #cae682;">property</span>&gt;
+	&lt;<span style="color: #cae682;">property</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>&gt;&lt;<span style="color: #cae682;">null</span>/&gt;&lt;/<span style="color: #cae682;">property</span>&gt; <span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">&#20351;&#29992;null</span><span style="color: #99968b;">--&gt;</span>
+	<span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">java.util.Properties</span><span style="color: #99968b;">--&gt;</span>
+	&lt;<span style="color: #cae682;">property</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>&gt;
+		&lt;<span style="color: #cae682;">props</span>&gt;&lt;<span style="color: #cae682;">prop</span> <span style="color: #cae682;">key</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>&gt;xx&lt;/<span style="color: #cae682;">prop</span>&gt;&lt;/<span style="color: #cae682;">props</span>&gt;
+	&lt;/<span style="color: #cae682;">property</span>&gt;
+
+	<span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">java.util.List</span><span style="color: #99968b;">--&gt;</span>
+	&lt;<span style="color: #cae682;">property</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>&gt;
+		&lt;<span style="color: #cae682;">list</span>&gt;
+			&lt;<span style="color: #cae682;">value</span>&gt;xx&lt;/<span style="color: #cae682;">value</span>&gt;
+			&lt;<span style="color: #cae682;">ref</span> <span style="color: #cae682;">bean</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>/&gt;
+		&lt;/<span style="color: #cae682;">list</span>&gt;
+	&lt;/<span style="color: #cae682;">property</span>&gt;
+
+	<span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">java.util.Map</span><span style="color: #99968b;">--&gt;</span>
+	&lt;<span style="color: #cae682;">property</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>&gt;
+		&lt;<span style="color: #cae682;">map</span>&gt;
+			&lt;<span style="color: #cae682;">entry</span>&gt;
+				&lt;<span style="color: #cae682;">key</span>&gt;&lt;<span style="color: #cae682;">value</span>&gt;xx&lt;/<span style="color: #cae682;">value</span>&gt;&lt;/<span style="color: #cae682;">key</span>&gt;
+				&lt;<span style="color: #cae682;">value</span>&gt;&lt;/<span style="color: #cae682;">value</span>&gt;
+			&lt;/<span style="color: #cae682;">entry</span>&gt;
+			&lt;<span style="color: #cae682;">entry</span>&gt;
+		 ...
+			&lt;/<span style="color: #cae682;">entry</span>&gt;
+			...
+		&lt;/<span style="color: #cae682;">map</span>&gt;
+	&lt;/<span style="color: #cae682;">property</span>&gt;
+
+	<span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">java.util.set</span><span style="color: #99968b;">--&gt;</span>
+	&lt;<span style="color: #cae682;">property</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>&gt;
+		&lt;<span style="color: #cae682;">set</span>&gt;
+			&lt;<span style="color: #cae682;">value</span>&gt;xx&lt;/<span style="color: #cae682;">value</span>&gt;
+			&lt;<span style="color: #cae682;">ref</span> <span style="color: #cae682;">bean</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> /&gt;
+		&lt;/<span style="color: #cae682;">set</span>&gt;
+	&lt;/<span style="color: #cae682;">property</span>&gt;
+&lt;/<span style="color: #cae682;">bean</span>&gt;
+
+<span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">&#26041;&#27861;&#26367;&#25442;</span><span style="color: #99968b;">--&gt;</span>
+&lt;<span style="color: #cae682;">replaced-method</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">method-name</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">replacer</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">bean-name</span><span style="color: #95e454;">"</span>&gt;<span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">&#20854;&#20013;replacer&#20013;&#37197;&#32622;&#30340;bean&#38656;&#35201;&#23454;&#29616;MethodReplacer&#25509;&#21475;&#12290;</span><span style="color: #99968b;">--&gt;</span>
+<span style="color: #99968b;">&lt;!--</span>
+<span style="color: #99968b;">&#35813;&#26041;&#27861;&#30340;&#36820;&#22238;&#31867;&#22411;&#24517;&#39035;&#20026;bean&#20013;&#37197;&#32622;&#30340;&#23545;&#35937;&#31867;&#22411;&#65288;&#25110;&#20854;&#29238;&#31867;&#30340;&#31867;&#22411;&#65289;&#65292;&#23454;&#38469;&#19978;&#35813;&#26041;&#27861;&#34987;&#26367;&#25442;&#20026;ctx.getBean("bean-name")&#12290;</span>
+<span style="color: #99968b;">&#25152;&#20197;&#23545;&#20110;bean&#23646;&#24615;&#20013;&#37197;&#32622;&#30340;bean&#27809;&#26377;&#35201;&#27714;&#12290;</span>
+<span style="color: #99968b;">&#36825;&#19968;&#26041;&#27861;&#30340;&#20351;&#29992;&#30456;&#24403;&#20110;&#35843;&#29992;set&#26041;&#27861;&#65292;&#19981;&#21516;&#20043;&#22788;&#22312;&#20110;&#22914;&#26524;set&#30340;bean&#30340;scope&#20026;prototype&#26102;set&#26041;&#27861;&#21482;&#33021;&#24471;&#21040;&#19968;&#20010;&#23545;&#35937;&#65292;</span>
+<span style="color: #99968b;">&#32780;&#22810;&#27425;&#35843;&#29992;&#37197;&#32622;&#30340;&#26041;&#27861;&#21017;&#21487;&#20197;&#22810;&#27425;&#24471;&#21040;&#19981;&#21516;&#30340;bean&#12290;</span><span style="color: #99968b;">--&gt;</span>
+&lt;<span style="color: #cae682;">lookup-method</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">method-name</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">bean</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">bean-name</span><span style="color: #95e454;">"</span>&gt;
+
+<span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">&#35774;&#32622;bean&#34987;&#23454;&#20363;&#21270;&#20043;&#21518;&#25191;&#34892;&#30340;&#26041;&#27861;&#65292;</span><span style="color: #99968b;">--&gt;</span>
+&lt;<span style="color: #cae682;">bean</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">init-method</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">destroy-method</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> ...&gt;
+<span style="color: #99968b;">&lt;!--</span><span style="color: #99968b;">&#22312;web&#23481;&#22120;&#25110;EJB&#23481;&#22120;&#22806;&#38656;&#35201;&#25191;&#34892;destroy&#26041;&#27861;&#38656;&#35201;&#20351;&#29992;beanfactory&#30340;destroySingletons&#26041;&#27861;&#65292;&#25110;&#20854;&#20182;destroy&#26041;&#27861;&#12290;</span>
+<span style="color: #99968b;">&#20063;&#21487;&#20197;&#35753;bean&#32487;&#25215;InitializingBean&#65292;&#23454;&#29616;afterPropertiesSet&#26041;&#27861;&#65292;&#20197;&#23454;&#29616;init-method&#12290;&#20063;&#21487;&#20197;&#20351;&#29992;@PreDestroy&#21644;@PostConstruct&#26469;&#23454;&#29616;&#12290;</span><span style="color: #99968b;">--&gt;</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> scope</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>bean的生成方式&lt;bean name="" class="" scope=""&gt;：默认是singleton。设置为prototype每一次都新生成一个。
+设置为request|session|global，这几个用于web应用中，需要在xml中设置requestContextFilter，详见spring手册，bean scopes。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> 事务管理</h2>
+<div class="outline-text-2" id="text-3">
+
+<p>1.机制：在运行时调用一个类的方法时，将会执行如下步骤：
+</p>
+<p>
+AOP Proxy &ndash;&gt; Transaction Advisor &ndash;&gt; Custom Advisor  &ndash;&gt; Target Method
+</p>
+<p>
+2.配置:
+</p>
+<p>
+(a).transactionManager: data source transaction manager,有一个property为datasource；
+</p>
+
+
+<pre class="src src-xml">&lt;<span style="color: #cae682;">bean</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">txManager</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">class</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">org.springframework.jdbc.datasource.DataSourceTransactionManager</span><span style="color: #95e454;">"</span>&gt;
+&lt;<span style="color: #cae682;">property</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">dataSource</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">ref</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">dataSource</span><span style="color: #95e454;">"</span>/&gt;
+&lt;/<span style="color: #cae682;">bean</span>&gt;
+</pre>
+
+<p>
+(b).tx:advice: 里面配置transaction-manager以及需要配置事务的方法，异常等内容；
+</p>
+
+
+<pre class="src src-xml">&lt;<span style="color: #e5786d;">tx</span>:<span style="color: #cae682;">advice</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">txAdvice</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">transaction-manager</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">txManager</span><span style="color: #95e454;">"</span>&gt;
+&lt;<span style="color: #e5786d;">tx</span>:<span style="color: #cae682;">attributes</span>&gt;
+&lt;<span style="color: #e5786d;">tx</span>:<span style="color: #cae682;">method</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">get*</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">read-only</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">true</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">rollback-for</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">exception</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">timeout</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">&#36229;&#26102;&#26102;&#38388;</span><span style="color: #95e454;">"</span>/&gt;
+&lt;<span style="color: #e5786d;">tx</span>:<span style="color: #cae682;">method</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">*</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">no-rollback-for</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">exception</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">isolation</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">propagation</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>/&gt;
+&lt;/<span style="color: #e5786d;">tx</span>:<span style="color: #cae682;">attributes</span>&gt;
+&lt;/<span style="color: #e5786d;">tx</span>:<span style="color: #cae682;">advice</span>&gt;
+</pre>
+
+<p>
+(c).aop:pointcut和aop:advisor:advisor需要一个pointcut和一个txAdvice。
+</p>
+
+
+<pre class="src src-xml">&lt;<span style="color: #e5786d;">aop</span>:<span style="color: #cae682;">config</span>&gt;
+&lt;<span style="color: #e5786d;">aop</span>:<span style="color: #cae682;">pointcut</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">fooServiceOperation</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">expression</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">execution(* x.y.service.FooService.*(..))</span><span style="color: #95e454;">"</span>/&gt;
+&lt;<span style="color: #e5786d;">aop</span>:<span style="color: #cae682;">advisor</span> <span style="color: #cae682;">advice-ref</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">txAdvice</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">pointcut-ref</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">fooServiceOperation</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">order</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">1</span><span style="color: #95e454;">"</span>/&gt;
+&lt;/<span style="color: #e5786d;">aop</span>:<span style="color: #cae682;">config</span>&gt;
+</pre>
+
+<p>
+order用于设置切面的执行顺序；isolation用于设置事务的隔离级别。
+</p>
+<p>
+3.回滚：
+</p>
+<p>
+用户自己处理的异常将不会被回滚，因为spring将不能够捕获该异常。spring中也可以设置哪些异常需要回滚(tx:method中设置rollback-for和no-rollback-for属性)。(spring通过aop来捕获异常进行回滚操作，所以需要进行回滚则需要让spring能够捕获到该异常)
+</p>
+<p>
+4.事务传播性(propagation)：
+</p>
+<p>
+PROPAGATION_REQUIRED:支持当前事务，如果当前没有事务，就新建一个事务。(默认)
+</p>
+<p>
+PROPAGATION_SUPPORTS:支持当前事务，如果当前没有事务，就以非事务方式执行。
+</p>
+<p>
+PROPAGATION_MANDATORY:支持当前事务，如果当前没有事务，就抛出异常。
+</p>
+<p>
+PROPAGATION_REQUIRES_NEW:新建事务，如果当前存在事务，把当前事务挂起。
+</p>
+<p>
+PROPAGATION_NOT_SUPPORTED:以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。
+</p>
+<p>
+PROPAGATION_NEVER:以非事务方式执行，如果当前存在事务，则抛出异常。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> other</h2>
+<div class="outline-text-2" id="text-4">
+
+
+<p>
+spring hibernate:
+</p>
+<p>
+在hibernateDaoSupport中调用getsession(false),false的作用是告诉该session被事务管理，如果不设置为false则需要手动关闭session。要使用该方法并使用参数false必须配置事务。如果没有配置事务，则使用getsession(true)获取session，同时在使用完了之后要调用releaseSession(session)释放获得的session；
+</p>
+<p>
+spring中一个applicationContext或beanFactory对象维护xml中设置的bean，如果多个applicationContext指向同一个xml则多个applicationContext之间实例化的对象是不同的。每次创建一个新的applicationContext对象则无法实现singleton。这是应该避免的。
+</p>
+<p>
+spring配置文件中使用properties文件中的信息，需要加入如下配置
+</p>
+
+
+<pre class="src src-xml">&lt;<span style="color: #cae682;">bean</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">propertyConfigurer</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">class</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">org.springframework.beans.factory.config.PropertyPlaceholderConfigurer</span><span style="color: #95e454;">"</span>
+	<span style="color: #cae682;">lazy-init</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">false</span><span style="color: #95e454;">"</span>&gt;
+	&lt;<span style="color: #cae682;">property</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">locations</span><span style="color: #95e454;">"</span>&gt;
+	 &lt;<span style="color: #cae682;">list</span>&gt;&lt;<span style="color: #cae682;">value</span>&gt;xxx.properties&lt;/<span style="color: #cae682;">value</span>&gt;&lt;/<span style="color: #cae682;">list</span>&gt;
+	&lt;/<span style="color: #cae682;">property</span>&gt;
+&lt;/<span style="color: #cae682;">bean</span>&gt;
+</pre>
+
+
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> 获取applicationContext</h3>
+<div class="outline-text-3" id="text-4-1">
+
+<p>1.继承自抽象类ApplicationObjectSupport
+</p>
+<p>
+说明：抽象类ApplicationObjectSupport提供getApplicationContext()方法，可以方便的获取到ApplicationContext。
+</p>
+<p>
+Spring初始化时，会通过该抽象类的setApplicationContext(ApplicationContext context)方法将ApplicationContext 对象注入。
+</p>
+<p>
+2.继承自抽象类WebApplicationObjectSupport
+</p>
+<p>
+说明：类似上面方法，调用getWebApplicationContext()获取WebApplicationContext
+</p>
+<p>
+3.实现接口ApplicationContextAware
+</p>
+<p>
+说明：实现该接口的setApplicationContext(ApplicationContext context)方法，并保存ApplicationContext 对象。
+</p>
+<p>
+Spring初始化时，会通过该方法将ApplicationContext对象注入。
+</p>
+<p>
+4.web项目中配置Listener，Linstener类实现ServletContextListener接口，contextInitialized(ServletContextEvent e)方法中使用e.getServletContext()获得servletContext进而获得webApplicationContext；
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> 获取webapplicationcontext</h3>
+<div class="outline-text-3" id="text-4-2">
+
+
+
+
+<pre class="src src-java"><span style="color: #92a65e; font-weight: bold;">WebApplicationContext</span> <span style="color: #cae682;">ctx</span> = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> annotation</h2>
+<div class="outline-text-2" id="text-5">
+
+<p>需要在配置文件中加入&lt;context:annotation-config/&gt;，以使spring去解析annotation，该配置告诉spring使用postprocessor类来预处理这些信息。
+</p>
+<p>
+@Required：用于某个属性或是其set方法，表示该属性必须被注入，如果没有注入则会报错。可以避免运行时出现NullPointerException
+</p>
+<p>
+@Autowired：在配置文件中&lt;bean &hellip; autowire="byName|byType|constructor|autoDetect"&gt;设置按照什么方式进行注入，一般来说使用byName，将会根据属性名在配置文件中寻找具有相同name(id)的bean进行注入。也可以在&lt;beans default-autowire="byName"&gt;统一设定所有bean使用autowire，如果不设置，默认不会使用autowire。
+</p>
+<p>
+@Component("bean_name")用于class，作用为标识这个class为一个spring的bean，以替代配置文件中&lt;bean&gt;配置。
+</p>
+<p>
+需要增加配置&lt;context:component-scan base-package="" /&gt;
+</p></div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> MVC</h2>
+<div class="outline-text-2" id="text-6">
+
+
+
+</div>
+
+<div id="outline-container-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> annotation</h3>
+<div class="outline-text-3" id="text-6-1">
+
+
+
+
+
+<pre class="src src-java"><span style="color: #e5786d;">@Controller</span>
+<span style="color: #e5786d;">@RequestMapping</span>(<span style="color: #95e454;">"/test"</span>)
+<span style="color: #8ac6f2; font-weight: bold;">public</span> <span style="color: #8ac6f2; font-weight: bold;">class</span> <span style="color: #92a65e; font-weight: bold;">TestController</span> {
+
+	<span style="color: #e5786d;">@RequestMapping</span>(value=<span style="color: #95e454;">"/{id}"</span>,method=<span style="color: #e5786d;">RequestMethod</span>.GET, produces=<span style="color: #95e454;">"text/json"</span>)
+	<span style="color: #e5786d;">@ResponseBody</span>
+	<span style="color: #8ac6f2; font-weight: bold;">public</span> <span style="color: #92a65e; font-weight: bold;">JBean</span> <span style="color: #cae682;">get</span>(<span style="color: #e5786d;">@PathVariable</span> <span style="color: #92a65e; font-weight: bold;">int</span> <span style="color: #cae682;">id</span>) {
+		<span style="color: #8ac6f2; font-weight: bold;">return</span> <span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">JBean</span>(id);
+	}
+
+<span style="color: #92a65e; font-weight: bold;">curl</span> <span style="color: #cae682;">http</span>:<span style="color: #99968b;">//</span><span style="color: #99968b;">localhost/app/test/1</span>
+</pre>
+
+
+
+<pre class="src src-java"><span style="color: #95e454;">/**</span>
+<span style="color: #95e454;"> * same as setRequestAttribute("bean", new JBean(2));</span>
+<span style="color: #95e454;"> */</span>
+<span style="color: #e5786d;">@RequestMapping</span>
+<span style="color: #e5786d;">@ModelAttribute</span>(<span style="color: #95e454;">"bean"</span>)
+<span style="color: #8ac6f2; font-weight: bold;">public</span> <span style="color: #92a65e; font-weight: bold;">JBean</span> <span style="color: #cae682;">get</span>() {
+	<span style="color: #8ac6f2; font-weight: bold;">return</span> <span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">JBean</span>(2);
+}
+
+<span style="color: #95e454;">/**</span>
+<span style="color: #95e454;"> * Same as the previous one.</span>
+<span style="color: #95e454;"> */</span>
+<span style="color: #e5786d;">@RequestMapping</span>
+<span style="color: #8ac6f2; font-weight: bold;">public</span> <span style="color: #92a65e; font-weight: bold;">String</span> <span style="color: #cae682;">get</span>(<span style="color: #92a65e; font-weight: bold;">Model</span> <span style="color: #cae682;">m</span>) {
+	m.addAttribute(<span style="color: #95e454;">"bean"</span>, <span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">JBean</span>(2));
+	<span style="color: #8ac6f2; font-weight: bold;">return</span> <span style="color: #95e454;">"redirect:/succeed"</span>; <span style="color: #99968b;">//</span><span style="color: #99968b;">redirect to url</span>
+}
+
+
+</pre>
+
+
+
+
+<pre class="src src-java"><span style="color: #e5786d;">@RequestMapping</span>(value=<span style="color: #95e454;">"/multi"</span>, method=<span style="color: #e5786d;">RequestMethod</span>.POST)
+<span style="color: #e5786d;">@ResponseBody</span>
+<span style="color: #8ac6f2; font-weight: bold;">public</span> <span style="color: #92a65e; font-weight: bold;">String</span> <span style="color: #cae682;">getF</span>(<span style="color: #e5786d;">@RequestParam</span>(<span style="color: #95e454;">"f"</span>) <span style="color: #92a65e; font-weight: bold;">MultipartFile</span> <span style="color: #cae682;">file</span>) {
+	<span style="color: #8ac6f2; font-weight: bold;">return</span> file.getOriginalFilename();
+}
+
+</pre>
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2014-12-02T23:12+0800</p>
+<p class="author">Author: Rex.Houy</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

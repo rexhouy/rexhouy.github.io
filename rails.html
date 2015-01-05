@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>rails</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="rails"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2015-01-04T21:59+0800"/>
+<meta name="author" content="Rex.Houy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">rails</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Rails script</a></li>
+<li><a href="#sec-2">2 Rails coding</a>
+<ul>
+<li><a href="#sec-2-1">2.1 Strong parameters check</a></li>
+<li><a href="#sec-2-2">2.2 Validate</a></li>
+<li><a href="#sec-2-3">2.3 Set parameters for application.html.erb</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3 Views</a>
+<ul>
+<li><a href="#sec-3-1">3.1 Path helper</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4 DB migration</a>
+<ul>
+<li><a href="#sec-4-1">4.1 Create</a></li>
+<li><a href="#sec-4-2">4.2 Update</a></li>
+<li><a href="#sec-4-3">4.3 Delete</a></li>
+<li><a href="#sec-4-4">4.4 Index</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 ActiveRecord</a>
+<ul>
+<li><a href="#sec-5-1">5.1 Naming conventions</a></li>
+<li><a href="#sec-5-2">5.2 Single table inheritance</a></li>
+<li><a href="#sec-5-3">5.3 Create</a></li>
+<li><a href="#sec-5-4">5.4 Read</a>
+<ul>
+<li><a href="#sec-5-4-1">5.4.1 Query methods</a></li>
+<li><a href="#sec-5-4-2">5.4.2 Eager loading</a></li>
+<li><a href="#sec-5-4-3">5.4.3 Scopes</a></li>
+<li><a href="#sec-5-4-4">5.4.4 Dynamic finders</a></li>
+</ul>
+</li>
+<li><a href="#sec-5-5">5.5 Update</a></li>
+<li><a href="#sec-5-6">5.6 Delete</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">6 Validations</a></li>
+<li><a href="#sec-7">7 Logger</a></li>
+<li><a href="#sec-8">8 Others</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Rails script</h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+Create a new application.
+</p>
+
+
+
+<pre class="src src-bash">rails new app_name [-d mysql -m haml]
+</pre>
+
+
+<p>
+Start up server
+</p>
+
+
+<pre class="src src-bash">rails server
+</pre>
+
+
+<p>
+Create controller
+</p>
+
+
+<pre class="src src-bash">// contains methods response to [./ctr_name/method1] [./ctr_name/method2]
+rails g controller ctr_name [method1 method2 ...]
+</pre>
+
+
+<p>
+Remove created controller
+</p>
+
+
+<pre class="src src-bash">rails d controller ctr_name
+</pre>
+
+
+<p>
+Create resource(rest full controller and router, model)
+</p>
+
+
+<pre class="src src-bash">rails g resource r_name
+</pre>
+
+
+
+<p>
+Create model
+</p>
+
+
+<pre class="src src-bash">rails g model model_name field_1:type field_2:type
+
+// Generate db info
+rake db:migrate
+</pre>
+
+
+
+<p>
+List routes infomation
+</p>
+
+
+<pre class="src src-bash">rake routes
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Rails coding</h2>
+<div class="outline-text-2" id="text-2">
+
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Strong parameters check</h3>
+<div class="outline-text-3" id="text-2-1">
+
+
+
+
+<pre class="src src-ruby"><span style="color: #2aa198;">//</span> <span style="color: #268bd2;">Defines</span> avaible variables, must be <span style="color: #859900;">private</span>
+<span style="color: #859900;">private</span>
+<span style="color: #859900;">def</span> <span style="color: #b58900;">test_params</span>
+        params.require(<span style="color: #268bd2;">:test</span>).permit(<span style="color: #268bd2;">:id</span>, <span style="color: #268bd2;">:name</span>)
+<span style="color: #859900;">end</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Validate</h3>
+<div class="outline-text-3" id="text-2-2">
+
+
+
+
+<pre class="src src-ruby"><span style="color: #2aa198;">//</span> validates method <span style="color: #859900;">in</span> record
+validates <span style="color: #268bd2;">:id</span>, <span style="color: #268bd2;">presence</span>: <span style="color: #6c71c4;">true</span>, <span style="color: #268bd2;">length</span>: { <span style="color: #268bd2;">minimum</span>: 5 }
+
+<span style="color: #2aa198;">//</span> validate errors <span style="color: #859900;">in</span> view
+&lt;% <span style="color: #859900;">if</span> <span style="color: #6c71c4;">@model</span>.errors.any? <span style="color: #859900;">do</span> <span style="color: #2aa198;">%&gt;</span>
+<span style="color: #2aa198;">        &lt;ul&gt;</span>
+                &lt;% <span style="color: #6c71c4;">@model</span>.errors.full_messages.each <span style="color: #859900;">do</span> |msg| <span style="color: #2aa198;">%&gt;</span>
+<span style="color: #2aa198;">                        &lt;li&gt;</span>&lt;<span style="color: #2aa198;">%= msg %&gt;&lt;/li&gt;</span>
+<span style="color: #2aa198;">                &lt;% end %&gt;</span>
+<span style="color: #2aa198;">        &lt;/ul&gt;</span>
+<span style="color: #2aa198;">&lt;% end %&gt;</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Set parameters for application.html.erb</h3>
+<div class="outline-text-3" id="text-2-3">
+
+
+
+
+<pre class="src src-ruby"><span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Add before_action in application_controller.rb</span>
+        before_action <span style="color: #268bd2;">:menu</span>
+
+        <span style="color: #859900;">def</span> <span style="color: #b58900;">menu</span>()
+                <span style="color: #6c71c4;">@menus</span> = [{<span style="color: #268bd2;">:url</span> =&gt; <span style="color: #2aa198;">"/orders"</span>, <span style="color: #268bd2;">:text</span> =&gt; <span style="color: #2aa198;">"&#35746;&#21333;&#31649;&#29702;"</span>, <span style="color: #268bd2;">:active</span> =&gt; <span style="color: #6c71c4;">false</span>},
+                                                 {<span style="color: #268bd2;">:url</span> =&gt; <span style="color: #2aa198;">"/customers"</span>, <span style="color: #268bd2;">:text</span> =&gt; <span style="color: #2aa198;">"&#23458;&#25143;&#31649;&#29702;"</span>, <span style="color: #268bd2;">:active</span> =&gt; <span style="color: #6c71c4;">false</span>}]
+
+                <span style="color: #6c71c4;">@menus</span>.each <span style="color: #859900;">do</span> |menu|
+                        menu[<span style="color: #268bd2;">:active</span>] = menu[<span style="color: #268bd2;">:url</span>].eql? <span style="color: #2aa198;">"</span><span style="color: #6c71c4;">/#{params[:controller]}</span><span style="color: #2aa198;">"</span>
+                <span style="color: #859900;">end</span>
+        <span style="color: #859900;">end</span>
+
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Views</h2>
+<div class="outline-text-2" id="text-3">
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Path helper</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<p>Take user for example
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">#</td><td class="left">URL Pattern</td><td class="left">Method</td><td class="left">Action</td><td class="left">Path String</td></tr>
+<tr><td class="left">To List Page</td><td class="left">/users</td><td class="left">GET</td><td class="left">index</td><td class="left">users<sub>path</sub></td></tr>
+<tr><td class="left">To Edit Page</td><td class="left">/users/id/eidt</td><td class="left">GET</td><td class="left">edit</td><td class="left">edit<sub>user</sub><sub>path</sub>(@user)</td></tr>
+<tr><td class="left">To Detail Page</td><td class="left">/users/id</td><td class="left">GET</td><td class="left">show</td><td class="left">user<sub>path</sub>(@user)</td></tr>
+<tr><td class="left">To Create Page</td><td class="left">/users/new</td><td class="left">GET</td><td class="left">new</td><td class="left">new<sub>user</sub><sub>path</sub></td></tr>
+<tr><td class="left">Create</td><td class="left">/users</td><td class="left">POST</td><td class="left">create</td><td class="left">&mdash;</td></tr>
+<tr><td class="left">Update</td><td class="left">/users/id</td><td class="left">PUT</td><td class="left">update</td><td class="left">user<sub>path</sub>(@user), method: :put</td></tr>
+<tr><td class="left">Delete</td><td class="left">/users/id</td><td class="left">DELETE</td><td class="left">destroy</td><td class="left">user<sub>path</sub>(@user), method: :delete</td></tr>
+</tbody>
+</table>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> DB migration</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>Change db
+</p>
+
+
+<pre class="src src-bash">rails g migration CreateMap
+rails g migration AddTypeToMap
+</pre>
+
+<p>
+Supported data types:
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">:primary<sub>key</sub></td></tr>
+<tr><td class="left">:string</td></tr>
+<tr><td class="left">:text</td></tr>
+<tr><td class="left">:integer</td></tr>
+<tr><td class="left">:float</td></tr>
+<tr><td class="left">:decimal</td></tr>
+<tr><td class="left">:datetime</td></tr>
+<tr><td class="left">:timestamp</td></tr>
+<tr><td class="left">:time</td></tr>
+<tr><td class="left">:date</td></tr>
+<tr><td class="left">:binary</td></tr>
+<tr><td class="left">:boolean</td></tr>
+<tr><td class="left">:references</td></tr>
+</tbody>
+</table>
+
+Supported
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">limit</td><td class="left">Sets the maximum size of the string/text/binary/integer fields</td></tr>
+<tr><td class="left">precision</td><td class="left">Defines the precision for the decimal fields</td></tr>
+<tr><td class="left">scale</td><td class="left">Defines the scale for the decimal fields</td></tr>
+<tr><td class="left">polymorphic</td><td class="left">Adds a type column for belongs<sub>to</sub> associations</td></tr>
+<tr><td class="left">null</td><td class="left">Allows or disallows NULL values in the column.</td></tr>
+</tbody>
+</table>
+
+
+
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Create</h3>
+<div class="outline-text-3" id="text-4-1">
+
+
+
+
+<pre class="src src-ruby"><span style="color: #859900;">def</span> <span style="color: #b58900;">change</span>
+        create_table <span style="color: #268bd2;">:products</span> <span style="color: #859900;">do</span> |t|
+                t.string <span style="color: #268bd2;">:name</span>, <span style="color: #268bd2;">index</span>: <span style="color: #6c71c4;">true</span>
+                t.text <span style="color: #268bd2;">:description</span>
+                t.decimal <span style="color: #268bd2;">:price</span>, <span style="color: #268bd2;">precision</span>: 2, <span style="color: #268bd2;">scale</span>: 5, <span style="color: #268bd2;">null</span>: <span style="color: #6c71c4;">false</span>
+
+                t.timestamps
+        <span style="color: #859900;">end</span>
+<span style="color: #859900;">end</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Update</h3>
+<div class="outline-text-3" id="text-4-2">
+
+
+
+
+<pre class="src src-ruby"><span style="color: #859900;">def</span> <span style="color: #b58900;">change</span>
+        add_column <span style="color: #268bd2;">:products</span>, <span style="color: #268bd2;">:part_number</span>, <span style="color: #268bd2;">:string</span>
+
+        add_index <span style="color: #268bd2;">:products</span>, <span style="color: #268bd2;">:name</span>
+
+        add_reference <span style="color: #268bd2;">:products</span>, <span style="color: #268bd2;">:user</span>, <span style="color: #268bd2;">index</span>: <span style="color: #6c71c4;">true</span>
+
+        add_timestamps
+
+        create_join_table <span style="color: #268bd2;">:products</span>, <span style="color: #268bd2;">:categories</span> <span style="color: #859900;">do</span> |t|
+                t.index <span style="color: #268bd2;">:product_id</span> <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Not necessary</span>
+                t.index <span style="color: #268bd2;">:category_id</span> <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Not necessary</span>
+        <span style="color: #859900;">end</span>
+
+        change_table <span style="color: #268bd2;">:products</span> <span style="color: #859900;">do</span> |t|
+                t.remove <span style="color: #268bd2;">:description</span>, <span style="color: #268bd2;">:name</span>
+                t.string <span style="color: #268bd2;">:part_number</span>
+                t.index <span style="color: #268bd2;">:part_number</span>
+                t.rename <span style="color: #268bd2;">:upccode</span>, <span style="color: #268bd2;">:upc_code</span>
+        <span style="color: #859900;">end</span>
+
+        rename_column <span style="color: #268bd2;">:users</span>, <span style="color: #268bd2;">:email</span>, <span style="color: #268bd2;">:email_address</span>
+
+        rename_index
+
+        rename_table <span style="color: #268bd2;">:users</span>, <span style="color: #268bd2;">:customers</span>
+
+<span style="color: #859900;">end</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Delete</h3>
+<div class="outline-text-3" id="text-4-3">
+
+
+
+
+<pre class="src src-ruby"><span style="color: #859900;">def</span> <span style="color: #b58900;">change</span>
+        remove_column <span style="color: #268bd2;">:products</span>, <span style="color: #268bd2;">:part_number</span>, <span style="color: #268bd2;">:string</span>
+
+        drop_table <span style="color: #268bd2;">:users</span>
+
+        drop_join_table <span style="color: #268bd2;">:products</span>, <span style="color: #268bd2;">:users</span>
+
+        remove_timestamps
+
+        remove_reference <span style="color: #268bd2;">:products</span>, <span style="color: #268bd2;">:user</span>
+
+<span style="color: #859900;">end</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Index</h3>
+<div class="outline-text-3" id="text-4-4">
+
+
+
+
+<pre class="src src-ruby"><span style="color: #859900;">def</span> <span style="color: #b58900;">change</span>
+        add_index <span style="color: #268bd2;">:products</span>, <span style="color: #268bd2;">:part_number</span>
+
+        add_reference <span style="color: #268bd2;">:products</span>, <span style="color: #268bd2;">:user</span>, <span style="color: #268bd2;">index</span>: <span style="color: #6c71c4;">true</span> <span style="color: #93a1a1; font-style: italic;">#</span><span style="color: #93a1a1; font-style: italic;">belongs_to relation, Remember not to use :users</span>
+<span style="color: #859900;">end</span>
+
+<span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Use up down method to handle reversable operations</span>
+<span style="color: #859900;">def</span> <span style="color: #b58900;">up</span>
+        <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">add a foreign key</span>
+        execute <span style="color: #2aa198;">&lt;&lt;-SQL</span>
+<span style="color: #2aa198;">                ALTER TABLE products</span>
+<span style="color: #2aa198;">                        ADD CONSTRAINT fk_products_categories</span>
+<span style="color: #2aa198;">                        FOREIGN KEY (category_id)</span>
+<span style="color: #2aa198;">                        REFERENCES categories(id)</span>
+<span style="color: #2aa198;">        SQL</span>
+<span style="color: #859900;">end</span>
+
+<span style="color: #859900;">def</span> <span style="color: #b58900;">down</span>
+        execute <span style="color: #2aa198;">&lt;&lt;-SQL</span>
+<span style="color: #2aa198;">                ALTER TABLE products</span>
+<span style="color: #2aa198;">                        DROP FOREIGN KEY fk_products_categories</span>
+<span style="color: #2aa198;">        SQL</span>
+<span style="color: #859900;">end</span>
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> ActiveRecord</h2>
+<div class="outline-text-2" id="text-5">
+
+
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Naming conventions</h3>
+<div class="outline-text-3" id="text-5-1">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">Class</td><td class="left">Schema</td><td class="left">Foreign keys</td><td class="left">Primary key</td></tr>
+<tr><td class="left">Post</td><td class="left">posts</td><td class="left">post<sub>id</sub></td><td class="left">id</td></tr>
+<tr><td class="left">LineItem</td><td class="left">line<sub>items</sub></td><td class="left">line<sub>item</sub><sub>id</sub></td><td class="left">id</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div id="outline-container-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Single table inheritance</h3>
+<div class="outline-text-3" id="text-5-2">
+
+</div>
+
+</div>
+
+<div id="outline-container-5-3" class="outline-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> Create</h3>
+<div class="outline-text-3" id="text-5-3">
+
+<p>Create &amp; save
+</p>
+
+
+<pre class="src src-ruby"><span style="color: #268bd2;">User</span>.create(<span style="color: #268bd2;">name</span>: <span style="color: #2aa198;">'Rex'</span>, <span style="color: #268bd2;">occupation</span>: <span style="color: #2aa198;">'Code Plumber'</span>)
+<span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Equals</span>
+user = <span style="color: #268bd2;">User</span>.new <span style="color: #859900;">do</span> |u|
+        u.name = <span style="color: #2aa198;">"Rex"</span>
+        u.occupation = <span style="color: #2aa198;">"Code Plumber"</span>
+<span style="color: #859900;">end</span>
+user.save
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-5-4" class="outline-3">
+<h3 id="sec-5-4"><span class="section-number-3">5.4</span> Read</h3>
+<div class="outline-text-3" id="text-5-4">
+
+
+</div>
+
+<div id="outline-container-5-4-1" class="outline-4">
+<h4 id="sec-5-4-1"><span class="section-number-4">5.4.1</span> Query methods</h4>
+<div class="outline-text-4" id="text-5-4-1">
+
+
+
+
+<pre class="src src-ruby"><span style="color: #268bd2;">User</span>.all
+<span style="color: #268bd2;">User</span>.first
+<span style="color: #268bd2;">User</span>.find_by(<span style="color: #268bd2;">name</span>: <span style="color: #2aa198;">"Rex"</span>)
+<span style="color: #268bd2;">User</span>.where(<span style="color: #268bd2;">name</span>: <span style="color: #2aa198;">"Rex"</span>, <span style="color: #268bd2;">occupation</span>: <span style="color: #2aa198;">"Code Plumber"</span>).order(<span style="color: #2aa198;">"created_at desc"</span>)
+</pre>
+
+<p>
+Every methods has a .*! version, those methods will throw an exception if no record can be found.
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">Methods</td><td class="left">Function</td><td class="left">Parameters</td><td class="left">Example</td></tr>
+<tr><td class="left">take</td><td class="left">Find records without ordering</td><td class="left">limit(optional)</td><td class="left"></td></tr>
+<tr><td class="left">first</td><td class="left">Find the 1st record ordered by primary key</td><td class="left">limit(optional)</td><td class="left"></td></tr>
+<tr><td class="left">last</td><td class="left">Find the last record ordered by primary key</td><td class="left">limit(optional)</td><td class="left"></td></tr>
+<tr><td class="left">find<sub>by</sub></td><td class="left">Find the 1st record by condition</td><td class="left">name: value</td><td class="left"></td></tr>
+<tr><td class="left">find</td><td class="left">Find multiple records by primary key</td><td class="left">[primary<sub>key]</sub></td><td class="left"></td></tr>
+<tr><td class="left">find<sub>each</sub></td><td class="left">Find all records and handle these records in block(use batch)</td><td class="left">block</td><td class="left">T</td></tr>
+<tr><td class="left">all</td><td class="left">Find all records</td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">count</td><td class="left">Find count</td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">minimum</td><td class="left"></td><td class="left">field</td><td class="left"></td></tr>
+<tr><td class="left">maximum</td><td class="left"></td><td class="left">field</td><td class="left"></td></tr>
+</tbody>
+</table>
+
+
+
+
+<pre class="src src-ruby"><span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">start &amp; batch_size is optional</span>
+<span style="color: #268bd2;">User</span>.find_each(<span style="color: #268bd2;">start</span>: 2000, <span style="color: #268bd2;">batch_size</span>: 5000) <span style="color: #859900;">do</span> |user|
+        <span style="color: #268bd2;">NewsLetter</span>.weekly_deliver(user)
+<span style="color: #859900;">end</span>
+</pre>
+
+<p>
+Every methods below returns a chainable relation object(ActiveRecord::Relation).
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">Methods</td><td class="left">Function</td><td class="left">Parameters</td><td class="left">Example</td></tr>
+<tr><td class="left">where</td><td class="left"></td><td class="left">sql, param / hash</td><td class="left">T</td></tr>
+<tr><td class="left">select</td><td class="left">Set select fields</td><td class="left">fields</td><td class="left">T</td></tr>
+<tr><td class="left">limit</td><td class="left">Set records limit</td><td class="left">limit</td><td class="left"></td></tr>
+<tr><td class="left">offset</td><td class="left">Set offset</td><td class="left">number</td><td class="left"></td></tr>
+<tr><td class="left">group</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">having</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">none</td><td class="left">returns a chainable relation with no records</td><td class="left">-</td><td class="left"></td></tr>
+<tr><td class="left">joins</td><td class="left">joins tables together</td><td class="left"></td><td class="left">T</td></tr>
+</tbody>
+</table>
+
+
+
+
+<pre class="src src-ruby"><span style="color: #268bd2;">User</span>.where(<span style="color: #2aa198;">"name = ?"</span>, params[<span style="color: #268bd2;">:name</span>])
+<span style="color: #268bd2;">User</span>.where(<span style="color: #2aa198;">"name = :name"</span>, {<span style="color: #268bd2;">name</span>: params[<span style="color: #268bd2;">:name</span>]})
+<span style="color: #268bd2;">User</span>.where(<span style="color: #2aa198;">"name"</span> =&gt; params[<span style="color: #268bd2;">:name</span>])
+<span style="color: #268bd2;">User</span>.where(<span style="color: #268bd2;">name</span>: params[<span style="color: #268bd2;">:name</span>])
+<span style="color: #268bd2;">User</span>.joins(<span style="color: #268bd2;">:address</span>).where(<span style="color: #268bd2;">address</span>: {<span style="color: #268bd2;">nation</span>: params[<span style="color: #268bd2;">:nation</span>]}) <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Nested attributes</span>
+<span style="color: #268bd2;">User</span>.where(<span style="color: #268bd2;">age</span>: 12..15) <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Between X and Y</span>
+<span style="color: #268bd2;">User</span>.where(<span style="color: #268bd2;">name</span>: [<span style="color: #2aa198;">"Homer"</span>, <span style="color: #2aa198;">"Bart"</span>]) <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">in</span>
+<span style="color: #268bd2;">User</span>.where.not(<span style="color: #268bd2;">name</span>: <span style="color: #2aa198;">"Homer"</span>)
+<span style="color: #268bd2;">Client</span>.order(<span style="color: #268bd2;">name</span>: <span style="color: #268bd2;">:asc</span>, <span style="color: #268bd2;">age</span>: <span style="color: #268bd2;">:desc</span>)
+</pre>
+
+
+
+<pre class="src src-ruby"><span style="color: #268bd2;">User</span>.select(<span style="color: #268bd2;">:name</span>).distinct
+</pre>
+
+
+
+<pre class="src src-ruby"><span style="color: #268bd2;">User</span>.joins(<span style="color: #268bd2;">:address</span>, <span style="color: #268bd2;">:articles</span>) <span style="color: #93a1a1; font-style: italic;">#</span><span style="color: #93a1a1; font-style: italic;">join multiple tables</span>
+<span style="color: #268bd2;">User</span>.joins(<span style="color: #268bd2;">address</span>: <span style="color: #268bd2;">:nations</span>) <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Nested join</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-5-4-2" class="outline-4">
+<h4 id="sec-5-4-2"><span class="section-number-4">5.4.2</span> Eager loading</h4>
+<div class="outline-text-4" id="text-5-4-2">
+
+<p>Associated records are loaded when it is used.
+</p>
+<p>
+There are some methods to eagerly load those records.
+</p>
+
+
+<pre class="src src-ruby"><span style="color: #268bd2;">User</span>.includes(<span style="color: #268bd2;">:address</span>).limit(10)
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-5-4-3" class="outline-4">
+<h4 id="sec-5-4-3"><span class="section-number-4">5.4.3</span> Scopes</h4>
+<div class="outline-text-4" id="text-5-4-3">
+
+<p>Predefine a query(condition) that can be used easily as method.
+</p>
+<p>
+scope methods should return a ActiveRecord::Relation object.
+</p>
+<p>
+default scopes are applied to all queries.
+</p>
+
+
+<pre class="src src-ruby">scope <span style="color: #268bd2;">:local</span> -&gt; (value) { where(<span style="color: #268bd2;">nations</span>: value) }
+<span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Previous is the same as the following</span>
+<span style="color: #859900;">def</span> <span style="color: #b58900;">self.local</span>(value)
+        where(<span style="color: #268bd2;">nations</span>: value)
+<span style="color: #859900;">end</span>
+<span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Default scope</span>
+default_scope { where(<span style="color: #2aa198;">"removed_at IS NULL"</span>) }
+<span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Using scopes</span>
+<span style="color: #268bd2;">User</span>.local(<span style="color: #2aa198;">"china"</span>).all
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-5-4-4" class="outline-4">
+<h4 id="sec-5-4-4"><span class="section-number-4">5.4.4</span> Dynamic finders</h4>
+<div class="outline-text-4" id="text-5-4-4">
+
+<p>ActiveRecord defined query methods for every fields. Use find<sub>by</sub><sub>field</sub><sub>name</sub> to query by field.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5-5" class="outline-3">
+<h3 id="sec-5-5"><span class="section-number-3">5.5</span> Update</h3>
+<div class="outline-text-3" id="text-5-5">
+
+
+
+
+<pre class="src src-ruby">user = <span style="color: #268bd2;">User</span>.find_by(<span style="color: #268bd2;">name</span>: <span style="color: #2aa198;">'David'</span>)
+user.name = <span style="color: #2aa198;">'Dave'</span>
+user.save
+
+user = <span style="color: #268bd2;">User</span>.find_by(<span style="color: #268bd2;">name</span>: <span style="color: #2aa198;">'David'</span>)
+user.update(<span style="color: #268bd2;">name</span>: <span style="color: #2aa198;">'Dave'</span>)
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-5-6" class="outline-3">
+<h3 id="sec-5-6"><span class="section-number-3">5.6</span> Delete</h3>
+<div class="outline-text-3" id="text-5-6">
+
+
+
+
+<pre class="src src-ruby">user = <span style="color: #268bd2;">User</span>.find_by(<span style="color: #268bd2;">name</span>: <span style="color: #2aa198;">'David'</span>)
+user.destroy
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Validations</h2>
+<div class="outline-text-2" id="text-6">
+
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Logger</h2>
+<div class="outline-text-2" id="text-7">
+
+<p>Saved in /log/[development|test|production].log
+</p>
+
+
+<pre class="src src-ruby">logger.error(<span style="color: #2aa198;">"error message"</span>)
+logger.info(<span style="color: #2aa198;">"infomation"</span>)
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Others</h2>
+<div class="outline-text-2" id="text-8">
+
+
+<p>
+gem 'bootstrap-sass', '~&gt; 3.1.1'
+</p></div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2015-01-04T21:59+0800</p>
+<p class="author">Author: Rex.Houy</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

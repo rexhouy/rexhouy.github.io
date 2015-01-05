@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>git</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="git"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-12-19T16:44+0800"/>
+<meta name="author" content="Rex.Houy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">git</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 安装配置</a></li>
+<li><a href="#sec-2">2 创建新仓库</a></li>
+<li><a href="#sec-3">3 检出仓库</a></li>
+<li><a href="#sec-4">4 添加，删除与提交</a></li>
+<li><a href="#sec-5">5 推送改动</a></li>
+<li><a href="#sec-6">6 分支</a></li>
+<li><a href="#sec-7">7 更新与合并</a></li>
+<li><a href="#sec-8">8 替换本地改动</a></li>
+<li><a href="#sec-9">9 引用repository</a>
+<ul>
+<li><a href="#sec-9-1">9.1 删除submodule</a></li>
+<li><a href="#sec-9-2">9.2 更新</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 安装配置</h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+安装git
+</p>
+
+
+<pre class="src src-bash">sudo apt-get install git git-core
+</pre>
+
+
+<p>
+配置本机的git
+</p>
+
+
+<pre class="src src-bash">$ git config --global user.name <span style="color: #2aa198;">"rexhouy"</span>
+$ git config --global user.email rex.houy@gmail.com
+</pre>
+
+
+<p>
+生成密钥
+</p>
+
+
+<pre class="src src-bash">$ ssh-keygen -t rsa -C <span style="color: #2aa198;">"rex.houy@gmail.com"</span>
+</pre>
+
+
+<p>
+提交密钥
+</p>
+
+
+<pre class="src src-bash">vim /home/rexhouy/.ssh/id_rsa.pub //&#22797;&#21046;&#37324;&#38754;&#30340;&#23494;&#38053;
+</pre>
+
+
+<p>
+检验是否链接上了github
+</p>
+
+
+<pre class="src src-bash">ssh -T git@github.com
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 创建新仓库</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>创建新文件夹，打开，然后执行
+</p>
+
+
+<pre class="src src-bash">git init
+</pre>
+
+<p>
+以创建新的 git 仓库。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> 检出仓库</h2>
+<div class="outline-text-2" id="text-3">
+
+<p>执行如下命令以创建一个本地仓库的克隆版本：
+</p>
+
+
+<pre class="src src-bash">git clone /path/to/repository
+</pre>
+
+<p>
+如果是远端服务器上的仓库，你的命令会是这个样子：
+</p>
+
+
+<pre class="src src-bash">git clone username@host:/path/to/repository
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> 添加，删除与提交</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>你可以计划改动（把它们添加到缓存区），使用如下命令：
+</p>
+
+
+<pre class="src src-bash">git add &lt;filename&gt;
+git add *
+git rm &lt;filename&gt;
+git rm -r &lt;directory&gt;
+</pre>
+
+<p>
+这是 git 基本工作流程的第一步；使用如下命令以实际提交改动：
+</p>
+
+
+<pre class="src src-bash">git commit -m <span style="color: #2aa198;">"&#20195;&#30721;&#25552;&#20132;&#20449;&#24687;"</span>
+</pre>
+
+<p>
+现在，你的改动已经提交到了 HEAD，但是还没到你的远端仓库。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> 推送改动</h2>
+<div class="outline-text-2" id="text-5">
+
+<p>你的改动现在已经在本地仓库的 HEAD 中了。执行如下命令以将这些改动提交到远端仓库：
+</p>
+
+
+<pre class="src src-bash">git push origin master
+</pre>
+
+<p>
+可以把 master 换成你想要推送的任何分支。
+</p>
+<p>
+如果你还没有克隆现有仓库，并欲将你的仓库连接到某个远程服务器，你可以使用如下命令添加：
+</p>
+
+
+<pre class="src src-bash">git remote add origin &lt;server&gt;
+</pre>
+
+<p>
+如此你就能够将你的改动推送到所添加的服务器上去了。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> 分支</h2>
+<div class="outline-text-2" id="text-6">
+
+<p>分支是用来将特性开发绝缘开来的。在你创建仓库的时候，master 是“默认的”。在其他分支上进行开发，完成后再将它们合并到主分支上。
+</p>
+
+<p>
+创建一个叫做“feature<sub>x”的分支，并切换过去：</sub>
+</p>
+
+
+<pre class="src src-bash">git checkout -b feature_x
+</pre>
+
+<p>
+切换回主分支：
+</p>
+
+
+<pre class="src src-bash">git checkout master
+</pre>
+
+<p>
+再把新建的分支删掉：
+</p>
+
+
+<pre class="src src-bash">git branch -d feature_x
+</pre>
+
+<p>
+除非你将分支推送到远端仓库，不然该分支就是 不为他人所见的：
+</p>
+
+
+<pre class="src src-bash">git push origin &lt;branch&gt;
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> 更新与合并</h2>
+<div class="outline-text-2" id="text-7">
+
+<p>要更新你的本地仓库至最新改动，执行：
+</p>
+
+
+<pre class="src src-bash">git pull
+</pre>
+
+<p>
+以在你的工作目录中 获取（fetch） 并 合并（merge） 远端的改动。
+要合并其他分支到你的当前分支（例如 master），执行：
+</p>
+
+
+<pre class="src src-bash">git merge &lt;branch&gt;
+</pre>
+
+<p>
+两种情况下，git 都会尝试去自动合并改动。不幸的是，自动合并并非次次都能成功，并可能导致 冲突（conflicts）。 这时候就需要你修改这些文件来人肉合并这些 冲突（conflicts） 了。改完之后，你需要执行如下命令以将它们标记为合并成功：
+</p>
+
+
+<pre class="src src-bash">git add &lt;filename&gt;
+</pre>
+
+<p>
+在合并改动之前，也可以使用如下命令查看：
+</p>
+
+
+<pre class="src src-bash">git diff &lt;source_branch&gt; &lt;target_branch&gt;
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> 替换本地改动</h2>
+<div class="outline-text-2" id="text-8">
+
+<p>假如你做错事（自然，这是不可能的），你可以使用如下命令替换掉本地改动：
+</p>
+
+
+<pre class="src src-bash">git checkout -- &lt;filename&gt;
+</pre>
+
+<p>
+此命令会使用 HEAD 中的最新内容替换掉你的工作目录中的文件。已添加到缓存区的改动，以及新文件，都不受影响。
+</p>
+<p>
+假如你想要丢弃你所有的本地改动与提交，可以到服务器上获取最新的版本并将你本地主分支指向到它：
+</p>
+
+
+<pre class="src src-bash">git fetch origin
+git reset --hard origin/master
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> 引用repository</h2>
+<div class="outline-text-2" id="text-9">
+
+<p>add Common.git as a submodule at the path "common" inside this repo
+</p>
+
+
+<pre class="src src-bash">git submodule add /var/Common.git common
+</pre>
+
+
+<p>
+initialize it, clone, and check out a copy
+</p>
+
+
+<pre class="src src-bash">git submodule update --init
+</pre>
+
+
+<p>
+commit the addition of the submodule
+</p>
+
+
+<pre class="src src-bash">git commit
+</pre>
+
+
+
+</div>
+
+<div id="outline-container-9-1" class="outline-3">
+<h3 id="sec-9-1"><span class="section-number-3">9.1</span> 删除submodule</h3>
+<div class="outline-text-3" id="text-9-1">
+
+<p>Remove relevent info from .gitmodule
+</p>
+<p>
+Remove relevent info from .git/config
+</p>
+<p>
+git rm &ndash;cached module<sub>path</sub>
+</p>
+<p>
+if git rm report error, try git add .gitmodule, and then run git rm again.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-9-2" class="outline-3">
+<h3 id="sec-9-2"><span class="section-number-3">9.2</span> 更新</h3>
+<div class="outline-text-3" id="text-9-2">
+
+<p>Update .gitmodule
+</p>
+<p>
+update .git/config
+</p>
+<p>
+git submodule sync
+</p></div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2014-12-19T16:44+0800</p>
+<p class="author">Author: Rex.Houy</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+							 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>hibernate</title>
+<meta http-equiv="Content-Type" content="text/html;charset=gbk"/>
+<meta name="title" content="hibernate"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-02-07T00:01+0900"/>
+<meta name="author" content="rex.houy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">hibernate</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 查询</a>
+<ul>
+<li><a href="#sec-1-1">1.1 延迟加载</a></li>
+<li><a href="#sec-1-2">1.2 n+1查询</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2 缓存</a></li>
+<li><a href="#sec-3">3 锁</a></li>
+<li><a href="#sec-4">4 方法</a></li>
+<li><a href="#sec-5">5 关系</a>
+<ul>
+<li><a href="#sec-5-1">5.1 继承</a></li>
+<li><a href="#sec-5-2">5.2 单表继承映射</a></li>
+<li><a href="#sec-5-3">5.3 other</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">6 other</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 查询</h2>
+<div class="outline-text-2" id="text-1">
+
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> 延迟加载</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<p>对于hibernate查询，延迟加载，代理使用的说明：（这两个都使用lazy设置）
+</p>
+<p>
+（lazy设置为true或extra，如果设置为false将不会使用代理而是直接查询）
+</p>
+<p>
+(one-to-many对应配置为true、false、extra；many-to-one或one-to-one对应配置为proxy、no-proxy、false)：
+</p>
+<p>
+1.当使用load()方法时将会使用代理。在一些情况下代理是非常有用的，如：
+</p>
+
+
+<pre class="src src-java"><span style="color: #92a65e; font-weight: bold;">Item</span> <span style="color: #cae682;">item</span> = (<span style="color: #92a65e; font-weight: bold;">Item</span>) session.load(Item.<span style="color: #8ac6f2; font-weight: bold;">class</span>, <span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">Long</span>(123));
+<span style="color: #92a65e; font-weight: bold;">Bid</span> <span style="color: #cae682;">bid</span> = <span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">Bid</span>(<span style="color: #95e454;">"xx"</span>);
+bid.setItem(item);
+session.save(bid);
+</pre>
+
+<p>
+这时通过代理的使用避免了从数据库中进行不必要的查询。
+</p>
+<p>
+（对于使用id查询单个对象hibernate还提供了get方法，该方法将会直接去查询数据库。此外JPA中与load方法相对应的方法为getReference与get方法相对应的方法为find）
+</p>
+<p>
+2.当lazy为true时查询出一个具有关联关系的对象（如使用get），则与他相关联的对象将会由代理对象代替。这时，如果访问关联对象，包括使用size()isEmpty()方法时都将会导致该关联对象(集)被查询出来。这时可以通过设置lazy为extra(one-to-many)使hibernate只查询出size(),isEmpty()所需要的信息。（使用lazy为false时查询一个数据只会查询出与他直接关联的对象，而与他直接关联的对象中的其他对象（与他间接关联的对象）会使用代理代替，也就是说这种查询并不会导致洪泛的产生）
+</p>
+<p>
+（关于lazy的其他说明：proxy与true相同，no-proxy通过字节码加强的方式进行（可能通过使用cglib对该类进行加强，加入了关联对象的内容，只有在真正使用到关联对象的数据时才会查询数据库，也就是说如果调用的关联对象的方法并没有涉及到关联对象在数据库中对应的数据内容则不会导致查询产生，此时如果是proxy则会导致查询产生）保证能够使用lazy为true但又不使用代理）
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> n+1查询</h3>
+<div class="outline-text-3" id="text-1-2">
+
+<p>n+1查询（lazy=true）：
+</p>
+
+
+<pre class="src src-java">List&lt;Item&gt; items = session.createQuery(<span style="color: #95e454;">"from Item"</span>).list;
+items.get(1).getUser();
+items.get(2).getUser();
+</pre>
+
+<p>
+hibernate的执行情况为，当使用createQuery时，查询出item对象列表。后面当逐个访问item的关联对象时，每一次访问都将触发一条sql语句。
+</p>
+<p>
+解决方案：
+</p>
+<p>
+1.batch-size
+</p>
+<p>
+当使用&lt;class &hellip; batch-size=10&gt;设置时，items().get(1)时，将会触发一条sql语句查询出接下来的10个item中的user对象。
+</p>
+<p>
+也可以在&lt;set .. batch-size=10&gt;中设置，效果是一样的，只是范围缩小。
+</p>
+<p>
+2.fetch=subselect
+</p>
+<p>
+当第一次调用items.get()时，将会触发一条sql语句查询出其余的所有对象。
+</p>
+<p>
+3.fetch=join
+</p>
+<p>
+当查询item的时候就同时查询出user对象，这样整个过程只会有一条sql。
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 缓存</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>一级缓存：session范围。
+</p>
+<p>
+二级缓存：application范围或集群范围。默认不打开。
+</p>
+<p>
+一级缓存的管理：
+</p>
+<p>
+evit(Object obj)  将指定的持久化对象从一级缓存中清除,释放对象所占用的内存资源,指定对象从持久化状态变为脱管状态,从而成为游离对象.
+</p>
+<p>
+clear()  将一级缓存中的所有持久化对象清除,释放其占用的内存资源
+</p>
+<p>
+contains(Object obj) 判断指定的对象是否存在于一级缓存中.
+</p>
+<p>
+flush() 刷新一级缓存区的内容,使之与数据库数据保持同步.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> 锁</h2>
+<div class="outline-text-2" id="text-3">
+
+<p>悲观锁：
+</p>
+
+
+<pre class="src src-java">session.get(xx,<span style="color: #e5786d;">LockMode</span>.UPGRADE)
+</pre>
+
+
+<p>
+LockMode.UPGRADE不管是否存在对象，总是通过select到数据库中加载对象。如果数据库系统支持悲观锁(如ORACLE与MYSQL)，就执行select &hellip; for update。如果不支持，就执行普通的select语句。
+</p>
+<p>
+LockMode.UPGRADE<sub>NOWAIT　同LockMode</sub>.UPGRADE相同，此外，对ORACLE数据库，执行select &hellip; for update nowait，表示如果不能立刻获得悲观锁，不等待其他事务释放锁，而是抛出锁定异常。
+</p>
+<p>
+乐观锁：配置&lt;version&gt;元素或&lt;timestamp&gt;元素
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> 方法</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>session.save()保存对象；
+</p>
+<p>
+session.load(class<sub>name</sub>.class, id)查询相应id的对象，将返回代理（直到使用该对象的某方法时才查询数据库），不会同时查询出相关联的对象，如果没有查到将抛出无法恢复的异常；
+</p>
+<p>
+session.get(class<sub>name</sub>.class, id, LockMode.UPGRADE)查询相应id的对象,立即查询，没有数据则返回null，其中lockmode是可选的；
+</p>
+<p>
+session.refresh()刷新某个对象，同时也会查询出与之关联的对象。
+</p>
+<p>
+session.update()如果确定session中没有该对象则使用
+</p>
+<p>
+session.merge()覆盖session中原有的实例（如果没有则查询出来）的属性，完成后用户给出的实例仍为托管对象。
+</p>
+<p>
+session.saveOrUpdate()如果该对象没有id或verion表明该对象为新对象则save，否则update。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> 关系</h2>
+<div class="outline-text-2" id="text-5">
+
+
+
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> 继承</h3>
+<div class="outline-text-3" id="text-5-1">
+
+<p>使用union连接：(可以替代union查询，hql不支持union，如果abstract设置为false那么还将会union查询父类所对应的表)
+</p>
+
+
+<pre class="src src-xml">&lt;<span style="color: #cae682;">class</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">abstract</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">true</span><span style="color: #95e454;">"</span>&gt;
+	&lt;<span style="color: #cae682;">property</span>&gt;...&lt;/<span style="color: #cae682;">property</span>&gt;
+	&lt;<span style="color: #cae682;">union-subclass</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">table</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>&gt;&lt;/<span style="color: #cae682;">union-subclass</span>&gt;
+&lt;/<span style="color: #cae682;">class</span>&gt;
+</pre>
+
+<p>
+生成的inline view中会将所有字段都查出来，效率存在问题
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> 单表继承映射</h3>
+<div class="outline-text-3" id="text-5-2">
+
+
+
+
+<pre class="src src-xml">&lt;<span style="color: #cae682;">discriminator</span> <span style="color: #cae682;">column</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">flag</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">string</span><span style="color: #95e454;">"</span> /&gt;
+&lt;<span style="color: #cae682;">subclass</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">CustomerA</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">discriminator-value</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">A</span><span style="color: #95e454;">"</span>&gt;
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-3" class="outline-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> other</h3>
+<div class="outline-text-3" id="text-5-3">
+
+<p>cascade属性（all、delete-orphan、delete、update、create；all包含了delete、update和create）
+</p>
+<p>
+注意：一般是在one-to-many端中的set中设置该关系
+</p>
+
+
+<pre class="src src-java"><span style="color: #92a65e; font-weight: bold;">Parent</span> <span style="color: #cae682;">p</span> = (<span style="color: #92a65e; font-weight: bold;">Parent</span>) session.load(Parent.<span style="color: #8ac6f2; font-weight: bold;">class</span>, pid);
+<span style="color: #92a65e; font-weight: bold;">Child</span> <span style="color: #cae682;">c</span> = (<span style="color: #92a65e; font-weight: bold;">Child</span>) p.getChildren().iterator().next();
+p.getChildren().remove(c);
+delete(p);
+c.setParent(<span style="color: #e5786d;">null</span>);
+session.flush();
+&lt;set name=<span style="color: #95e454;">"children"</span> inverse=<span style="color: #95e454;">"true"</span> cascade=<span style="color: #95e454;">"all-delete-orphan"</span>&gt;
+&lt;key column=<span style="color: #95e454;">"parent_id"</span>/&gt;
+&lt;one-to-many <span style="color: #8ac6f2; font-weight: bold;">class</span>=<span style="color: #95e454;">"Child"</span>/&gt;
+&lt;/set&gt;
+</pre>
+
+<p>
+如果all则delete(p)将会将p和c一起删除，p.getChildren().remove(c)不会删除c，只会删除p和c的关系（将c的外键置为null）。
+</p>
+<p>
+如果all-delete-orphan则p.getChildren().remove(c)会将c删除。
+</p>
+<p>
+one-to-one不维护关系，当使用one-to-one的一端进行级联更新时，将会是分别更新两张表.
+</p>
+<p>
+one-to-one关系需要配置需要注意的地方，一般该关系的对应于数据库表为两张数据库表的主键字段对应，使用casecade进行级联操作cascade="all" 设置constrained和表明约束关系，这三项内容应该要同时设置constrained="true" lazy="no-proxy" outer-join="true"，以使查询的时候能够不会级联查询出关联对象(lazy)，使用join fetch时避免n+1查询（outer-join），为了使lazy和outer-join生效必须设置constrained为true。如果设置了properties-ref对于cascade save的关系需要自己维护（只能有一侧是one-to-one，one-to-one是该表的主键与另一个表的某列一一对应）。
+</p>
+<p>
+使用Hibernate.initialize(p.getStudent());来让hibernate lazy加载关联到的对象。
+</p>
+<p>
+hibernate使用过程中根据需求一般不需要使用eager fetch 特别是在使用缓存的情况下，使用eager fetch会导致表关联查询消耗性能，而使用lazy可以先将一个大查询进行分解，在使用缓存是能够减少对数据库的访问。
+</p>
+<p>
+应该在单端中的set中设置inverse="true"；
+</p>
+<p>
+java中的对象关系为parent.setChild(child);child.setParent(parent);两边都需要有对方的链接，在操作数据库时只需要其中一方进行操作就行了一对多中由单端来进行维护。
+</p>
+
+<p>
+调用delete删除一个对象后，该对象还将存在于session中，并被标记为deleted，对这个对象的使用应该谨慎，可能会导致session中出现重复的对象而报错。
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> other</h2>
+<div class="outline-text-2" id="text-6">
+
+<p>按照指定顺序排序:
+</p>
+
+
+<pre class="src src-java">order <span style="color: #92a65e; font-weight: bold;">by</span> <span style="color: #cae682;">locate</span>(<span style="color: #92a65e; font-weight: bold;">person_key</span>, 4657);
+</pre>
+
+
+<p>
+hibernate setParameterList()用于设置in(?)里面的参数。
+</p>
+<p>
+Spring、Hibernate中的两种代理方式：java动态代理和cglib库
+</p>
+<p>
+动态代理：被代理的类必须实现一个接口，在调用bind方法得到代理类的时候会动态的创建一个被代理类的子类，该类实现了接口。
+</p>
+<p>
+cglib库：封装了asm。asm用于生成字节码。这种方法不要求被代理类实现接口，能够对被代理进行byte code增强，同样也是生成被代理类的子类作为代理。
+</p></div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2014-02-07T00:01+0900</p>
+<p class="author">Author: rex.houy</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

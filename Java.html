@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+							 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Java</title>
+<meta http-equiv="Content-Type" content="text/html;charset=gbk"/>
+<meta name="title" content="Java"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-02-07T00:00+0900"/>
+<meta name="author" content="rex.houy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Java</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 java path</a></li>
+<li><a href="#sec-2">2 System类常用方法</a></li>
+<li><a href="#sec-3">3 StringTokenizer</a></li>
+<li><a href="#sec-4">4 java Runtime类</a></li>
+<li><a href="#sec-5">5 concurrent</a>
+<ul>
+<li><a href="#sec-5-1">5.1 volatile使用原则</a></li>
+<li><a href="#sec-5-2">5.2 java concurrent visibility问题</a></li>
+<li><a href="#sec-5-3">5.3 thread starvation deadlock</a></li>
+<li><a href="#sec-5-4">5.4 singleThreadExecutor</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">6 使用Date、Calendar、DateFormat处理日期</a></li>
+<li><a href="#sec-7">7 String.Format()</a></li>
+<li><a href="#sec-8">8 java运行jar文件</a></li>
+<li><a href="#sec-9">9 classLoader</a>
+<ul>
+<li><a href="#sec-9-1">9.1 jar包中的classpath问题</a></li>
+</ul>
+</li>
+<li><a href="#sec-10">10 JVM内存模型</a>
+<ul>
+<li><a href="#sec-10-1">10.1 java内存设置</a></li>
+<li><a href="#sec-10-2">10.2 垃圾回收机制</a></li>
+</ul>
+</li>
+<li><a href="#sec-11">11 net</a>
+<ul>
+<li><a href="#sec-11-1">11.1 NIO</a></li>
+<li><a href="#sec-11-2">11.2 Socket</a></li>
+</ul>
+</li>
+<li><a href="#sec-12">12 other</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> java path</h2>
+<div class="outline-text-2" id="text-1">
+
+
+
+
+<pre class="src src-java"><span style="color: #99968b;">//</span><span style="color: #99968b;">&#20351;&#29992;&#20004;&#20010;&#21442;&#25968;&#24471;&#21040;&#30340;&#32467;&#26524;&#26159;&#20004;&#20010;&#21442;&#25968;&#30340;&#36830;&#25509;</span>
+<span style="color: #92a65e; font-weight: bold;">File</span> <span style="color: #cae682;">f</span> = <span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">File</span>(System.getProperty(<span style="color: #95e454;">"user.dir"</span>), <span style="color: #95e454;">".."</span>);
+<span style="color: #99968b;">//</span><span style="color: #99968b;">&#23558;&#20250;&#24471;&#21040;path/..;</span>
+f.getAbsolutePath();
+<span style="color: #99968b;">//</span><span style="color: #99968b;">&#23558;&#20250;&#24471;&#21040;path&#30340;&#19978;&#19968;&#23618;&#30446;&#24405;;&#20063;&#23601;&#26159;&#35828;&#36890;&#36807;..&#21487;&#20197;&#33719;&#24471;&#19978;&#19968;&#23618;&#30446;&#24405;&#12290;</span>
+f.getCanonicalPath();
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> System类常用方法</h2>
+<div class="outline-text-2" id="text-2">
+
+
+
+
+<pre class="src src-java">currentTimeMills();<span style="color: #99968b;">//</span><span style="color: #99968b;">&#33719;&#24471;&#24403;&#21069;&#26102;&#38388;&#65292;&#27627;&#31186;&#35745;&#25968;</span>
+arrayCopy();<span style="color: #99968b;">//</span><span style="color: #99968b;">&#22797;&#21046;&#25968;&#32452;</span>
+exit();<span style="color: #99968b;">//</span><span style="color: #99968b;">&#20851;&#38381;java&#34394;&#25311;&#26426;</span>
+gc();<span style="color: #99968b;">//</span><span style="color: #99968b;">&#36816;&#34892;gc</span>
+nanoTime();<span style="color: #99968b;">//</span><span style="color: #99968b;">&#24471;&#21040;&#32435;&#31186;</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> StringTokenizer</h2>
+<div class="outline-text-2" id="text-3">
+
+<p>用于分割字符串：(分别得到使用"|"分割的字符串)
+</p>
+
+
+<pre class="src src-java"><span style="color: #92a65e; font-weight: bold;">StringTokenizer</span> <span style="color: #cae682;">st</span> = <span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">StringTokenizer</span>(<span style="color: #95e454;">"xx|xx"</span>, <span style="color: #95e454;">"|"</span>);
+<span style="color: #8ac6f2; font-weight: bold;">while</span>(st.hasMoreElements()) { st.nextToken(); }
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> java Runtime类</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>唯一一个能够得到程序运行环境的类通过Runtime.getRuntime()得到对象。
+</p>
+
+
+<pre class="src src-java">Runtime.getRuntime().addShutdownHook(<span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">Thread</span>(<span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">hook</span>()));
+</pre>
+
+<p>
+当程序（JVM）退出的时候，或程序被终止的时候（不能是kill线程）将会调用给hook对象。
+</p>
+<p>
+使用exec(command)来执行操作系统的一些命令，该方法返回值为Process，使用该对象的getErrorStream() getInputStream()来得到返回值。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> concurrent</h2>
+<div class="outline-text-2" id="text-5">
+
+
+<p>
+java的线程同步通过监视区域来完成，同一时间只能有一个线程获得监视区域，当一个线程请求使用监视区域时它将进入监视区域的入口区，当持有监控区域的线程放弃该监控区域后入口区的线程会获得该监控区域。另一种模型为使用wait，当一个线程需要某种条件具备时才获取监控区域时条件不具备时线程进入等待区，当持有监控区域的线程执行唤醒指令并放弃持有监控区域后等待区中的线程将会被唤醒，如果持有监控区的线程在释放监控区之前没有执行唤醒操作，并且等待区的线程也没有被唤醒则入口区的线程将会和入口区的线程竞争获得该监控区。为此java提供的接口为wait，notify，notify all。wait可以指定时间，当超过该时间时线程将会收到一个来自虚拟机的唤醒指令。notify将随机通知一个等待区的线程，notify all将通知所有，具体的实现与虚拟机的实现相关。只要等待区有多个线程都应该使用notify all以确保不会因为虚拟机实现的算法不同而导致某个线程等待很长时间。
+</p>
+<p>
+java对象与类都实现了锁机制，线程可以对其加锁，类的锁机制是通过锁住对应的Class对象完成的。一个线程可以对同一对象多次上锁，如果要取消锁也需要多次取消才能释放。对对象或类上锁是由虚拟机来完成的。在使用过程中有两种方式来进行一种是synchronized(object){}，线程将会获得该object的锁。synchronized void xx(){}如果是类方法则获得类的锁，如果是对象的方法则获取对象的锁。
+</p>
+<p>
+java.util.concurrent.atomic包为int、long、reference等变量提供了无阻塞的多线程实现。使用更细粒度的机制CAS：如果内存位置（V）的预期原始值为A，而新值为B则判断V的值，如果为A则将V位置的值置为B否则返回原值。通过循环执行以上步骤实现无阻塞，但在最坏情况下，同一个操作将会被多次执行。处理器实现了该机制，在java中通过更细粒度的操作保证了该同步操作具有较小的性能损耗。
+</p>
+<p>
+线程应该检测isInterrupted，根据是否被interruped进行相应处理（例如退出）使得线程成为可中断的。
+</p>
+<p>
+线程同步带来的问题为线程对锁资源的争用，当线程在争用失败后将会被挂起然后会再重新被调度，这导致了线程的上下文切换，会带来较大的性能损失。使用CAS机制进行非阻塞的资源争用控制使得线程在处理资源失败后能够不被阻塞而继续重试。
+</p>
+
+
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> volatile使用原则</h3>
+<div class="outline-text-3" id="text-5-1">
+
+
+<p>
+volatile阻止编译器重排代码并保证写操作能及时刷到内存
+</p>
+<blockquote>
+
+<p>Writes to the variable do not depend on its current value, or you can ensure that only a single thread ever updates the value;
+The variable does not participate in invariants with other state variables; and Locking is not required for any other reason while the variable is being accessed.
+</p>
+</blockquote>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> java concurrent visibility问题</h3>
+<div class="outline-text-3" id="text-5-2">
+
+
+<p>
+当多个线程共享的变量如果对该变量的读取不加锁则当一个线程改变了该变量的值的时候，另一个线程读取该值，那么他获得的值可能不是最新的。因为该变量尚未被刷入到主存中（还在该线程的工作内存）。锁所作的事情还包括了对数据可见性的维护。
+</p>
+<p>
+java多线程同步需要解决两个问题：原子性、可见性
+</p>
+<p>
+synchonize块能够保证该块中的操作具有以上两个性质。
+</p>
+<p>
+java的内存模型为数据保存在主存中，该主存中的数据是共享的。每个线程有自己的工作内存，当线程工作时，将会把主存中的数据复制到工作内存中，对工作内存中的数据进行处理，然后将该数据刷回到主存中。同步块的作用除了锁之外还能够保证数据的可见性，另外也能阻止编译器、硬件等进行指令重排导致问题。
+</p>
+<p>
+在多线程环境下遍历（如for循环、foreach、itorator）vector之类的线性安全的数组也可能会出现异常，因为在遍历的过程中vector的size可能会被其他线程改变从而造成错误，为避免这些错误应该使用synchronize；或使用concurrent包中的CopyOnWriteArrayList、ConcurrentHashMap、ConcurrentLinkedQueue。
+</p>
+<p>
+在producer-consumer模式中使用blockingqueue，在从blockingqueue中取数据时如果没有数据则阻塞队列。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5-3" class="outline-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> thread starvation deadlock</h3>
+<div class="outline-text-3" id="text-5-3">
+
+
+<p>
+线程A中启动了一个线程M，如果线程A结束的条件为获得线程M的结果，当两个线程处于同一个executor中时可能会导致该问题。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5-4" class="outline-3">
+<h3 id="sec-5-4"><span class="section-number-3">5.4</span> singleThreadExecutor</h3>
+<div class="outline-text-3" id="text-5-4">
+
+<p>用于执行单个线程，当向其中加入另一个runnable对象时，将会等待第一个任务执行完毕。
+</p>
+
+
+
+<pre class="src src-java"><span style="color: #99968b;">//</span><span style="color: #99968b;">&#23558;executor&#20013;&#30340;queue&#35774;&#32622;&#20026;&#30456;&#24212;&#30340;priorityBlockingQueue&#25110;&#20854;&#20182;&#30340;&#31867;&#22411;&#30340;queue&#20197;&#20445;&#35777;&#25191;&#34892;&#30340;&#39034;&#24207;&#65292;&#22914;&#26524;&#32473;&#23450;&#30340;queue&#26159;&#30830;&#23450;&#20102;&#22823;&#23567;&#30340;&#65288;capacity&#65289;&#37027;&#20040;&#24403;queue&#28385;&#26102;&#21521;queue&#20013;&#21152;&#20837;&#25968;&#25454;&#23558;&#20250;&#26681;&#25454;&#30456;&#24212;&#30340;policy&#26469;&#22788;&#29702;&#65292;&#21487;&#20197;&#36890;&#36807;&#20197;&#19979;&#26041;&#24335;&#35774;&#23450;&#35813;policy&#12290;</span>
+<span style="color: #92a65e; font-weight: bold;">ThreadPoolExecutor</span> <span style="color: #cae682;">executor</span> = <span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">ThreadPoolExecutor</span>(N_THREADS, N_THREADS, 0L, <span style="color: #e5786d;">TimeUnit</span>.MILLISECONDS, <span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">LinkedBlockingQueue</span>&lt;Runnable&gt;(CAPACITY));
+executor.setRejectedExecutionHandler(<span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #e5786d;">ThreadPoolExecutor</span>.<span style="color: #92a65e; font-weight: bold;">CallerRunsPolicy</span>());
+</pre>
+
+
+<p>
+在继承了thread的类中使用setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {&hellip;});来设置UncaughtExceptionHandler。
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> 使用Date、Calendar、DateFormat处理日期</h2>
+<div class="outline-text-2" id="text-6">
+
+
+
+
+<pre class="src src-java"><span style="color: #92a65e; font-weight: bold;">DateFormat</span> <span style="color: #cae682;">format</span> = <span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">SimpleDateFormat</span>(<span style="color: #95e454;">"yyyy-MM-dd,hh:mm:ss"</span>);<span style="color: #99968b;">//</span><span style="color: #99968b;">&#35813;&#23383;&#31526;&#20018;&#30340;&#26684;&#24335;&#21487;&#20197;&#33258;&#23450;&#20041;</span>
+format.format(<span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">Date</span>());<span style="color: #99968b;">//</span><span style="color: #99968b;">&#23558;date&#25353;&#29031;&#26684;&#24335;&#36716;&#20026;&#23383;&#31526;&#20018;</span>
+format.parseObject(<span style="color: #95e454;">"1999-11-11,11:11:11"</span>);<span style="color: #99968b;">//</span><span style="color: #99968b;">&#25226;&#23383;&#31526;&#20018;&#36716;&#20026;Date</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> String.Format()</h2>
+<div class="outline-text-2" id="text-7">
+
+<p>对整数进行格式化：Format("%[标识][最小宽度]转换方式");
+</p>
+
+
+<pre class="src src-java">Format(<span style="color: #95e454;">"%04d"</span>, 1) <span style="color: #99968b;">//</span><span style="color: #99968b;">&#32467;&#26524;0001&#65292;&#31532;&#19968;&#20301;0&#34920;&#31034;&#29992;0&#22635;&#20805;&#65292;&#31532;&#20108;&#20301;&#26159;&#26368;&#23567;&#23485;&#24230;&#65292;&#31532;&#19977;&#20301;&#20026;&#36716;&#25442;&#26041;&#24335;d&#20026;&#21313;&#36827;&#21046;&#12290;</span>
+Format(<span style="color: #95e454;">"%,d"</span>, 10000)<span style="color: #99968b;">//</span><span style="color: #99968b;">&#32467;&#26524;10,000</span>
+</pre>
+
+<p>
+对浮点数进行格式化：Format("%[标识][最小宽度][.精度]转换方式");
+</p>
+<p>
+String.split("[|]")将按照"|"将String分割为String[].
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> java运行jar文件</h2>
+<div class="outline-text-2" id="text-8">
+
+
+
+
+<pre class="src src-java">java -jar xx.jar;
+
+<span style="color: #99968b;">//</span><span style="color: #99968b;">&#36816;&#34892;jar&#25991;&#20214;&#20013;&#30340;&#26576;&#20010;&#31867;&#65306;</span>
+java -classpath xx.jar xxx;
+
+Arrays.asList(<span style="color: #95e454;">" "</span>, <span style="color: #95e454;">" "</span>, <span style="color: #95e454;">" "</span>);<span style="color: #99968b;">//</span><span style="color: #99968b;">&#29983;&#25104;List</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> classLoader</h2>
+<div class="outline-text-2" id="text-9">
+
+<p>如果不在程序中显示的调用其他命名空间中的类（使用import），不同命名空间中的类是相互不可见的。同一命名空间中的类相互之间是可见的(必须是由相同的classloader装载的)，不需要使用import引入。不同的classloader各自维护自己的命名空间，也就是说不同的classloader中可以有相同的命名空间。
+</p>
+<p>
+类的装载：classloader是一个链的结构，除了启动装载器外别的装载器都有parent装载器，启动装载器能够装载java类库。当一个classloader装载类时，他首先将向parent请求装载该类，parent继续向上请求，如果不能装载该类则返回，如果所有的类装载器都不能装载该类则有最初发出请求的类装载器用自己的方法来装载该类。
+</p>
+<p>
+classLoader装载的类的信息将该信息保存到方法区中，保存的信息包括类的全限定名，父类的全限定名，所有方法，静态变量，常量，装载该类的classLoader等。对于每一个被装载的类，虚拟机会为其创建一个对应的Class实例。方法区是共享的，所以方法区中的东西应该被设计为线程安全的，如两个线程请求同一个类则将该类载入方法区只能由其中的一个线程来执行。
+</p>
+<p>
+线程中的每一个方法拥有一个栈帧，线程执行到一个方法时将该方法压栈，运行结束后在出栈。栈帧将会存储参数、局部变量、中间运算结果等。对于非静态方法，该方法的局部变量表中有一个指针，指向该对象本身（this指针）。
+</p>
+<p>
+对象在堆中的情况：在堆中的对象需要有指向该对象的类型的指针，对象锁的信息（记录对象是否被某线程锁定），垃圾收集器的信息。
+</p>
+<p>
+数组是对象，数组有其对应的class，维数相同、数据类型相同的数组属于同一个class。
+</p>
+<p>
+将一个类装载如方法区需要三个步骤：
+装载class文件到内存，验证（包括是否符合java规范的验证如final的方法不能被重写），准备（为类变量分配内存并设置默认初始值），解析（将常量池中的类、接口、方法等的符号引用替换为直接引用，具体什么时候进行解析由虚拟机的具体实现决定）
+</p>
+<p>
+默认初始值：long 0L、 boolean false、 float 0.0f、 double 0.0d
+</p>
+<p>
+常量池：虚拟机为每个被装载的类型维护一个常量池，用于保存该类型会用到的直接常量（int等）和对其它类型，字段和方法的符号引用（在链接过程后会被替换为直接引用）。每一个class文件都有一个常量池，而被装载如内存后在内存中有运行时常量池，内容为对class中常量池的拷贝，只是数据结构可能不同。
+</p>
+<p>
+java对象的创建：分配内存、初始化变量为其附默认初值、如果通过clone方法获得则将被clone对象的变量值赋给变量，反序列化时使用反序列化得到的值对变量进行赋值。
+</p>
+<p>
+如果不通过super明确调用父类的构造方法则子类的构造方法将会最终默认的调用父类的无参数构造方法。（构造方法中可以使用this（）方法来调用本类中的其他构造方法）
+</p>
+
+<p>
+如果类创建了一个void finalize(){}方法则在垃圾回收器回收该对象时这个方法将会被调用。
+</p>
+<p>
+使用forName（）或classLoader能够动态的链接新的类（新链接的类并不在class的常量池中），
+</p>
+<p>
+双亲委派模式：用户自定义的classLoader是最底层的，当他试图加载类时，将会逐层向上询问是否该类已被加载，直到最顶一层。如果未被加载则逐层向下到各自的路径中去尝试加载，直到最后一层，如果还没找到就抛出ClassNotFoundException。所以双亲加载的类对于子类加载器是可见的。当子加载器加载了一个类，该类调用了另一个类，load当前类的classloader将会负责进行该类的加载工作（但由于双亲委派模式该类不一定是这个classloader加载的）。另外classloader加载的类只能看到自己的classloader或是该classloader的上级装载的类。
+</p>
+<p>
+Java相同名称的类成员变量存在覆盖问题，（相同名称的类成员变量必须得有相同的类型）。覆盖后方法在调用该变量时，将会根据该方法属于哪一个对象来决定调用父类或子类变量。为了实现变量的多态，需要为其提供访问方法，间接的实现。
+</p>
+<p>
+在将数据插入到hashmap或hashset中时将根据equals和hashCode方法来进行判断两个对象是否相等，只有在equals返回true，hashCode相等的情况下两个对象才相等。
+</p>
+<p>
+Java的最小单位为byte（8个bit），使用位运算符可以对其进行操作。Integer.toHexString(int i)将int转为16进制表示。
+java int 与byte转换
+</p>
+
+
+<pre class="src src-java"><span style="color: #92a65e; font-weight: bold;">int</span> <span style="color: #cae682;">x</span> = 0xff00ff00;
+<span style="color: #92a65e; font-weight: bold;">byte</span> <span style="color: #cae682;">b</span> = (<span style="color: #92a65e; font-weight: bold;">byte</span>) (x &amp; 0x000000ff);
+<span style="color: #8ac6f2; font-weight: bold;">for</span>(<span style="color: #92a65e; font-weight: bold;">int</span> <span style="color: #cae682;">i</span> = 0; i &lt; 8; i++) { sysout(b &amp; 1); b&gt;&gt;=1; }
+</pre>
+
+
+
+</div>
+
+<div id="outline-container-9-1" class="outline-3">
+<h3 id="sec-9-1"><span class="section-number-3">9.1</span> jar包中的classpath问题</h3>
+<div class="outline-text-3" id="text-9-1">
+
+<p>jar中需要依赖到的jar包可以在该jar包之外，这时需要在meta-info中设置class-path：xx.jar lib/x.jar；
+</p>
+<p>
+如果配置文件在jar包之外需要将配置文件放在与jar包相同的目录或jar包所在目录的子目录中，如果是在子目录中需要 在meta-info中设置class-path：config/(以放置在config目录下为例)。通过getClassLoader().getResourceAsStream("xx.properties")可以直接读取配置文件；
+</p>
+<p>
+对于log4j的配置文件，默认是读取class目录下的配置文件如果需要自定义位置与文件名则需要使用PropertyConfigurator.configure("")指明配置文件位置；
+</p>
+<p>
+对于spring的配置文件中配置的对文件的加载同样适用，需要使用classpathxmlapplicationcontext。读取的properties文件需要在项目路径中。
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> JVM内存模型</h2>
+<div class="outline-text-2" id="text-10">
+
+<p>内存分为堆和栈两部分。
+</p>
+<p>
+其中堆分为三代（young、old、permanent），其中permanent generation也就是方法区，young分为一个eden区和两个survival区，所有新生的对象都在eden区，当eden区满时还在被引用的对象将被放到一个survival区，当这个survival区满时还在被引用的对象将被放到另一个survival区，两个survival区是平行的没有先后区分，在经过了两个survival区之后还存活的对象将被放置到old generation中，为了减慢对象被放到old区的时间可以设置使用多个survival区。
+</p>
+<p>
+Java的引用：
+</p>
+<p>
+Strong、Soft、Weak、Phantom；
+</p>
+<p>
+正常创建的对象使用的是Strong引用，对象在失去了Strong引用后将会被回收；
+</p>
+
+
+<pre class="src src-java"><span style="color: #99968b;">// </span><span style="color: #99968b;">&#21019;&#24314;&#21040;str&#30340;Soft&#24341;&#29992;&#65292;&#23545;&#35937;&#22312;&#22833;&#21435;Soft&#24341;&#29992;&#21518;&#35201;&#31561;&#21040;&#20869;&#23384;&#19981;&#22815;&#29992;&#26102;&#25165;&#20250;&#34987;&#22238;&#25910;&#65292;&#36866;&#21512;&#19982;&#20570;&#32531;&#23384;&#65307;</span>
+SoftReference&lt;String&gt; softreference = <span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">SoftReference</span>&lt;String&gt;(str);
+<span style="color: #99968b;">// </span><span style="color: #99968b;">&#21019;&#24314;&#21040;str&#30340;Weak&#24341;&#29992;&#65292;&#23545;&#35937;&#22312;&#22403;&#22334;&#22238;&#25910;&#26102;&#19968;&#23450;&#20250;&#34987;&#22238;&#25910;&#19981;&#31649;&#26159;&#21542;&#34987;&#24341;&#29992;&#65307;</span>
+WeakReference&lt;String&gt; weakReference = <span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">WeakReference</span>&lt;String&gt;(str);
+</pre>
+
+
+
+</div>
+
+<div id="outline-container-10-1" class="outline-3">
+<h3 id="sec-10-1"><span class="section-number-3">10.1</span> java内存设置</h3>
+<div class="outline-text-3" id="text-10-1">
+
+<p>-Xmx 总内存最大大小
+</p>
+<p>
+-Xms 总内存初始大小
+</p>
+<p>
+-Xmn 新生代内存大小
+</p>
+<p>
+-XX:PermSize=16M -XX:MaxPermSize=64M 设置permanent generation大小
+</p>
+<p>
+-XX:SurvivorRatio=32 设置eden和一个survivor的比值是32：1
+</p>
+<p>
+-XX:NewRatio=8 设置old generation和 young generation的比值8：1
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-10-2" class="outline-3">
+<h3 id="sec-10-2"><span class="section-number-3">10.2</span> 垃圾回收机制</h3>
+<div class="outline-text-3" id="text-10-2">
+
+<p>1.标记-清除：从root节点扫描所有可以到达的节点并标记，然后删除未被标记的节点；
+</p>
+<p>
+2.复制收集器：将被引用的对象复制到另一个区域；
+</p>
+<p>
+3.标记-清除-压缩：在进行标记-清除之后对剩下的对象复制到堆栈的新域中去除碎片。
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> net</h2>
+<div class="outline-text-2" id="text-11">
+
+
+
+</div>
+
+<div id="outline-container-11-1" class="outline-3">
+<h3 id="sec-11-1"><span class="section-number-3">11.1</span> NIO</h3>
+<div class="outline-text-3" id="text-11-1">
+
+<p>byteBuffer分为Direct和NonDirect两种，其中Direct使用ByteBuffer.allocateDirect创建（或者是mappedByteBuffer），存储在native buffer中，而NonDirect使用ByteBuffer.allocate创建，存储在JVM的heap buffer中。
+</p>
+<p>
+NonDirect将会导致多一次内存复制（从native buffer复制到heap buffer），因为JVM的内存并不由操作系统管理，例如网络数据传输，操作系统接收到的数据是放在native buffer中的，操作系统能够直接管理，而JVM使用时如果是NonDirect则需要将其复制到heap buffer中；
+</p>
+<p>
+NonDirect虽然避免了内存复制，但是本身的创建和销毁开销很大，每次创建和销毁都会调用gc，所以只有在处理生命周期很长、需要较大缓冲区、需要使用JNI进行数据共享的时候才使用NonDirect buffer。
+</p>
+<p>
+nio将处理过程分为两部分，一部分为channel，另一部分为buffer。channel为文件或socket的一个抽象。能够在channel上进行读写。buffer则为缓存。channel可以和stream相互转换，但是不能在stream上执行非阻塞操作。
+</p>
+<p>
+buffer的capacity和limit的区别：capacity为所能容纳的elements的数量，而limit为第一个没有数据的位置。也就是说缓存的大小等于capacity*一个element所占用的空间。
+</p>
+<p>
+buffer是非线程安全的。
+</p>
+<p>
+channel是线程安全的，但是在同一个channel上不会同时进行读写，前一个操作会阻塞后一个，这时因为java的对象锁导致的。
+</p>
+<p>
+nio OP<sub>CONNECT和OP</sub><sub>WRITE是相互冲突的，不能同时注册到selector中，一个连接在连接上之前使用op</sub><sub>connect在连接上之后注销op</sub><sub>connect然后再注册op</sub><sub>write。</sub>
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-11-2" class="outline-3">
+<h3 id="sec-11-2"><span class="section-number-3">11.2</span> Socket</h3>
+<div class="outline-text-3" id="text-11-2">
+
+<p>最好使用BufferedOutputStream和BufferedInputStream对数据进行收发，这两个buffer应该要大于SendBufferSize和ReceiveBufferSize（通过socket.getSendBufferSize()和socket.getReceiveBufferSize()获取）。sendBufferSize和receiveBufferSize是TCP的缓冲区大小，位于kernel的内存空间中，不属于JVM。Java使用BufferedOutputStream和BufferedInputStream来缓存数据，TCP使用的缓冲区中的数据来自于这两个缓冲。
+</p>
+<p>
+SendBufferSize与ReceiveBufferSize的设置，SendBufferSize应该不小于接收方的ReceiveBufferSize。由于TCP报文头的存在，发送较大的TCP包将能够减少网络中的数据传输（减少TCP报文数量）。另外一个较小的ReceiveBufferSize将会极大的减慢传输速率，因为在ReceiveBufferSize满时接收方将会阻止发送方继续发送数据（TCP协议），所以应该为这两个缓冲区设置合适的大小。服务器端ServerSocket的设置将会被创建的Socket继承。需要在socket bind之前进行设置。
+</p>
+<p>
+TCP协议为了避免一有数据就进行发送的问题（糊涂窗口综合证），使用了Nagle算法，当有足够多的数据时再进行发送，可以使用setTcpNoDelay(true)方法禁用该算法。
+</p>
+<p>
+IP数据报中的Traffic Class报文头用于设置通信的类别和优先级，使用setTrafficClass()进行设置。
+</p>
+<p>
+serversocket的setsotimeout用于设定accept的超时时间，如果超过一定时间没有收到建立连接请求则抛出sockettimeoutexception，这样就可以让线程重新获得操作权。
+</p>
+<p>
+socket的setsotimeout用于设定socket read的时间，如果超时则抛出sockettimeoutexception。
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> other</h2>
+<div class="outline-text-2" id="text-12">
+
+<p>sequenceInputStream 合并多个inputstream
+</p>
+<p>
+System.getProperty("java.io.tmpdir")获取系统临时目录
+</p>
+<p>
+Java序列化和反序列化不仅要求类ialize接口，则父类的成员变量不会被序列化，并且这时需要父类有无参数构造函数，因为反序列化时构建对象都是先创建父对象然后是子对象的。transient关键字能够使变量不被序列化。可以通过实现readObject和writeObject方法在对象序列化和反序列化时对对象进行修改（例如加密）。
+</p>
+<p>
+Java使用的是Big-Endian，可以使用ByteBuffer.order(arg)来使它转化为Little-Endian。
+</p></div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2014-02-07T00:00+0900</p>
+<p class="author">Author: rex.houy</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

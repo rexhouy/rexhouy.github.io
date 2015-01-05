@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+							 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>ruby</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="title" content="ruby"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-10-08T11:57+0800"/>
+<meta name="author" content="Rex.Houy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">ruby</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 active record</a>
+<ul>
+<li><a href="#sec-1-1">1.1 env</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1 install</a></li>
+<li><a href="#sec-1-1-2">1.1.2 code</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-2">2 bundle</a>
+<ul>
+<li><a href="#sec-2-1">2.1 install</a></li>
+<li><a href="#sec-2-2">2.2 usage</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3 rack</a></li>
+<li><a href="#sec-4">4 grape</a></li>
+<li><a href="#sec-5">5 API</a>
+<ul>
+<li><a href="#sec-5-1">5.1 Array</a></li>
+<li><a href="#sec-5-2">5.2 Fixnum</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> active record</h2>
+<div class="outline-text-2" id="text-1">
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> env</h3>
+<div class="outline-text-3" id="text-1-1">
+
+
+
+</div>
+
+<div id="outline-container-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> install</h4>
+<div class="outline-text-4" id="text-1-1-1">
+
+
+
+
+<pre class="src src-shell">gem install activerecord
+gem install mysql2
+</pre>
+
+
+<p>
+if install mysql2 got makefile problems:
+</p>
+
+
+<pre class="src src-shell">sudo apt-get install libmysql-ruby libmysqlclient-dev
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> code</h4>
+<div class="outline-text-4" id="text-1-1-2">
+
+
+
+
+<pre class="src src-ruby">require <span style="color: #95e454;">"rubygems"</span>
+require <span style="color: #95e454;">"active_record"</span>
+
+config = <span style="color: #92a65e; font-weight: bold;">YAML</span>.load_file( <span style="color: #95e454;">'./database.yml'</span> )
+<span style="color: #92a65e; font-weight: bold;">ActiveRecord</span>::<span style="color: #92a65e; font-weight: bold;">Base</span>.establish_connection(config[<span style="color: #95e454;">"development"</span>])
+</pre>
+
+
+<p>
+database.yml
+</p>
+
+
+<pre class="src src-yml">development:
+	adapter:  mysql2
+	host:     localhost
+	username: xxx
+	password: xxx
+	database: xxx
+</pre>
+
+
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> bundle</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>manage application dependencies
+</p>
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> install</h3>
+<div class="outline-text-3" id="text-2-1">
+
+
+
+
+<pre class="src src-shell">gem install bundle
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> usage</h3>
+<div class="outline-text-3" id="text-2-2">
+
+<p>put Gemfile in project root directory. file name is case sensitive.
+</p>
+<p>
+example Gemfile
+</p>
+
+
+<pre class="src src-gemfile">source 'https://rubygems.org'
+gem 'nokogiri'
+gem 'rack', '~&gt;1.1'
+gem 'rspec', :require =&gt; 'spec'
+</pre>
+
+
+<p>
+install gems specified in gemfile
+</p>
+
+
+<pre class="src src-shell">bundle install
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> rack</h2>
+<div class="outline-text-2" id="text-3">
+
+<p>web server interface
+</p>
+<p>
+config.ru
+</p>
+
+
+<pre class="src src-ruby">require <span style="color: #95e454;">"./api"</span>
+run <span style="color: #92a65e; font-weight: bold;">Web</span>::<span style="color: #92a65e; font-weight: bold;">API</span>
+</pre>
+
+
+
+<pre class="src src-shell">rackup
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> grape</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>rest api tool, can be used with rack.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> API</h2>
+<div class="outline-text-2" id="text-5">
+
+
+
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Array</h3>
+<div class="outline-text-3" id="text-5-1">
+
+
+
+
+
+<pre class="src src-ruby">arr = []
+arr[1..3], arr[-1]
+
+arr.first
+
+arr.last
+
+arr.length
+
+arr.empty?
+
+arr.include?
+
+arr.push
+
+arr.insert(index, obj)
+
+arr.pop // last
+
+arr.shift // first
+
+arr.delete_at(index)
+
+arr.delete(obj)
+
+arr.compact // remove all <span style="color: #cae682;">nil</span> elements
+
+arr.uniq
+
+arr.each { |obj| puts obj }
+
+arr.each_index { |index| block }
+
+arr.reverse_each { |obj| puts obj}
+
+arr.map { |obj| obj*2 }
+
+arr.select { |obj| obj &gt; 0 }
+
+arr.reject { |obj| obj &lt; 0 }
+
+arr &lt;&lt; obj
+
+arr1 + arr2
+
+arr.clear
+
+arr.count { |obj| obj &gt; 2 }
+
+arr.eql?
+
+arr.fill(obj)
+
+arr.index(obj)
+
+arr.sort { |a, b| a &lt;=&gt; b }
+
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Fixnum</h3>
+<div class="outline-text-3" id="text-5-2">
+
+
+
+
+
+<pre class="src src-ruby">num.even?
+
+num.odd?
+
+num.abs
+
+</pre>
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2014-10-08T11:57+0800</p>
+<p class="author">Author: Rex.Houy</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

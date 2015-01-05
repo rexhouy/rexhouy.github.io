@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- void elements dont need an end tag -->
+		<!-- void elements are area base br col command embed hr img input keygen link meta param source track wbr -->
+		<meta charset="utf-8"> <!-- set charset of the html if the http header is not under controll -->
+
+		<!-- rel stands for relation and is necessary -->
+		<link rel="stylesheet" href="#"> <!-- type is not needed because there is only one stylesheet in the world -->
+		<link rel="alternate" type="application/atom+xml" title="" href="/feed/"> <!-- rss link -->
+		<link rel="author" href="">
+		<link rel="icon" href="/icon.png">
+		<link rel="license" href="">
+
+
+		<style>
+			body { height: 38em; width: 72em; color: #4f4f4f; text-align: center; }
+			h1, h2, h3, h4, h5 { margin: 0; }
+			label, input { position: relative; top: .5em; }
+			body, header, nav, section, aside, footer, article { border: solid 1px #aaa; margin:1em auto; border-radius: 5px; box-shadow: 2px 2px 5px 0px gray; }
+			header, footer { width: 70em; height: 3em; overflow: auto; background: #ddd; }
+			article header { box-shadow: none; margin: 0; border-radius: 0; border: 0; }
+			ul li { text-align: left; }
+			nav, section, aside { float: left; height: 26em; margin: 1em; }
+			nav { width: 15em; }
+			aside { width: 15em; text-shadow: 3px 3px 3px gray; }
+			section { width: 35em; }
+			section header, article { width:33em; }
+			article { height: 23em; }
+			table { width: 100%; margin: 1em;}
+			input { width: 18em; }
+			.pub-date { margin: 2px; font-size: 12px; float: right; }
+			p { margin: 2px;}
+		</style>
+		<!--[if lt IE 9]>
+		<script>
+			// handle browsers that not support html5
+			 var e = "abbr,article,aside,audio,canvas,datalist,details,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(',');
+			 for (var i = 0; i < e.length; i++) {
+					document.createElement(e[i]);
+			 }
+		</script>
+		<![endif]-->
+		<script>document.createElement("article");</script><!-- handle brawsers that not support html5. -->
+	</head>
+	<body>
+		<label>body</label>
+		<header>
+			<!-- h1 ~ h6 elements is used to create a document outline. its important to use the right h element to create the outline. -->
+			<hgroup><!-- use hgroup to create a single node in the document outline. -->
+				<h1>HTML5</h1>
+				<h2 style="font-size: 10px;">new tag in html5</h2><!-- this h2 will not in document outline -->
+			</hgroup>
+		</header>
+
+		<nav>
+			<ul>
+				<li><a href="http://gsnedders.html5.org/outliner/">HTML outline</a></li>
+				<li></li>
+			</ul>
+			<label>navigation</label>
+		</nav>
+
+		<section>
+			<label>section</label>
+			<article><!-- article is an resusable part. an article can be put into other htmls. -->
+				<header>
+					<h1>Article Title</h1><!-- article will start a new document line. so start from h1 in an article. -->
+					<p><time class="pub-date" datetime="2014-10-22" pubdate>October 22, 2014</time></p>
+				</header>
+				<table>
+					<tr>
+						<td><label for=suggest>suggest & auto focus :</label></td>
+						<td>
+							<input required name=suggest list=names autofocus=on placeholder="input name here">
+							<datalist id=names>
+								<option value="Google">
+								<option value="Apple">
+								<option value="Microsoft">
+							</datalist>
+						</td>
+					</tr>
+					<tr>
+						<td><label for=date>date:</label></td>
+						<td><input name=date type=date></td>
+					</tr>
+				</table>
+			</article>
+		</section>
+
+		<aside>
+			<label>aside</label>
+		</aside>
+
+		<footer>
+			<label>footer</label>
+		</footer>
+	</body>
+</html>

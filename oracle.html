@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+							 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>oracle</title>
+<meta http-equiv="Content-Type" content="text/html;charset=gbk"/>
+<meta name="title" content="oracle"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-02-07T00:02+0900"/>
+<meta name="author" content="rex.houy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">oracle</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 概念</a></li>
+<li><a href="#sec-2">2 结构</a></li>
+<li><a href="#sec-3">3 sql</a></li>
+<li><a href="#sec-4">4 事物隔离级别</a></li>
+<li><a href="#sec-5">5 锁</a></li>
+<li><a href="#sec-6">6 Object</a>
+<ul>
+<li><a href="#sec-6-1">6.1 Dimention</a></li>
+<li><a href="#sec-6-2">6.2 IOT表</a></li>
+<li><a href="#sec-6-3">6.3 sequence</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7 调优</a></li>
+<li><a href="#sec-8">8 DDL</a></li>
+<li><a href="#sec-9">9 other</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 概念</h2>
+<div class="outline-text-2" id="text-1">
+
+<ol>
+<li>系统提供了一些view，通过这些view可以间接的查看data dictionary中的一些信息。包括以user、all、dba为前缀的一些view分别提供给不同权限的用户查询相应的信息。如user<sub>objects\all</sub><sub>objects\sys</sub>.dba<sub>objects</sub>.
+
+</li>
+<li>dynamic performance tables记录当前数据库活动信息的虚拟表，sys用户拥有这些表，这些表的名字以V_$开头，依赖于这些表的视图以V$开头。
+
+</li>
+<li>Database buffer cache用于缓存disk blocks（包括write list 和least recently used（LRU）list；write list用于保存脏数据，LRU保存空闲buffer，还未写入write list的脏数据和正在使用的数据。用户查询数据时先在该缓存中查找，如果没找到或者只找到了脏数据则从disk中将数据读入缓存中（如果没有空闲buffer则调用后台线程将脏数据写回disk）然后再从缓存中读取数据返回（cache hit、cache miss））
+
+</li>
+<li>shared pool用于sql和pl/sql执行时使用，保存sql parse和sql roadmap等信息。
+
+</li>
+<li>java pool用于java对象以及其他的java操作使用
+
+</li>
+<li>large pool用于shared server IO 备份等操作
+
+</li>
+<li>connection:用户线程与oracle实例之间通信的通道；
+
+</li>
+<li>session:一个用户线程与oracle实例之间交互的特殊的connection；
+
+</li>
+<li>server process：处理用户线程的请求，包括parse、run SQL，从data blocks中读取信息到SGA中，
+
+</li>
+<li>background process：v$bgprocess中可以查看到所有的线程。
+
+</li>
+<li>DBWn：可以为DBW1～DBWn等多个线程，当没有free buffer或到了checkpoint的时候将dirty data写回data blocks；
+
+</li>
+<li>LGWR：事务提交、redo log buffer 有1/3满了，DBWn需要将dirty data写回data blocks以及每3秒时都会执行。（redo log buffer是一个循环使用的buffer）
+
+</li>
+<li>SCN：当事物提交时将会为该事务生成一个system change number（SCN）该SCN会被一同放入到redo log中，使得RAC能够同步。
+
+</li>
+<li>trace file：每个后台线程都有与之相关的trace file，当线程出现错误时会将错误记录到相关的trace file。
+
+</li>
+<li>alert log：每个数据库有一个alert.log文件，记录信息。
+
+</li>
+<li>data pump export and import:数据库导入导出
+
+</li>
+<li>Load data into Oracle tables from operating system files using SQL*Loader or from external sources using external tables
+
+</li>
+<li>Metadata API：处理metadata
+
+</li>
+<li>logMiner：查询redolog
+
+</li>
+<li>oracle中的语句、存储过程都是原子性的，在失败后都会回滚到执行之前。（如果一条语句触发了trriger那么如果在任何一处出错则整个都将回滚）。但是在存储过程中加入when others then&hellip;这样的语句后会破坏存储过程的原子性，使得该存储过程在出错后不会回滚到执行前的状态，所以当需要进行类似的异常处理时需要注意，可以显示的调用savepoint进行回滚。
+
+</li>
+<li>oracle将在每一条sql语句执行完之后进行完整性约束检查，对于违反约束条件的更改将会失败。通过设置该约束为推迟到commit是执行可以使得在事务中违反该约束条件（例如可以进行级联更新操作）。（set constraint con<sub>name</sub> immediate：立即检查 set constraint con<sub>name</sub> deferred：推迟执行）（并不推荐）
+
+</li>
+<li>oracle high water mark:用于标记表的末尾（会随着表中数据的增加而增加），在该标记与表的开头之间有许多数据块，这些数据块不一定是满的。当使用count(*)时，会计算两者之间的数据块是否为空。
+
+</li>
+<li>oracle freelist：用于标记位于high water mark以下的数据块是否空闲，当需要插入或更新数据时，oracle会从freelist中查找空闲的块，以便加入数据。一个空闲的数据块对象可能会出现在多个freelist中，这对并行插入等并行操作是很有用的。如果freelist的数量不够，就会影响到表的并行性能。合理的使用freelist将会极大的提高数据库并行性能。freelist的使用将会消耗多余的存储空间，所以过多的freelist是不必要的。
+
+</li>
+<li>oracle pctfree：该值告诉oracle在块中应该保留多少空闲空间以供数据在将来的更新使用。默认值为10%。
+
+</li>
+<li>oracle pctused：该值告诉oracle在块中有多少剩余空间时为该块增加freelist。默认值为40%。如果按照默认值，一个块在用完90%的空间之前都会使用freelist，当到达90%以后将不使用freelist，直到空闲空间超过60%时才又重新使用freelist。
+
+</li>
+<li>oracle 行迁移：如果一个块中的某一行更新所需要的空间超过了该块的空闲空间，则这个块将会被移动到另一个块中，同时在该块中将会有一个指针指向该行的新地址，这一变动直到原先的块中有足够空间值才将该行重新移回。行的迁移使得读取数据的IO增加，所以需要合理的设置pctfree来尽量避免行迁移。
+
+</li>
+<li>oracle中行的顺序并不是按照数据插入的顺序。
+
+</li>
+<li>oracle堆组织表：按照堆的方式存储。
+
+</li>
+<li>oracle索引组织表：使用noncompress、compress来设置是否进行压缩存储，使用pctthreshold、overflow、including来有效的组织存储空间，处理存储空间溢出问题。
+
+</li>
+<li>oracle索引聚簇表：存储一组表的方法。这些表共享同一数据块中的某些相同列，并且把相关的数据存储到同一块上。使用聚簇表将会影响DML的性能、要注意size参数的使用。
+
+</li>
+<li>使用B*树索引（最常用的索引），该索引经常被用于谓词中（where子句等），查询中查询的数据全部来自于索引，例如使用select count(*) from t where id=?，当如果索引为id则所需要的IO将全部来自于该索引。如果使用select id, name from t where id=?，那么如果结果集的数据量超过了整张表的1%～20%，则将会使得该查询的效率低于全扫描的效率，因为在索引中找到了数据后还需要到表中查找相应的其他数据，而这些数据是分散在多个块中的，这样将会使得IO非常慢。如果表中的数据主键是按照顺序排序的，则这些数据也可能是在同一个块中的，当使用索引查找较多数据的时候效率也不一定低。对于这一问题可以使用CBO进行优化：
+</li>
+</ol>
+
+
+
+
+<pre class="src src-sql">analyze <span style="color: #8ac6f2; font-weight: bold;">table</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span> compute statistics <span style="color: #8ac6f2; font-weight: bold;">for</span> <span style="color: #8ac6f2; font-weight: bold;">table</span> <span style="color: #8ac6f2; font-weight: bold;">for</span> <span style="color: #8ac6f2; font-weight: bold;">all</span> indexes <span style="color: #8ac6f2; font-weight: bold;">for</span> <span style="color: #8ac6f2; font-weight: bold;">all</span> indexed <span style="color: #8ac6f2; font-weight: bold;">columns</span>;
+</pre>
+
+
+<ol>
+<li>oracle latch(锁存器)：用于锁定SGA中的数据结构，一个进程需要访问SGA中的某一数据结构需要获得latch，当有多个进程需要获得该latch时多个进程存在竞争关系，oracle并不保证先来后到，而是随机的让其中一个获得latch，latch是稀有资源，他的获取与释放是很短暂的。对latch的竞争会导致程序的并发性能下降。
+
+</li>
+<li>oracle enqueue用于锁定数据库内的某些对象，与latch不同，enqueue采用队列的方式保证获得锁定的先后顺序
+</li>
+</ol>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 结构</h2>
+<div class="outline-text-2" id="text-2">
+
+<ol>
+<li>表空间(tablespace)：是Oracle中的一个逻辑存储容器，位于存储层次体系的顶层，包含一个或多个数据文件;
+
+</li>
+<li>段(segment)：占用存储空间的数据为对象，如表、索引、回滚段等；段由一个或多个区段组成;
+
+</li>
+<li>区段(extent)：是文件中一个逻辑上连续分配的空间；区段由块组成;
+
+</li>
+<li>块(block)：是Oracle中最小的空间分配单位；数据行、索引条目或临时排序结果就存储在块中；Oracle中常见的块大小：2K、4K、 8K、16K(最大不能超过32K);
+
+</li>
+<li>它们之间的关系：数据库由一个或多个表空间组成，表空间由一个或多个数据文件组成，表空间包含段，段由一个或多个区段组成，区段则由连续的块组成;segment可以跨越多个data file不能跨越多个tablespace；
+
+</li>
+<li>表分区后一个表跨越多个tablespace；
+</li>
+</ol>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> sql</h2>
+<div class="outline-text-2" id="text-3">
+
+
+
+
+<pre class="src src-sql"><span style="color: #99968b;">--&#25353;&#29031;&#25351;&#23450;&#39034;&#24207;&#25490;&#24207;&#65306;&#65288;&#25353;&#29031;4&#12289;6&#12289;5&#12289;7&#30340;&#39034;&#24207;&#36827;&#34892;&#25490;&#24207;&#65289;</span>
+<span style="color: #8ac6f2; font-weight: bold;">select</span> * <span style="color: #e5786d;">from</span> person <span style="color: #8ac6f2; font-weight: bold;">order</span> <span style="color: #8ac6f2; font-weight: bold;">by</span> decode(person_key,4,1,6,2,5,3,7,4)
+<span style="color: #99968b;">--&#25353;&#26465;&#20214;&#25490;&#24207;&#65306;(&#26681;&#25454;&#26465;&#20214;&#25353;&#29031;person_key&#25490;&#24207;&#25110;&#32773;&#25353;&#29031;another_key&#25490;&#24207;)</span>
+<span style="color: #8ac6f2; font-weight: bold;">select</span> * <span style="color: #e5786d;">from</span> person <span style="color: #8ac6f2; font-weight: bold;">order</span> <span style="color: #8ac6f2; font-weight: bold;">by</span> <span style="color: #8ac6f2; font-weight: bold;">case</span> <span style="color: #8ac6f2; font-weight: bold;">when</span> person_key <span style="color: #8ac6f2; font-weight: bold;">is</span> <span style="color: #8ac6f2; font-weight: bold;">not</span> <span style="color: #8ac6f2; font-weight: bold;">null</span> <span style="color: #8ac6f2; font-weight: bold;">then</span> person_key <span style="color: #8ac6f2; font-weight: bold;">else</span> another_key <span style="color: #8ac6f2; font-weight: bold;">end</span> <span style="color: #8ac6f2; font-weight: bold;">desc</span>;
+<span style="color: #99968b;">--&#25353;&#29031;&#31508;&#21010;&#25490;&#24207;</span>
+<span style="color: #8ac6f2; font-weight: bold;">select</span> * <span style="color: #e5786d;">from</span> person <span style="color: #8ac6f2; font-weight: bold;">order</span> <span style="color: #8ac6f2; font-weight: bold;">by</span> nlssort(<span style="color: #8ac6f2; font-weight: bold;">name</span>,<span style="color: #95e454;">'NLS_SORT=SCHINESE_STROKE_M'</span>);
+<span style="color: #99968b;">--&#25353;&#29031;&#37096;&#39318;&#25490;&#24207;</span>
+<span style="color: #8ac6f2; font-weight: bold;">select</span> * <span style="color: #e5786d;">from</span> person <span style="color: #8ac6f2; font-weight: bold;">order</span> <span style="color: #8ac6f2; font-weight: bold;">by</span> nlssort(<span style="color: #8ac6f2; font-weight: bold;">name</span>,<span style="color: #95e454;">'NLS_SORT=SCHINESE_RADICAL_M'</span>);
+<span style="color: #99968b;">--&#25353;&#29031;&#25340;&#38899;&#25490;&#24207;&#65292;&#27492;&#20026;&#31995;&#32479;&#30340;&#40664;&#35748;&#25490;&#24207;&#26041;&#24335;</span>
+<span style="color: #8ac6f2; font-weight: bold;">select</span> * <span style="color: #e5786d;">from</span> person <span style="color: #8ac6f2; font-weight: bold;">order</span> <span style="color: #8ac6f2; font-weight: bold;">by</span> nlssort(<span style="color: #8ac6f2; font-weight: bold;">name</span>,<span style="color: #95e454;">'NLS_SORT=SCHINESE_PINYIN_M'</span>);
+
+<span style="color: #99968b;">--trunc(date, [expression])&#20174;&#32473;&#23450;&#26085;&#26399;&#20013;&#25353;&#29031;expression&#30340;&#26684;&#24335;&#25130;&#21462;&#19968;&#27573;&#12290;&#22914;&#65306;</span>
+trunc(to_date(<span style="color: #95e454;">'2009-03-09'</span>, <span style="color: #95e454;">'yyyy-mm-dd'</span>), <span style="color: #95e454;">'mm'</span>);<span style="color: #99968b;">--&#25353;&#26376;&#25130;&#21462;</span>
+
+<span style="color: #99968b;">--trunc(number, precision) &#25353;&#25351;&#23450;&#25130;&#21462;&#31934;&#24230;&#25130;&#21462;&#12290;&#22914;&#65306;</span>
+trunc(12345.45, 1)<span style="color: #99968b;">--&#23558;&#20250;&#25130;&#21462;&#23567;&#25968;&#28857;&#21518;&#19968;&#20301;&#12290;</span>
+
+dbms_random.<span style="color: #8ac6f2; font-weight: bold;">value</span>(1, 100)<span style="color: #99968b;">--&#23558;&#29983;&#25104;1&#65374;100&#20043;&#38388;&#30340;&#38543;&#26426;&#25968;&#12290;</span>
+
+to_date(<span style="color: #92a65e; font-weight: bold;">date</span>, <span style="color: #95e454;">'J'</span>)<span style="color: #99968b;">--&#23558;&#24471;&#21040;&#24635;&#22825;&#25968;&#12290;</span>
+to_date(<span style="color: #95e454;">'1999-09-09'</span>, <span style="color: #95e454;">'yyyy-mm-dd'</span>);
+to_char(<span style="color: #92a65e; font-weight: bold;">date</span>, <span style="color: #95e454;">'yyyy-mm'</span>);<span style="color: #99968b;">--&#25353;&#26684;&#24335;&#24471;&#21040;date</span>
+
+<span style="color: #99968b;">--&#36882;&#24402;&#26597;&#35810;&#65306;&#34920;&#32467;&#26500;-(id, name, super)</span>
+<span style="color: #8ac6f2; font-weight: bold;">SELECT</span> * <span style="color: #e5786d;">FROM</span> table_ <span style="color: #8ac6f2; font-weight: bold;">CONNECT</span> <span style="color: #8ac6f2; font-weight: bold;">BY</span> <span style="color: #8ac6f2; font-weight: bold;">PRIOR</span> id=super <span style="color: #8ac6f2; font-weight: bold;">START</span> <span style="color: #8ac6f2; font-weight: bold;">WITH</span> id=xx;
+<span style="color: #99968b;">--&#23558;&#20250;&#26597;&#35810;&#20986;&#20174;id=xx&#30340;&#34892;&#20197;&#21450;&#35813;&#34892;&#30340;&#25152;&#26377;&#23376;&#33410;&#28857;&#12290;</span>
+
+<span style="color: #99968b;">--&#22312;&#34920;&#20013;&#25554;&#20837;&#22810;&#34892;&#25968;&#25454;&#65306;</span>
+<span style="color: #8ac6f2; font-weight: bold;">insert</span> <span style="color: #8ac6f2; font-weight: bold;">into</span> table1(fields1, fields2) <span style="color: #8ac6f2; font-weight: bold;">select</span> fields1,fields2 <span style="color: #e5786d;">from</span> table2<span style="color: #99968b;">--&#23558;&#19968;&#20010;&#34920;&#30340;&#22810;&#34892;&#25968;&#25454;&#25554;&#20837;&#21478;&#19968;&#24352;&#34920;&#12290;</span>
+<span style="color: #8ac6f2; font-weight: bold;">insert</span> <span style="color: #8ac6f2; font-weight: bold;">into</span> table1(<span style="color: #8ac6f2; font-weight: bold;">fields</span>) <span style="color: #8ac6f2; font-weight: bold;">select</span> xxx <span style="color: #e5786d;">from</span> table2 <span style="color: #8ac6f2; font-weight: bold;">where</span> rownum&lt;200;<span style="color: #99968b;">--xxx&#20026;&#38656;&#35201;&#25554;&#20837;table1&#30340;&#25968;&#25454;&#65292;&#36825;&#26679;&#23601;&#33021;&#23558;&#38656;&#35201;&#30340;&#22810;&#34892;&#25968;&#25454;&#25554;&#20837;&#19968;&#20010;&#34920;&#20013;&#12290;</span>
+
+<span style="color: #8ac6f2; font-weight: bold;">create</span> <span style="color: #8ac6f2; font-weight: bold;">table</span> <span style="color: #cae682;">test</span> <span style="color: #8ac6f2; font-weight: bold;">as</span> <span style="color: #8ac6f2; font-weight: bold;">select</span> * <span style="color: #e5786d;">from</span> test_b<span style="color: #99968b;">--&#29992;&#20110;&#21019;&#24314;&#34920;&#12290;</span>
+
+<span style="color: #99968b;">--cast&#31034;&#20363;&#65306;</span>
+<span style="color: #e5786d;">cast</span>(xx <span style="color: #8ac6f2; font-weight: bold;">AS</span> VARCHAR2(10)|<span style="color: #8ac6f2; font-weight: bold;">NUMBER</span>|...) <span style="color: #99968b;">--&#19981;&#25903;&#25345;LONG</span>
+<span style="color: #8ac6f2; font-weight: bold;">TYPE</span> <span style="color: #8ac6f2; font-weight: bold;">type</span> <span style="color: #8ac6f2; font-weight: bold;">IS</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> <span style="color: #8ac6f2; font-weight: bold;">OF</span> some_type;
+<span style="color: #e5786d;">CAST</span>(MULTISET(<span style="color: #8ac6f2; font-weight: bold;">SELECT</span> x, y <span style="color: #e5786d;">from</span> some_table) <span style="color: #8ac6f2; font-weight: bold;">AS</span> <span style="color: #8ac6f2; font-weight: bold;">type</span>)
+
+<span style="color: #99968b;">--any,some,all,in:</span>
+<span style="color: #99968b;">--some&#21644;any&#20316;&#29992;&#24046;&#19981;&#22810;&#65292;&#25324;&#21495;&#20869;&#19968;&#33324;&#20026;&#23376;&#26597;&#35810;&#12290;&#19968;&#33324;&#26469;&#35828;some&#29992;&#20110;=&#65292;any&#29992;&#20110;&#27604;&#36739;&#12290;&#24403;&#29992;&#20110;&#27604;&#36739;&#26102;in&#19982;some,any&#30456;&#21516;&#12290;</span>
+<span style="color: #8ac6f2; font-weight: bold;">select</span> x <span style="color: #e5786d;">from</span> some_talbe <span style="color: #8ac6f2; font-weight: bold;">where</span> y = <span style="color: #8ac6f2; font-weight: bold;">some</span> (...);
+<span style="color: #8ac6f2; font-weight: bold;">select</span> x <span style="color: #e5786d;">from</span> some_table <span style="color: #8ac6f2; font-weight: bold;">where</span> y &gt; <span style="color: #8ac6f2; font-weight: bold;">any</span> (...);
+<span style="color: #8ac6f2; font-weight: bold;">select</span> x <span style="color: #e5786d;">from</span> some_table <span style="color: #8ac6f2; font-weight: bold;">where</span> y &gt; <span style="color: #8ac6f2; font-weight: bold;">all</span> (...);
+
+<span style="color: #99968b;">--decode:</span>
+<span style="color: #8ac6f2; font-weight: bold;">SELECT</span> DECODE(<span style="color: #8ac6f2; font-weight: bold;">column_name</span>, condition1, result1, condition2, result2, default_result) <span style="color: #e5786d;">from</span> <span style="color: #8ac6f2; font-weight: bold;">table</span>;
+
+<span style="color: #99968b;">--union</span>
+<span style="color: #8ac6f2; font-weight: bold;">select</span> <span style="color: #92a65e; font-weight: bold;">date</span> <span style="color: #e5786d;">from</span> table_1 <span style="color: #8ac6f2; font-weight: bold;">union</span> <span style="color: #8ac6f2; font-weight: bold;">select</span> <span style="color: #92a65e; font-weight: bold;">date</span> <span style="color: #e5786d;">from</span> table_2;
+<span style="color: #99968b;">--&#24471;&#21040;&#20004;&#20010;&#34920;&#20013;&#30340;date&#20449;&#24687;(date&#21487;&#20197;&#20026;&#20854;&#20182;column&#65292;&#19981;&#36807;&#20004;&#20010;&#34920;&#20013;select&#20986;&#26469;&#30340;column&#31867;&#22411;&#24517;&#39035;&#30456;&#21516;)&#12290;&#24471;&#21040;&#30340;&#20449;&#24687;&#19981;&#20250;&#26377;&#37325;&#22797;&#30340;&#12290;&#22914;&#26524;&#20351;&#29992;union all&#21017;&#21487;&#20197;&#24471;&#21040;&#25152;&#26377;&#30340;&#20449;&#24687;&#65292;&#21253;&#25324;&#37325;&#22797;&#30340;&#12290;</span>
+<span style="color: #99968b;">--intersect&#65306; &#20351;&#29992;&#26041;&#27861;&#21516;union&#65292;&#19981;&#21516;&#30340;&#26159;&#24471;&#21040;&#30340;&#32467;&#26524;&#38598;&#26159;&#20004;&#20010;select&#30340;&#20132;&#38598;&#12290;</span>
+
+<span style="color: #99968b;">--&#22914;&#26524;expression1&#20026;null&#21017;&#36820;&#22238;expression2&#65292;&#21542;&#21017;&#36820;&#22238;expression1&#65307;</span>
+NVL(expression1, expression2)
+
+<span style="color: #e5786d;">concat</span>(expression, expression)<span style="color: #99968b;">--&#23383;&#31526;&#20018;&#36830;&#25509;&#65292;&#21516;||&#65307;</span>
+<span style="color: #e5786d;">lower</span>(expression), <span style="color: #e5786d;">upper</span>(expression), initcap(expression).initcap <span style="color: #99968b;">--&#20316;&#29992;&#20026;&#21333;&#35789;&#39318;&#23383;&#27597;&#22823;&#20889;;</span>
+<span style="color: #e5786d;">instr</span>(expression, <span style="color: #e5786d;">substring</span> [, <span style="color: #e5786d;">position</span> [, occurence]]) <span style="color: #99968b;">--&#33719;&#24471;expression&#20013;substring&#30340;&#20301;&#32622;&#65292;position&#20026;&#20174;expression&#30340;&#31532;&#20960;&#20301;&#24320;&#22987;&#65292;occurence&#20026;&#31532;&#20960;&#27425;&#20986;&#29616;&#65307;</span>
+<span style="color: #e5786d;">length</span>(expression);
+<span style="color: #e5786d;">lpad</span>(expression, n, [, expression]),<span style="color: #e5786d;">rpad</span>(expression, n, [, expression]) <span style="color: #99968b;">--&#20351;&#29992;[]&#20013;&#30340;expression&#22635;&#20805;&#23383;&#31526;&#20018;&#65292;&#20351;&#24471;&#23383;&#31526;&#20018;&#30340;&#38271;&#24230;&#20026;n&#65292;lpad&#20026;&#22312;&#24038;&#36793;&#22635;&#20805;&#65292;rpad&#20026;&#22312;&#21491;&#36793;&#22635;&#20805;;</span>
+<span style="color: #e5786d;">trim</span>([ <span style="color: #e5786d;">leading</span>|<span style="color: #e5786d;">trailing</span>|<span style="color: #e5786d;">both</span> <span style="color: #8ac6f2; font-weight: bold;">character</span> <span style="color: #e5786d;">from</span>] expression) <span style="color: #99968b;">--&#21024;&#38500;&#23383;&#31526;&#20018;&#21069;|&#21518;|&#21069;&#21518;&#30340;&#25351;&#23450;&#23383;&#31526;(character);</span>
+<span style="color: #e5786d;">replace</span>(expression, <span style="color: #8ac6f2; font-weight: bold;">search</span> [, <span style="color: #e5786d;">replace</span>]) <span style="color: #99968b;">--&#29992;replace&#23383;&#31526;&#26367;&#25442;expression&#20013;&#30340;search&#23383;&#31526;;</span>
+<span style="color: #e5786d;">translate</span>(expression, <span style="color: #8ac6f2; font-weight: bold;">search</span> [, <span style="color: #e5786d;">replace</span>]) <span style="color: #99968b;">--expression&#20013;&#21253;&#21547;&#30340;search&#20013;&#30340;&#23383;&#31526;&#23558;&#20250;&#34987;&#26367;&#25442;&#20026;replace&#20013;&#23545;&#24212;&#30340;&#23383;&#31526;&#65292;&#20363;&#22914;&#65306;translate('test', 'ts', 'ap')='aept',t&#34987;&#26367;&#25442;&#20026;a&#65292;s&#26367;&#25442;&#20026;p;</span>
+substr(expression, [-]<span style="color: #e5786d;">position</span> [, <span style="color: #e5786d;">length</span>]) <span style="color: #99968b;">--&#20174;position&#24320;&#22987;&#21462;length&#38271;&#24230;&#30340;&#23376;&#23383;&#31526;&#20018;&#65292;position&#20026;&#36127;&#25968;&#21017;&#20174;&#26411;&#23614;&#24320;&#22987;&#21521;&#21069;&#25968;&#65307;</span>
+<span style="color: #e5786d;">abs</span>(n) <span style="color: #99968b;">--&#21462;&#32477;&#23545;&#20540;;</span>
+ceil(n), floor(n).ceil(1.2)=2, floor(1.2)=1;
+<span style="color: #e5786d;">mod</span>(<span style="color: #8ac6f2; font-weight: bold;">m</span>, n) <span style="color: #99968b;">--&#21462;m/n&#30340;&#27169;;</span>
+power(<span style="color: #8ac6f2; font-weight: bold;">m</span>, n)<span style="color: #99968b;">--&#21462;m&#30340;n&#27425;&#26041;;</span>
+round(n [, places])<span style="color: #99968b;">--&#25353;places&#21462;&#30456;&#24212;&#31934;&#24230;&#30340;&#25968;&#65292;&#22235;&#33293;&#20116;&#20837;&#65307;</span>
+sign(n) <span style="color: #99968b;">--&#36127;&#25968;&#36820;&#22238;-1&#65292;&#27491;&#25968;&#36820;&#22238;1&#65292;&#38646;&#36820;&#22238;0&#65306;</span>
+sqt(n) <span style="color: #99968b;">--n&#30340;&#24179;&#26041;&#26681;;</span>
+trunc(n [, places]) <span style="color: #99968b;">--&#25353;places&#21462;&#30456;&#24212;&#31934;&#24230;&#30340;&#25968;&#65292;&#30452;&#25509;&#33293;&#21435;&#22810;&#20313;&#30340;&#20301;;</span>
+add_months(<span style="color: #92a65e; font-weight: bold;">date</span>, n) <span style="color: #99968b;">--&#36820;&#22238;date&#30340;&#26376;&#20221;&#21152;n&#21518;&#30340;&#26085;&#26399;;</span>
+<span style="color: #e5786d;">extract</span>(<span style="color: #92a65e; font-weight: bold;">year</span>|<span style="color: #8ac6f2; font-weight: bold;">month</span>|<span style="color: #8ac6f2; font-weight: bold;">day</span>|<span style="color: #8ac6f2; font-weight: bold;">hour</span>|... <span style="color: #e5786d;">FROM</span> <span style="color: #92a65e; font-weight: bold;">DATE</span> <span style="color: #92a65e; font-weight: bold;">date</span>) <span style="color: #99968b;">--&#20174;date&#20013;&#25130;&#21462;&#25968;&#25454;;</span>
+
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> 事物隔离级别</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>oracle只有两个事物隔离级别：read committed（默认，能避免脏读）、serializable（能避免脏读、不可重复读、幻像读）
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">SET</span> <span style="color: #8ac6f2; font-weight: bold;">TRANSACTION</span> <span style="color: #8ac6f2; font-weight: bold;">ISOLATION</span> <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> <span style="color: #8ac6f2; font-weight: bold;">READ</span> <span style="color: #8ac6f2; font-weight: bold;">COMMITTED</span>;
+<span style="color: #8ac6f2; font-weight: bold;">SET</span> <span style="color: #8ac6f2; font-weight: bold;">TRANSACTION</span> <span style="color: #8ac6f2; font-weight: bold;">ISOLATION</span> <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> <span style="color: #8ac6f2; font-weight: bold;">SERIALIZABLE</span>;
+<span style="color: #8ac6f2; font-weight: bold;">SET</span> <span style="color: #8ac6f2; font-weight: bold;">TRANSACTION</span> <span style="color: #8ac6f2; font-weight: bold;">READ</span> <span style="color: #8ac6f2; font-weight: bold;">ONLY</span>;
+</pre>
+
+<p>
+使用serializable时，如果事务过程中修改一个在该事务进行过程中被其他事务修改的行时将抛出Cannot serialize access error
+</p>
+<p>
+重复读：同一事务中两次读取同一（行）数据，得到的结果不同；
+</p>
+<p>
+幻想读：同一事务过程中表中的数据有新增或删除导致两次得到的结果不同；
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> 锁</h2>
+<div class="outline-text-2" id="text-5">
+
+
+<p>
+在执行update、delete、select for update时将会获得一个行级的tx锁（事务锁）将会锁定该行以防止在该事务提交前其他事务对该行进行update、delete。此外还将建立一个表级的tm锁，该锁防止DDL语句对该表的操作。
+</p>
+<p>
+在执行DDL语句时将会获得一个该表的DDL锁定，以防止其他事务获得对该表的DDL锁定和TM锁定。
+</p>
+<p>
+如果需要对一个表中的绝大多数数据进行更新等操作则可以使用LOCK TABLE IN EXCLUSIVE MODE该语句将会锁定该表。
+</p>
+<p>
+可以使用DBMS<sub>LOCK包创建自己的锁定。</sub>
+</p>
+<p>
+Oracle中的锁定可以分为几类：DML lock（data lock），DDL lock（dictionary lock)和internal lock/latch。
+</p>
+<p>
+DML lock又可以分为row lock和table lock。row lock在select.. for update/insert/update/delete时隐式自动产生，而table lock除了隐式产生，也可以调用lock table &lt;table<sub>name&gt</sub>; in &lt;/table<sub>name&gt</sub>; name来显示锁定。
+</p>
+
+
+<pre class="src src-sql"><span style="color: #99968b;">--&#21482;&#20801;&#35768;&#21035;&#30340;session&#26597;&#35810;&#34920;&#20013;&#30340;&#25968;&#25454;&#12290;</span>
+<span style="color: #8ac6f2; font-weight: bold;">lock</span> <span style="color: #8ac6f2; font-weight: bold;">table</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span> <span style="color: #8ac6f2; font-weight: bold;">in</span> exclusive <span style="color: #8ac6f2; font-weight: bold;">mode</span>&#65288;X&#65289;
+<span style="color: #99968b;">--&#21482;&#20801;&#35768;&#21035;&#30340;session&#26597;&#35810;&#34920;&#20013;&#30340;&#25968;&#25454;&#12290;</span>
+<span style="color: #8ac6f2; font-weight: bold;">lock</span> <span style="color: #8ac6f2; font-weight: bold;">table</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span> <span style="color: #8ac6f2; font-weight: bold;">in</span> <span style="color: #8ac6f2; font-weight: bold;">share</span> <span style="color: #92a65e; font-weight: bold;">row</span> exclusive <span style="color: #8ac6f2; font-weight: bold;">mode</span>&#65288;SRX&#65289;
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Object</h2>
+<div class="outline-text-2" id="text-6">
+
+
+</div>
+
+<div id="outline-container-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Dimention</h3>
+<div class="outline-text-3" id="text-6-1">
+
+<p>创建Dimention：（用于为物化视图的查询重写服务）
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">CREATE</span> DIMENSION customers_dim
+	 <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> customer   <span style="color: #8ac6f2; font-weight: bold;">IS</span> (customers.cust_id)
+	 <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> city       <span style="color: #8ac6f2; font-weight: bold;">IS</span> (customers.cust_city)
+	 <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> <span style="color: #8ac6f2; font-weight: bold;">state</span>      <span style="color: #8ac6f2; font-weight: bold;">IS</span> (customers.cust_state_province)
+	 <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> country    <span style="color: #8ac6f2; font-weight: bold;">IS</span> (countries.country_id)
+	 <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> subregion  <span style="color: #8ac6f2; font-weight: bold;">IS</span> (countries.country_subregion)
+	 <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> region     <span style="color: #8ac6f2; font-weight: bold;">IS</span> (countries.country_region)
+	 <span style="color: #8ac6f2; font-weight: bold;">HIERARCHY</span> geog_rollup (
+			customer      CHILD <span style="color: #8ac6f2; font-weight: bold;">OF</span>
+			city          CHILD <span style="color: #8ac6f2; font-weight: bold;">OF</span>
+			<span style="color: #8ac6f2; font-weight: bold;">state</span>         CHILD <span style="color: #8ac6f2; font-weight: bold;">OF</span>
+			country       CHILD <span style="color: #8ac6f2; font-weight: bold;">OF</span>
+			subregion     CHILD <span style="color: #8ac6f2; font-weight: bold;">OF</span>
+			region
+	 <span style="color: #8ac6f2; font-weight: bold;">JOIN</span> <span style="color: #8ac6f2; font-weight: bold;">KEY</span> (customers.country_id) <span style="color: #8ac6f2; font-weight: bold;">REFERENCES</span> country //&#35774;&#32622;&#20004;&#24352;&#34920;&#30340;&#20851;&#32852;
+	 )
+	 ATTRIBUTE customer DETERMINES      //&#21578;&#35785;oracle&#27599;&#19968;&#20010;&#23618;&#32423;&#25152;&#33021;&#22815;&#21807;&#19968;&#30830;&#23450;&#30340;&#19996;&#35199;
+	 (cust_first_name, cust_last_name, cust_gender,
+		cust_marital_status, cust_year_of_birth,
+		cust_income_level, cust_credit_limit)
+	 ATTRIBUTE country DETERMINES (countries.country_name)
+;
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> IOT表</h3>
+<div class="outline-text-3" id="text-6-2">
+
+<p>IOT表将整行数据按照索引的组织进行存储，这与正常的堆组织表是不同的。（插入慢）
+</p>
+<p>
+对于总是通过对主键的精确匹配或范围扫描进行访问的表，就需要考虑使用索引组织表(IOT),将使用B+树来存储数据，提高查询速度。
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">create</span> <span style="color: #8ac6f2; font-weight: bold;">table</span> <span style="color: #cae682;">table1</span>(colum1 <span style="color: #8ac6f2; font-weight: bold;">primary</span> <span style="color: #8ac6f2; font-weight: bold;">key</span>, colum2) organization <span style="color: #8ac6f2; font-weight: bold;">index</span>;
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6-3" class="outline-3">
+<h3 id="sec-6-3"><span class="section-number-3">6.3</span> sequence</h3>
+<div class="outline-text-3" id="text-6-3">
+
+
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">create</span> <span style="color: #8ac6f2; font-weight: bold;">sequence</span> <span style="color: #cae682;">seq_name</span> [increment <span style="color: #8ac6f2; font-weight: bold;">by</span> ] [<span style="color: #8ac6f2; font-weight: bold;">start</span> <span style="color: #8ac6f2; font-weight: bold;">with</span>] [nomaxvalue] [nocycle] [cache];
+</pre>
+
+<p>
+seq<sub>name</sub>.currval得到当前的序列号.
+</p>
+<p>
+seq<sub>name</sub>.nextval得到下一个序列号，并将该序列号存入currval中。
+</p>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> 调优</h2>
+<div class="outline-text-2" id="text-7">
+
+
+<p>
+使用set autotrace traceonly explain可以查看sql语句执行的execution plan
+</p>
+<p>
+使用set timing on查看查询所需要的时间
+</p>
+<p>
+B*tree索引不为null的数据创建索引
+</p>
+<p>
+当删除或更新父表中的主键时，将会锁定子表，并且会对子表进行全扫描，这时候就需要给子表的外键加上索引。如果没有这些情况则可以不进行索引。
+</p>
+<p>
+使用alter session set sql<sub>trace</sub>=true;alter session set timed<sub>statistics</sub>=true;来设置保存跟踪文件用于优化，跟踪文件的位置记录在user<sub>dump</sub><sub>dest参数中，可通过show</sub> parameter user<sub>dump</sub><sub>dest或从V</sub>$PARAMETER视图中查看。相应的信息将会保存到trc文件中，通过使用tkprof工具可以对其进行格式转换，命令为：
+</p>
+
+
+<pre class="src src-sql">tkprof &#25991;&#20214;&#21517;.trc report.txt
+</pre>
+
+<p>
+该文件将会被转换格式后保存到report.txt文件中。其中的部分参数如下：
+</p>
+<p>
+	count：执行的次数
+</p>
+<p>
+	disk：需要多少次IO
+</p>
+<p>
+	query：需要处理多少块
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> DDL</h2>
+<div class="outline-text-2" id="text-8">
+
+
+<p>
+在某一表空间中创建表
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">CREATE</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> ... TABLESPACE tablespace_name;
+</pre>
+
+
+<p>
+指定与该表相关的index保存在另一个表空间
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">CREATE</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> ... <span style="color: #8ac6f2; font-weight: bold;">USING</span> <span style="color: #8ac6f2; font-weight: bold;">INDEX</span> TABLESPACE tablespace_name;
+</pre>
+
+
+<p>
+创建索引
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">CREATE</span> <span style="color: #8ac6f2; font-weight: bold;">INDEX</span> index_name <span style="color: #8ac6f2; font-weight: bold;">ON</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span> (<span style="color: #8ac6f2; font-weight: bold;">column_name</span>);
+</pre>
+
+
+<p>
+创建唯一约束
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">ALTER</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span> <span style="color: #8ac6f2; font-weight: bold;">ADD</span> <span style="color: #8ac6f2; font-weight: bold;">CONSTRAINT</span> <span style="color: #8ac6f2; font-weight: bold;">constraint_name</span> <span style="color: #8ac6f2; font-weight: bold;">UNIQUE</span> (<span style="color: #8ac6f2; font-weight: bold;">column_name</span> [, <span style="color: #8ac6f2; font-weight: bold;">column_name</span>]);
+</pre>
+
+
+<p>
+创建主键
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">ALTER</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span> <span style="color: #8ac6f2; font-weight: bold;">ADD</span> <span style="color: #8ac6f2; font-weight: bold;">CONSTRAINT</span> <span style="color: #8ac6f2; font-weight: bold;">constraint_name</span> <span style="color: #8ac6f2; font-weight: bold;">PRIMARY</span> <span style="color: #8ac6f2; font-weight: bold;">KEY</span> (<span style="color: #8ac6f2; font-weight: bold;">column_name</span> [, <span style="color: #8ac6f2; font-weight: bold;">column_name</span>]);
+</pre>
+
+
+
+<p>
+创建外键：(on delete cascade设置使得删除主表的值时关联删除子表中的值,on delete set null,删除时将子表中的相关值置为null,no action与restrict差不多表示删除时如果子表有记录则禁止操作)
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">alter</span> <span style="color: #8ac6f2; font-weight: bold;">table</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span> <span style="color: #8ac6f2; font-weight: bold;">add</span> <span style="color: #8ac6f2; font-weight: bold;">constraint</span> <span style="color: #8ac6f2; font-weight: bold;">constraint_name</span> <span style="color: #8ac6f2; font-weight: bold;">foreign</span> <span style="color: #8ac6f2; font-weight: bold;">key</span>(<span style="color: #8ac6f2; font-weight: bold;">column</span> [,<span style="color: #8ac6f2; font-weight: bold;">column</span> ...]) <span style="color: #8ac6f2; font-weight: bold;">references</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span>(<span style="color: #8ac6f2; font-weight: bold;">column</span> [,<span style="color: #8ac6f2; font-weight: bold;">column</span> ...]) [<span style="color: #8ac6f2; font-weight: bold;">on</span> <span style="color: #8ac6f2; font-weight: bold;">delete</span>|<span style="color: #8ac6f2; font-weight: bold;">update</span> <span style="color: #8ac6f2; font-weight: bold;">cascade</span>|<span style="color: #8ac6f2; font-weight: bold;">set</span> <span style="color: #8ac6f2; font-weight: bold;">null</span>|<span style="color: #8ac6f2; font-weight: bold;">no</span> <span style="color: #8ac6f2; font-weight: bold;">action</span>|<span style="color: #8ac6f2; font-weight: bold;">restrict</span>];
+</pre>
+
+
+<p>
+truncate与delete的区别:
+truncate不产生回滚，会重置high water mark，属于ddl（执行后不能回滚）。
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> other</h2>
+<div class="outline-text-2" id="text-9">
+
+
+<p>
+sqlplus username/password@sid登录。
+</p>
+<p>
+oracle $exp $imp 进行导入导出
+</p>
+<p>
+all<sub>tables表；所有用户的表</sub>
+</p>
+<p>
+user<sub>tables表；当前用户的表</sub>
+</p>
+<p>
+all<sub>source表；包括存储过程等各种资源</sub>
+</p>
+<p>
+sqlplus username/password as sysdba;使用dba权限登录。
+</p>
+<p>
+dbms<sub>output</sub>.put<sub>line</sub>('xxx');输出（dbms<sub>output提供了一些用于输出的方法）</sub>
+</p>
+<p>
+set serveroutput on（在屏幕上看到输出的内容）
+</p>
+<p>
+select systimestamp from dual;获取系统时间
+</p>
+<p>
+tnsping orcl;查看tns监听是否启动，orcl为sid在tnsnames.ora中配置。
+</p>
+<p>
+@filename；执行相应文件，需要给出完整的路径。当文件不在系统根目录下的时候测试失败。
+</p>
+<p>
+一个query进入执行阶段后，就将有确定的SCN，在执行过程中只会查找observed SCN所对应的data block（能够被观察到的SCN）。如果有的data block所对应的SCN不能被观察到，则表示这个数据为脏数据，这时就到rollback segment中查找。
+</p>
+<p>
+oracle在创建constraint的时候会同时为该列建立B+树index,例如在创建主键时将会自动创建索引。
+</p>
+<p>
+dba创建的表的信息在DBA<sub>TABLES中能够查询，其余用户创建的表在USER</sub><sub>TABLES中能够查询；同样index可以在DBA</sub><sub>INDEXES和USER</sub><sub>INEXES中查询。</sub>
+</p>
+<p>
+三个环境变量的设置：
+</p>
+<p>
+是否现实执行的命令内容
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">show</span> echo  <span style="color: #8ac6f2; font-weight: bold;">set</span> echo <span style="color: #8ac6f2; font-weight: bold;">on</span>/<span style="color: #8ac6f2; font-weight: bold;">off</span>
+</pre>
+
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">show</span> feedback
+<span style="color: #8ac6f2; font-weight: bold;">set</span> feedback <span style="color: #8ac6f2; font-weight: bold;">on</span>/<span style="color: #8ac6f2; font-weight: bold;">off</span>
+</pre>
+
+
+<p>
+页面大小设置
+</p>
+
+
+<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">show</span> pagesize  <span style="color: #8ac6f2; font-weight: bold;">set</span> pagesize &#215;&#215;
+</pre>
+
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2014-02-07T00:02+0900</p>
+<p class="author">Author: rex.houy</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>
