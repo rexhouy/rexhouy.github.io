@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="gbk"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-							 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>hibernate</title>
-<meta http-equiv="Content-Type" content="text/html;charset=gbk"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="hibernate"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2014-02-07T00:01+0900"/>
-<meta name="author" content="rex.houy"/>
+<meta name="generated" content="2015-01-05T13:21+0800"/>
+<meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
 <link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
@@ -29,19 +29,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 ²éÑ¯</a>
+<li><a href="#sec-1">1 æŸ¥è¯¢</a>
 <ul>
-<li><a href="#sec-1-1">1.1 ÑÓ³Ù¼ÓÔØ</a></li>
-<li><a href="#sec-1-2">1.2 n+1²éÑ¯</a></li>
+<li><a href="#sec-1-1">1.1 å»¶è¿ŸåŠ è½½</a></li>
+<li><a href="#sec-1-2">1.2 n+1æŸ¥è¯¢</a></li>
 </ul>
 </li>
-<li><a href="#sec-2">2 »º´æ</a></li>
-<li><a href="#sec-3">3 Ëø</a></li>
-<li><a href="#sec-4">4 ·½·¨</a></li>
-<li><a href="#sec-5">5 ¹ØÏµ</a>
+<li><a href="#sec-2">2 ç¼“å­˜</a></li>
+<li><a href="#sec-3">3 é”</a></li>
+<li><a href="#sec-4">4 æ–¹æ³•</a></li>
+<li><a href="#sec-5">5 å…³ç³»</a>
 <ul>
-<li><a href="#sec-5-1">5.1 ¼Ì³Ğ</a></li>
-<li><a href="#sec-5-2">5.2 µ¥±í¼Ì³ĞÓ³Éä</a></li>
+<li><a href="#sec-5-1">5.1 ç»§æ‰¿</a></li>
+<li><a href="#sec-5-2">5.2 å•è¡¨ç»§æ‰¿æ˜ å°„</a></li>
 <li><a href="#sec-5-3">5.3 other</a></li>
 </ul>
 </li>
@@ -51,7 +51,7 @@
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> ²éÑ¯</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> æŸ¥è¯¢</h2>
 <div class="outline-text-2" id="text-1">
 
 
@@ -59,39 +59,39 @@
 </div>
 
 <div id="outline-container-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> ÑÓ³Ù¼ÓÔØ</h3>
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> å»¶è¿ŸåŠ è½½</h3>
 <div class="outline-text-3" id="text-1-1">
 
-<p>¶ÔÓÚhibernate²éÑ¯£¬ÑÓ³Ù¼ÓÔØ£¬´úÀíÊ¹ÓÃµÄËµÃ÷£º£¨ÕâÁ½¸ö¶¼Ê¹ÓÃlazyÉèÖÃ£©
+<p>å¯¹äºhibernateæŸ¥è¯¢ï¼Œå»¶è¿ŸåŠ è½½ï¼Œä»£ç†ä½¿ç”¨çš„è¯´æ˜ï¼šï¼ˆè¿™ä¸¤ä¸ªéƒ½ä½¿ç”¨lazyè®¾ç½®ï¼‰
 </p>
 <p>
-£¨lazyÉèÖÃÎªtrue»òextra£¬Èç¹ûÉèÖÃÎªfalse½«²»»áÊ¹ÓÃ´úÀí¶øÊÇÖ±½Ó²éÑ¯£©
+ï¼ˆlazyè®¾ç½®ä¸ºtrueæˆ–extraï¼Œå¦‚æœè®¾ç½®ä¸ºfalseå°†ä¸ä¼šä½¿ç”¨ä»£ç†è€Œæ˜¯ç›´æ¥æŸ¥è¯¢ï¼‰
 </p>
 <p>
-(one-to-many¶ÔÓ¦ÅäÖÃÎªtrue¡¢false¡¢extra£»many-to-one»òone-to-one¶ÔÓ¦ÅäÖÃÎªproxy¡¢no-proxy¡¢false)£º
+(one-to-manyå¯¹åº”é…ç½®ä¸ºtrueã€falseã€extraï¼›many-to-oneæˆ–one-to-oneå¯¹åº”é…ç½®ä¸ºproxyã€no-proxyã€false)ï¼š
 </p>
 <p>
-1.µ±Ê¹ÓÃload()·½·¨Ê±½«»áÊ¹ÓÃ´úÀí¡£ÔÚÒ»Ğ©Çé¿öÏÂ´úÀíÊÇ·Ç³£ÓĞÓÃµÄ£¬Èç£º
+1.å½“ä½¿ç”¨load()æ–¹æ³•æ—¶å°†ä¼šä½¿ç”¨ä»£ç†ã€‚åœ¨ä¸€äº›æƒ…å†µä¸‹ä»£ç†æ˜¯éå¸¸æœ‰ç”¨çš„ï¼Œå¦‚ï¼š
 </p>
 
 
-<pre class="src src-java"><span style="color: #92a65e; font-weight: bold;">Item</span> <span style="color: #cae682;">item</span> = (<span style="color: #92a65e; font-weight: bold;">Item</span>) session.load(Item.<span style="color: #8ac6f2; font-weight: bold;">class</span>, <span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">Long</span>(123));
-<span style="color: #92a65e; font-weight: bold;">Bid</span> <span style="color: #cae682;">bid</span> = <span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">Bid</span>(<span style="color: #95e454;">"xx"</span>);
+<pre class="src src-java"><span style="color: #268bd2;">Item</span> <span style="color: #6c71c4;">item</span> = (<span style="color: #268bd2;">Item</span>) session.load(Item.<span style="color: #859900;">class</span>, <span style="color: #859900;">new</span> <span style="color: #268bd2;">Long</span>(123));
+<span style="color: #268bd2;">Bid</span> <span style="color: #6c71c4;">bid</span> = <span style="color: #859900;">new</span> <span style="color: #268bd2;">Bid</span>(<span style="color: #2aa198;">"xx"</span>);
 bid.setItem(item);
 session.save(bid);
 </pre>
 
 <p>
-ÕâÊ±Í¨¹ı´úÀíµÄÊ¹ÓÃ±ÜÃâÁË´ÓÊı¾İ¿âÖĞ½øĞĞ²»±ØÒªµÄ²éÑ¯¡£
+è¿™æ—¶é€šè¿‡ä»£ç†çš„ä½¿ç”¨é¿å…äº†ä»æ•°æ®åº“ä¸­è¿›è¡Œä¸å¿…è¦çš„æŸ¥è¯¢ã€‚
 </p>
 <p>
-£¨¶ÔÓÚÊ¹ÓÃid²éÑ¯µ¥¸ö¶ÔÏóhibernate»¹Ìá¹©ÁËget·½·¨£¬¸Ã·½·¨½«»áÖ±½ÓÈ¥²éÑ¯Êı¾İ¿â¡£´ËÍâJPAÖĞÓëload·½·¨Ïà¶ÔÓ¦µÄ·½·¨ÎªgetReferenceÓëget·½·¨Ïà¶ÔÓ¦µÄ·½·¨Îªfind£©
+ï¼ˆå¯¹äºä½¿ç”¨idæŸ¥è¯¢å•ä¸ªå¯¹è±¡hibernateè¿˜æä¾›äº†getæ–¹æ³•ï¼Œè¯¥æ–¹æ³•å°†ä¼šç›´æ¥å»æŸ¥è¯¢æ•°æ®åº“ã€‚æ­¤å¤–JPAä¸­ä¸loadæ–¹æ³•ç›¸å¯¹åº”çš„æ–¹æ³•ä¸ºgetReferenceä¸getæ–¹æ³•ç›¸å¯¹åº”çš„æ–¹æ³•ä¸ºfindï¼‰
 </p>
 <p>
-2.µ±lazyÎªtrueÊ±²éÑ¯³öÒ»¸ö¾ßÓĞ¹ØÁª¹ØÏµµÄ¶ÔÏó£¨ÈçÊ¹ÓÃget£©£¬ÔòÓëËûÏà¹ØÁªµÄ¶ÔÏó½«»áÓÉ´úÀí¶ÔÏó´úÌæ¡£ÕâÊ±£¬Èç¹û·ÃÎÊ¹ØÁª¶ÔÏó£¬°üÀ¨Ê¹ÓÃsize()isEmpty()·½·¨Ê±¶¼½«»áµ¼ÖÂ¸Ã¹ØÁª¶ÔÏó(¼¯)±»²éÑ¯³öÀ´¡£ÕâÊ±¿ÉÒÔÍ¨¹ıÉèÖÃlazyÎªextra(one-to-many)Ê¹hibernateÖ»²éÑ¯³ösize(),isEmpty()ËùĞèÒªµÄĞÅÏ¢¡££¨Ê¹ÓÃlazyÎªfalseÊ±²éÑ¯Ò»¸öÊı¾İÖ»»á²éÑ¯³öÓëËûÖ±½Ó¹ØÁªµÄ¶ÔÏó£¬¶øÓëËûÖ±½Ó¹ØÁªµÄ¶ÔÏóÖĞµÄÆäËû¶ÔÏó£¨ÓëËû¼ä½Ó¹ØÁªµÄ¶ÔÏó£©»áÊ¹ÓÃ´úÀí´úÌæ£¬Ò²¾ÍÊÇËµÕâÖÖ²éÑ¯²¢²»»áµ¼ÖÂºé·ºµÄ²úÉú£©
+2.å½“lazyä¸ºtrueæ—¶æŸ¥è¯¢å‡ºä¸€ä¸ªå…·æœ‰å…³è”å…³ç³»çš„å¯¹è±¡ï¼ˆå¦‚ä½¿ç”¨getï¼‰ï¼Œåˆ™ä¸ä»–ç›¸å…³è”çš„å¯¹è±¡å°†ä¼šç”±ä»£ç†å¯¹è±¡ä»£æ›¿ã€‚è¿™æ—¶ï¼Œå¦‚æœè®¿é—®å…³è”å¯¹è±¡ï¼ŒåŒ…æ‹¬ä½¿ç”¨size()isEmpty()æ–¹æ³•æ—¶éƒ½å°†ä¼šå¯¼è‡´è¯¥å…³è”å¯¹è±¡(é›†)è¢«æŸ¥è¯¢å‡ºæ¥ã€‚è¿™æ—¶å¯ä»¥é€šè¿‡è®¾ç½®lazyä¸ºextra(one-to-many)ä½¿hibernateåªæŸ¥è¯¢å‡ºsize(),isEmpty()æ‰€éœ€è¦çš„ä¿¡æ¯ã€‚ï¼ˆä½¿ç”¨lazyä¸ºfalseæ—¶æŸ¥è¯¢ä¸€ä¸ªæ•°æ®åªä¼šæŸ¥è¯¢å‡ºä¸ä»–ç›´æ¥å…³è”çš„å¯¹è±¡ï¼Œè€Œä¸ä»–ç›´æ¥å…³è”çš„å¯¹è±¡ä¸­çš„å…¶ä»–å¯¹è±¡ï¼ˆä¸ä»–é—´æ¥å…³è”çš„å¯¹è±¡ï¼‰ä¼šä½¿ç”¨ä»£ç†ä»£æ›¿ï¼Œä¹Ÿå°±æ˜¯è¯´è¿™ç§æŸ¥è¯¢å¹¶ä¸ä¼šå¯¼è‡´æ´ªæ³›çš„äº§ç”Ÿï¼‰
 </p>
 <p>
-£¨¹ØÓÚlazyµÄÆäËûËµÃ÷£ºproxyÓëtrueÏàÍ¬£¬no-proxyÍ¨¹ı×Ö½ÚÂë¼ÓÇ¿µÄ·½Ê½½øĞĞ£¨¿ÉÄÜÍ¨¹ıÊ¹ÓÃcglib¶Ô¸ÃÀà½øĞĞ¼ÓÇ¿£¬¼ÓÈëÁË¹ØÁª¶ÔÏóµÄÄÚÈİ£¬Ö»ÓĞÔÚÕæÕıÊ¹ÓÃµ½¹ØÁª¶ÔÏóµÄÊı¾İÊ±²Å»á²éÑ¯Êı¾İ¿â£¬Ò²¾ÍÊÇËµÈç¹ûµ÷ÓÃµÄ¹ØÁª¶ÔÏóµÄ·½·¨²¢Ã»ÓĞÉæ¼°µ½¹ØÁª¶ÔÏóÔÚÊı¾İ¿âÖĞ¶ÔÓ¦µÄÊı¾İÄÚÈİÔò²»»áµ¼ÖÂ²éÑ¯²úÉú£¬´ËÊ±Èç¹ûÊÇproxyÔò»áµ¼ÖÂ²éÑ¯²úÉú£©±£Ö¤ÄÜ¹»Ê¹ÓÃlazyÎªtrueµ«ÓÖ²»Ê¹ÓÃ´úÀí£©
+ï¼ˆå…³äºlazyçš„å…¶ä»–è¯´æ˜ï¼šproxyä¸trueç›¸åŒï¼Œno-proxyé€šè¿‡å­—èŠ‚ç åŠ å¼ºçš„æ–¹å¼è¿›è¡Œï¼ˆå¯èƒ½é€šè¿‡ä½¿ç”¨cglibå¯¹è¯¥ç±»è¿›è¡ŒåŠ å¼ºï¼ŒåŠ å…¥äº†å…³è”å¯¹è±¡çš„å†…å®¹ï¼Œåªæœ‰åœ¨çœŸæ­£ä½¿ç”¨åˆ°å…³è”å¯¹è±¡çš„æ•°æ®æ—¶æ‰ä¼šæŸ¥è¯¢æ•°æ®åº“ï¼Œä¹Ÿå°±æ˜¯è¯´å¦‚æœè°ƒç”¨çš„å…³è”å¯¹è±¡çš„æ–¹æ³•å¹¶æ²¡æœ‰æ¶‰åŠåˆ°å…³è”å¯¹è±¡åœ¨æ•°æ®åº“ä¸­å¯¹åº”çš„æ•°æ®å†…å®¹åˆ™ä¸ä¼šå¯¼è‡´æŸ¥è¯¢äº§ç”Ÿï¼Œæ­¤æ—¶å¦‚æœæ˜¯proxyåˆ™ä¼šå¯¼è‡´æŸ¥è¯¢äº§ç”Ÿï¼‰ä¿è¯èƒ½å¤Ÿä½¿ç”¨lazyä¸ºtrueä½†åˆä¸ä½¿ç”¨ä»£ç†ï¼‰
 </p>
 
 </div>
@@ -99,44 +99,44 @@ session.save(bid);
 </div>
 
 <div id="outline-container-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> n+1²éÑ¯</h3>
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> n+1æŸ¥è¯¢</h3>
 <div class="outline-text-3" id="text-1-2">
 
-<p>n+1²éÑ¯£¨lazy=true£©£º
+<p>n+1æŸ¥è¯¢ï¼ˆlazy=trueï¼‰ï¼š
 </p>
 
 
-<pre class="src src-java">List&lt;Item&gt; items = session.createQuery(<span style="color: #95e454;">"from Item"</span>).list;
+<pre class="src src-java">List&lt;Item&gt; items = session.createQuery(<span style="color: #2aa198;">"from Item"</span>).list;
 items.get(1).getUser();
 items.get(2).getUser();
 </pre>
 
 <p>
-hibernateµÄÖ´ĞĞÇé¿öÎª£¬µ±Ê¹ÓÃcreateQueryÊ±£¬²éÑ¯³öitem¶ÔÏóÁĞ±í¡£ºóÃæµ±Öğ¸ö·ÃÎÊitemµÄ¹ØÁª¶ÔÏóÊ±£¬Ã¿Ò»´Î·ÃÎÊ¶¼½«´¥·¢Ò»ÌõsqlÓï¾ä¡£
+hibernateçš„æ‰§è¡Œæƒ…å†µä¸ºï¼Œå½“ä½¿ç”¨createQueryæ—¶ï¼ŒæŸ¥è¯¢å‡ºitemå¯¹è±¡åˆ—è¡¨ã€‚åé¢å½“é€ä¸ªè®¿é—®itemçš„å…³è”å¯¹è±¡æ—¶ï¼Œæ¯ä¸€æ¬¡è®¿é—®éƒ½å°†è§¦å‘ä¸€æ¡sqlè¯­å¥ã€‚
 </p>
 <p>
-½â¾ö·½°¸£º
+è§£å†³æ–¹æ¡ˆï¼š
 </p>
 <p>
 1.batch-size
 </p>
 <p>
-µ±Ê¹ÓÃ&lt;class &hellip; batch-size=10&gt;ÉèÖÃÊ±£¬items().get(1)Ê±£¬½«»á´¥·¢Ò»ÌõsqlÓï¾ä²éÑ¯³ö½ÓÏÂÀ´µÄ10¸öitemÖĞµÄuser¶ÔÏó¡£
+å½“ä½¿ç”¨&lt;class &hellip; batch-size=10&gt;è®¾ç½®æ—¶ï¼Œitems().get(1)æ—¶ï¼Œå°†ä¼šè§¦å‘ä¸€æ¡sqlè¯­å¥æŸ¥è¯¢å‡ºæ¥ä¸‹æ¥çš„10ä¸ªitemä¸­çš„userå¯¹è±¡ã€‚
 </p>
 <p>
-Ò²¿ÉÒÔÔÚ&lt;set .. batch-size=10&gt;ÖĞÉèÖÃ£¬Ğ§¹ûÊÇÒ»ÑùµÄ£¬Ö»ÊÇ·¶Î§ËõĞ¡¡£
+ä¹Ÿå¯ä»¥åœ¨&lt;set .. batch-size=10&gt;ä¸­è®¾ç½®ï¼Œæ•ˆæœæ˜¯ä¸€æ ·çš„ï¼Œåªæ˜¯èŒƒå›´ç¼©å°ã€‚
 </p>
 <p>
 2.fetch=subselect
 </p>
 <p>
-µ±µÚÒ»´Îµ÷ÓÃitems.get()Ê±£¬½«»á´¥·¢Ò»ÌõsqlÓï¾ä²éÑ¯³öÆäÓàµÄËùÓĞ¶ÔÏó¡£
+å½“ç¬¬ä¸€æ¬¡è°ƒç”¨items.get()æ—¶ï¼Œå°†ä¼šè§¦å‘ä¸€æ¡sqlè¯­å¥æŸ¥è¯¢å‡ºå…¶ä½™çš„æ‰€æœ‰å¯¹è±¡ã€‚
 </p>
 <p>
 3.fetch=join
 </p>
 <p>
-µ±²éÑ¯itemµÄÊ±ºò¾ÍÍ¬Ê±²éÑ¯³öuser¶ÔÏó£¬ÕâÑùÕû¸ö¹ı³ÌÖ»»áÓĞÒ»Ìõsql¡£
+å½“æŸ¥è¯¢itemçš„æ—¶å€™å°±åŒæ—¶æŸ¥è¯¢å‡ºuserå¯¹è±¡ï¼Œè¿™æ ·æ•´ä¸ªè¿‡ç¨‹åªä¼šæœ‰ä¸€æ¡sqlã€‚
 </p>
 </div>
 </div>
@@ -144,88 +144,88 @@ hibernateµÄÖ´ĞĞÇé¿öÎª£¬µ±Ê¹ÓÃcreateQueryÊ±£¬²éÑ¯³öitem¶ÔÏóÁĞ±í¡£ºóÃæµ±Öğ¸ö·ÃÎÊit
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> »º´æ</h2>
+<h2 id="sec-2"><span class="section-number-2">2</span> ç¼“å­˜</h2>
 <div class="outline-text-2" id="text-2">
 
-<p>Ò»¼¶»º´æ£ºsession·¶Î§¡£
+<p>ä¸€çº§ç¼“å­˜ï¼šsessionèŒƒå›´ã€‚
 </p>
 <p>
-¶ş¼¶»º´æ£ºapplication·¶Î§»ò¼¯Èº·¶Î§¡£Ä¬ÈÏ²»´ò¿ª¡£
+äºŒçº§ç¼“å­˜ï¼šapplicationèŒƒå›´æˆ–é›†ç¾¤èŒƒå›´ã€‚é»˜è®¤ä¸æ‰“å¼€ã€‚
 </p>
 <p>
-Ò»¼¶»º´æµÄ¹ÜÀí£º
+ä¸€çº§ç¼“å­˜çš„ç®¡ç†ï¼š
 </p>
 <p>
-evit(Object obj)  ½«Ö¸¶¨µÄ³Ö¾Ã»¯¶ÔÏó´ÓÒ»¼¶»º´æÖĞÇå³ı,ÊÍ·Å¶ÔÏóËùÕ¼ÓÃµÄÄÚ´æ×ÊÔ´,Ö¸¶¨¶ÔÏó´Ó³Ö¾Ã»¯×´Ì¬±äÎªÍÑ¹Ü×´Ì¬,´Ó¶ø³ÉÎªÓÎÀë¶ÔÏó.
+evit(Object obj)  å°†æŒ‡å®šçš„æŒä¹…åŒ–å¯¹è±¡ä»ä¸€çº§ç¼“å­˜ä¸­æ¸…é™¤,é‡Šæ”¾å¯¹è±¡æ‰€å ç”¨çš„å†…å­˜èµ„æº,æŒ‡å®šå¯¹è±¡ä»æŒä¹…åŒ–çŠ¶æ€å˜ä¸ºè„±ç®¡çŠ¶æ€,ä»è€Œæˆä¸ºæ¸¸ç¦»å¯¹è±¡.
 </p>
 <p>
-clear()  ½«Ò»¼¶»º´æÖĞµÄËùÓĞ³Ö¾Ã»¯¶ÔÏóÇå³ı,ÊÍ·ÅÆäÕ¼ÓÃµÄÄÚ´æ×ÊÔ´
+clear()  å°†ä¸€çº§ç¼“å­˜ä¸­çš„æ‰€æœ‰æŒä¹…åŒ–å¯¹è±¡æ¸…é™¤,é‡Šæ”¾å…¶å ç”¨çš„å†…å­˜èµ„æº
 </p>
 <p>
-contains(Object obj) ÅĞ¶ÏÖ¸¶¨µÄ¶ÔÏóÊÇ·ñ´æÔÚÓÚÒ»¼¶»º´æÖĞ.
+contains(Object obj) åˆ¤æ–­æŒ‡å®šçš„å¯¹è±¡æ˜¯å¦å­˜åœ¨äºä¸€çº§ç¼“å­˜ä¸­.
 </p>
 <p>
-flush() Ë¢ĞÂÒ»¼¶»º´æÇøµÄÄÚÈİ,Ê¹Ö®ÓëÊı¾İ¿âÊı¾İ±£³ÖÍ¬²½.
+flush() åˆ·æ–°ä¸€çº§ç¼“å­˜åŒºçš„å†…å®¹,ä½¿ä¹‹ä¸æ•°æ®åº“æ•°æ®ä¿æŒåŒæ­¥.
 </p>
 </div>
 
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Ëø</h2>
+<h2 id="sec-3"><span class="section-number-2">3</span> é”</h2>
 <div class="outline-text-2" id="text-3">
 
-<p>±¯¹ÛËø£º
+<p>æ‚²è§‚é”ï¼š
 </p>
 
 
-<pre class="src src-java">session.get(xx,<span style="color: #e5786d;">LockMode</span>.UPGRADE)
+<pre class="src src-java">session.get(xx,<span style="color: #268bd2;">LockMode</span>.UPGRADE)
 </pre>
 
 
 <p>
-LockMode.UPGRADE²»¹ÜÊÇ·ñ´æÔÚ¶ÔÏó£¬×ÜÊÇÍ¨¹ıselectµ½Êı¾İ¿âÖĞ¼ÓÔØ¶ÔÏó¡£Èç¹ûÊı¾İ¿âÏµÍ³Ö§³Ö±¯¹ÛËø(ÈçORACLEÓëMYSQL)£¬¾ÍÖ´ĞĞselect &hellip; for update¡£Èç¹û²»Ö§³Ö£¬¾ÍÖ´ĞĞÆÕÍ¨µÄselectÓï¾ä¡£
+LockMode.UPGRADEä¸ç®¡æ˜¯å¦å­˜åœ¨å¯¹è±¡ï¼Œæ€»æ˜¯é€šè¿‡selectåˆ°æ•°æ®åº“ä¸­åŠ è½½å¯¹è±¡ã€‚å¦‚æœæ•°æ®åº“ç³»ç»Ÿæ”¯æŒæ‚²è§‚é”(å¦‚ORACLEä¸MYSQL)ï¼Œå°±æ‰§è¡Œselect &hellip; for updateã€‚å¦‚æœä¸æ”¯æŒï¼Œå°±æ‰§è¡Œæ™®é€šçš„selectè¯­å¥ã€‚
 </p>
 <p>
-LockMode.UPGRADE<sub>NOWAIT¡¡Í¬LockMode</sub>.UPGRADEÏàÍ¬£¬´ËÍâ£¬¶ÔORACLEÊı¾İ¿â£¬Ö´ĞĞselect &hellip; for update nowait£¬±íÊ¾Èç¹û²»ÄÜÁ¢¿Ì»ñµÃ±¯¹ÛËø£¬²»µÈ´ıÆäËûÊÂÎñÊÍ·ÅËø£¬¶øÊÇÅ×³öËø¶¨Òì³£¡£
+LockMode.UPGRADE<sub>NOWAITã€€åŒLockMode</sub>.UPGRADEç›¸åŒï¼Œæ­¤å¤–ï¼Œå¯¹ORACLEæ•°æ®åº“ï¼Œæ‰§è¡Œselect &hellip; for update nowaitï¼Œè¡¨ç¤ºå¦‚æœä¸èƒ½ç«‹åˆ»è·å¾—æ‚²è§‚é”ï¼Œä¸ç­‰å¾…å…¶ä»–äº‹åŠ¡é‡Šæ”¾é”ï¼Œè€Œæ˜¯æŠ›å‡ºé”å®šå¼‚å¸¸ã€‚
 </p>
 <p>
-ÀÖ¹ÛËø£ºÅäÖÃ&lt;version&gt;ÔªËØ»ò&lt;timestamp&gt;ÔªËØ
+ä¹è§‚é”ï¼šé…ç½®&lt;version&gt;å…ƒç´ æˆ–&lt;timestamp&gt;å…ƒç´ 
 </p>
 </div>
 
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> ·½·¨</h2>
+<h2 id="sec-4"><span class="section-number-2">4</span> æ–¹æ³•</h2>
 <div class="outline-text-2" id="text-4">
 
-<p>session.save()±£´æ¶ÔÏó£»
+<p>session.save()ä¿å­˜å¯¹è±¡ï¼›
 </p>
 <p>
-session.load(class<sub>name</sub>.class, id)²éÑ¯ÏàÓ¦idµÄ¶ÔÏó£¬½«·µ»Ø´úÀí£¨Ö±µ½Ê¹ÓÃ¸Ã¶ÔÏóµÄÄ³·½·¨Ê±²Å²éÑ¯Êı¾İ¿â£©£¬²»»áÍ¬Ê±²éÑ¯³öÏà¹ØÁªµÄ¶ÔÏó£¬Èç¹ûÃ»ÓĞ²éµ½½«Å×³öÎŞ·¨»Ö¸´µÄÒì³££»
+session.load(class<sub>name</sub>.class, id)æŸ¥è¯¢ç›¸åº”idçš„å¯¹è±¡ï¼Œå°†è¿”å›ä»£ç†ï¼ˆç›´åˆ°ä½¿ç”¨è¯¥å¯¹è±¡çš„æŸæ–¹æ³•æ—¶æ‰æŸ¥è¯¢æ•°æ®åº“ï¼‰ï¼Œä¸ä¼šåŒæ—¶æŸ¥è¯¢å‡ºç›¸å…³è”çš„å¯¹è±¡ï¼Œå¦‚æœæ²¡æœ‰æŸ¥åˆ°å°†æŠ›å‡ºæ— æ³•æ¢å¤çš„å¼‚å¸¸ï¼›
 </p>
 <p>
-session.get(class<sub>name</sub>.class, id, LockMode.UPGRADE)²éÑ¯ÏàÓ¦idµÄ¶ÔÏó,Á¢¼´²éÑ¯£¬Ã»ÓĞÊı¾İÔò·µ»Ønull£¬ÆäÖĞlockmodeÊÇ¿ÉÑ¡µÄ£»
+session.get(class<sub>name</sub>.class, id, LockMode.UPGRADE)æŸ¥è¯¢ç›¸åº”idçš„å¯¹è±¡,ç«‹å³æŸ¥è¯¢ï¼Œæ²¡æœ‰æ•°æ®åˆ™è¿”å›nullï¼Œå…¶ä¸­lockmodeæ˜¯å¯é€‰çš„ï¼›
 </p>
 <p>
-session.refresh()Ë¢ĞÂÄ³¸ö¶ÔÏó£¬Í¬Ê±Ò²»á²éÑ¯³öÓëÖ®¹ØÁªµÄ¶ÔÏó¡£
+session.refresh()åˆ·æ–°æŸä¸ªå¯¹è±¡ï¼ŒåŒæ—¶ä¹Ÿä¼šæŸ¥è¯¢å‡ºä¸ä¹‹å…³è”çš„å¯¹è±¡ã€‚
 </p>
 <p>
-session.update()Èç¹ûÈ·¶¨sessionÖĞÃ»ÓĞ¸Ã¶ÔÏóÔòÊ¹ÓÃ
+session.update()å¦‚æœç¡®å®šsessionä¸­æ²¡æœ‰è¯¥å¯¹è±¡åˆ™ä½¿ç”¨
 </p>
 <p>
-session.merge()¸²¸ÇsessionÖĞÔ­ÓĞµÄÊµÀı£¨Èç¹ûÃ»ÓĞÔò²éÑ¯³öÀ´£©µÄÊôĞÔ£¬Íê³ÉºóÓÃ»§¸ø³öµÄÊµÀıÈÔÎªÍĞ¹Ü¶ÔÏó¡£
+session.merge()è¦†ç›–sessionä¸­åŸæœ‰çš„å®ä¾‹ï¼ˆå¦‚æœæ²¡æœ‰åˆ™æŸ¥è¯¢å‡ºæ¥ï¼‰çš„å±æ€§ï¼Œå®Œæˆåç”¨æˆ·ç»™å‡ºçš„å®ä¾‹ä»ä¸ºæ‰˜ç®¡å¯¹è±¡ã€‚
 </p>
 <p>
-session.saveOrUpdate()Èç¹û¸Ã¶ÔÏóÃ»ÓĞid»òverion±íÃ÷¸Ã¶ÔÏóÎªĞÂ¶ÔÏóÔòsave£¬·ñÔòupdate¡£
+session.saveOrUpdate()å¦‚æœè¯¥å¯¹è±¡æ²¡æœ‰idæˆ–verionè¡¨æ˜è¯¥å¯¹è±¡ä¸ºæ–°å¯¹è±¡åˆ™saveï¼Œå¦åˆ™updateã€‚
 </p>
 </div>
 
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> ¹ØÏµ</h2>
+<h2 id="sec-5"><span class="section-number-2">5</span> å…³ç³»</h2>
 <div class="outline-text-2" id="text-5">
 
 
@@ -233,21 +233,21 @@ session.saveOrUpdate()Èç¹û¸Ã¶ÔÏóÃ»ÓĞid»òverion±íÃ÷¸Ã¶ÔÏóÎªĞÂ¶ÔÏóÔòsave£¬·ñÔòupda
 </div>
 
 <div id="outline-container-5-1" class="outline-3">
-<h3 id="sec-5-1"><span class="section-number-3">5.1</span> ¼Ì³Ğ</h3>
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> ç»§æ‰¿</h3>
 <div class="outline-text-3" id="text-5-1">
 
-<p>Ê¹ÓÃunionÁ¬½Ó£º(¿ÉÒÔÌæ´úunion²éÑ¯£¬hql²»Ö§³Öunion£¬Èç¹ûabstractÉèÖÃÎªfalseÄÇÃ´»¹½«»áunion²éÑ¯¸¸ÀàËù¶ÔÓ¦µÄ±í)
+<p>ä½¿ç”¨unionè¿æ¥ï¼š(å¯ä»¥æ›¿ä»£unionæŸ¥è¯¢ï¼Œhqlä¸æ”¯æŒunionï¼Œå¦‚æœabstractè®¾ç½®ä¸ºfalseé‚£ä¹ˆè¿˜å°†ä¼šunionæŸ¥è¯¢çˆ¶ç±»æ‰€å¯¹åº”çš„è¡¨)
 </p>
 
 
-<pre class="src src-xml">&lt;<span style="color: #cae682;">class</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">abstract</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">true</span><span style="color: #95e454;">"</span>&gt;
-	&lt;<span style="color: #cae682;">property</span>&gt;...&lt;/<span style="color: #cae682;">property</span>&gt;
-	&lt;<span style="color: #cae682;">union-subclass</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">table</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">"</span>&gt;&lt;/<span style="color: #cae682;">union-subclass</span>&gt;
-&lt;/<span style="color: #cae682;">class</span>&gt;
+<pre class="src src-xml">&lt;<span style="color: #b58900;">class</span> <span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">""</span> <span style="color: #6c71c4;">abstract</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">true</span><span style="color: #2aa198;">"</span>&gt;
+        &lt;<span style="color: #b58900;">property</span>&gt;...&lt;/<span style="color: #b58900;">property</span>&gt;
+        &lt;<span style="color: #b58900;">union-subclass</span> <span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">""</span> <span style="color: #6c71c4;">table</span>=<span style="color: #2aa198;">""</span>&gt;&lt;/<span style="color: #b58900;">union-subclass</span>&gt;
+&lt;/<span style="color: #b58900;">class</span>&gt;
 </pre>
 
 <p>
-Éú³ÉµÄinline viewÖĞ»á½«ËùÓĞ×Ö¶Î¶¼²é³öÀ´£¬Ğ§ÂÊ´æÔÚÎÊÌâ
+ç”Ÿæˆçš„inline viewä¸­ä¼šå°†æ‰€æœ‰å­—æ®µéƒ½æŸ¥å‡ºæ¥ï¼Œæ•ˆç‡å­˜åœ¨é—®é¢˜
 </p>
 
 </div>
@@ -255,14 +255,14 @@ session.saveOrUpdate()Èç¹û¸Ã¶ÔÏóÃ»ÓĞid»òverion±íÃ÷¸Ã¶ÔÏóÎªĞÂ¶ÔÏóÔòsave£¬·ñÔòupda
 </div>
 
 <div id="outline-container-5-2" class="outline-3">
-<h3 id="sec-5-2"><span class="section-number-3">5.2</span> µ¥±í¼Ì³ĞÓ³Éä</h3>
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> å•è¡¨ç»§æ‰¿æ˜ å°„</h3>
 <div class="outline-text-3" id="text-5-2">
 
 
 
 
-<pre class="src src-xml">&lt;<span style="color: #cae682;">discriminator</span> <span style="color: #cae682;">column</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">flag</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">string</span><span style="color: #95e454;">"</span> /&gt;
-&lt;<span style="color: #cae682;">subclass</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">CustomerA</span><span style="color: #95e454;">"</span> <span style="color: #cae682;">discriminator-value</span>=<span style="color: #95e454;">"</span><span style="color: #95e454;">A</span><span style="color: #95e454;">"</span>&gt;
+<pre class="src src-xml">&lt;<span style="color: #b58900;">discriminator</span> <span style="color: #6c71c4;">column</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">flag</span><span style="color: #2aa198;">"</span> <span style="color: #6c71c4;">type</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">string</span><span style="color: #2aa198;">"</span> /&gt;
+&lt;<span style="color: #b58900;">subclass</span> <span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">CustomerA</span><span style="color: #2aa198;">"</span> <span style="color: #6c71c4;">discriminator-value</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">A</span><span style="color: #2aa198;">"</span>&gt;
 </pre>
 
 
@@ -274,52 +274,52 @@ session.saveOrUpdate()Èç¹û¸Ã¶ÔÏóÃ»ÓĞid»òverion±íÃ÷¸Ã¶ÔÏóÎªĞÂ¶ÔÏóÔòsave£¬·ñÔòupda
 <h3 id="sec-5-3"><span class="section-number-3">5.3</span> other</h3>
 <div class="outline-text-3" id="text-5-3">
 
-<p>cascadeÊôĞÔ£¨all¡¢delete-orphan¡¢delete¡¢update¡¢create£»all°üº¬ÁËdelete¡¢updateºÍcreate£©
+<p>cascadeå±æ€§ï¼ˆallã€delete-orphanã€deleteã€updateã€createï¼›allåŒ…å«äº†deleteã€updateå’Œcreateï¼‰
 </p>
 <p>
-×¢Òâ£ºÒ»°ãÊÇÔÚone-to-many¶ËÖĞµÄsetÖĞÉèÖÃ¸Ã¹ØÏµ
+æ³¨æ„ï¼šä¸€èˆ¬æ˜¯åœ¨one-to-manyç«¯ä¸­çš„setä¸­è®¾ç½®è¯¥å…³ç³»
 </p>
 
 
-<pre class="src src-java"><span style="color: #92a65e; font-weight: bold;">Parent</span> <span style="color: #cae682;">p</span> = (<span style="color: #92a65e; font-weight: bold;">Parent</span>) session.load(Parent.<span style="color: #8ac6f2; font-weight: bold;">class</span>, pid);
-<span style="color: #92a65e; font-weight: bold;">Child</span> <span style="color: #cae682;">c</span> = (<span style="color: #92a65e; font-weight: bold;">Child</span>) p.getChildren().iterator().next();
+<pre class="src src-java"><span style="color: #268bd2;">Parent</span> <span style="color: #6c71c4;">p</span> = (<span style="color: #268bd2;">Parent</span>) session.load(Parent.<span style="color: #859900;">class</span>, pid);
+<span style="color: #268bd2;">Child</span> <span style="color: #6c71c4;">c</span> = (<span style="color: #268bd2;">Child</span>) p.getChildren().iterator().next();
 p.getChildren().remove(c);
 delete(p);
-c.setParent(<span style="color: #e5786d;">null</span>);
+c.setParent(<span style="color: #268bd2;">null</span>);
 session.flush();
-&lt;set name=<span style="color: #95e454;">"children"</span> inverse=<span style="color: #95e454;">"true"</span> cascade=<span style="color: #95e454;">"all-delete-orphan"</span>&gt;
-&lt;key column=<span style="color: #95e454;">"parent_id"</span>/&gt;
-&lt;one-to-many <span style="color: #8ac6f2; font-weight: bold;">class</span>=<span style="color: #95e454;">"Child"</span>/&gt;
+&lt;set name=<span style="color: #2aa198;">"children"</span> inverse=<span style="color: #2aa198;">"true"</span> cascade=<span style="color: #2aa198;">"all-delete-orphan"</span>&gt;
+&lt;key column=<span style="color: #2aa198;">"parent_id"</span>/&gt;
+&lt;one-to-many <span style="color: #859900;">class</span>=<span style="color: #2aa198;">"Child"</span>/&gt;
 &lt;/set&gt;
 </pre>
 
 <p>
-Èç¹ûallÔòdelete(p)½«»á½«pºÍcÒ»ÆğÉ¾³ı£¬p.getChildren().remove(c)²»»áÉ¾³ıc£¬Ö»»áÉ¾³ıpºÍcµÄ¹ØÏµ£¨½«cµÄÍâ¼üÖÃÎªnull£©¡£
+å¦‚æœallåˆ™delete(p)å°†ä¼šå°†på’Œcä¸€èµ·åˆ é™¤ï¼Œp.getChildren().remove(c)ä¸ä¼šåˆ é™¤cï¼Œåªä¼šåˆ é™¤på’Œcçš„å…³ç³»ï¼ˆå°†cçš„å¤–é”®ç½®ä¸ºnullï¼‰ã€‚
 </p>
 <p>
-Èç¹ûall-delete-orphanÔòp.getChildren().remove(c)»á½«cÉ¾³ı¡£
+å¦‚æœall-delete-orphanåˆ™p.getChildren().remove(c)ä¼šå°†cåˆ é™¤ã€‚
 </p>
 <p>
-one-to-one²»Î¬»¤¹ØÏµ£¬µ±Ê¹ÓÃone-to-oneµÄÒ»¶Ë½øĞĞ¼¶Áª¸üĞÂÊ±£¬½«»áÊÇ·Ö±ğ¸üĞÂÁ½ÕÅ±í.
+one-to-oneä¸ç»´æŠ¤å…³ç³»ï¼Œå½“ä½¿ç”¨one-to-oneçš„ä¸€ç«¯è¿›è¡Œçº§è”æ›´æ–°æ—¶ï¼Œå°†ä¼šæ˜¯åˆ†åˆ«æ›´æ–°ä¸¤å¼ è¡¨.
 </p>
 <p>
-one-to-one¹ØÏµĞèÒªÅäÖÃĞèÒª×¢ÒâµÄµØ·½£¬Ò»°ã¸Ã¹ØÏµµÄ¶ÔÓ¦ÓÚÊı¾İ¿â±íÎªÁ½ÕÅÊı¾İ¿â±íµÄÖ÷¼ü×Ö¶Î¶ÔÓ¦£¬Ê¹ÓÃcasecade½øĞĞ¼¶Áª²Ù×÷cascade="all" ÉèÖÃconstrainedºÍ±íÃ÷Ô¼Êø¹ØÏµ£¬ÕâÈıÏîÄÚÈİÓ¦¸ÃÒªÍ¬Ê±ÉèÖÃconstrained="true" lazy="no-proxy" outer-join="true"£¬ÒÔÊ¹²éÑ¯µÄÊ±ºòÄÜ¹»²»»á¼¶Áª²éÑ¯³ö¹ØÁª¶ÔÏó(lazy)£¬Ê¹ÓÃjoin fetchÊ±±ÜÃân+1²éÑ¯£¨outer-join£©£¬ÎªÁËÊ¹lazyºÍouter-joinÉúĞ§±ØĞëÉèÖÃconstrainedÎªtrue¡£Èç¹ûÉèÖÃÁËproperties-ref¶ÔÓÚcascade saveµÄ¹ØÏµĞèÒª×Ô¼ºÎ¬»¤£¨Ö»ÄÜÓĞÒ»²àÊÇone-to-one£¬one-to-oneÊÇ¸Ã±íµÄÖ÷¼üÓëÁíÒ»¸ö±íµÄÄ³ÁĞÒ»Ò»¶ÔÓ¦£©¡£
+one-to-oneå…³ç³»éœ€è¦é…ç½®éœ€è¦æ³¨æ„çš„åœ°æ–¹ï¼Œä¸€èˆ¬è¯¥å…³ç³»çš„å¯¹åº”äºæ•°æ®åº“è¡¨ä¸ºä¸¤å¼ æ•°æ®åº“è¡¨çš„ä¸»é”®å­—æ®µå¯¹åº”ï¼Œä½¿ç”¨casecadeè¿›è¡Œçº§è”æ“ä½œcascade="all" è®¾ç½®constrainedå’Œè¡¨æ˜çº¦æŸå…³ç³»ï¼Œè¿™ä¸‰é¡¹å†…å®¹åº”è¯¥è¦åŒæ—¶è®¾ç½®constrained="true" lazy="no-proxy" outer-join="true"ï¼Œä»¥ä½¿æŸ¥è¯¢çš„æ—¶å€™èƒ½å¤Ÿä¸ä¼šçº§è”æŸ¥è¯¢å‡ºå…³è”å¯¹è±¡(lazy)ï¼Œä½¿ç”¨join fetchæ—¶é¿å…n+1æŸ¥è¯¢ï¼ˆouter-joinï¼‰ï¼Œä¸ºäº†ä½¿lazyå’Œouter-joinç”Ÿæ•ˆå¿…é¡»è®¾ç½®constrainedä¸ºtrueã€‚å¦‚æœè®¾ç½®äº†properties-refå¯¹äºcascade saveçš„å…³ç³»éœ€è¦è‡ªå·±ç»´æŠ¤ï¼ˆåªèƒ½æœ‰ä¸€ä¾§æ˜¯one-to-oneï¼Œone-to-oneæ˜¯è¯¥è¡¨çš„ä¸»é”®ä¸å¦ä¸€ä¸ªè¡¨çš„æŸåˆ—ä¸€ä¸€å¯¹åº”ï¼‰ã€‚
 </p>
 <p>
-Ê¹ÓÃHibernate.initialize(p.getStudent());À´ÈÃhibernate lazy¼ÓÔØ¹ØÁªµ½µÄ¶ÔÏó¡£
+ä½¿ç”¨Hibernate.initialize(p.getStudent());æ¥è®©hibernate lazyåŠ è½½å…³è”åˆ°çš„å¯¹è±¡ã€‚
 </p>
 <p>
-hibernateÊ¹ÓÃ¹ı³ÌÖĞ¸ù¾İĞèÇóÒ»°ã²»ĞèÒªÊ¹ÓÃeager fetch ÌØ±ğÊÇÔÚÊ¹ÓÃ»º´æµÄÇé¿öÏÂ£¬Ê¹ÓÃeager fetch»áµ¼ÖÂ±í¹ØÁª²éÑ¯ÏûºÄĞÔÄÜ£¬¶øÊ¹ÓÃlazy¿ÉÒÔÏÈ½«Ò»¸ö´ó²éÑ¯½øĞĞ·Ö½â£¬ÔÚÊ¹ÓÃ»º´æÊÇÄÜ¹»¼õÉÙ¶ÔÊı¾İ¿âµÄ·ÃÎÊ¡£
+hibernateä½¿ç”¨è¿‡ç¨‹ä¸­æ ¹æ®éœ€æ±‚ä¸€èˆ¬ä¸éœ€è¦ä½¿ç”¨eager fetch ç‰¹åˆ«æ˜¯åœ¨ä½¿ç”¨ç¼“å­˜çš„æƒ…å†µä¸‹ï¼Œä½¿ç”¨eager fetchä¼šå¯¼è‡´è¡¨å…³è”æŸ¥è¯¢æ¶ˆè€—æ€§èƒ½ï¼Œè€Œä½¿ç”¨lazyå¯ä»¥å…ˆå°†ä¸€ä¸ªå¤§æŸ¥è¯¢è¿›è¡Œåˆ†è§£ï¼Œåœ¨ä½¿ç”¨ç¼“å­˜æ˜¯èƒ½å¤Ÿå‡å°‘å¯¹æ•°æ®åº“çš„è®¿é—®ã€‚
 </p>
 <p>
-Ó¦¸ÃÔÚµ¥¶ËÖĞµÄsetÖĞÉèÖÃinverse="true"£»
+åº”è¯¥åœ¨å•ç«¯ä¸­çš„setä¸­è®¾ç½®inverse="true"ï¼›
 </p>
 <p>
-javaÖĞµÄ¶ÔÏó¹ØÏµÎªparent.setChild(child);child.setParent(parent);Á½±ß¶¼ĞèÒªÓĞ¶Ô·½µÄÁ´½Ó£¬ÔÚ²Ù×÷Êı¾İ¿âÊ±Ö»ĞèÒªÆäÖĞÒ»·½½øĞĞ²Ù×÷¾ÍĞĞÁËÒ»¶Ô¶àÖĞÓÉµ¥¶ËÀ´½øĞĞÎ¬»¤¡£
+javaä¸­çš„å¯¹è±¡å…³ç³»ä¸ºparent.setChild(child);child.setParent(parent);ä¸¤è¾¹éƒ½éœ€è¦æœ‰å¯¹æ–¹çš„é“¾æ¥ï¼Œåœ¨æ“ä½œæ•°æ®åº“æ—¶åªéœ€è¦å…¶ä¸­ä¸€æ–¹è¿›è¡Œæ“ä½œå°±è¡Œäº†ä¸€å¯¹å¤šä¸­ç”±å•ç«¯æ¥è¿›è¡Œç»´æŠ¤ã€‚
 </p>
 
 <p>
-µ÷ÓÃdeleteÉ¾³ıÒ»¸ö¶ÔÏóºó£¬¸Ã¶ÔÏó»¹½«´æÔÚÓÚsessionÖĞ£¬²¢±»±ê¼ÇÎªdeleted£¬¶ÔÕâ¸ö¶ÔÏóµÄÊ¹ÓÃÓ¦¸Ã½÷É÷£¬¿ÉÄÜ»áµ¼ÖÂsessionÖĞ³öÏÖÖØ¸´µÄ¶ÔÏó¶ø±¨´í¡£
+è°ƒç”¨deleteåˆ é™¤ä¸€ä¸ªå¯¹è±¡åï¼Œè¯¥å¯¹è±¡è¿˜å°†å­˜åœ¨äºsessionä¸­ï¼Œå¹¶è¢«æ ‡è®°ä¸ºdeletedï¼Œå¯¹è¿™ä¸ªå¯¹è±¡çš„ä½¿ç”¨åº”è¯¥è°¨æ…ï¼Œå¯èƒ½ä¼šå¯¼è‡´sessionä¸­å‡ºç°é‡å¤çš„å¯¹è±¡è€ŒæŠ¥é”™ã€‚
 </p></div>
 </div>
 
@@ -329,32 +329,32 @@ javaÖĞµÄ¶ÔÏó¹ØÏµÎªparent.setChild(child);child.setParent(parent);Á½±ß¶¼ĞèÒªÓĞ¶Ô·
 <h2 id="sec-6"><span class="section-number-2">6</span> other</h2>
 <div class="outline-text-2" id="text-6">
 
-<p>°´ÕÕÖ¸¶¨Ë³ĞòÅÅĞò:
+<p>æŒ‰ç…§æŒ‡å®šé¡ºåºæ’åº:
 </p>
 
 
-<pre class="src src-java">order <span style="color: #92a65e; font-weight: bold;">by</span> <span style="color: #cae682;">locate</span>(<span style="color: #92a65e; font-weight: bold;">person_key</span>, 4657);
+<pre class="src src-java">order <span style="color: #268bd2;">by</span> <span style="color: #b58900;">locate</span>(<span style="color: #268bd2;">person_key</span>, 4657);
 </pre>
 
 
 <p>
-hibernate setParameterList()ÓÃÓÚÉèÖÃin(?)ÀïÃæµÄ²ÎÊı¡£
+hibernate setParameterList()ç”¨äºè®¾ç½®in(?)é‡Œé¢çš„å‚æ•°ã€‚
 </p>
 <p>
-Spring¡¢HibernateÖĞµÄÁ½ÖÖ´úÀí·½Ê½£ºjava¶¯Ì¬´úÀíºÍcglib¿â
+Springã€Hibernateä¸­çš„ä¸¤ç§ä»£ç†æ–¹å¼ï¼šjavaåŠ¨æ€ä»£ç†å’Œcglibåº“
 </p>
 <p>
-¶¯Ì¬´úÀí£º±»´úÀíµÄÀà±ØĞëÊµÏÖÒ»¸ö½Ó¿Ú£¬ÔÚµ÷ÓÃbind·½·¨µÃµ½´úÀíÀàµÄÊ±ºò»á¶¯Ì¬µÄ´´½¨Ò»¸ö±»´úÀíÀàµÄ×ÓÀà£¬¸ÃÀàÊµÏÖÁË½Ó¿Ú¡£
+åŠ¨æ€ä»£ç†ï¼šè¢«ä»£ç†çš„ç±»å¿…é¡»å®ç°ä¸€ä¸ªæ¥å£ï¼Œåœ¨è°ƒç”¨bindæ–¹æ³•å¾—åˆ°ä»£ç†ç±»çš„æ—¶å€™ä¼šåŠ¨æ€çš„åˆ›å»ºä¸€ä¸ªè¢«ä»£ç†ç±»çš„å­ç±»ï¼Œè¯¥ç±»å®ç°äº†æ¥å£ã€‚
 </p>
 <p>
-cglib¿â£º·â×°ÁËasm¡£asmÓÃÓÚÉú³É×Ö½ÚÂë¡£ÕâÖÖ·½·¨²»ÒªÇó±»´úÀíÀàÊµÏÖ½Ó¿Ú£¬ÄÜ¹»¶Ô±»´úÀí½øĞĞbyte codeÔöÇ¿£¬Í¬ÑùÒ²ÊÇÉú³É±»´úÀíÀàµÄ×ÓÀà×÷Îª´úÀí¡£
+cglibåº“ï¼šå°è£…äº†asmã€‚asmç”¨äºç”Ÿæˆå­—èŠ‚ç ã€‚è¿™ç§æ–¹æ³•ä¸è¦æ±‚è¢«ä»£ç†ç±»å®ç°æ¥å£ï¼Œèƒ½å¤Ÿå¯¹è¢«ä»£ç†è¿›è¡Œbyte codeå¢å¼ºï¼ŒåŒæ ·ä¹Ÿæ˜¯ç”Ÿæˆè¢«ä»£ç†ç±»çš„å­ç±»ä½œä¸ºä»£ç†ã€‚
 </p></div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2014-02-07T00:01+0900</p>
-<p class="author">Author: rex.houy</p>
+<p class="date">Date: 2015-01-05T13:21+0800</p>
+<p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
 

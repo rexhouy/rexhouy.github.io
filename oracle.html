@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="gbk"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-							 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>oracle</title>
-<meta http-equiv="Content-Type" content="text/html;charset=gbk"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="oracle"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2014-02-07T00:02+0900"/>
-<meta name="author" content="rex.houy"/>
+<meta name="generated" content="2015-01-05T13:21+0800"/>
+<meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
 <link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
@@ -29,19 +29,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 ¸ÅÄî</a></li>
-<li><a href="#sec-2">2 ½á¹¹</a></li>
+<li><a href="#sec-1">1 æ¦‚å¿µ</a></li>
+<li><a href="#sec-2">2 ç»“æ„</a></li>
 <li><a href="#sec-3">3 sql</a></li>
-<li><a href="#sec-4">4 ÊÂÎï¸ôÀë¼¶±ğ</a></li>
-<li><a href="#sec-5">5 Ëø</a></li>
+<li><a href="#sec-4">4 äº‹ç‰©éš”ç¦»çº§åˆ«</a></li>
+<li><a href="#sec-5">5 é”</a></li>
 <li><a href="#sec-6">6 Object</a>
 <ul>
 <li><a href="#sec-6-1">6.1 Dimention</a></li>
-<li><a href="#sec-6-2">6.2 IOT±í</a></li>
+<li><a href="#sec-6-2">6.2 IOTè¡¨</a></li>
 <li><a href="#sec-6-3">6.3 sequence</a></li>
 </ul>
 </li>
-<li><a href="#sec-7">7 µ÷ÓÅ</a></li>
+<li><a href="#sec-7">7 è°ƒä¼˜</a></li>
 <li><a href="#sec-8">8 DDL</a></li>
 <li><a href="#sec-9">9 other</a></li>
 </ul>
@@ -49,116 +49,116 @@
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> ¸ÅÄî</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> æ¦‚å¿µ</h2>
 <div class="outline-text-2" id="text-1">
 
 <ol>
-<li>ÏµÍ³Ìá¹©ÁËÒ»Ğ©view£¬Í¨¹ıÕâĞ©view¿ÉÒÔ¼ä½ÓµÄ²é¿´data dictionaryÖĞµÄÒ»Ğ©ĞÅÏ¢¡£°üÀ¨ÒÔuser¡¢all¡¢dbaÎªÇ°×ºµÄÒ»Ğ©view·Ö±ğÌá¹©¸ø²»Í¬È¨ÏŞµÄÓÃ»§²éÑ¯ÏàÓ¦µÄĞÅÏ¢¡£Èçuser<sub>objects\all</sub><sub>objects\sys</sub>.dba<sub>objects</sub>.
+<li>ç³»ç»Ÿæä¾›äº†ä¸€äº›viewï¼Œé€šè¿‡è¿™äº›viewå¯ä»¥é—´æ¥çš„æŸ¥çœ‹data dictionaryä¸­çš„ä¸€äº›ä¿¡æ¯ã€‚åŒ…æ‹¬ä»¥userã€allã€dbaä¸ºå‰ç¼€çš„ä¸€äº›viewåˆ†åˆ«æä¾›ç»™ä¸åŒæƒé™çš„ç”¨æˆ·æŸ¥è¯¢ç›¸åº”çš„ä¿¡æ¯ã€‚å¦‚user<sub>objects\all</sub><sub>objects\sys</sub>.dba<sub>objects</sub>.
 
 </li>
-<li>dynamic performance tables¼ÇÂ¼µ±Ç°Êı¾İ¿â»î¶¯ĞÅÏ¢µÄĞéÄâ±í£¬sysÓÃ»§ÓµÓĞÕâĞ©±í£¬ÕâĞ©±íµÄÃû×ÖÒÔV_$¿ªÍ·£¬ÒÀÀµÓÚÕâĞ©±íµÄÊÓÍ¼ÒÔV$¿ªÍ·¡£
+<li>dynamic performance tablesè®°å½•å½“å‰æ•°æ®åº“æ´»åŠ¨ä¿¡æ¯çš„è™šæ‹Ÿè¡¨ï¼Œsysç”¨æˆ·æ‹¥æœ‰è¿™äº›è¡¨ï¼Œè¿™äº›è¡¨çš„åå­—ä»¥V_$å¼€å¤´ï¼Œä¾èµ–äºè¿™äº›è¡¨çš„è§†å›¾ä»¥V$å¼€å¤´ã€‚
 
 </li>
-<li>Database buffer cacheÓÃÓÚ»º´ædisk blocks£¨°üÀ¨write list ºÍleast recently used£¨LRU£©list£»write listÓÃÓÚ±£´æÔàÊı¾İ£¬LRU±£´æ¿ÕÏĞbuffer£¬»¹Î´Ğ´Èëwrite listµÄÔàÊı¾İºÍÕıÔÚÊ¹ÓÃµÄÊı¾İ¡£ÓÃ»§²éÑ¯Êı¾İÊ±ÏÈÔÚ¸Ã»º´æÖĞ²éÕÒ£¬Èç¹ûÃ»ÕÒµ½»òÕßÖ»ÕÒµ½ÁËÔàÊı¾İÔò´ÓdiskÖĞ½«Êı¾İ¶ÁÈë»º´æÖĞ£¨Èç¹ûÃ»ÓĞ¿ÕÏĞbufferÔòµ÷ÓÃºóÌ¨Ïß³Ì½«ÔàÊı¾İĞ´»Ødisk£©È»ºóÔÙ´Ó»º´æÖĞ¶ÁÈ¡Êı¾İ·µ»Ø£¨cache hit¡¢cache miss£©£©
+<li>Database buffer cacheç”¨äºç¼“å­˜disk blocksï¼ˆåŒ…æ‹¬write list å’Œleast recently usedï¼ˆLRUï¼‰listï¼›write listç”¨äºä¿å­˜è„æ•°æ®ï¼ŒLRUä¿å­˜ç©ºé—²bufferï¼Œè¿˜æœªå†™å…¥write listçš„è„æ•°æ®å’Œæ­£åœ¨ä½¿ç”¨çš„æ•°æ®ã€‚ç”¨æˆ·æŸ¥è¯¢æ•°æ®æ—¶å…ˆåœ¨è¯¥ç¼“å­˜ä¸­æŸ¥æ‰¾ï¼Œå¦‚æœæ²¡æ‰¾åˆ°æˆ–è€…åªæ‰¾åˆ°äº†è„æ•°æ®åˆ™ä»diskä¸­å°†æ•°æ®è¯»å…¥ç¼“å­˜ä¸­ï¼ˆå¦‚æœæ²¡æœ‰ç©ºé—²bufferåˆ™è°ƒç”¨åå°çº¿ç¨‹å°†è„æ•°æ®å†™å›diskï¼‰ç„¶åå†ä»ç¼“å­˜ä¸­è¯»å–æ•°æ®è¿”å›ï¼ˆcache hitã€cache missï¼‰ï¼‰
 
 </li>
-<li>shared poolÓÃÓÚsqlºÍpl/sqlÖ´ĞĞÊ±Ê¹ÓÃ£¬±£´æsql parseºÍsql roadmapµÈĞÅÏ¢¡£
+<li>shared poolç”¨äºsqlå’Œpl/sqlæ‰§è¡Œæ—¶ä½¿ç”¨ï¼Œä¿å­˜sql parseå’Œsql roadmapç­‰ä¿¡æ¯ã€‚
 
 </li>
-<li>java poolÓÃÓÚjava¶ÔÏóÒÔ¼°ÆäËûµÄjava²Ù×÷Ê¹ÓÃ
+<li>java poolç”¨äºjavaå¯¹è±¡ä»¥åŠå…¶ä»–çš„javaæ“ä½œä½¿ç”¨
 
 </li>
-<li>large poolÓÃÓÚshared server IO ±¸·İµÈ²Ù×÷
+<li>large poolç”¨äºshared server IO å¤‡ä»½ç­‰æ“ä½œ
 
 </li>
-<li>connection:ÓÃ»§Ïß³ÌÓëoracleÊµÀıÖ®¼äÍ¨ĞÅµÄÍ¨µÀ£»
+<li>connection:ç”¨æˆ·çº¿ç¨‹ä¸oracleå®ä¾‹ä¹‹é—´é€šä¿¡çš„é€šé“ï¼›
 
 </li>
-<li>session:Ò»¸öÓÃ»§Ïß³ÌÓëoracleÊµÀıÖ®¼ä½»»¥µÄÌØÊâµÄconnection£»
+<li>session:ä¸€ä¸ªç”¨æˆ·çº¿ç¨‹ä¸oracleå®ä¾‹ä¹‹é—´äº¤äº’çš„ç‰¹æ®Šçš„connectionï¼›
 
 </li>
-<li>server process£º´¦ÀíÓÃ»§Ïß³ÌµÄÇëÇó£¬°üÀ¨parse¡¢run SQL£¬´Ódata blocksÖĞ¶ÁÈ¡ĞÅÏ¢µ½SGAÖĞ£¬
+<li>server processï¼šå¤„ç†ç”¨æˆ·çº¿ç¨‹çš„è¯·æ±‚ï¼ŒåŒ…æ‹¬parseã€run SQLï¼Œä»data blocksä¸­è¯»å–ä¿¡æ¯åˆ°SGAä¸­ï¼Œ
 
 </li>
-<li>background process£ºv$bgprocessÖĞ¿ÉÒÔ²é¿´µ½ËùÓĞµÄÏß³Ì¡£
+<li>background processï¼šv$bgprocessä¸­å¯ä»¥æŸ¥çœ‹åˆ°æ‰€æœ‰çš„çº¿ç¨‹ã€‚
 
 </li>
-<li>DBWn£º¿ÉÒÔÎªDBW1¡«DBWnµÈ¶à¸öÏß³Ì£¬µ±Ã»ÓĞfree buffer»òµ½ÁËcheckpointµÄÊ±ºò½«dirty dataĞ´»Ødata blocks£»
+<li>DBWnï¼šå¯ä»¥ä¸ºDBW1ï½DBWnç­‰å¤šä¸ªçº¿ç¨‹ï¼Œå½“æ²¡æœ‰free bufferæˆ–åˆ°äº†checkpointçš„æ—¶å€™å°†dirty dataå†™å›data blocksï¼›
 
 </li>
-<li>LGWR£ºÊÂÎñÌá½»¡¢redo log buffer ÓĞ1/3ÂúÁË£¬DBWnĞèÒª½«dirty dataĞ´»Ødata blocksÒÔ¼°Ã¿3ÃëÊ±¶¼»áÖ´ĞĞ¡££¨redo log bufferÊÇÒ»¸öÑ­»·Ê¹ÓÃµÄbuffer£©
+<li>LGWRï¼šäº‹åŠ¡æäº¤ã€redo log buffer æœ‰1/3æ»¡äº†ï¼ŒDBWnéœ€è¦å°†dirty dataå†™å›data blocksä»¥åŠæ¯3ç§’æ—¶éƒ½ä¼šæ‰§è¡Œã€‚ï¼ˆredo log bufferæ˜¯ä¸€ä¸ªå¾ªç¯ä½¿ç”¨çš„bufferï¼‰
 
 </li>
-<li>SCN£ºµ±ÊÂÎïÌá½»Ê±½«»áÎª¸ÃÊÂÎñÉú³ÉÒ»¸ösystem change number£¨SCN£©¸ÃSCN»á±»Ò»Í¬·ÅÈëµ½redo logÖĞ£¬Ê¹µÃRACÄÜ¹»Í¬²½¡£
+<li>SCNï¼šå½“äº‹ç‰©æäº¤æ—¶å°†ä¼šä¸ºè¯¥äº‹åŠ¡ç”Ÿæˆä¸€ä¸ªsystem change numberï¼ˆSCNï¼‰è¯¥SCNä¼šè¢«ä¸€åŒæ”¾å…¥åˆ°redo logä¸­ï¼Œä½¿å¾—RACèƒ½å¤ŸåŒæ­¥ã€‚
 
 </li>
-<li>trace file£ºÃ¿¸öºóÌ¨Ïß³Ì¶¼ÓĞÓëÖ®Ïà¹ØµÄtrace file£¬µ±Ïß³Ì³öÏÖ´íÎóÊ±»á½«´íÎó¼ÇÂ¼µ½Ïà¹ØµÄtrace file¡£
+<li>trace fileï¼šæ¯ä¸ªåå°çº¿ç¨‹éƒ½æœ‰ä¸ä¹‹ç›¸å…³çš„trace fileï¼Œå½“çº¿ç¨‹å‡ºç°é”™è¯¯æ—¶ä¼šå°†é”™è¯¯è®°å½•åˆ°ç›¸å…³çš„trace fileã€‚
 
 </li>
-<li>alert log£ºÃ¿¸öÊı¾İ¿âÓĞÒ»¸öalert.logÎÄ¼ş£¬¼ÇÂ¼ĞÅÏ¢¡£
+<li>alert logï¼šæ¯ä¸ªæ•°æ®åº“æœ‰ä¸€ä¸ªalert.logæ–‡ä»¶ï¼Œè®°å½•ä¿¡æ¯ã€‚
 
 </li>
-<li>data pump export and import:Êı¾İ¿âµ¼Èëµ¼³ö
+<li>data pump export and import:æ•°æ®åº“å¯¼å…¥å¯¼å‡º
 
 </li>
 <li>Load data into Oracle tables from operating system files using SQL*Loader or from external sources using external tables
 
 </li>
-<li>Metadata API£º´¦Àímetadata
+<li>Metadata APIï¼šå¤„ç†metadata
 
 </li>
-<li>logMiner£º²éÑ¯redolog
+<li>logMinerï¼šæŸ¥è¯¢redolog
 
 </li>
-<li>oracleÖĞµÄÓï¾ä¡¢´æ´¢¹ı³Ì¶¼ÊÇÔ­×ÓĞÔµÄ£¬ÔÚÊ§°Üºó¶¼»á»Ø¹öµ½Ö´ĞĞÖ®Ç°¡££¨Èç¹ûÒ»ÌõÓï¾ä´¥·¢ÁËtrrigerÄÇÃ´Èç¹ûÔÚÈÎºÎÒ»´¦³ö´íÔòÕû¸ö¶¼½«»Ø¹ö£©¡£µ«ÊÇÔÚ´æ´¢¹ı³ÌÖĞ¼ÓÈëwhen others then&hellip;ÕâÑùµÄÓï¾äºó»áÆÆ»µ´æ´¢¹ı³ÌµÄÔ­×ÓĞÔ£¬Ê¹µÃ¸Ã´æ´¢¹ı³ÌÔÚ³ö´íºó²»»á»Ø¹öµ½Ö´ĞĞÇ°µÄ×´Ì¬£¬ËùÒÔµ±ĞèÒª½øĞĞÀàËÆµÄÒì³£´¦ÀíÊ±ĞèÒª×¢Òâ£¬¿ÉÒÔÏÔÊ¾µÄµ÷ÓÃsavepoint½øĞĞ»Ø¹ö¡£
+<li>oracleä¸­çš„è¯­å¥ã€å­˜å‚¨è¿‡ç¨‹éƒ½æ˜¯åŸå­æ€§çš„ï¼Œåœ¨å¤±è´¥åéƒ½ä¼šå›æ»šåˆ°æ‰§è¡Œä¹‹å‰ã€‚ï¼ˆå¦‚æœä¸€æ¡è¯­å¥è§¦å‘äº†trrigeré‚£ä¹ˆå¦‚æœåœ¨ä»»ä½•ä¸€å¤„å‡ºé”™åˆ™æ•´ä¸ªéƒ½å°†å›æ»šï¼‰ã€‚ä½†æ˜¯åœ¨å­˜å‚¨è¿‡ç¨‹ä¸­åŠ å…¥when others then&hellip;è¿™æ ·çš„è¯­å¥åä¼šç ´åå­˜å‚¨è¿‡ç¨‹çš„åŸå­æ€§ï¼Œä½¿å¾—è¯¥å­˜å‚¨è¿‡ç¨‹åœ¨å‡ºé”™åä¸ä¼šå›æ»šåˆ°æ‰§è¡Œå‰çš„çŠ¶æ€ï¼Œæ‰€ä»¥å½“éœ€è¦è¿›è¡Œç±»ä¼¼çš„å¼‚å¸¸å¤„ç†æ—¶éœ€è¦æ³¨æ„ï¼Œå¯ä»¥æ˜¾ç¤ºçš„è°ƒç”¨savepointè¿›è¡Œå›æ»šã€‚
 
 </li>
-<li>oracle½«ÔÚÃ¿Ò»ÌõsqlÓï¾äÖ´ĞĞÍêÖ®ºó½øĞĞÍêÕûĞÔÔ¼Êø¼ì²é£¬¶ÔÓÚÎ¥·´Ô¼ÊøÌõ¼şµÄ¸ü¸Ä½«»áÊ§°Ü¡£Í¨¹ıÉèÖÃ¸ÃÔ¼ÊøÎªÍÆ³Ùµ½commitÊÇÖ´ĞĞ¿ÉÒÔÊ¹µÃÔÚÊÂÎñÖĞÎ¥·´¸ÃÔ¼ÊøÌõ¼ş£¨ÀıÈç¿ÉÒÔ½øĞĞ¼¶Áª¸üĞÂ²Ù×÷£©¡££¨set constraint con<sub>name</sub> immediate£ºÁ¢¼´¼ì²é set constraint con<sub>name</sub> deferred£ºÍÆ³ÙÖ´ĞĞ£©£¨²¢²»ÍÆ¼ö£©
+<li>oracleå°†åœ¨æ¯ä¸€æ¡sqlè¯­å¥æ‰§è¡Œå®Œä¹‹åè¿›è¡Œå®Œæ•´æ€§çº¦æŸæ£€æŸ¥ï¼Œå¯¹äºè¿åçº¦æŸæ¡ä»¶çš„æ›´æ”¹å°†ä¼šå¤±è´¥ã€‚é€šè¿‡è®¾ç½®è¯¥çº¦æŸä¸ºæ¨è¿Ÿåˆ°commitæ˜¯æ‰§è¡Œå¯ä»¥ä½¿å¾—åœ¨äº‹åŠ¡ä¸­è¿åè¯¥çº¦æŸæ¡ä»¶ï¼ˆä¾‹å¦‚å¯ä»¥è¿›è¡Œçº§è”æ›´æ–°æ“ä½œï¼‰ã€‚ï¼ˆset constraint con<sub>name</sub> immediateï¼šç«‹å³æ£€æŸ¥ set constraint con<sub>name</sub> deferredï¼šæ¨è¿Ÿæ‰§è¡Œï¼‰ï¼ˆå¹¶ä¸æ¨èï¼‰
 
 </li>
-<li>oracle high water mark:ÓÃÓÚ±ê¼Ç±íµÄÄ©Î²£¨»áËæ×Å±íÖĞÊı¾İµÄÔö¼Ó¶øÔö¼Ó£©£¬ÔÚ¸Ã±ê¼ÇÓë±íµÄ¿ªÍ·Ö®¼äÓĞĞí¶àÊı¾İ¿é£¬ÕâĞ©Êı¾İ¿é²»Ò»¶¨ÊÇÂúµÄ¡£µ±Ê¹ÓÃcount(*)Ê±£¬»á¼ÆËãÁ½ÕßÖ®¼äµÄÊı¾İ¿éÊÇ·ñÎª¿Õ¡£
+<li>oracle high water mark:ç”¨äºæ ‡è®°è¡¨çš„æœ«å°¾ï¼ˆä¼šéšç€è¡¨ä¸­æ•°æ®çš„å¢åŠ è€Œå¢åŠ ï¼‰ï¼Œåœ¨è¯¥æ ‡è®°ä¸è¡¨çš„å¼€å¤´ä¹‹é—´æœ‰è®¸å¤šæ•°æ®å—ï¼Œè¿™äº›æ•°æ®å—ä¸ä¸€å®šæ˜¯æ»¡çš„ã€‚å½“ä½¿ç”¨count(*)æ—¶ï¼Œä¼šè®¡ç®—ä¸¤è€…ä¹‹é—´çš„æ•°æ®å—æ˜¯å¦ä¸ºç©ºã€‚
 
 </li>
-<li>oracle freelist£ºÓÃÓÚ±ê¼ÇÎ»ÓÚhigh water markÒÔÏÂµÄÊı¾İ¿éÊÇ·ñ¿ÕÏĞ£¬µ±ĞèÒª²åÈë»ò¸üĞÂÊı¾İÊ±£¬oracle»á´ÓfreelistÖĞ²éÕÒ¿ÕÏĞµÄ¿é£¬ÒÔ±ã¼ÓÈëÊı¾İ¡£Ò»¸ö¿ÕÏĞµÄÊı¾İ¿é¶ÔÏó¿ÉÄÜ»á³öÏÖÔÚ¶à¸öfreelistÖĞ£¬Õâ¶Ô²¢ĞĞ²åÈëµÈ²¢ĞĞ²Ù×÷ÊÇºÜÓĞÓÃµÄ¡£Èç¹ûfreelistµÄÊıÁ¿²»¹»£¬¾Í»áÓ°Ïìµ½±íµÄ²¢ĞĞĞÔÄÜ¡£ºÏÀíµÄÊ¹ÓÃfreelist½«»á¼«´óµÄÌá¸ßÊı¾İ¿â²¢ĞĞĞÔÄÜ¡£freelistµÄÊ¹ÓÃ½«»áÏûºÄ¶àÓàµÄ´æ´¢¿Õ¼ä£¬ËùÒÔ¹ı¶àµÄfreelistÊÇ²»±ØÒªµÄ¡£
+<li>oracle freelistï¼šç”¨äºæ ‡è®°ä½äºhigh water markä»¥ä¸‹çš„æ•°æ®å—æ˜¯å¦ç©ºé—²ï¼Œå½“éœ€è¦æ’å…¥æˆ–æ›´æ–°æ•°æ®æ—¶ï¼Œoracleä¼šä»freelistä¸­æŸ¥æ‰¾ç©ºé—²çš„å—ï¼Œä»¥ä¾¿åŠ å…¥æ•°æ®ã€‚ä¸€ä¸ªç©ºé—²çš„æ•°æ®å—å¯¹è±¡å¯èƒ½ä¼šå‡ºç°åœ¨å¤šä¸ªfreelistä¸­ï¼Œè¿™å¯¹å¹¶è¡Œæ’å…¥ç­‰å¹¶è¡Œæ“ä½œæ˜¯å¾ˆæœ‰ç”¨çš„ã€‚å¦‚æœfreelistçš„æ•°é‡ä¸å¤Ÿï¼Œå°±ä¼šå½±å“åˆ°è¡¨çš„å¹¶è¡Œæ€§èƒ½ã€‚åˆç†çš„ä½¿ç”¨freelistå°†ä¼šæå¤§çš„æé«˜æ•°æ®åº“å¹¶è¡Œæ€§èƒ½ã€‚freelistçš„ä½¿ç”¨å°†ä¼šæ¶ˆè€—å¤šä½™çš„å­˜å‚¨ç©ºé—´ï¼Œæ‰€ä»¥è¿‡å¤šçš„freelistæ˜¯ä¸å¿…è¦çš„ã€‚
 
 </li>
-<li>oracle pctfree£º¸ÃÖµ¸æËßoracleÔÚ¿éÖĞÓ¦¸Ã±£Áô¶àÉÙ¿ÕÏĞ¿Õ¼äÒÔ¹©Êı¾İÔÚ½«À´µÄ¸üĞÂÊ¹ÓÃ¡£Ä¬ÈÏÖµÎª10%¡£
+<li>oracle pctfreeï¼šè¯¥å€¼å‘Šè¯‰oracleåœ¨å—ä¸­åº”è¯¥ä¿ç•™å¤šå°‘ç©ºé—²ç©ºé—´ä»¥ä¾›æ•°æ®åœ¨å°†æ¥çš„æ›´æ–°ä½¿ç”¨ã€‚é»˜è®¤å€¼ä¸º10%ã€‚
 
 </li>
-<li>oracle pctused£º¸ÃÖµ¸æËßoracleÔÚ¿éÖĞÓĞ¶àÉÙÊ£Óà¿Õ¼äÊ±Îª¸Ã¿éÔö¼Ófreelist¡£Ä¬ÈÏÖµÎª40%¡£Èç¹û°´ÕÕÄ¬ÈÏÖµ£¬Ò»¸ö¿éÔÚÓÃÍê90%µÄ¿Õ¼äÖ®Ç°¶¼»áÊ¹ÓÃfreelist£¬µ±µ½´ï90%ÒÔºó½«²»Ê¹ÓÃfreelist£¬Ö±µ½¿ÕÏĞ¿Õ¼ä³¬¹ı60%Ê±²ÅÓÖÖØĞÂÊ¹ÓÃfreelist¡£
+<li>oracle pctusedï¼šè¯¥å€¼å‘Šè¯‰oracleåœ¨å—ä¸­æœ‰å¤šå°‘å‰©ä½™ç©ºé—´æ—¶ä¸ºè¯¥å—å¢åŠ freelistã€‚é»˜è®¤å€¼ä¸º40%ã€‚å¦‚æœæŒ‰ç…§é»˜è®¤å€¼ï¼Œä¸€ä¸ªå—åœ¨ç”¨å®Œ90%çš„ç©ºé—´ä¹‹å‰éƒ½ä¼šä½¿ç”¨freelistï¼Œå½“åˆ°è¾¾90%ä»¥åå°†ä¸ä½¿ç”¨freelistï¼Œç›´åˆ°ç©ºé—²ç©ºé—´è¶…è¿‡60%æ—¶æ‰åˆé‡æ–°ä½¿ç”¨freelistã€‚
 
 </li>
-<li>oracle ĞĞÇ¨ÒÆ£ºÈç¹ûÒ»¸ö¿éÖĞµÄÄ³Ò»ĞĞ¸üĞÂËùĞèÒªµÄ¿Õ¼ä³¬¹ıÁË¸Ã¿éµÄ¿ÕÏĞ¿Õ¼ä£¬ÔòÕâ¸ö¿é½«»á±»ÒÆ¶¯µ½ÁíÒ»¸ö¿éÖĞ£¬Í¬Ê±ÔÚ¸Ã¿éÖĞ½«»áÓĞÒ»¸öÖ¸ÕëÖ¸Ïò¸ÃĞĞµÄĞÂµØÖ·£¬ÕâÒ»±ä¶¯Ö±µ½Ô­ÏÈµÄ¿éÖĞÓĞ×ã¹»¿Õ¼äÖµ²Å½«¸ÃĞĞÖØĞÂÒÆ»Ø¡£ĞĞµÄÇ¨ÒÆÊ¹µÃ¶ÁÈ¡Êı¾İµÄIOÔö¼Ó£¬ËùÒÔĞèÒªºÏÀíµÄÉèÖÃpctfreeÀ´¾¡Á¿±ÜÃâĞĞÇ¨ÒÆ¡£
+<li>oracle è¡Œè¿ç§»ï¼šå¦‚æœä¸€ä¸ªå—ä¸­çš„æŸä¸€è¡Œæ›´æ–°æ‰€éœ€è¦çš„ç©ºé—´è¶…è¿‡äº†è¯¥å—çš„ç©ºé—²ç©ºé—´ï¼Œåˆ™è¿™ä¸ªå—å°†ä¼šè¢«ç§»åŠ¨åˆ°å¦ä¸€ä¸ªå—ä¸­ï¼ŒåŒæ—¶åœ¨è¯¥å—ä¸­å°†ä¼šæœ‰ä¸€ä¸ªæŒ‡é’ˆæŒ‡å‘è¯¥è¡Œçš„æ–°åœ°å€ï¼Œè¿™ä¸€å˜åŠ¨ç›´åˆ°åŸå…ˆçš„å—ä¸­æœ‰è¶³å¤Ÿç©ºé—´å€¼æ‰å°†è¯¥è¡Œé‡æ–°ç§»å›ã€‚è¡Œçš„è¿ç§»ä½¿å¾—è¯»å–æ•°æ®çš„IOå¢åŠ ï¼Œæ‰€ä»¥éœ€è¦åˆç†çš„è®¾ç½®pctfreeæ¥å°½é‡é¿å…è¡Œè¿ç§»ã€‚
 
 </li>
-<li>oracleÖĞĞĞµÄË³Ğò²¢²»ÊÇ°´ÕÕÊı¾İ²åÈëµÄË³Ğò¡£
+<li>oracleä¸­è¡Œçš„é¡ºåºå¹¶ä¸æ˜¯æŒ‰ç…§æ•°æ®æ’å…¥çš„é¡ºåºã€‚
 
 </li>
-<li>oracle¶Ñ×éÖ¯±í£º°´ÕÕ¶ÑµÄ·½Ê½´æ´¢¡£
+<li>oracleå †ç»„ç»‡è¡¨ï¼šæŒ‰ç…§å †çš„æ–¹å¼å­˜å‚¨ã€‚
 
 </li>
-<li>oracleË÷Òı×éÖ¯±í£ºÊ¹ÓÃnoncompress¡¢compressÀ´ÉèÖÃÊÇ·ñ½øĞĞÑ¹Ëõ´æ´¢£¬Ê¹ÓÃpctthreshold¡¢overflow¡¢includingÀ´ÓĞĞ§µÄ×éÖ¯´æ´¢¿Õ¼ä£¬´¦Àí´æ´¢¿Õ¼äÒç³öÎÊÌâ¡£
+<li>oracleç´¢å¼•ç»„ç»‡è¡¨ï¼šä½¿ç”¨noncompressã€compressæ¥è®¾ç½®æ˜¯å¦è¿›è¡Œå‹ç¼©å­˜å‚¨ï¼Œä½¿ç”¨pctthresholdã€overflowã€includingæ¥æœ‰æ•ˆçš„ç»„ç»‡å­˜å‚¨ç©ºé—´ï¼Œå¤„ç†å­˜å‚¨ç©ºé—´æº¢å‡ºé—®é¢˜ã€‚
 
 </li>
-<li>oracleË÷Òı¾Û´Ø±í£º´æ´¢Ò»×é±íµÄ·½·¨¡£ÕâĞ©±í¹²ÏíÍ¬Ò»Êı¾İ¿éÖĞµÄÄ³Ğ©ÏàÍ¬ÁĞ£¬²¢ÇÒ°ÑÏà¹ØµÄÊı¾İ´æ´¢µ½Í¬Ò»¿éÉÏ¡£Ê¹ÓÃ¾Û´Ø±í½«»áÓ°ÏìDMLµÄĞÔÄÜ¡¢Òª×¢Òâsize²ÎÊıµÄÊ¹ÓÃ¡£
+<li>oracleç´¢å¼•èšç°‡è¡¨ï¼šå­˜å‚¨ä¸€ç»„è¡¨çš„æ–¹æ³•ã€‚è¿™äº›è¡¨å…±äº«åŒä¸€æ•°æ®å—ä¸­çš„æŸäº›ç›¸åŒåˆ—ï¼Œå¹¶ä¸”æŠŠç›¸å…³çš„æ•°æ®å­˜å‚¨åˆ°åŒä¸€å—ä¸Šã€‚ä½¿ç”¨èšç°‡è¡¨å°†ä¼šå½±å“DMLçš„æ€§èƒ½ã€è¦æ³¨æ„sizeå‚æ•°çš„ä½¿ç”¨ã€‚
 
 </li>
-<li>Ê¹ÓÃB*Ê÷Ë÷Òı£¨×î³£ÓÃµÄË÷Òı£©£¬¸ÃË÷Òı¾­³£±»ÓÃÓÚÎ½´ÊÖĞ£¨where×Ó¾äµÈ£©£¬²éÑ¯ÖĞ²éÑ¯µÄÊı¾İÈ«²¿À´×ÔÓÚË÷Òı£¬ÀıÈçÊ¹ÓÃselect count(*) from t where id=?£¬µ±Èç¹ûË÷ÒıÎªidÔòËùĞèÒªµÄIO½«È«²¿À´×ÔÓÚ¸ÃË÷Òı¡£Èç¹ûÊ¹ÓÃselect id, name from t where id=?£¬ÄÇÃ´Èç¹û½á¹û¼¯µÄÊı¾İÁ¿³¬¹ıÁËÕûÕÅ±íµÄ1%¡«20%£¬Ôò½«»áÊ¹µÃ¸Ã²éÑ¯µÄĞ§ÂÊµÍÓÚÈ«É¨ÃèµÄĞ§ÂÊ£¬ÒòÎªÔÚË÷ÒıÖĞÕÒµ½ÁËÊı¾İºó»¹ĞèÒªµ½±íÖĞ²éÕÒÏàÓ¦µÄÆäËûÊı¾İ£¬¶øÕâĞ©Êı¾İÊÇ·ÖÉ¢ÔÚ¶à¸ö¿éÖĞµÄ£¬ÕâÑù½«»áÊ¹µÃIO·Ç³£Âı¡£Èç¹û±íÖĞµÄÊı¾İÖ÷¼üÊÇ°´ÕÕË³ĞòÅÅĞòµÄ£¬ÔòÕâĞ©Êı¾İÒ²¿ÉÄÜÊÇÔÚÍ¬Ò»¸ö¿éÖĞµÄ£¬µ±Ê¹ÓÃË÷Òı²éÕÒ½Ï¶àÊı¾İµÄÊ±ºòĞ§ÂÊÒ²²»Ò»¶¨µÍ¡£¶ÔÓÚÕâÒ»ÎÊÌâ¿ÉÒÔÊ¹ÓÃCBO½øĞĞÓÅ»¯£º
+<li>ä½¿ç”¨B*æ ‘ç´¢å¼•ï¼ˆæœ€å¸¸ç”¨çš„ç´¢å¼•ï¼‰ï¼Œè¯¥ç´¢å¼•ç»å¸¸è¢«ç”¨äºè°“è¯ä¸­ï¼ˆwhereå­å¥ç­‰ï¼‰ï¼ŒæŸ¥è¯¢ä¸­æŸ¥è¯¢çš„æ•°æ®å…¨éƒ¨æ¥è‡ªäºç´¢å¼•ï¼Œä¾‹å¦‚ä½¿ç”¨select count(*) from t where id=?ï¼Œå½“å¦‚æœç´¢å¼•ä¸ºidåˆ™æ‰€éœ€è¦çš„IOå°†å…¨éƒ¨æ¥è‡ªäºè¯¥ç´¢å¼•ã€‚å¦‚æœä½¿ç”¨select id, name from t where id=?ï¼Œé‚£ä¹ˆå¦‚æœç»“æœé›†çš„æ•°æ®é‡è¶…è¿‡äº†æ•´å¼ è¡¨çš„1%ï½20%ï¼Œåˆ™å°†ä¼šä½¿å¾—è¯¥æŸ¥è¯¢çš„æ•ˆç‡ä½äºå…¨æ‰«æçš„æ•ˆç‡ï¼Œå› ä¸ºåœ¨ç´¢å¼•ä¸­æ‰¾åˆ°äº†æ•°æ®åè¿˜éœ€è¦åˆ°è¡¨ä¸­æŸ¥æ‰¾ç›¸åº”çš„å…¶ä»–æ•°æ®ï¼Œè€Œè¿™äº›æ•°æ®æ˜¯åˆ†æ•£åœ¨å¤šä¸ªå—ä¸­çš„ï¼Œè¿™æ ·å°†ä¼šä½¿å¾—IOéå¸¸æ…¢ã€‚å¦‚æœè¡¨ä¸­çš„æ•°æ®ä¸»é”®æ˜¯æŒ‰ç…§é¡ºåºæ’åºçš„ï¼Œåˆ™è¿™äº›æ•°æ®ä¹Ÿå¯èƒ½æ˜¯åœ¨åŒä¸€ä¸ªå—ä¸­çš„ï¼Œå½“ä½¿ç”¨ç´¢å¼•æŸ¥æ‰¾è¾ƒå¤šæ•°æ®çš„æ—¶å€™æ•ˆç‡ä¹Ÿä¸ä¸€å®šä½ã€‚å¯¹äºè¿™ä¸€é—®é¢˜å¯ä»¥ä½¿ç”¨CBOè¿›è¡Œä¼˜åŒ–ï¼š
 </li>
 </ol>
 
 
 
 
-<pre class="src src-sql">analyze <span style="color: #8ac6f2; font-weight: bold;">table</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span> compute statistics <span style="color: #8ac6f2; font-weight: bold;">for</span> <span style="color: #8ac6f2; font-weight: bold;">table</span> <span style="color: #8ac6f2; font-weight: bold;">for</span> <span style="color: #8ac6f2; font-weight: bold;">all</span> indexes <span style="color: #8ac6f2; font-weight: bold;">for</span> <span style="color: #8ac6f2; font-weight: bold;">all</span> indexed <span style="color: #8ac6f2; font-weight: bold;">columns</span>;
+<pre class="src src-sql">analyze table table_name compute statistics for table for all indexes for all indexed columns;
 </pre>
 
 
 <ol>
-<li>oracle latch(Ëø´æÆ÷)£ºÓÃÓÚËø¶¨SGAÖĞµÄÊı¾İ½á¹¹£¬Ò»¸ö½ø³ÌĞèÒª·ÃÎÊSGAÖĞµÄÄ³Ò»Êı¾İ½á¹¹ĞèÒª»ñµÃlatch£¬µ±ÓĞ¶à¸ö½ø³ÌĞèÒª»ñµÃ¸ÃlatchÊ±¶à¸ö½ø³Ì´æÔÚ¾ºÕù¹ØÏµ£¬oracle²¢²»±£Ö¤ÏÈÀ´ºóµ½£¬¶øÊÇËæ»úµÄÈÃÆäÖĞÒ»¸ö»ñµÃlatch£¬latchÊÇÏ¡ÓĞ×ÊÔ´£¬ËûµÄ»ñÈ¡ÓëÊÍ·ÅÊÇºÜ¶ÌÔİµÄ¡£¶ÔlatchµÄ¾ºÕù»áµ¼ÖÂ³ÌĞòµÄ²¢·¢ĞÔÄÜÏÂ½µ¡£
+<li>oracle latch(é”å­˜å™¨)ï¼šç”¨äºé”å®šSGAä¸­çš„æ•°æ®ç»“æ„ï¼Œä¸€ä¸ªè¿›ç¨‹éœ€è¦è®¿é—®SGAä¸­çš„æŸä¸€æ•°æ®ç»“æ„éœ€è¦è·å¾—latchï¼Œå½“æœ‰å¤šä¸ªè¿›ç¨‹éœ€è¦è·å¾—è¯¥latchæ—¶å¤šä¸ªè¿›ç¨‹å­˜åœ¨ç«äº‰å…³ç³»ï¼Œoracleå¹¶ä¸ä¿è¯å…ˆæ¥ååˆ°ï¼Œè€Œæ˜¯éšæœºçš„è®©å…¶ä¸­ä¸€ä¸ªè·å¾—latchï¼Œlatchæ˜¯ç¨€æœ‰èµ„æºï¼Œä»–çš„è·å–ä¸é‡Šæ”¾æ˜¯å¾ˆçŸ­æš‚çš„ã€‚å¯¹latchçš„ç«äº‰ä¼šå¯¼è‡´ç¨‹åºçš„å¹¶å‘æ€§èƒ½ä¸‹é™ã€‚
 
 </li>
-<li>oracle enqueueÓÃÓÚËø¶¨Êı¾İ¿âÄÚµÄÄ³Ğ©¶ÔÏó£¬Óëlatch²»Í¬£¬enqueue²ÉÓÃ¶ÓÁĞµÄ·½Ê½±£Ö¤»ñµÃËø¶¨µÄÏÈºóË³Ğò
+<li>oracle enqueueç”¨äºé”å®šæ•°æ®åº“å†…çš„æŸäº›å¯¹è±¡ï¼Œä¸latchä¸åŒï¼Œenqueueé‡‡ç”¨é˜Ÿåˆ—çš„æ–¹å¼ä¿è¯è·å¾—é”å®šçš„å…ˆåé¡ºåº
 </li>
 </ol>
 
@@ -169,26 +169,26 @@
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> ½á¹¹</h2>
+<h2 id="sec-2"><span class="section-number-2">2</span> ç»“æ„</h2>
 <div class="outline-text-2" id="text-2">
 
 <ol>
-<li>±í¿Õ¼ä(tablespace)£ºÊÇOracleÖĞµÄÒ»¸öÂß¼­´æ´¢ÈİÆ÷£¬Î»ÓÚ´æ´¢²ã´ÎÌåÏµµÄ¶¥²ã£¬°üº¬Ò»¸ö»ò¶à¸öÊı¾İÎÄ¼ş;
+<li>è¡¨ç©ºé—´(tablespace)ï¼šæ˜¯Oracleä¸­çš„ä¸€ä¸ªé€»è¾‘å­˜å‚¨å®¹å™¨ï¼Œä½äºå­˜å‚¨å±‚æ¬¡ä½“ç³»çš„é¡¶å±‚ï¼ŒåŒ…å«ä¸€ä¸ªæˆ–å¤šä¸ªæ•°æ®æ–‡ä»¶;
 
 </li>
-<li>¶Î(segment)£ºÕ¼ÓÃ´æ´¢¿Õ¼äµÄÊı¾İÎª¶ÔÏó£¬Èç±í¡¢Ë÷Òı¡¢»Ø¹ö¶ÎµÈ£»¶ÎÓÉÒ»¸ö»ò¶à¸öÇø¶Î×é³É;
+<li>æ®µ(segment)ï¼šå ç”¨å­˜å‚¨ç©ºé—´çš„æ•°æ®ä¸ºå¯¹è±¡ï¼Œå¦‚è¡¨ã€ç´¢å¼•ã€å›æ»šæ®µç­‰ï¼›æ®µç”±ä¸€ä¸ªæˆ–å¤šä¸ªåŒºæ®µç»„æˆ;
 
 </li>
-<li>Çø¶Î(extent)£ºÊÇÎÄ¼şÖĞÒ»¸öÂß¼­ÉÏÁ¬Ğø·ÖÅäµÄ¿Õ¼ä£»Çø¶ÎÓÉ¿é×é³É;
+<li>åŒºæ®µ(extent)ï¼šæ˜¯æ–‡ä»¶ä¸­ä¸€ä¸ªé€»è¾‘ä¸Šè¿ç»­åˆ†é…çš„ç©ºé—´ï¼›åŒºæ®µç”±å—ç»„æˆ;
 
 </li>
-<li>¿é(block)£ºÊÇOracleÖĞ×îĞ¡µÄ¿Õ¼ä·ÖÅäµ¥Î»£»Êı¾İĞĞ¡¢Ë÷ÒıÌõÄ¿»òÁÙÊ±ÅÅĞò½á¹û¾Í´æ´¢ÔÚ¿éÖĞ£»OracleÖĞ³£¼ûµÄ¿é´óĞ¡£º2K¡¢4K¡¢ 8K¡¢16K(×î´ó²»ÄÜ³¬¹ı32K);
+<li>å—(block)ï¼šæ˜¯Oracleä¸­æœ€å°çš„ç©ºé—´åˆ†é…å•ä½ï¼›æ•°æ®è¡Œã€ç´¢å¼•æ¡ç›®æˆ–ä¸´æ—¶æ’åºç»“æœå°±å­˜å‚¨åœ¨å—ä¸­ï¼›Oracleä¸­å¸¸è§çš„å—å¤§å°ï¼š2Kã€4Kã€ 8Kã€16K(æœ€å¤§ä¸èƒ½è¶…è¿‡32K);
 
 </li>
-<li>ËüÃÇÖ®¼äµÄ¹ØÏµ£ºÊı¾İ¿âÓÉÒ»¸ö»ò¶à¸ö±í¿Õ¼ä×é³É£¬±í¿Õ¼äÓÉÒ»¸ö»ò¶à¸öÊı¾İÎÄ¼ş×é³É£¬±í¿Õ¼ä°üº¬¶Î£¬¶ÎÓÉÒ»¸ö»ò¶à¸öÇø¶Î×é³É£¬Çø¶ÎÔòÓÉÁ¬ĞøµÄ¿é×é³É;segment¿ÉÒÔ¿çÔ½¶à¸ödata file²»ÄÜ¿çÔ½¶à¸ötablespace£»
+<li>å®ƒä»¬ä¹‹é—´çš„å…³ç³»ï¼šæ•°æ®åº“ç”±ä¸€ä¸ªæˆ–å¤šä¸ªè¡¨ç©ºé—´ç»„æˆï¼Œè¡¨ç©ºé—´ç”±ä¸€ä¸ªæˆ–å¤šä¸ªæ•°æ®æ–‡ä»¶ç»„æˆï¼Œè¡¨ç©ºé—´åŒ…å«æ®µï¼Œæ®µç”±ä¸€ä¸ªæˆ–å¤šä¸ªåŒºæ®µç»„æˆï¼ŒåŒºæ®µåˆ™ç”±è¿ç»­çš„å—ç»„æˆ;segmentå¯ä»¥è·¨è¶Šå¤šä¸ªdata fileä¸èƒ½è·¨è¶Šå¤šä¸ªtablespaceï¼›
 
 </li>
-<li>±í·ÖÇøºóÒ»¸ö±í¿çÔ½¶à¸ötablespace£»
+<li>è¡¨åˆ†åŒºåä¸€ä¸ªè¡¨è·¨è¶Šå¤šä¸ªtablespaceï¼›
 </li>
 </ol>
 
@@ -205,80 +205,80 @@
 
 
 
-<pre class="src src-sql"><span style="color: #99968b;">--&#25353;&#29031;&#25351;&#23450;&#39034;&#24207;&#25490;&#24207;&#65306;&#65288;&#25353;&#29031;4&#12289;6&#12289;5&#12289;7&#30340;&#39034;&#24207;&#36827;&#34892;&#25490;&#24207;&#65289;</span>
-<span style="color: #8ac6f2; font-weight: bold;">select</span> * <span style="color: #e5786d;">from</span> person <span style="color: #8ac6f2; font-weight: bold;">order</span> <span style="color: #8ac6f2; font-weight: bold;">by</span> decode(person_key,4,1,6,2,5,3,7,4)
-<span style="color: #99968b;">--&#25353;&#26465;&#20214;&#25490;&#24207;&#65306;(&#26681;&#25454;&#26465;&#20214;&#25353;&#29031;person_key&#25490;&#24207;&#25110;&#32773;&#25353;&#29031;another_key&#25490;&#24207;)</span>
-<span style="color: #8ac6f2; font-weight: bold;">select</span> * <span style="color: #e5786d;">from</span> person <span style="color: #8ac6f2; font-weight: bold;">order</span> <span style="color: #8ac6f2; font-weight: bold;">by</span> <span style="color: #8ac6f2; font-weight: bold;">case</span> <span style="color: #8ac6f2; font-weight: bold;">when</span> person_key <span style="color: #8ac6f2; font-weight: bold;">is</span> <span style="color: #8ac6f2; font-weight: bold;">not</span> <span style="color: #8ac6f2; font-weight: bold;">null</span> <span style="color: #8ac6f2; font-weight: bold;">then</span> person_key <span style="color: #8ac6f2; font-weight: bold;">else</span> another_key <span style="color: #8ac6f2; font-weight: bold;">end</span> <span style="color: #8ac6f2; font-weight: bold;">desc</span>;
-<span style="color: #99968b;">--&#25353;&#29031;&#31508;&#21010;&#25490;&#24207;</span>
-<span style="color: #8ac6f2; font-weight: bold;">select</span> * <span style="color: #e5786d;">from</span> person <span style="color: #8ac6f2; font-weight: bold;">order</span> <span style="color: #8ac6f2; font-weight: bold;">by</span> nlssort(<span style="color: #8ac6f2; font-weight: bold;">name</span>,<span style="color: #95e454;">'NLS_SORT=SCHINESE_STROKE_M'</span>);
-<span style="color: #99968b;">--&#25353;&#29031;&#37096;&#39318;&#25490;&#24207;</span>
-<span style="color: #8ac6f2; font-weight: bold;">select</span> * <span style="color: #e5786d;">from</span> person <span style="color: #8ac6f2; font-weight: bold;">order</span> <span style="color: #8ac6f2; font-weight: bold;">by</span> nlssort(<span style="color: #8ac6f2; font-weight: bold;">name</span>,<span style="color: #95e454;">'NLS_SORT=SCHINESE_RADICAL_M'</span>);
-<span style="color: #99968b;">--&#25353;&#29031;&#25340;&#38899;&#25490;&#24207;&#65292;&#27492;&#20026;&#31995;&#32479;&#30340;&#40664;&#35748;&#25490;&#24207;&#26041;&#24335;</span>
-<span style="color: #8ac6f2; font-weight: bold;">select</span> * <span style="color: #e5786d;">from</span> person <span style="color: #8ac6f2; font-weight: bold;">order</span> <span style="color: #8ac6f2; font-weight: bold;">by</span> nlssort(<span style="color: #8ac6f2; font-weight: bold;">name</span>,<span style="color: #95e454;">'NLS_SORT=SCHINESE_PINYIN_M'</span>);
+<pre class="src src-sql"><span style="color: #93a1a1; font-style: italic;">--&#25353;&#29031;&#25351;&#23450;&#39034;&#24207;&#25490;&#24207;&#65306;&#65288;&#25353;&#29031;4&#12289;6&#12289;5&#12289;7&#30340;&#39034;&#24207;&#36827;&#34892;&#25490;&#24207;&#65289;</span>
+select * from person order by decode(person_key,4,1,6,2,5,3,7,4)
+<span style="color: #93a1a1; font-style: italic;">--&#25353;&#26465;&#20214;&#25490;&#24207;&#65306;(&#26681;&#25454;&#26465;&#20214;&#25353;&#29031;person_key&#25490;&#24207;&#25110;&#32773;&#25353;&#29031;another_key&#25490;&#24207;)</span>
+select * from person order by case when person_key is not null then person_key else another_key end desc;
+<span style="color: #93a1a1; font-style: italic;">--&#25353;&#29031;&#31508;&#21010;&#25490;&#24207;</span>
+select * from person order by nlssort(name,<span style="color: #2aa198;">'NLS_SORT=SCHINESE_STROKE_M'</span>);
+<span style="color: #93a1a1; font-style: italic;">--&#25353;&#29031;&#37096;&#39318;&#25490;&#24207;</span>
+select * from person order by nlssort(name,<span style="color: #2aa198;">'NLS_SORT=SCHINESE_RADICAL_M'</span>);
+<span style="color: #93a1a1; font-style: italic;">--&#25353;&#29031;&#25340;&#38899;&#25490;&#24207;&#65292;&#27492;&#20026;&#31995;&#32479;&#30340;&#40664;&#35748;&#25490;&#24207;&#26041;&#24335;</span>
+select * from person order by nlssort(name,<span style="color: #2aa198;">'NLS_SORT=SCHINESE_PINYIN_M'</span>);
 
-<span style="color: #99968b;">--trunc(date, [expression])&#20174;&#32473;&#23450;&#26085;&#26399;&#20013;&#25353;&#29031;expression&#30340;&#26684;&#24335;&#25130;&#21462;&#19968;&#27573;&#12290;&#22914;&#65306;</span>
-trunc(to_date(<span style="color: #95e454;">'2009-03-09'</span>, <span style="color: #95e454;">'yyyy-mm-dd'</span>), <span style="color: #95e454;">'mm'</span>);<span style="color: #99968b;">--&#25353;&#26376;&#25130;&#21462;</span>
+<span style="color: #93a1a1; font-style: italic;">--trunc(date, [expression])&#20174;&#32473;&#23450;&#26085;&#26399;&#20013;&#25353;&#29031;expression&#30340;&#26684;&#24335;&#25130;&#21462;&#19968;&#27573;&#12290;&#22914;&#65306;</span>
+trunc(to_date(<span style="color: #2aa198;">'2009-03-09'</span>, <span style="color: #2aa198;">'yyyy-mm-dd'</span>), <span style="color: #2aa198;">'mm'</span>);<span style="color: #93a1a1; font-style: italic;">--&#25353;&#26376;&#25130;&#21462;</span>
 
-<span style="color: #99968b;">--trunc(number, precision) &#25353;&#25351;&#23450;&#25130;&#21462;&#31934;&#24230;&#25130;&#21462;&#12290;&#22914;&#65306;</span>
-trunc(12345.45, 1)<span style="color: #99968b;">--&#23558;&#20250;&#25130;&#21462;&#23567;&#25968;&#28857;&#21518;&#19968;&#20301;&#12290;</span>
+<span style="color: #93a1a1; font-style: italic;">--trunc(number, precision) &#25353;&#25351;&#23450;&#25130;&#21462;&#31934;&#24230;&#25130;&#21462;&#12290;&#22914;&#65306;</span>
+trunc(12345.45, 1)<span style="color: #93a1a1; font-style: italic;">--&#23558;&#20250;&#25130;&#21462;&#23567;&#25968;&#28857;&#21518;&#19968;&#20301;&#12290;</span>
 
-dbms_random.<span style="color: #8ac6f2; font-weight: bold;">value</span>(1, 100)<span style="color: #99968b;">--&#23558;&#29983;&#25104;1&#65374;100&#20043;&#38388;&#30340;&#38543;&#26426;&#25968;&#12290;</span>
+dbms_random.value(1, 100)<span style="color: #93a1a1; font-style: italic;">--&#23558;&#29983;&#25104;1&#65374;100&#20043;&#38388;&#30340;&#38543;&#26426;&#25968;&#12290;</span>
 
-to_date(<span style="color: #92a65e; font-weight: bold;">date</span>, <span style="color: #95e454;">'J'</span>)<span style="color: #99968b;">--&#23558;&#24471;&#21040;&#24635;&#22825;&#25968;&#12290;</span>
-to_date(<span style="color: #95e454;">'1999-09-09'</span>, <span style="color: #95e454;">'yyyy-mm-dd'</span>);
-to_char(<span style="color: #92a65e; font-weight: bold;">date</span>, <span style="color: #95e454;">'yyyy-mm'</span>);<span style="color: #99968b;">--&#25353;&#26684;&#24335;&#24471;&#21040;date</span>
+to_date(date, <span style="color: #2aa198;">'J'</span>)<span style="color: #93a1a1; font-style: italic;">--&#23558;&#24471;&#21040;&#24635;&#22825;&#25968;&#12290;</span>
+to_date(<span style="color: #2aa198;">'1999-09-09'</span>, <span style="color: #2aa198;">'yyyy-mm-dd'</span>);
+to_char(date, <span style="color: #2aa198;">'yyyy-mm'</span>);<span style="color: #93a1a1; font-style: italic;">--&#25353;&#26684;&#24335;&#24471;&#21040;date</span>
 
-<span style="color: #99968b;">--&#36882;&#24402;&#26597;&#35810;&#65306;&#34920;&#32467;&#26500;-(id, name, super)</span>
-<span style="color: #8ac6f2; font-weight: bold;">SELECT</span> * <span style="color: #e5786d;">FROM</span> table_ <span style="color: #8ac6f2; font-weight: bold;">CONNECT</span> <span style="color: #8ac6f2; font-weight: bold;">BY</span> <span style="color: #8ac6f2; font-weight: bold;">PRIOR</span> id=super <span style="color: #8ac6f2; font-weight: bold;">START</span> <span style="color: #8ac6f2; font-weight: bold;">WITH</span> id=xx;
-<span style="color: #99968b;">--&#23558;&#20250;&#26597;&#35810;&#20986;&#20174;id=xx&#30340;&#34892;&#20197;&#21450;&#35813;&#34892;&#30340;&#25152;&#26377;&#23376;&#33410;&#28857;&#12290;</span>
+<span style="color: #93a1a1; font-style: italic;">--&#36882;&#24402;&#26597;&#35810;&#65306;&#34920;&#32467;&#26500;-(id, name, super)</span>
+SELECT * FROM table_ CONNECT BY PRIOR id=super START WITH id=xx;
+<span style="color: #93a1a1; font-style: italic;">--&#23558;&#20250;&#26597;&#35810;&#20986;&#20174;id=xx&#30340;&#34892;&#20197;&#21450;&#35813;&#34892;&#30340;&#25152;&#26377;&#23376;&#33410;&#28857;&#12290;</span>
 
-<span style="color: #99968b;">--&#22312;&#34920;&#20013;&#25554;&#20837;&#22810;&#34892;&#25968;&#25454;&#65306;</span>
-<span style="color: #8ac6f2; font-weight: bold;">insert</span> <span style="color: #8ac6f2; font-weight: bold;">into</span> table1(fields1, fields2) <span style="color: #8ac6f2; font-weight: bold;">select</span> fields1,fields2 <span style="color: #e5786d;">from</span> table2<span style="color: #99968b;">--&#23558;&#19968;&#20010;&#34920;&#30340;&#22810;&#34892;&#25968;&#25454;&#25554;&#20837;&#21478;&#19968;&#24352;&#34920;&#12290;</span>
-<span style="color: #8ac6f2; font-weight: bold;">insert</span> <span style="color: #8ac6f2; font-weight: bold;">into</span> table1(<span style="color: #8ac6f2; font-weight: bold;">fields</span>) <span style="color: #8ac6f2; font-weight: bold;">select</span> xxx <span style="color: #e5786d;">from</span> table2 <span style="color: #8ac6f2; font-weight: bold;">where</span> rownum&lt;200;<span style="color: #99968b;">--xxx&#20026;&#38656;&#35201;&#25554;&#20837;table1&#30340;&#25968;&#25454;&#65292;&#36825;&#26679;&#23601;&#33021;&#23558;&#38656;&#35201;&#30340;&#22810;&#34892;&#25968;&#25454;&#25554;&#20837;&#19968;&#20010;&#34920;&#20013;&#12290;</span>
+<span style="color: #93a1a1; font-style: italic;">--&#22312;&#34920;&#20013;&#25554;&#20837;&#22810;&#34892;&#25968;&#25454;&#65306;</span>
+insert into table1(fields1, fields2) select fields1,fields2 from table2<span style="color: #93a1a1; font-style: italic;">--&#23558;&#19968;&#20010;&#34920;&#30340;&#22810;&#34892;&#25968;&#25454;&#25554;&#20837;&#21478;&#19968;&#24352;&#34920;&#12290;</span>
+insert into table1(fields) select xxx from table2 where rownum&lt;200;<span style="color: #93a1a1; font-style: italic;">--xxx&#20026;&#38656;&#35201;&#25554;&#20837;table1&#30340;&#25968;&#25454;&#65292;&#36825;&#26679;&#23601;&#33021;&#23558;&#38656;&#35201;&#30340;&#22810;&#34892;&#25968;&#25454;&#25554;&#20837;&#19968;&#20010;&#34920;&#20013;&#12290;</span>
 
-<span style="color: #8ac6f2; font-weight: bold;">create</span> <span style="color: #8ac6f2; font-weight: bold;">table</span> <span style="color: #cae682;">test</span> <span style="color: #8ac6f2; font-weight: bold;">as</span> <span style="color: #8ac6f2; font-weight: bold;">select</span> * <span style="color: #e5786d;">from</span> test_b<span style="color: #99968b;">--&#29992;&#20110;&#21019;&#24314;&#34920;&#12290;</span>
+create table test as select * from test_b<span style="color: #93a1a1; font-style: italic;">--&#29992;&#20110;&#21019;&#24314;&#34920;&#12290;</span>
 
-<span style="color: #99968b;">--cast&#31034;&#20363;&#65306;</span>
-<span style="color: #e5786d;">cast</span>(xx <span style="color: #8ac6f2; font-weight: bold;">AS</span> VARCHAR2(10)|<span style="color: #8ac6f2; font-weight: bold;">NUMBER</span>|...) <span style="color: #99968b;">--&#19981;&#25903;&#25345;LONG</span>
-<span style="color: #8ac6f2; font-weight: bold;">TYPE</span> <span style="color: #8ac6f2; font-weight: bold;">type</span> <span style="color: #8ac6f2; font-weight: bold;">IS</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> <span style="color: #8ac6f2; font-weight: bold;">OF</span> some_type;
-<span style="color: #e5786d;">CAST</span>(MULTISET(<span style="color: #8ac6f2; font-weight: bold;">SELECT</span> x, y <span style="color: #e5786d;">from</span> some_table) <span style="color: #8ac6f2; font-weight: bold;">AS</span> <span style="color: #8ac6f2; font-weight: bold;">type</span>)
+<span style="color: #93a1a1; font-style: italic;">--cast&#31034;&#20363;&#65306;</span>
+cast(xx AS VARCHAR2(10)|NUMBER|...) <span style="color: #93a1a1; font-style: italic;">--&#19981;&#25903;&#25345;LONG</span>
+TYPE type IS TABLE OF some_type;
+CAST(MULTISET(SELECT x, y from some_table) AS type)
 
-<span style="color: #99968b;">--any,some,all,in:</span>
-<span style="color: #99968b;">--some&#21644;any&#20316;&#29992;&#24046;&#19981;&#22810;&#65292;&#25324;&#21495;&#20869;&#19968;&#33324;&#20026;&#23376;&#26597;&#35810;&#12290;&#19968;&#33324;&#26469;&#35828;some&#29992;&#20110;=&#65292;any&#29992;&#20110;&#27604;&#36739;&#12290;&#24403;&#29992;&#20110;&#27604;&#36739;&#26102;in&#19982;some,any&#30456;&#21516;&#12290;</span>
-<span style="color: #8ac6f2; font-weight: bold;">select</span> x <span style="color: #e5786d;">from</span> some_talbe <span style="color: #8ac6f2; font-weight: bold;">where</span> y = <span style="color: #8ac6f2; font-weight: bold;">some</span> (...);
-<span style="color: #8ac6f2; font-weight: bold;">select</span> x <span style="color: #e5786d;">from</span> some_table <span style="color: #8ac6f2; font-weight: bold;">where</span> y &gt; <span style="color: #8ac6f2; font-weight: bold;">any</span> (...);
-<span style="color: #8ac6f2; font-weight: bold;">select</span> x <span style="color: #e5786d;">from</span> some_table <span style="color: #8ac6f2; font-weight: bold;">where</span> y &gt; <span style="color: #8ac6f2; font-weight: bold;">all</span> (...);
+<span style="color: #93a1a1; font-style: italic;">--any,some,all,in:</span>
+<span style="color: #93a1a1; font-style: italic;">--some&#21644;any&#20316;&#29992;&#24046;&#19981;&#22810;&#65292;&#25324;&#21495;&#20869;&#19968;&#33324;&#20026;&#23376;&#26597;&#35810;&#12290;&#19968;&#33324;&#26469;&#35828;some&#29992;&#20110;=&#65292;any&#29992;&#20110;&#27604;&#36739;&#12290;&#24403;&#29992;&#20110;&#27604;&#36739;&#26102;in&#19982;some,any&#30456;&#21516;&#12290;</span>
+select x from some_talbe where y = some (...);
+select x from some_table where y &gt; any (...);
+select x from some_table where y &gt; all (...);
 
-<span style="color: #99968b;">--decode:</span>
-<span style="color: #8ac6f2; font-weight: bold;">SELECT</span> DECODE(<span style="color: #8ac6f2; font-weight: bold;">column_name</span>, condition1, result1, condition2, result2, default_result) <span style="color: #e5786d;">from</span> <span style="color: #8ac6f2; font-weight: bold;">table</span>;
+<span style="color: #93a1a1; font-style: italic;">--decode:</span>
+SELECT DECODE(column_name, condition1, result1, condition2, result2, default_result) from table;
 
-<span style="color: #99968b;">--union</span>
-<span style="color: #8ac6f2; font-weight: bold;">select</span> <span style="color: #92a65e; font-weight: bold;">date</span> <span style="color: #e5786d;">from</span> table_1 <span style="color: #8ac6f2; font-weight: bold;">union</span> <span style="color: #8ac6f2; font-weight: bold;">select</span> <span style="color: #92a65e; font-weight: bold;">date</span> <span style="color: #e5786d;">from</span> table_2;
-<span style="color: #99968b;">--&#24471;&#21040;&#20004;&#20010;&#34920;&#20013;&#30340;date&#20449;&#24687;(date&#21487;&#20197;&#20026;&#20854;&#20182;column&#65292;&#19981;&#36807;&#20004;&#20010;&#34920;&#20013;select&#20986;&#26469;&#30340;column&#31867;&#22411;&#24517;&#39035;&#30456;&#21516;)&#12290;&#24471;&#21040;&#30340;&#20449;&#24687;&#19981;&#20250;&#26377;&#37325;&#22797;&#30340;&#12290;&#22914;&#26524;&#20351;&#29992;union all&#21017;&#21487;&#20197;&#24471;&#21040;&#25152;&#26377;&#30340;&#20449;&#24687;&#65292;&#21253;&#25324;&#37325;&#22797;&#30340;&#12290;</span>
-<span style="color: #99968b;">--intersect&#65306; &#20351;&#29992;&#26041;&#27861;&#21516;union&#65292;&#19981;&#21516;&#30340;&#26159;&#24471;&#21040;&#30340;&#32467;&#26524;&#38598;&#26159;&#20004;&#20010;select&#30340;&#20132;&#38598;&#12290;</span>
+<span style="color: #93a1a1; font-style: italic;">--union</span>
+select date from table_1 union select date from table_2;
+<span style="color: #93a1a1; font-style: italic;">--&#24471;&#21040;&#20004;&#20010;&#34920;&#20013;&#30340;date&#20449;&#24687;(date&#21487;&#20197;&#20026;&#20854;&#20182;column&#65292;&#19981;&#36807;&#20004;&#20010;&#34920;&#20013;select&#20986;&#26469;&#30340;column&#31867;&#22411;&#24517;&#39035;&#30456;&#21516;)&#12290;&#24471;&#21040;&#30340;&#20449;&#24687;&#19981;&#20250;&#26377;&#37325;&#22797;&#30340;&#12290;&#22914;&#26524;&#20351;&#29992;union all&#21017;&#21487;&#20197;&#24471;&#21040;&#25152;&#26377;&#30340;&#20449;&#24687;&#65292;&#21253;&#25324;&#37325;&#22797;&#30340;&#12290;</span>
+<span style="color: #93a1a1; font-style: italic;">--intersect&#65306; &#20351;&#29992;&#26041;&#27861;&#21516;union&#65292;&#19981;&#21516;&#30340;&#26159;&#24471;&#21040;&#30340;&#32467;&#26524;&#38598;&#26159;&#20004;&#20010;select&#30340;&#20132;&#38598;&#12290;</span>
 
-<span style="color: #99968b;">--&#22914;&#26524;expression1&#20026;null&#21017;&#36820;&#22238;expression2&#65292;&#21542;&#21017;&#36820;&#22238;expression1&#65307;</span>
+<span style="color: #93a1a1; font-style: italic;">--&#22914;&#26524;expression1&#20026;null&#21017;&#36820;&#22238;expression2&#65292;&#21542;&#21017;&#36820;&#22238;expression1&#65307;</span>
 NVL(expression1, expression2)
 
-<span style="color: #e5786d;">concat</span>(expression, expression)<span style="color: #99968b;">--&#23383;&#31526;&#20018;&#36830;&#25509;&#65292;&#21516;||&#65307;</span>
-<span style="color: #e5786d;">lower</span>(expression), <span style="color: #e5786d;">upper</span>(expression), initcap(expression).initcap <span style="color: #99968b;">--&#20316;&#29992;&#20026;&#21333;&#35789;&#39318;&#23383;&#27597;&#22823;&#20889;;</span>
-<span style="color: #e5786d;">instr</span>(expression, <span style="color: #e5786d;">substring</span> [, <span style="color: #e5786d;">position</span> [, occurence]]) <span style="color: #99968b;">--&#33719;&#24471;expression&#20013;substring&#30340;&#20301;&#32622;&#65292;position&#20026;&#20174;expression&#30340;&#31532;&#20960;&#20301;&#24320;&#22987;&#65292;occurence&#20026;&#31532;&#20960;&#27425;&#20986;&#29616;&#65307;</span>
-<span style="color: #e5786d;">length</span>(expression);
-<span style="color: #e5786d;">lpad</span>(expression, n, [, expression]),<span style="color: #e5786d;">rpad</span>(expression, n, [, expression]) <span style="color: #99968b;">--&#20351;&#29992;[]&#20013;&#30340;expression&#22635;&#20805;&#23383;&#31526;&#20018;&#65292;&#20351;&#24471;&#23383;&#31526;&#20018;&#30340;&#38271;&#24230;&#20026;n&#65292;lpad&#20026;&#22312;&#24038;&#36793;&#22635;&#20805;&#65292;rpad&#20026;&#22312;&#21491;&#36793;&#22635;&#20805;;</span>
-<span style="color: #e5786d;">trim</span>([ <span style="color: #e5786d;">leading</span>|<span style="color: #e5786d;">trailing</span>|<span style="color: #e5786d;">both</span> <span style="color: #8ac6f2; font-weight: bold;">character</span> <span style="color: #e5786d;">from</span>] expression) <span style="color: #99968b;">--&#21024;&#38500;&#23383;&#31526;&#20018;&#21069;|&#21518;|&#21069;&#21518;&#30340;&#25351;&#23450;&#23383;&#31526;(character);</span>
-<span style="color: #e5786d;">replace</span>(expression, <span style="color: #8ac6f2; font-weight: bold;">search</span> [, <span style="color: #e5786d;">replace</span>]) <span style="color: #99968b;">--&#29992;replace&#23383;&#31526;&#26367;&#25442;expression&#20013;&#30340;search&#23383;&#31526;;</span>
-<span style="color: #e5786d;">translate</span>(expression, <span style="color: #8ac6f2; font-weight: bold;">search</span> [, <span style="color: #e5786d;">replace</span>]) <span style="color: #99968b;">--expression&#20013;&#21253;&#21547;&#30340;search&#20013;&#30340;&#23383;&#31526;&#23558;&#20250;&#34987;&#26367;&#25442;&#20026;replace&#20013;&#23545;&#24212;&#30340;&#23383;&#31526;&#65292;&#20363;&#22914;&#65306;translate('test', 'ts', 'ap')='aept',t&#34987;&#26367;&#25442;&#20026;a&#65292;s&#26367;&#25442;&#20026;p;</span>
-substr(expression, [-]<span style="color: #e5786d;">position</span> [, <span style="color: #e5786d;">length</span>]) <span style="color: #99968b;">--&#20174;position&#24320;&#22987;&#21462;length&#38271;&#24230;&#30340;&#23376;&#23383;&#31526;&#20018;&#65292;position&#20026;&#36127;&#25968;&#21017;&#20174;&#26411;&#23614;&#24320;&#22987;&#21521;&#21069;&#25968;&#65307;</span>
-<span style="color: #e5786d;">abs</span>(n) <span style="color: #99968b;">--&#21462;&#32477;&#23545;&#20540;;</span>
+concat(expression, expression)<span style="color: #93a1a1; font-style: italic;">--&#23383;&#31526;&#20018;&#36830;&#25509;&#65292;&#21516;||&#65307;</span>
+lower(expression), upper(expression), initcap(expression).initcap <span style="color: #93a1a1; font-style: italic;">--&#20316;&#29992;&#20026;&#21333;&#35789;&#39318;&#23383;&#27597;&#22823;&#20889;;</span>
+instr(expression, substring [, position [, occurence]]) <span style="color: #93a1a1; font-style: italic;">--&#33719;&#24471;expression&#20013;substring&#30340;&#20301;&#32622;&#65292;position&#20026;&#20174;expression&#30340;&#31532;&#20960;&#20301;&#24320;&#22987;&#65292;occurence&#20026;&#31532;&#20960;&#27425;&#20986;&#29616;&#65307;</span>
+length(expression);
+lpad(expression, n, [, expression]),rpad(expression, n, [, expression]) <span style="color: #93a1a1; font-style: italic;">--&#20351;&#29992;[]&#20013;&#30340;expression&#22635;&#20805;&#23383;&#31526;&#20018;&#65292;&#20351;&#24471;&#23383;&#31526;&#20018;&#30340;&#38271;&#24230;&#20026;n&#65292;lpad&#20026;&#22312;&#24038;&#36793;&#22635;&#20805;&#65292;rpad&#20026;&#22312;&#21491;&#36793;&#22635;&#20805;;</span>
+trim([ leading|trailing|both character from] expression) <span style="color: #93a1a1; font-style: italic;">--&#21024;&#38500;&#23383;&#31526;&#20018;&#21069;|&#21518;|&#21069;&#21518;&#30340;&#25351;&#23450;&#23383;&#31526;(character);</span>
+replace(expression, search [, replace]) <span style="color: #93a1a1; font-style: italic;">--&#29992;replace&#23383;&#31526;&#26367;&#25442;expression&#20013;&#30340;search&#23383;&#31526;;</span>
+translate(expression, search [, replace]) <span style="color: #93a1a1; font-style: italic;">--expression&#20013;&#21253;&#21547;&#30340;search&#20013;&#30340;&#23383;&#31526;&#23558;&#20250;&#34987;&#26367;&#25442;&#20026;replace&#20013;&#23545;&#24212;&#30340;&#23383;&#31526;&#65292;&#20363;&#22914;&#65306;translate('test', 'ts', 'ap')='aept',t&#34987;&#26367;&#25442;&#20026;a&#65292;s&#26367;&#25442;&#20026;p;</span>
+substr(expression, [-]position [, length]) <span style="color: #93a1a1; font-style: italic;">--&#20174;position&#24320;&#22987;&#21462;length&#38271;&#24230;&#30340;&#23376;&#23383;&#31526;&#20018;&#65292;position&#20026;&#36127;&#25968;&#21017;&#20174;&#26411;&#23614;&#24320;&#22987;&#21521;&#21069;&#25968;&#65307;</span>
+abs(n) <span style="color: #93a1a1; font-style: italic;">--&#21462;&#32477;&#23545;&#20540;;</span>
 ceil(n), floor(n).ceil(1.2)=2, floor(1.2)=1;
-<span style="color: #e5786d;">mod</span>(<span style="color: #8ac6f2; font-weight: bold;">m</span>, n) <span style="color: #99968b;">--&#21462;m/n&#30340;&#27169;;</span>
-power(<span style="color: #8ac6f2; font-weight: bold;">m</span>, n)<span style="color: #99968b;">--&#21462;m&#30340;n&#27425;&#26041;;</span>
-round(n [, places])<span style="color: #99968b;">--&#25353;places&#21462;&#30456;&#24212;&#31934;&#24230;&#30340;&#25968;&#65292;&#22235;&#33293;&#20116;&#20837;&#65307;</span>
-sign(n) <span style="color: #99968b;">--&#36127;&#25968;&#36820;&#22238;-1&#65292;&#27491;&#25968;&#36820;&#22238;1&#65292;&#38646;&#36820;&#22238;0&#65306;</span>
-sqt(n) <span style="color: #99968b;">--n&#30340;&#24179;&#26041;&#26681;;</span>
-trunc(n [, places]) <span style="color: #99968b;">--&#25353;places&#21462;&#30456;&#24212;&#31934;&#24230;&#30340;&#25968;&#65292;&#30452;&#25509;&#33293;&#21435;&#22810;&#20313;&#30340;&#20301;;</span>
-add_months(<span style="color: #92a65e; font-weight: bold;">date</span>, n) <span style="color: #99968b;">--&#36820;&#22238;date&#30340;&#26376;&#20221;&#21152;n&#21518;&#30340;&#26085;&#26399;;</span>
-<span style="color: #e5786d;">extract</span>(<span style="color: #92a65e; font-weight: bold;">year</span>|<span style="color: #8ac6f2; font-weight: bold;">month</span>|<span style="color: #8ac6f2; font-weight: bold;">day</span>|<span style="color: #8ac6f2; font-weight: bold;">hour</span>|... <span style="color: #e5786d;">FROM</span> <span style="color: #92a65e; font-weight: bold;">DATE</span> <span style="color: #92a65e; font-weight: bold;">date</span>) <span style="color: #99968b;">--&#20174;date&#20013;&#25130;&#21462;&#25968;&#25454;;</span>
+mod(m, n) <span style="color: #93a1a1; font-style: italic;">--&#21462;m/n&#30340;&#27169;;</span>
+power(m, n)<span style="color: #93a1a1; font-style: italic;">--&#21462;m&#30340;n&#27425;&#26041;;</span>
+round(n [, places])<span style="color: #93a1a1; font-style: italic;">--&#25353;places&#21462;&#30456;&#24212;&#31934;&#24230;&#30340;&#25968;&#65292;&#22235;&#33293;&#20116;&#20837;&#65307;</span>
+sign(n) <span style="color: #93a1a1; font-style: italic;">--&#36127;&#25968;&#36820;&#22238;-1&#65292;&#27491;&#25968;&#36820;&#22238;1&#65292;&#38646;&#36820;&#22238;0&#65306;</span>
+sqt(n) <span style="color: #93a1a1; font-style: italic;">--n&#30340;&#24179;&#26041;&#26681;;</span>
+trunc(n [, places]) <span style="color: #93a1a1; font-style: italic;">--&#25353;places&#21462;&#30456;&#24212;&#31934;&#24230;&#30340;&#25968;&#65292;&#30452;&#25509;&#33293;&#21435;&#22810;&#20313;&#30340;&#20301;;</span>
+add_months(date, n) <span style="color: #93a1a1; font-style: italic;">--&#36820;&#22238;date&#30340;&#26376;&#20221;&#21152;n&#21518;&#30340;&#26085;&#26399;;</span>
+extract(year|month|day|hour|... FROM DATE date) <span style="color: #93a1a1; font-style: italic;">--&#20174;date&#20013;&#25130;&#21462;&#25968;&#25454;;</span>
 
 </pre>
 
@@ -289,26 +289,26 @@ add_months(<span style="color: #92a65e; font-weight: bold;">date</span>, n) <spa
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> ÊÂÎï¸ôÀë¼¶±ğ</h2>
+<h2 id="sec-4"><span class="section-number-2">4</span> äº‹ç‰©éš”ç¦»çº§åˆ«</h2>
 <div class="outline-text-2" id="text-4">
 
-<p>oracleÖ»ÓĞÁ½¸öÊÂÎï¸ôÀë¼¶±ğ£ºread committed£¨Ä¬ÈÏ£¬ÄÜ±ÜÃâÔà¶Á£©¡¢serializable£¨ÄÜ±ÜÃâÔà¶Á¡¢²»¿ÉÖØ¸´¶Á¡¢»ÃÏñ¶Á£©
+<p>oracleåªæœ‰ä¸¤ä¸ªäº‹ç‰©éš”ç¦»çº§åˆ«ï¼šread committedï¼ˆé»˜è®¤ï¼Œèƒ½é¿å…è„è¯»ï¼‰ã€serializableï¼ˆèƒ½é¿å…è„è¯»ã€ä¸å¯é‡å¤è¯»ã€å¹»åƒè¯»ï¼‰
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">SET</span> <span style="color: #8ac6f2; font-weight: bold;">TRANSACTION</span> <span style="color: #8ac6f2; font-weight: bold;">ISOLATION</span> <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> <span style="color: #8ac6f2; font-weight: bold;">READ</span> <span style="color: #8ac6f2; font-weight: bold;">COMMITTED</span>;
-<span style="color: #8ac6f2; font-weight: bold;">SET</span> <span style="color: #8ac6f2; font-weight: bold;">TRANSACTION</span> <span style="color: #8ac6f2; font-weight: bold;">ISOLATION</span> <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> <span style="color: #8ac6f2; font-weight: bold;">SERIALIZABLE</span>;
-<span style="color: #8ac6f2; font-weight: bold;">SET</span> <span style="color: #8ac6f2; font-weight: bold;">TRANSACTION</span> <span style="color: #8ac6f2; font-weight: bold;">READ</span> <span style="color: #8ac6f2; font-weight: bold;">ONLY</span>;
+<pre class="src src-sql">SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+SET TRANSACTION READ ONLY;
 </pre>
 
 <p>
-Ê¹ÓÃserializableÊ±£¬Èç¹ûÊÂÎñ¹ı³ÌÖĞĞŞ¸ÄÒ»¸öÔÚ¸ÃÊÂÎñ½øĞĞ¹ı³ÌÖĞ±»ÆäËûÊÂÎñĞŞ¸ÄµÄĞĞÊ±½«Å×³öCannot serialize access error
+ä½¿ç”¨serializableæ—¶ï¼Œå¦‚æœäº‹åŠ¡è¿‡ç¨‹ä¸­ä¿®æ”¹ä¸€ä¸ªåœ¨è¯¥äº‹åŠ¡è¿›è¡Œè¿‡ç¨‹ä¸­è¢«å…¶ä»–äº‹åŠ¡ä¿®æ”¹çš„è¡Œæ—¶å°†æŠ›å‡ºCannot serialize access error
 </p>
 <p>
-ÖØ¸´¶Á£ºÍ¬Ò»ÊÂÎñÖĞÁ½´Î¶ÁÈ¡Í¬Ò»£¨ĞĞ£©Êı¾İ£¬µÃµ½µÄ½á¹û²»Í¬£»
+é‡å¤è¯»ï¼šåŒä¸€äº‹åŠ¡ä¸­ä¸¤æ¬¡è¯»å–åŒä¸€ï¼ˆè¡Œï¼‰æ•°æ®ï¼Œå¾—åˆ°çš„ç»“æœä¸åŒï¼›
 </p>
 <p>
-»ÃÏë¶Á£ºÍ¬Ò»ÊÂÎñ¹ı³ÌÖĞ±íÖĞµÄÊı¾İÓĞĞÂÔö»òÉ¾³ıµ¼ÖÂÁ½´ÎµÃµ½µÄ½á¹û²»Í¬£»
+å¹»æƒ³è¯»ï¼šåŒä¸€äº‹åŠ¡è¿‡ç¨‹ä¸­è¡¨ä¸­çš„æ•°æ®æœ‰æ–°å¢æˆ–åˆ é™¤å¯¼è‡´ä¸¤æ¬¡å¾—åˆ°çš„ç»“æœä¸åŒï¼›
 </p>
 
 </div>
@@ -316,34 +316,34 @@ add_months(<span style="color: #92a65e; font-weight: bold;">date</span>, n) <spa
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Ëø</h2>
+<h2 id="sec-5"><span class="section-number-2">5</span> é”</h2>
 <div class="outline-text-2" id="text-5">
 
 
 <p>
-ÔÚÖ´ĞĞupdate¡¢delete¡¢select for updateÊ±½«»á»ñµÃÒ»¸öĞĞ¼¶µÄtxËø£¨ÊÂÎñËø£©½«»áËø¶¨¸ÃĞĞÒÔ·ÀÖ¹ÔÚ¸ÃÊÂÎñÌá½»Ç°ÆäËûÊÂÎñ¶Ô¸ÃĞĞ½øĞĞupdate¡¢delete¡£´ËÍâ»¹½«½¨Á¢Ò»¸ö±í¼¶µÄtmËø£¬¸ÃËø·ÀÖ¹DDLÓï¾ä¶Ô¸Ã±íµÄ²Ù×÷¡£
+åœ¨æ‰§è¡Œupdateã€deleteã€select for updateæ—¶å°†ä¼šè·å¾—ä¸€ä¸ªè¡Œçº§çš„txé”ï¼ˆäº‹åŠ¡é”ï¼‰å°†ä¼šé”å®šè¯¥è¡Œä»¥é˜²æ­¢åœ¨è¯¥äº‹åŠ¡æäº¤å‰å…¶ä»–äº‹åŠ¡å¯¹è¯¥è¡Œè¿›è¡Œupdateã€deleteã€‚æ­¤å¤–è¿˜å°†å»ºç«‹ä¸€ä¸ªè¡¨çº§çš„tmé”ï¼Œè¯¥é”é˜²æ­¢DDLè¯­å¥å¯¹è¯¥è¡¨çš„æ“ä½œã€‚
 </p>
 <p>
-ÔÚÖ´ĞĞDDLÓï¾äÊ±½«»á»ñµÃÒ»¸ö¸Ã±íµÄDDLËø¶¨£¬ÒÔ·ÀÖ¹ÆäËûÊÂÎñ»ñµÃ¶Ô¸Ã±íµÄDDLËø¶¨ºÍTMËø¶¨¡£
+åœ¨æ‰§è¡ŒDDLè¯­å¥æ—¶å°†ä¼šè·å¾—ä¸€ä¸ªè¯¥è¡¨çš„DDLé”å®šï¼Œä»¥é˜²æ­¢å…¶ä»–äº‹åŠ¡è·å¾—å¯¹è¯¥è¡¨çš„DDLé”å®šå’ŒTMé”å®šã€‚
 </p>
 <p>
-Èç¹ûĞèÒª¶ÔÒ»¸ö±íÖĞµÄ¾ø´ó¶àÊıÊı¾İ½øĞĞ¸üĞÂµÈ²Ù×÷Ôò¿ÉÒÔÊ¹ÓÃLOCK TABLE IN EXCLUSIVE MODE¸ÃÓï¾ä½«»áËø¶¨¸Ã±í¡£
+å¦‚æœéœ€è¦å¯¹ä¸€ä¸ªè¡¨ä¸­çš„ç»å¤§å¤šæ•°æ•°æ®è¿›è¡Œæ›´æ–°ç­‰æ“ä½œåˆ™å¯ä»¥ä½¿ç”¨LOCK TABLE IN EXCLUSIVE MODEè¯¥è¯­å¥å°†ä¼šé”å®šè¯¥è¡¨ã€‚
 </p>
 <p>
-¿ÉÒÔÊ¹ÓÃDBMS<sub>LOCK°ü´´½¨×Ô¼ºµÄËø¶¨¡£</sub>
+å¯ä»¥ä½¿ç”¨DBMS<sub>LOCKåŒ…åˆ›å»ºè‡ªå·±çš„é”å®šã€‚</sub>
 </p>
 <p>
-OracleÖĞµÄËø¶¨¿ÉÒÔ·ÖÎª¼¸Àà£ºDML lock£¨data lock£©£¬DDL lock£¨dictionary lock)ºÍinternal lock/latch¡£
+Oracleä¸­çš„é”å®šå¯ä»¥åˆ†ä¸ºå‡ ç±»ï¼šDML lockï¼ˆdata lockï¼‰ï¼ŒDDL lockï¼ˆdictionary lock)å’Œinternal lock/latchã€‚
 </p>
 <p>
-DML lockÓÖ¿ÉÒÔ·ÖÎªrow lockºÍtable lock¡£row lockÔÚselect.. for update/insert/update/deleteÊ±ÒşÊ½×Ô¶¯²úÉú£¬¶øtable lock³ıÁËÒşÊ½²úÉú£¬Ò²¿ÉÒÔµ÷ÓÃlock table &lt;table<sub>name&gt</sub>; in &lt;/table<sub>name&gt</sub>; nameÀ´ÏÔÊ¾Ëø¶¨¡£
+DML lockåˆå¯ä»¥åˆ†ä¸ºrow lockå’Œtable lockã€‚row lockåœ¨select.. for update/insert/update/deleteæ—¶éšå¼è‡ªåŠ¨äº§ç”Ÿï¼Œè€Œtable locké™¤äº†éšå¼äº§ç”Ÿï¼Œä¹Ÿå¯ä»¥è°ƒç”¨lock table &lt;table<sub>name&gt</sub>; in &lt;/table<sub>name&gt</sub>; nameæ¥æ˜¾ç¤ºé”å®šã€‚
 </p>
 
 
-<pre class="src src-sql"><span style="color: #99968b;">--&#21482;&#20801;&#35768;&#21035;&#30340;session&#26597;&#35810;&#34920;&#20013;&#30340;&#25968;&#25454;&#12290;</span>
-<span style="color: #8ac6f2; font-weight: bold;">lock</span> <span style="color: #8ac6f2; font-weight: bold;">table</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span> <span style="color: #8ac6f2; font-weight: bold;">in</span> exclusive <span style="color: #8ac6f2; font-weight: bold;">mode</span>&#65288;X&#65289;
-<span style="color: #99968b;">--&#21482;&#20801;&#35768;&#21035;&#30340;session&#26597;&#35810;&#34920;&#20013;&#30340;&#25968;&#25454;&#12290;</span>
-<span style="color: #8ac6f2; font-weight: bold;">lock</span> <span style="color: #8ac6f2; font-weight: bold;">table</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span> <span style="color: #8ac6f2; font-weight: bold;">in</span> <span style="color: #8ac6f2; font-weight: bold;">share</span> <span style="color: #92a65e; font-weight: bold;">row</span> exclusive <span style="color: #8ac6f2; font-weight: bold;">mode</span>&#65288;SRX&#65289;
+<pre class="src src-sql"><span style="color: #93a1a1; font-style: italic;">--&#21482;&#20801;&#35768;&#21035;&#30340;session&#26597;&#35810;&#34920;&#20013;&#30340;&#25968;&#25454;&#12290;</span>
+lock table table_name in exclusive mode&#65288;X&#65289;
+<span style="color: #93a1a1; font-style: italic;">--&#21482;&#20801;&#35768;&#21035;&#30340;session&#26597;&#35810;&#34920;&#20013;&#30340;&#25968;&#25454;&#12290;</span>
+lock table table_name in share row exclusive mode&#65288;SRX&#65289;
 </pre>
 
 
@@ -363,31 +363,31 @@ DML lockÓÖ¿ÉÒÔ·ÖÎªrow lockºÍtable lock¡£row lockÔÚselect.. for update/insert/upd
 <h3 id="sec-6-1"><span class="section-number-3">6.1</span> Dimention</h3>
 <div class="outline-text-3" id="text-6-1">
 
-<p>´´½¨Dimention£º£¨ÓÃÓÚÎªÎï»¯ÊÓÍ¼µÄ²éÑ¯ÖØĞ´·şÎñ£©
+<p>åˆ›å»ºDimentionï¼šï¼ˆç”¨äºä¸ºç‰©åŒ–è§†å›¾çš„æŸ¥è¯¢é‡å†™æœåŠ¡ï¼‰
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">CREATE</span> DIMENSION customers_dim
-	 <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> customer   <span style="color: #8ac6f2; font-weight: bold;">IS</span> (customers.cust_id)
-	 <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> city       <span style="color: #8ac6f2; font-weight: bold;">IS</span> (customers.cust_city)
-	 <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> <span style="color: #8ac6f2; font-weight: bold;">state</span>      <span style="color: #8ac6f2; font-weight: bold;">IS</span> (customers.cust_state_province)
-	 <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> country    <span style="color: #8ac6f2; font-weight: bold;">IS</span> (countries.country_id)
-	 <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> subregion  <span style="color: #8ac6f2; font-weight: bold;">IS</span> (countries.country_subregion)
-	 <span style="color: #8ac6f2; font-weight: bold;">LEVEL</span> region     <span style="color: #8ac6f2; font-weight: bold;">IS</span> (countries.country_region)
-	 <span style="color: #8ac6f2; font-weight: bold;">HIERARCHY</span> geog_rollup (
-			customer      CHILD <span style="color: #8ac6f2; font-weight: bold;">OF</span>
-			city          CHILD <span style="color: #8ac6f2; font-weight: bold;">OF</span>
-			<span style="color: #8ac6f2; font-weight: bold;">state</span>         CHILD <span style="color: #8ac6f2; font-weight: bold;">OF</span>
-			country       CHILD <span style="color: #8ac6f2; font-weight: bold;">OF</span>
-			subregion     CHILD <span style="color: #8ac6f2; font-weight: bold;">OF</span>
-			region
-	 <span style="color: #8ac6f2; font-weight: bold;">JOIN</span> <span style="color: #8ac6f2; font-weight: bold;">KEY</span> (customers.country_id) <span style="color: #8ac6f2; font-weight: bold;">REFERENCES</span> country //&#35774;&#32622;&#20004;&#24352;&#34920;&#30340;&#20851;&#32852;
-	 )
-	 ATTRIBUTE customer DETERMINES      //&#21578;&#35785;oracle&#27599;&#19968;&#20010;&#23618;&#32423;&#25152;&#33021;&#22815;&#21807;&#19968;&#30830;&#23450;&#30340;&#19996;&#35199;
-	 (cust_first_name, cust_last_name, cust_gender,
-		cust_marital_status, cust_year_of_birth,
-		cust_income_level, cust_credit_limit)
-	 ATTRIBUTE country DETERMINES (countries.country_name)
+<pre class="src src-sql">CREATE DIMENSION customers_dim
+         LEVEL customer   IS (customers.cust_id)
+         LEVEL city       IS (customers.cust_city)
+         LEVEL state      IS (customers.cust_state_province)
+         LEVEL country    IS (countries.country_id)
+         LEVEL subregion  IS (countries.country_subregion)
+         LEVEL region     IS (countries.country_region)
+         HIERARCHY geog_rollup (
+                        customer      CHILD OF
+                        city          CHILD OF
+                        state         CHILD OF
+                        country       CHILD OF
+                        subregion     CHILD OF
+                        region
+         JOIN KEY (customers.country_id) REFERENCES country     //&#35774;&#32622;&#20004;&#24352;&#34920;&#30340;&#20851;&#32852;
+         )
+         ATTRIBUTE customer DETERMINES                  //&#21578;&#35785;oracle&#27599;&#19968;&#20010;&#23618;&#32423;&#25152;&#33021;&#22815;&#21807;&#19968;&#30830;&#23450;&#30340;&#19996;&#35199;
+         (cust_first_name, cust_last_name, cust_gender,
+                cust_marital_status, cust_year_of_birth,
+                cust_income_level, cust_credit_limit)
+         ATTRIBUTE country DETERMINES (countries.country_name)
 ;
 </pre>
 
@@ -397,17 +397,17 @@ DML lockÓÖ¿ÉÒÔ·ÖÎªrow lockºÍtable lock¡£row lockÔÚselect.. for update/insert/upd
 </div>
 
 <div id="outline-container-6-2" class="outline-3">
-<h3 id="sec-6-2"><span class="section-number-3">6.2</span> IOT±í</h3>
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> IOTè¡¨</h3>
 <div class="outline-text-3" id="text-6-2">
 
-<p>IOT±í½«ÕûĞĞÊı¾İ°´ÕÕË÷ÒıµÄ×éÖ¯½øĞĞ´æ´¢£¬ÕâÓëÕı³£µÄ¶Ñ×éÖ¯±íÊÇ²»Í¬µÄ¡££¨²åÈëÂı£©
+<p>IOTè¡¨å°†æ•´è¡Œæ•°æ®æŒ‰ç…§ç´¢å¼•çš„ç»„ç»‡è¿›è¡Œå­˜å‚¨ï¼Œè¿™ä¸æ­£å¸¸çš„å †ç»„ç»‡è¡¨æ˜¯ä¸åŒçš„ã€‚ï¼ˆæ’å…¥æ…¢ï¼‰
 </p>
 <p>
-¶ÔÓÚ×ÜÊÇÍ¨¹ı¶ÔÖ÷¼üµÄ¾«È·Æ¥Åä»ò·¶Î§É¨Ãè½øĞĞ·ÃÎÊµÄ±í£¬¾ÍĞèÒª¿¼ÂÇÊ¹ÓÃË÷Òı×éÖ¯±í(IOT),½«Ê¹ÓÃB+Ê÷À´´æ´¢Êı¾İ£¬Ìá¸ß²éÑ¯ËÙ¶È¡£
+å¯¹äºæ€»æ˜¯é€šè¿‡å¯¹ä¸»é”®çš„ç²¾ç¡®åŒ¹é…æˆ–èŒƒå›´æ‰«æè¿›è¡Œè®¿é—®çš„è¡¨ï¼Œå°±éœ€è¦è€ƒè™‘ä½¿ç”¨ç´¢å¼•ç»„ç»‡è¡¨(IOT),å°†ä½¿ç”¨B+æ ‘æ¥å­˜å‚¨æ•°æ®ï¼Œæé«˜æŸ¥è¯¢é€Ÿåº¦ã€‚
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">create</span> <span style="color: #8ac6f2; font-weight: bold;">table</span> <span style="color: #cae682;">table1</span>(colum1 <span style="color: #8ac6f2; font-weight: bold;">primary</span> <span style="color: #8ac6f2; font-weight: bold;">key</span>, colum2) organization <span style="color: #8ac6f2; font-weight: bold;">index</span>;
+<pre class="src src-sql">create table table1(colum1 primary key, colum2) organization index;
 </pre>
 
 
@@ -422,14 +422,14 @@ DML lockÓÖ¿ÉÒÔ·ÖÎªrow lockºÍtable lock¡£row lockÔÚselect.. for update/insert/upd
 
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">create</span> <span style="color: #8ac6f2; font-weight: bold;">sequence</span> <span style="color: #cae682;">seq_name</span> [increment <span style="color: #8ac6f2; font-weight: bold;">by</span> ] [<span style="color: #8ac6f2; font-weight: bold;">start</span> <span style="color: #8ac6f2; font-weight: bold;">with</span>] [nomaxvalue] [nocycle] [cache];
+<pre class="src src-sql">create sequence seq_name [increment by ] [start with] [nomaxvalue] [nocycle] [cache];
 </pre>
 
 <p>
-seq<sub>name</sub>.currvalµÃµ½µ±Ç°µÄĞòÁĞºÅ.
+seq<sub>name</sub>.currvalå¾—åˆ°å½“å‰çš„åºåˆ—å·.
 </p>
 <p>
-seq<sub>name</sub>.nextvalµÃµ½ÏÂÒ»¸öĞòÁĞºÅ£¬²¢½«¸ÃĞòÁĞºÅ´æÈëcurrvalÖĞ¡£
+seq<sub>name</sub>.nextvalå¾—åˆ°ä¸‹ä¸€ä¸ªåºåˆ—å·ï¼Œå¹¶å°†è¯¥åºåˆ—å·å­˜å…¥currvalä¸­ã€‚
 </p>
 
 </div>
@@ -438,24 +438,24 @@ seq<sub>name</sub>.nextvalµÃµ½ÏÂÒ»¸öĞòÁĞºÅ£¬²¢½«¸ÃĞòÁĞºÅ´æÈëcurrvalÖĞ¡£
 </div>
 
 <div id="outline-container-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> µ÷ÓÅ</h2>
+<h2 id="sec-7"><span class="section-number-2">7</span> è°ƒä¼˜</h2>
 <div class="outline-text-2" id="text-7">
 
 
 <p>
-Ê¹ÓÃset autotrace traceonly explain¿ÉÒÔ²é¿´sqlÓï¾äÖ´ĞĞµÄexecution plan
+ä½¿ç”¨set autotrace traceonly explainå¯ä»¥æŸ¥çœ‹sqlè¯­å¥æ‰§è¡Œçš„execution plan
 </p>
 <p>
-Ê¹ÓÃset timing on²é¿´²éÑ¯ËùĞèÒªµÄÊ±¼ä
+ä½¿ç”¨set timing onæŸ¥çœ‹æŸ¥è¯¢æ‰€éœ€è¦çš„æ—¶é—´
 </p>
 <p>
-B*treeË÷Òı²»ÎªnullµÄÊı¾İ´´½¨Ë÷Òı
+B*treeç´¢å¼•ä¸ä¸ºnullçš„æ•°æ®åˆ›å»ºç´¢å¼•
 </p>
 <p>
-µ±É¾³ı»ò¸üĞÂ¸¸±íÖĞµÄÖ÷¼üÊ±£¬½«»áËø¶¨×Ó±í£¬²¢ÇÒ»á¶Ô×Ó±í½øĞĞÈ«É¨Ãè£¬ÕâÊ±ºò¾ÍĞèÒª¸ø×Ó±íµÄÍâ¼ü¼ÓÉÏË÷Òı¡£Èç¹ûÃ»ÓĞÕâĞ©Çé¿öÔò¿ÉÒÔ²»½øĞĞË÷Òı¡£
+å½“åˆ é™¤æˆ–æ›´æ–°çˆ¶è¡¨ä¸­çš„ä¸»é”®æ—¶ï¼Œå°†ä¼šé”å®šå­è¡¨ï¼Œå¹¶ä¸”ä¼šå¯¹å­è¡¨è¿›è¡Œå…¨æ‰«æï¼Œè¿™æ—¶å€™å°±éœ€è¦ç»™å­è¡¨çš„å¤–é”®åŠ ä¸Šç´¢å¼•ã€‚å¦‚æœæ²¡æœ‰è¿™äº›æƒ…å†µåˆ™å¯ä»¥ä¸è¿›è¡Œç´¢å¼•ã€‚
 </p>
 <p>
-Ê¹ÓÃalter session set sql<sub>trace</sub>=true;alter session set timed<sub>statistics</sub>=true;À´ÉèÖÃ±£´æ¸ú×ÙÎÄ¼şÓÃÓÚÓÅ»¯£¬¸ú×ÙÎÄ¼şµÄÎ»ÖÃ¼ÇÂ¼ÔÚuser<sub>dump</sub><sub>dest²ÎÊıÖĞ£¬¿ÉÍ¨¹ıshow</sub> parameter user<sub>dump</sub><sub>dest»ò´ÓV</sub>$PARAMETERÊÓÍ¼ÖĞ²é¿´¡£ÏàÓ¦µÄĞÅÏ¢½«»á±£´æµ½trcÎÄ¼şÖĞ£¬Í¨¹ıÊ¹ÓÃtkprof¹¤¾ß¿ÉÒÔ¶ÔÆä½øĞĞ¸ñÊ½×ª»»£¬ÃüÁîÎª£º
+ä½¿ç”¨alter session set sql<sub>trace</sub>=true;alter session set timed<sub>statistics</sub>=true;æ¥è®¾ç½®ä¿å­˜è·Ÿè¸ªæ–‡ä»¶ç”¨äºä¼˜åŒ–ï¼Œè·Ÿè¸ªæ–‡ä»¶çš„ä½ç½®è®°å½•åœ¨user<sub>dump</sub><sub>destå‚æ•°ä¸­ï¼Œå¯é€šè¿‡show</sub> parameter user<sub>dump</sub><sub>destæˆ–ä»V</sub>$PARAMETERè§†å›¾ä¸­æŸ¥çœ‹ã€‚ç›¸åº”çš„ä¿¡æ¯å°†ä¼šä¿å­˜åˆ°trcæ–‡ä»¶ä¸­ï¼Œé€šè¿‡ä½¿ç”¨tkprofå·¥å…·å¯ä»¥å¯¹å…¶è¿›è¡Œæ ¼å¼è½¬æ¢ï¼Œå‘½ä»¤ä¸ºï¼š
 </p>
 
 
@@ -463,16 +463,16 @@ B*treeË÷Òı²»ÎªnullµÄÊı¾İ´´½¨Ë÷Òı
 </pre>
 
 <p>
-¸ÃÎÄ¼ş½«»á±»×ª»»¸ñÊ½ºó±£´æµ½report.txtÎÄ¼şÖĞ¡£ÆäÖĞµÄ²¿·Ö²ÎÊıÈçÏÂ£º
+è¯¥æ–‡ä»¶å°†ä¼šè¢«è½¬æ¢æ ¼å¼åä¿å­˜åˆ°report.txtæ–‡ä»¶ä¸­ã€‚å…¶ä¸­çš„éƒ¨åˆ†å‚æ•°å¦‚ä¸‹ï¼š
 </p>
 <p>
-	count£ºÖ´ĞĞµÄ´ÎÊı
+        countï¼šæ‰§è¡Œçš„æ¬¡æ•°
 </p>
 <p>
-	disk£ºĞèÒª¶àÉÙ´ÎIO
+        diskï¼šéœ€è¦å¤šå°‘æ¬¡IO
 </p>
 <p>
-	query£ºĞèÒª´¦Àí¶àÉÙ¿é
+        queryï¼šéœ€è¦å¤„ç†å¤šå°‘å—
 </p>
 
 </div>
@@ -485,63 +485,63 @@ B*treeË÷Òı²»ÎªnullµÄÊı¾İ´´½¨Ë÷Òı
 
 
 <p>
-ÔÚÄ³Ò»±í¿Õ¼äÖĞ´´½¨±í
+åœ¨æŸä¸€è¡¨ç©ºé—´ä¸­åˆ›å»ºè¡¨
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">CREATE</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> ... TABLESPACE tablespace_name;
+<pre class="src src-sql">CREATE TABLE ... TABLESPACE tablespace_name;
 </pre>
 
 
 <p>
-Ö¸¶¨Óë¸Ã±íÏà¹ØµÄindex±£´æÔÚÁíÒ»¸ö±í¿Õ¼ä
+æŒ‡å®šä¸è¯¥è¡¨ç›¸å…³çš„indexä¿å­˜åœ¨å¦ä¸€ä¸ªè¡¨ç©ºé—´
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">CREATE</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> ... <span style="color: #8ac6f2; font-weight: bold;">USING</span> <span style="color: #8ac6f2; font-weight: bold;">INDEX</span> TABLESPACE tablespace_name;
+<pre class="src src-sql">CREATE TABLE ... USING INDEX TABLESPACE tablespace_name;
 </pre>
 
 
 <p>
-´´½¨Ë÷Òı
+åˆ›å»ºç´¢å¼•
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">CREATE</span> <span style="color: #8ac6f2; font-weight: bold;">INDEX</span> index_name <span style="color: #8ac6f2; font-weight: bold;">ON</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span> (<span style="color: #8ac6f2; font-weight: bold;">column_name</span>);
+<pre class="src src-sql">CREATE INDEX index_name ON table_name (column_name);
 </pre>
 
 
 <p>
-´´½¨Î¨Ò»Ô¼Êø
+åˆ›å»ºå”¯ä¸€çº¦æŸ
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">ALTER</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span> <span style="color: #8ac6f2; font-weight: bold;">ADD</span> <span style="color: #8ac6f2; font-weight: bold;">CONSTRAINT</span> <span style="color: #8ac6f2; font-weight: bold;">constraint_name</span> <span style="color: #8ac6f2; font-weight: bold;">UNIQUE</span> (<span style="color: #8ac6f2; font-weight: bold;">column_name</span> [, <span style="color: #8ac6f2; font-weight: bold;">column_name</span>]);
+<pre class="src src-sql">ALTER TABLE table_name ADD CONSTRAINT constraint_name UNIQUE (column_name [, column_name]);
 </pre>
 
 
 <p>
-´´½¨Ö÷¼ü
+åˆ›å»ºä¸»é”®
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">ALTER</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span> <span style="color: #8ac6f2; font-weight: bold;">ADD</span> <span style="color: #8ac6f2; font-weight: bold;">CONSTRAINT</span> <span style="color: #8ac6f2; font-weight: bold;">constraint_name</span> <span style="color: #8ac6f2; font-weight: bold;">PRIMARY</span> <span style="color: #8ac6f2; font-weight: bold;">KEY</span> (<span style="color: #8ac6f2; font-weight: bold;">column_name</span> [, <span style="color: #8ac6f2; font-weight: bold;">column_name</span>]);
+<pre class="src src-sql">ALTER TABLE table_name ADD CONSTRAINT constraint_name PRIMARY KEY (column_name [, column_name]);
 </pre>
 
 
 
 <p>
-´´½¨Íâ¼ü£º(on delete cascadeÉèÖÃÊ¹µÃÉ¾³ıÖ÷±íµÄÖµÊ±¹ØÁªÉ¾³ı×Ó±íÖĞµÄÖµ,on delete set null,É¾³ıÊ±½«×Ó±íÖĞµÄÏà¹ØÖµÖÃÎªnull,no actionÓërestrict²î²»¶à±íÊ¾É¾³ıÊ±Èç¹û×Ó±íÓĞ¼ÇÂ¼Ôò½ûÖ¹²Ù×÷)
+åˆ›å»ºå¤–é”®ï¼š(on delete cascadeè®¾ç½®ä½¿å¾—åˆ é™¤ä¸»è¡¨çš„å€¼æ—¶å…³è”åˆ é™¤å­è¡¨ä¸­çš„å€¼,on delete set null,åˆ é™¤æ—¶å°†å­è¡¨ä¸­çš„ç›¸å…³å€¼ç½®ä¸ºnull,no actionä¸restrictå·®ä¸å¤šè¡¨ç¤ºåˆ é™¤æ—¶å¦‚æœå­è¡¨æœ‰è®°å½•åˆ™ç¦æ­¢æ“ä½œ)
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">alter</span> <span style="color: #8ac6f2; font-weight: bold;">table</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span> <span style="color: #8ac6f2; font-weight: bold;">add</span> <span style="color: #8ac6f2; font-weight: bold;">constraint</span> <span style="color: #8ac6f2; font-weight: bold;">constraint_name</span> <span style="color: #8ac6f2; font-weight: bold;">foreign</span> <span style="color: #8ac6f2; font-weight: bold;">key</span>(<span style="color: #8ac6f2; font-weight: bold;">column</span> [,<span style="color: #8ac6f2; font-weight: bold;">column</span> ...]) <span style="color: #8ac6f2; font-weight: bold;">references</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span>(<span style="color: #8ac6f2; font-weight: bold;">column</span> [,<span style="color: #8ac6f2; font-weight: bold;">column</span> ...]) [<span style="color: #8ac6f2; font-weight: bold;">on</span> <span style="color: #8ac6f2; font-weight: bold;">delete</span>|<span style="color: #8ac6f2; font-weight: bold;">update</span> <span style="color: #8ac6f2; font-weight: bold;">cascade</span>|<span style="color: #8ac6f2; font-weight: bold;">set</span> <span style="color: #8ac6f2; font-weight: bold;">null</span>|<span style="color: #8ac6f2; font-weight: bold;">no</span> <span style="color: #8ac6f2; font-weight: bold;">action</span>|<span style="color: #8ac6f2; font-weight: bold;">restrict</span>];
+<pre class="src src-sql">alter table table_name add constraint constraint_name foreign key(column [,column ...]) references table_name(column [,column ...]) [on delete|update cascade|set null|no action|restrict];
 </pre>
 
 
 <p>
-truncateÓëdeleteµÄÇø±ğ:
-truncate²»²úÉú»Ø¹ö£¬»áÖØÖÃhigh water mark£¬ÊôÓÚddl£¨Ö´ĞĞºó²»ÄÜ»Ø¹ö£©¡£
+truncateä¸deleteçš„åŒºåˆ«:
+truncateä¸äº§ç”Ÿå›æ»šï¼Œä¼šé‡ç½®high water markï¼Œå±äºddlï¼ˆæ‰§è¡Œåä¸èƒ½å›æ»šï¼‰ã€‚
 </p>
 
 </div>
@@ -554,71 +554,71 @@ truncate²»²úÉú»Ø¹ö£¬»áÖØÖÃhigh water mark£¬ÊôÓÚddl£¨Ö´ĞĞºó²»ÄÜ»Ø¹ö£©¡£
 
 
 <p>
-sqlplus username/password@sidµÇÂ¼¡£
+sqlplus username/password@sidç™»å½•ã€‚
 </p>
 <p>
-oracle $exp $imp ½øĞĞµ¼Èëµ¼³ö
+oracle $exp $imp è¿›è¡Œå¯¼å…¥å¯¼å‡º
 </p>
 <p>
-all<sub>tables±í£»ËùÓĞÓÃ»§µÄ±í</sub>
+all<sub>tablesè¡¨ï¼›æ‰€æœ‰ç”¨æˆ·çš„è¡¨</sub>
 </p>
 <p>
-user<sub>tables±í£»µ±Ç°ÓÃ»§µÄ±í</sub>
+user<sub>tablesè¡¨ï¼›å½“å‰ç”¨æˆ·çš„è¡¨</sub>
 </p>
 <p>
-all<sub>source±í£»°üÀ¨´æ´¢¹ı³ÌµÈ¸÷ÖÖ×ÊÔ´</sub>
+all<sub>sourceè¡¨ï¼›åŒ…æ‹¬å­˜å‚¨è¿‡ç¨‹ç­‰å„ç§èµ„æº</sub>
 </p>
 <p>
-sqlplus username/password as sysdba;Ê¹ÓÃdbaÈ¨ÏŞµÇÂ¼¡£
+sqlplus username/password as sysdba;ä½¿ç”¨dbaæƒé™ç™»å½•ã€‚
 </p>
 <p>
-dbms<sub>output</sub>.put<sub>line</sub>('xxx');Êä³ö£¨dbms<sub>outputÌá¹©ÁËÒ»Ğ©ÓÃÓÚÊä³öµÄ·½·¨£©</sub>
+dbms<sub>output</sub>.put<sub>line</sub>('xxx');è¾“å‡ºï¼ˆdbms<sub>outputæä¾›äº†ä¸€äº›ç”¨äºè¾“å‡ºçš„æ–¹æ³•ï¼‰</sub>
 </p>
 <p>
-set serveroutput on£¨ÔÚÆÁÄ»ÉÏ¿´µ½Êä³öµÄÄÚÈİ£©
+set serveroutput onï¼ˆåœ¨å±å¹•ä¸Šçœ‹åˆ°è¾“å‡ºçš„å†…å®¹ï¼‰
 </p>
 <p>
-select systimestamp from dual;»ñÈ¡ÏµÍ³Ê±¼ä
+select systimestamp from dual;è·å–ç³»ç»Ÿæ—¶é—´
 </p>
 <p>
-tnsping orcl;²é¿´tns¼àÌıÊÇ·ñÆô¶¯£¬orclÎªsidÔÚtnsnames.oraÖĞÅäÖÃ¡£
+tnsping orcl;æŸ¥çœ‹tnsç›‘å¬æ˜¯å¦å¯åŠ¨ï¼Œorclä¸ºsidåœ¨tnsnames.oraä¸­é…ç½®ã€‚
 </p>
 <p>
-@filename£»Ö´ĞĞÏàÓ¦ÎÄ¼ş£¬ĞèÒª¸ø³öÍêÕûµÄÂ·¾¶¡£µ±ÎÄ¼ş²»ÔÚÏµÍ³¸ùÄ¿Â¼ÏÂµÄÊ±ºò²âÊÔÊ§°Ü¡£
+@filenameï¼›æ‰§è¡Œç›¸åº”æ–‡ä»¶ï¼Œéœ€è¦ç»™å‡ºå®Œæ•´çš„è·¯å¾„ã€‚å½“æ–‡ä»¶ä¸åœ¨ç³»ç»Ÿæ ¹ç›®å½•ä¸‹çš„æ—¶å€™æµ‹è¯•å¤±è´¥ã€‚
 </p>
 <p>
-Ò»¸öquery½øÈëÖ´ĞĞ½×¶Îºó£¬¾Í½«ÓĞÈ·¶¨µÄSCN£¬ÔÚÖ´ĞĞ¹ı³ÌÖĞÖ»»á²éÕÒobserved SCNËù¶ÔÓ¦µÄdata block£¨ÄÜ¹»±»¹Û²ìµ½µÄSCN£©¡£Èç¹ûÓĞµÄdata blockËù¶ÔÓ¦µÄSCN²»ÄÜ±»¹Û²ìµ½£¬Ôò±íÊ¾Õâ¸öÊı¾İÎªÔàÊı¾İ£¬ÕâÊ±¾Íµ½rollback segmentÖĞ²éÕÒ¡£
+ä¸€ä¸ªqueryè¿›å…¥æ‰§è¡Œé˜¶æ®µåï¼Œå°±å°†æœ‰ç¡®å®šçš„SCNï¼Œåœ¨æ‰§è¡Œè¿‡ç¨‹ä¸­åªä¼šæŸ¥æ‰¾observed SCNæ‰€å¯¹åº”çš„data blockï¼ˆèƒ½å¤Ÿè¢«è§‚å¯Ÿåˆ°çš„SCNï¼‰ã€‚å¦‚æœæœ‰çš„data blockæ‰€å¯¹åº”çš„SCNä¸èƒ½è¢«è§‚å¯Ÿåˆ°ï¼Œåˆ™è¡¨ç¤ºè¿™ä¸ªæ•°æ®ä¸ºè„æ•°æ®ï¼Œè¿™æ—¶å°±åˆ°rollback segmentä¸­æŸ¥æ‰¾ã€‚
 </p>
 <p>
-oracleÔÚ´´½¨constraintµÄÊ±ºò»áÍ¬Ê±Îª¸ÃÁĞ½¨Á¢B+Ê÷index,ÀıÈçÔÚ´´½¨Ö÷¼üÊ±½«»á×Ô¶¯´´½¨Ë÷Òı¡£
+oracleåœ¨åˆ›å»ºconstraintçš„æ—¶å€™ä¼šåŒæ—¶ä¸ºè¯¥åˆ—å»ºç«‹B+æ ‘index,ä¾‹å¦‚åœ¨åˆ›å»ºä¸»é”®æ—¶å°†ä¼šè‡ªåŠ¨åˆ›å»ºç´¢å¼•ã€‚
 </p>
 <p>
-dba´´½¨µÄ±íµÄĞÅÏ¢ÔÚDBA<sub>TABLESÖĞÄÜ¹»²éÑ¯£¬ÆäÓàÓÃ»§´´½¨µÄ±íÔÚUSER</sub><sub>TABLESÖĞÄÜ¹»²éÑ¯£»Í¬Ñùindex¿ÉÒÔÔÚDBA</sub><sub>INDEXESºÍUSER</sub><sub>INEXESÖĞ²éÑ¯¡£</sub>
+dbaåˆ›å»ºçš„è¡¨çš„ä¿¡æ¯åœ¨DBA<sub>TABLESä¸­èƒ½å¤ŸæŸ¥è¯¢ï¼Œå…¶ä½™ç”¨æˆ·åˆ›å»ºçš„è¡¨åœ¨USER</sub><sub>TABLESä¸­èƒ½å¤ŸæŸ¥è¯¢ï¼›åŒæ ·indexå¯ä»¥åœ¨DBA</sub><sub>INDEXESå’ŒUSER</sub><sub>INEXESä¸­æŸ¥è¯¢ã€‚</sub>
 </p>
 <p>
-Èı¸ö»·¾³±äÁ¿µÄÉèÖÃ£º
+ä¸‰ä¸ªç¯å¢ƒå˜é‡çš„è®¾ç½®ï¼š
 </p>
 <p>
-ÊÇ·ñÏÖÊµÖ´ĞĞµÄÃüÁîÄÚÈİ
+æ˜¯å¦ç°å®æ‰§è¡Œçš„å‘½ä»¤å†…å®¹
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">show</span> echo  <span style="color: #8ac6f2; font-weight: bold;">set</span> echo <span style="color: #8ac6f2; font-weight: bold;">on</span>/<span style="color: #8ac6f2; font-weight: bold;">off</span>
+<pre class="src src-sql">show echo  set echo on/off
 </pre>
 
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">show</span> feedback
-<span style="color: #8ac6f2; font-weight: bold;">set</span> feedback <span style="color: #8ac6f2; font-weight: bold;">on</span>/<span style="color: #8ac6f2; font-weight: bold;">off</span>
+<pre class="src src-sql">show feedback
+set feedback on/off
 </pre>
 
 
 <p>
-Ò³Ãæ´óĞ¡ÉèÖÃ
+é¡µé¢å¤§å°è®¾ç½®
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">show</span> pagesize  <span style="color: #8ac6f2; font-weight: bold;">set</span> pagesize &#215;&#215;
+<pre class="src src-sql">show pagesize  set pagesize &#215;&#215;
 </pre>
 
 </div>
@@ -626,8 +626,8 @@ dba´´½¨µÄ±íµÄĞÅÏ¢ÔÚDBA<sub>TABLESÖĞÄÜ¹»²éÑ¯£¬ÆäÓàÓÃ»§´´½¨µÄ±íÔÚUSER</sub><sub>TA
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2014-02-07T00:02+0900</p>
-<p class="author">Author: rex.houy</p>
+<p class="date">Date: 2015-01-05T13:21+0800</p>
+<p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
 

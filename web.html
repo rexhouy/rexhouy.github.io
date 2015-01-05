@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="gbk"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-							 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>web</title>
-<meta http-equiv="Content-Type" content="text/html;charset=gbk"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="web"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2014-06-05T23:25+0900"/>
-<meta name="author" content="rex.houy"/>
+<meta name="generated" content="2015-01-05T13:23+0800"/>
+<meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
 <link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
@@ -29,41 +29,46 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 ¼àÌıÆ÷</a></li>
+<li><a href="#sec-1">1 ç›‘å¬å™¨</a></li>
 <li><a href="#sec-2">2 JSTL</a></li>
-<li><a href="#sec-3">3 cache</a></li>
-<li><a href="#sec-4">4 Ò»Ğ©³£ÓÃµÄmetaÉè¶¨£º</a></li>
-<li><a href="#sec-5">5 HTML±êÇ©</a></li>
-<li><a href="#sec-6">6 ×¢ÒâÊÂÏî</a></li>
-<li><a href="#sec-7">7 http</a></li>
-<li><a href="#sec-8">8 other</a></li>
-<li><a href="#sec-9">9 Google web development fundamental</a>
+<li><a href="#sec-3">3 ä¸€äº›å¸¸ç”¨çš„metaè®¾å®šï¼š</a></li>
+<li><a href="#sec-4">4 HTMLæ ‡ç­¾</a></li>
+<li><a href="#sec-5">5 æ³¨æ„äº‹é¡¹</a></li>
+<li><a href="#sec-6">6 http</a></li>
+<li><a href="#sec-7">7 other</a></li>
+<li><a href="#sec-8">8 Google web development fundamental</a>
 <ul>
-<li><a href="#sec-9-1">9.1 Responsive web design</a>
+<li><a href="#sec-8-1">8.1 Responsive web design</a>
 <ul>
-<li><a href="#sec-9-1-1">9.1.1 Set viewport</a></li>
-<li><a href="#sec-9-1-2">9.1.2 Attention</a></li>
-<li><a href="#sec-9-1-3">9.1.3 Media query</a></li>
+<li><a href="#sec-8-1-1">8.1.1 Set viewport</a></li>
+<li><a href="#sec-8-1-2">8.1.2 Attention</a></li>
+<li><a href="#sec-8-1-3">8.1.3 Media query</a></li>
 </ul>
 </li>
-<li><a href="#sec-9-2">9.2 Forms</a>
+<li><a href="#sec-8-2">8.2 Forms</a>
 <ul>
-<li><a href="#sec-9-2-1">9.2.1 Input</a></li>
-<li><a href="#sec-9-2-2">9.2.2 Validation</a></li>
+<li><a href="#sec-8-2-1">8.2.1 Input</a></li>
+<li><a href="#sec-8-2-2">8.2.2 Validation</a></li>
 </ul>
 </li>
-<li><a href="#sec-9-3">9.3 Images</a>
+<li><a href="#sec-8-3">8.3 Images</a>
 <ul>
-<li><a href="#sec-9-3-1">9.3.1 Img</a></li>
-<li><a href="#sec-9-3-2">9.3.2 Video</a></li>
+<li><a href="#sec-8-3-1">8.3.1 Img</a></li>
+<li><a href="#sec-8-3-2">8.3.2 Video</a></li>
 </ul>
 </li>
-<li><a href="#sec-9-4">9.4 Performance</a>
+<li><a href="#sec-8-4">8.4 Performance</a>
 <ul>
-<li><a href="#sec-9-4-1">9.4.1 Render page</a></li>
-<li><a href="#sec-9-4-2">9.4.2 Critical path</a></li>
-<li><a href="#sec-9-4-3">9.4.3 Todos to gain performance</a></li>
-<li><a href="#sec-9-4-4">9.4.4 Event</a></li>
+<li><a href="#sec-8-4-1">8.4.1 Render page</a></li>
+<li><a href="#sec-8-4-2">8.4.2 Critical path</a></li>
+<li><a href="#sec-8-4-3">8.4.3 Todos to gain performance</a></li>
+<li><a href="#sec-8-4-4">8.4.4 Event</a></li>
+</ul>
+</li>
+<li><a href="#sec-8-5">8.5 Caching</a>
+<ul>
+<li><a href="#sec-8-5-1">8.5.1 ETags</a></li>
+<li><a href="#sec-8-5-2">8.5.2 Cache-Control</a></li>
 </ul>
 </li>
 </ul>
@@ -73,26 +78,27 @@
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> ¼àÌıÆ÷</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> ç›‘å¬å™¨</h2>
 <div class="outline-text-2" id="text-1">
 
-<p>1£®ServletContextListener£ºÓÃÓÚ¼àÌıWEB Ó¦ÓÃÆô¶¯ºÍÏú»ÙµÄÊÂ¼ş£¬¼àÌıÆ÷ÀàĞèÒªÊµÏÖjavax.servlet.ServletContextListener ½Ó¿Ú¡£
+<p>1ï¼ServletContextListenerï¼šç”¨äºç›‘å¬WEB åº”ç”¨å¯åŠ¨å’Œé”€æ¯çš„äº‹ä»¶ï¼Œç›‘å¬å™¨ç±»éœ€è¦å®ç°javax.servlet.ServletContextListener æ¥å£ã€‚
 </p>
 <p>
-2£®ServletContextAttributeListener£ºÓÃÓÚ¼àÌıWEBÓ¦ÓÃÊôĞÔ¸Ä±äµÄÊÂ¼ş£¬°üÀ¨£ºÔö¼ÓÊôĞÔ¡¢É¾³ıÊôĞÔ¡¢ĞŞ¸ÄÊôĞÔ£¬¼àÌıÆ÷ÀàĞèÒªÊµÏÖjavax.servlet.ServletContextAttributeListener½Ó¿Ú¡£
+2ï¼ServletContextAttributeListenerï¼šç”¨äºç›‘å¬WEBåº”ç”¨å±æ€§æ”¹å˜çš„äº‹ä»¶ï¼ŒåŒ…æ‹¬ï¼šå¢åŠ å±æ€§ã€åˆ é™¤å±æ€§ã€ä¿®æ”¹å±æ€§ï¼Œç›‘å¬å™¨ç±»éœ€è¦å®ç°javax.servlet.ServletContextAttributeListeneræ¥å£ã€‚
 </p>
 <p>
-3£®HttpSessionListener£ºÓÃÓÚ¼àÌıSession¶ÔÏóµÄ´´½¨ºÍÏú»Ù£¬¼àÌıÆ÷ÀàĞèÒªÊµÏÖjavax.servlet.http.HttpSessionListener½Ó¿Ú»òÕßjavax.servlet.http.HttpSessionActivationListener½Ó¿Ú£¬»òÕßÁ½¸ö¶¼ÊµÏÖ¡£
+3ï¼HttpSessionListenerï¼šç”¨äºç›‘å¬Sessionå¯¹è±¡çš„åˆ›å»ºå’Œé”€æ¯ï¼Œç›‘å¬å™¨ç±»éœ€è¦å®ç°javax.servlet.http.HttpSessionListeneræ¥å£æˆ–è€…javax.servlet.http.HttpSessionActivationListeneræ¥å£ï¼Œæˆ–è€…ä¸¤ä¸ªéƒ½å®ç°ã€‚
 </p>
 <p>
-4£®HttpSessionActivationListener£ºÓÃÓÚ¼àÌıSession¶ÔÏóµÄ¶Û»¯/»î»¯ÊÂ¼ş£¬¼àÌıÆ÷ÀàĞèÒªÊµÏÖjavax.servlet.http.HttpSessionListener½Ó¿Ú»òÕßjavax.servlet.http.HttpSessionActivationListener½Ó¿Ú£¬»òÕßÁ½¸ö¶¼ÊµÏÖ¡£
+4ï¼HttpSessionActivationListenerï¼šç”¨äºç›‘å¬Sessionå¯¹è±¡çš„é’åŒ–/æ´»åŒ–äº‹ä»¶ï¼Œç›‘å¬å™¨ç±»éœ€è¦å®ç°javax.servlet.http.HttpSessionListeneræ¥å£æˆ–è€…javax.servlet.http.HttpSessionActivationListeneræ¥å£ï¼Œæˆ–è€…ä¸¤ä¸ªéƒ½å®ç°ã€‚
 </p>
 <p>
-5£®HttpSessionAttributeListener£ºÓÃÓÚ¼àÌıSession¶ÔÏóÊôĞÔµÄ¸Ä±äÊÂ¼ş£¬¼àÌıÆ÷ÀàĞèÒªÊµÏÖjavax.servlet.http.HttpSessionAttributeListener½Ó¿Ú¡£
+5ï¼HttpSessionAttributeListenerï¼šç”¨äºç›‘å¬Sessionå¯¹è±¡å±æ€§çš„æ”¹å˜äº‹ä»¶ï¼Œç›‘å¬å™¨ç±»éœ€è¦å®ç°javax.servlet.http.HttpSessionAttributeListeneræ¥å£ã€‚
 </p>
 <p>
-6£®¼àÌıÆ÷µÄ²¿ÊğÔÚweb.xmlÎÄ¼şÖĞÅäÖÃ£¬ÔÚÅäÖÃÎÄ¼şÖĞ£¬ËüµÄÎ»ÖÃÓ¦¸ÃÔÚ¹ıÂËÆ÷µÄºóÃæServletµÄÇ°Ãæ.
+6ï¼ç›‘å¬å™¨çš„éƒ¨ç½²åœ¨web.xmlæ–‡ä»¶ä¸­é…ç½®ï¼Œåœ¨é…ç½®æ–‡ä»¶ä¸­ï¼Œå®ƒçš„ä½ç½®åº”è¯¥åœ¨è¿‡æ»¤å™¨çš„åé¢Servletçš„å‰é¢.
 </p>
+
 </div>
 
 </div>
@@ -104,35 +110,35 @@
 
 
 
-<pre class="src src-jsp">&lt;%@ taglib prefix=<span style="color: #95e454;">"fn"</span> uri=<span style="color: #95e454;">"http://java.sun.com/jsp/jstl/functions"</span> %&gt;
+<pre class="src src-jsp">&lt;%@ taglib prefix=<span style="color: #2aa198;">"fn"</span> uri=<span style="color: #2aa198;">"http://java.sun.com/jsp/jstl/functions"</span> %&gt;
 </pre>
 
 <p>
-ÏÂÃæÊÇJSTLÖĞ×Ô´øµÄ·½·¨ÁĞ±íÒÔ¼°ÆäÃèÊö:
+ä¸‹é¢æ˜¯JSTLä¸­è‡ªå¸¦çš„æ–¹æ³•åˆ—è¡¨ä»¥åŠå…¶æè¿°:
 </p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" /><col class="left" />
 </colgroup>
 <thead>
-<tr><th scope="col" class="left">º¯ÊıÃû</th><th scope="col" class="left">º¯ÊıËµÃ÷</th><th scope="col" class="left">Ê¹ÓÃ¾ÙÀı</th></tr>
+<tr><th scope="col" class="left">å‡½æ•°å</th><th scope="col" class="left">å‡½æ•°è¯´æ˜</th><th scope="col" class="left">ä½¿ç”¨ä¸¾ä¾‹</th></tr>
 </thead>
 <tbody>
-<tr><td class="left">fn:contains</td><td class="left">ÅĞ¶Ï×Ö·û´®ÊÇ·ñ°üº¬ÁíÍâÒ»¸ö×Ö·û´®</td><td class="left">&lt;c:if test="${fn:contains(name, searchString)}"&gt;</td></tr>
-<tr><td class="left">fn:containsIgnoreCase</td><td class="left">ÅĞ¶Ï×Ö·û´®ÊÇ·ñ°üº¬ÁíÍâÒ»¸ö×Ö·û´®(´óĞ¡Ğ´ÎŞ¹Ø)</td><td class="left">&lt;c:if test="${fn:containsIgnoreCase(name, searchString)}"&gt;</td></tr>
-<tr><td class="left">fn:endsWith</td><td class="left">ÅĞ¶Ï×Ö·û´®ÊÇ·ñÒÔÁíÍâ×Ö·û´®½áÊø</td><td class="left">&lt;c:if test="${fn:endsWith(filename, ".txt")}"&gt;</td></tr>
-<tr><td class="left">fn:escapeXml</td><td class="left">°ÑÒ»Ğ©×Ö·û×ª³ÉXML±íÊ¾£¬ÀıÈç &lt;×Ö·ûÓ¦¸Ã×ªÎª&amp;lt;</td><td class="left">${fn:escapeXml(param:info)}</td></tr>
-<tr><td class="left">fn:indexOf</td><td class="left">×Ó×Ö·û´®ÔÚÄ¸×Ö·û´®ÖĞ³öÏÖµÄÎ»ÖÃ</td><td class="left">${fn:indexOf(name, "-")}</td></tr>
-<tr><td class="left">fn:join</td><td class="left">½«Êı×éÖĞµÄÊı¾İÁªºÏ³ÉÒ»¸öĞÂ×Ö·û´®£¬²¢Ê¹ÓÃÖ¸¶¨×Ö·û¸ñ¿ª</td><td class="left">${fn:join(array, ";")}</td></tr>
-<tr><td class="left">fn:length</td><td class="left">»ñÈ¡×Ö·û´®µÄ³¤¶È£¬»òÕßÊı×éµÄ´óĞ¡</td><td class="left">${fn:length(shoppingCart.products)}</td></tr>
-<tr><td class="left">fn:replace</td><td class="left">Ìæ»»×Ö·û´®ÖĞÖ¸¶¨µÄ×Ö·û</td><td class="left">${fn:replace(text, "-", "&amp;#149;")}</td></tr>
-<tr><td class="left">fn:split</td><td class="left">°Ñ×Ö·û´®°´ÕÕÖ¸¶¨×Ö·ûÇĞ·Ö</td><td class="left">${fn:split(customerNames, ";")}</td></tr>
-<tr><td class="left">fn:startsWith</td><td class="left">ÅĞ¶Ï×Ö·û´®ÊÇ·ñÒÔÄ³¸ö×Ó´®¿ªÊ¼</td><td class="left">&lt;c:if test="${fn:startsWith(product.id, "100-")}"&gt;</td></tr>
-<tr><td class="left">fn:substring</td><td class="left">»ñÈ¡×Ó´®</td><td class="left">${fn:substring(zip, 6, -1)}</td></tr>
-<tr><td class="left">fn:substringAfter</td><td class="left">»ñÈ¡´ÓÄ³¸ö×Ö·ûËùÔÚÎ»ÖÃ¿ªÊ¼µÄ×Ó´®</td><td class="left">${fn:substringAfter(zip, "-")}</td></tr>
-<tr><td class="left">fn:substringBefore</td><td class="left">»ñÈ¡´Ó¿ªÊ¼µ½Ä³¸ö×Ö·ûËùÔÚÎ»ÖÃµÄ×Ó´®</td><td class="left">${fn:substringBefore(zip, "-")}</td></tr>
-<tr><td class="left">fn:toLowerCase</td><td class="left">×ªÎªĞ¡Ğ´</td><td class="left">${fn.toLowerCase(product.name)}</td></tr>
-<tr><td class="left">fn:toUpperCase</td><td class="left">×ªÎª´óĞ´×Ö·û</td><td class="left">${fn.UpperCase(product.name)}</td></tr>
-<tr><td class="left">fn:trim</td><td class="left">È¥³ı×Ö·û´®Ç°ºóµÄ¿Õ¸ñ</td><td class="left">${fn.trim(name)}</td></tr>
+<tr><td class="left">fn:contains</td><td class="left">åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦åŒ…å«å¦å¤–ä¸€ä¸ªå­—ç¬¦ä¸²</td><td class="left">&lt;c:if test="${fn:contains(name, searchString)}"&gt;</td></tr>
+<tr><td class="left">fn:containsIgnoreCase</td><td class="left">åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦åŒ…å«å¦å¤–ä¸€ä¸ªå­—ç¬¦ä¸²(å¤§å°å†™æ— å…³)</td><td class="left">&lt;c:if test="${fn:containsIgnoreCase(name, searchString)}"&gt;</td></tr>
+<tr><td class="left">fn:endsWith</td><td class="left">åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦ä»¥å¦å¤–å­—ç¬¦ä¸²ç»“æŸ</td><td class="left">&lt;c:if test="${fn:endsWith(filename, ".txt")}"&gt;</td></tr>
+<tr><td class="left">fn:escapeXml</td><td class="left">æŠŠä¸€äº›å­—ç¬¦è½¬æˆXMLè¡¨ç¤ºï¼Œä¾‹å¦‚ &lt;å­—ç¬¦åº”è¯¥è½¬ä¸º&amp;lt;</td><td class="left">${fn:escapeXml(param:info)}</td></tr>
+<tr><td class="left">fn:indexOf</td><td class="left">å­å­—ç¬¦ä¸²åœ¨æ¯å­—ç¬¦ä¸²ä¸­å‡ºç°çš„ä½ç½®</td><td class="left">${fn:indexOf(name, "-")}</td></tr>
+<tr><td class="left">fn:join</td><td class="left">å°†æ•°ç»„ä¸­çš„æ•°æ®è”åˆæˆä¸€ä¸ªæ–°å­—ç¬¦ä¸²ï¼Œå¹¶ä½¿ç”¨æŒ‡å®šå­—ç¬¦æ ¼å¼€</td><td class="left">${fn:join(array, ";")}</td></tr>
+<tr><td class="left">fn:length</td><td class="left">è·å–å­—ç¬¦ä¸²çš„é•¿åº¦ï¼Œæˆ–è€…æ•°ç»„çš„å¤§å°</td><td class="left">${fn:length(shoppingCart.products)}</td></tr>
+<tr><td class="left">fn:replace</td><td class="left">æ›¿æ¢å­—ç¬¦ä¸²ä¸­æŒ‡å®šçš„å­—ç¬¦</td><td class="left">${fn:replace(text, "-", "&amp;#149;")}</td></tr>
+<tr><td class="left">fn:split</td><td class="left">æŠŠå­—ç¬¦ä¸²æŒ‰ç…§æŒ‡å®šå­—ç¬¦åˆ‡åˆ†</td><td class="left">${fn:split(customerNames, ";")}</td></tr>
+<tr><td class="left">fn:startsWith</td><td class="left">åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦ä»¥æŸä¸ªå­ä¸²å¼€å§‹</td><td class="left">&lt;c:if test="${fn:startsWith(product.id, "100-")}"&gt;</td></tr>
+<tr><td class="left">fn:substring</td><td class="left">è·å–å­ä¸²</td><td class="left">${fn:substring(zip, 6, -1)}</td></tr>
+<tr><td class="left">fn:substringAfter</td><td class="left">è·å–ä»æŸä¸ªå­—ç¬¦æ‰€åœ¨ä½ç½®å¼€å§‹çš„å­ä¸²</td><td class="left">${fn:substringAfter(zip, "-")}</td></tr>
+<tr><td class="left">fn:substringBefore</td><td class="left">è·å–ä»å¼€å§‹åˆ°æŸä¸ªå­—ç¬¦æ‰€åœ¨ä½ç½®çš„å­ä¸²</td><td class="left">${fn:substringBefore(zip, "-")}</td></tr>
+<tr><td class="left">fn:toLowerCase</td><td class="left">è½¬ä¸ºå°å†™</td><td class="left">${fn.toLowerCase(product.name)}</td></tr>
+<tr><td class="left">fn:toUpperCase</td><td class="left">è½¬ä¸ºå¤§å†™å­—ç¬¦</td><td class="left">${fn.UpperCase(product.name)}</td></tr>
+<tr><td class="left">fn:trim</td><td class="left">å»é™¤å­—ç¬¦ä¸²å‰åçš„ç©ºæ ¼</td><td class="left">${fn.trim(name)}</td></tr>
 </tbody>
 </table>
 
@@ -143,171 +149,151 @@
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> cache</h2>
+<h2 id="sec-3"><span class="section-number-2">3</span> ä¸€äº›å¸¸ç”¨çš„metaè®¾å®šï¼š</h2>
 <div class="outline-text-2" id="text-3">
 
-<p>ÉèÖÃhttpÍ·ÖĞµÄexpiresºÍcashe-controlÊôĞÔ¶¨ÒåhtmlÒ³ÃæµÄ»º´æÊ±¼ä£¬
-</p>
-
-
-<pre class="src src-html">&lt;<span style="color: #cae682;">meta</span> <span style="color: #cae682;">http-equiv</span>=<span style="color: #95e454;">"Cache-Control"</span> <span style="color: #cae682;">content</span>=<span style="color: #95e454;">"max-age=7200"</span> /&gt;
-&lt;<span style="color: #cae682;">meta</span> <span style="color: #cae682;">http-equiv</span>=<span style="color: #95e454;">"Expires"</span> <span style="color: #cae682;">content</span>=<span style="color: #95e454;">"Mon, 20 Jul 2009 23:00:00 GMT"</span> /&gt;
-</pre>
 
 <p>
-cache-controlÊÇÔÚhttp1.1¿ªÊ¼Ö§³ÖµÄ£¬ÄÜ¹»¸ü¾«È·µÄ¼ÇÂ¼Ê±¼ä£¬×îºÃÁ½¸öÍ¬Ê±Ê¹ÓÃ£¬ÒòÎª²¿·Öä¯ÀÀÆ÷²»Ö§³Öhttp1.1.´ËÍâÉèÖÃÖ®ºóÖ»ÄÜ±£Ö¤¶Ô¸ÃhtmlÒ³ÃæÓĞĞ§£¬¶øÒ³ÃæÖĞµÄÆäËüÍ¼Æ¬scriptµÈÔòÎŞĞ§£¬Èç¹ûÒªÉèÖÃÄÇĞ©ÔªËØµÄ¹ıÆÚÊ±¼äÔòĞèÒªÍ¨¹ıapacheµÄmod<sub>expireÄ£¿é½øĞĞÉèÖÃ¡£ĞèÒªÊ¹ÓÃapache·şÎñÆ÷²¢°²×°mod</sub><sub>expiresÄ£¿é£¬ÔÚhttpd</sub>.confÖĞ½øĞĞÉèÖÃ¡£Èç¹ûÉèÖÃÁË¹ıÆÚÊ±¼äµÄ×é½¨ĞèÒª¸üĞÂÔò¸ü¸ÄĞèÒª¸üĞÂµÄ×é½¨µÄÃû³Æ£¬×îºÃÔÚ¸Ã×é½¨Ãû³ÆÖĞ¼ÓÉÏÈÕÆÚ»ò°æ±¾ºÅ£¬ĞŞ¸ÄÊ±Ö±½ÓĞŞ¸Ä°æ±¾ºÅ¡£
+å‘æœç´¢å¼•æ“è¯´æ˜ä½ çš„ç½‘é¡µçš„å…³é”®è¯ï¼›
 </p>
+
+
+<pre class="src src-html">&lt;<span style="color: #b58900;">meta</span> <span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"KEYWords"</span> <span style="color: #6c71c4;">contect</span>=<span style="color: #2aa198;">""</span>&gt;
+</pre>
+
+
+<p>
+å‘Šè¯‰æœç´¢å¼•æ“ä½ çš„ç«™ç‚¹çš„ä¸»è¦å†…å®¹ï¼›
+</p>
+
+
+<pre class="src src-html">&lt;<span style="color: #b58900;">meta</span> <span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"DEscription"</span> <span style="color: #6c71c4;">contect</span>=<span style="color: #2aa198;">""</span>&gt;
+</pre>
+
+
+<p>
+å‘Šè¯‰æœç´¢å¼•æ“ä½ çš„ç«™ç‚¹çš„åˆ¶ä½œçš„ä½œè€…ï¼›
+</p>
+
+
+<pre class="src src-html">&lt;<span style="color: #b58900;">meta</span> <span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"Author"</span> <span style="color: #6c71c4;">contect</span>=<span style="color: #2aa198;">"&#20320;&#30340;&#22995;&#21517;"</span>&gt;
+</pre>
+
+
+<p>
+è®¾å®šæœç´¢å¼•æ“è§„åˆ™ï¼š
+</p>
+<p>
+ã€€ã€€å…¶ä¸­çš„å±æ€§è¯´æ˜å¦‚ä¸‹ï¼š
+</p>
+<p>
+ã€€ã€€è®¾å®šä¸ºallï¼šæ–‡ä»¶å°†è¢«æ£€ç´¢ï¼Œä¸”é¡µé¢ä¸Šçš„é“¾æ¥å¯ä»¥è¢«æŸ¥è¯¢ï¼›
+</p>
+<p>
+ã€€ã€€è®¾å®šä¸ºnoneï¼šæ–‡ä»¶å°†ä¸è¢«æ£€ç´¢ï¼Œä¸”é¡µé¢ä¸Šçš„é“¾æ¥ä¸å¯ä»¥è¢«æŸ¥è¯¢ï¼›
+</p>
+<p>
+ã€€ã€€è®¾å®šä¸ºindexï¼šæ–‡ä»¶å°†è¢«æ£€ç´¢ï¼›
+</p>
+<p>
+ã€€ã€€è®¾å®šä¸ºfollowï¼šé¡µé¢ä¸Šçš„é“¾æ¥å¯ä»¥è¢«æŸ¥è¯¢ï¼›
+</p>
+<p>
+ã€€ã€€è®¾å®šä¸ºnoindexï¼šæ–‡ä»¶å°†ä¸è¢«æ£€ç´¢ï¼Œä½†é¡µé¢ä¸Šçš„é“¾æ¥å¯ä»¥è¢«æŸ¥è¯¢ï¼›
+</p>
+<p>
+ã€€ã€€è®¾å®šä¸ºnofollowï¼šæ–‡ä»¶å°†ä¸è¢«æ£€ç´¢ï¼Œé¡µé¢ä¸Šçš„é“¾æ¥å¯ä»¥è¢«æŸ¥è¯¢ã€‚
+</p>
+
+
+<pre class="src src-html">&lt;<span style="color: #b58900;">meta</span> <span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"Robots"</span> contect= <span style="color: #2aa198;">"all|none|index|noindex|follow|nofollow"</span>&gt;
+</pre>
+
+
+<p>
+ç”¨ä»¥è¯´æ˜ä¸»é¡µåˆ¶ä½œæ‰€ä½¿ç”¨çš„æ–‡å­—ä»¥åŠè¯­è¨€
+</p>
+
+
+<pre class="src src-html">&lt;<span style="color: #b58900;">meta</span> <span style="color: #6c71c4;">http-equiv</span>=<span style="color: #2aa198;">"Content-Type"</span> <span style="color: #6c71c4;">contect</span>=<span style="color: #2aa198;">"text/html"</span>;charset=gb_2312-80<span style="color: #2aa198;">"&gt;</span>
+<span style="color: #2aa198;">&lt;meta http-equiv="</span>Content-Language<span style="color: #2aa198;">" contect="</span>zh-CN<span style="color: #2aa198;">"&gt;</span>
+</pre>
+
+
+<p>
+å®šæ—¶è®©ç½‘é¡µåœ¨æŒ‡å®šçš„æ—¶é—´nå†…ï¼Œè·³è½¬åˆ°é¡µé¢<a href="http://yourlink">http://yourlink</a>ï¼›
+</p>
+
+
+<pre class="src src-html">&lt;<span style="color: #b58900;">meta</span> <span style="color: #6c71c4;">http-equiv</span>=<span style="color: #2aa198;">"Refresh"</span> <span style="color: #6c71c4;">contect</span>=<span style="color: #2aa198;">"n;url=http://yourlink"</span>&gt;
+</pre>
+
+
+<p>
+å¯ä»¥ç”¨äºè®¾å®šç½‘é¡µçš„åˆ°æœŸæ—¶é—´ï¼Œä¸€æ—¦è¿‡æœŸåˆ™å¿…é¡»åˆ°æœåŠ¡å™¨ä¸Šé‡æ–°è°ƒç”¨ã€‚éœ€è¦æ³¨æ„çš„æ˜¯å¿…é¡»ä½¿ç”¨GMTæ—¶é—´æ ¼å¼ï¼›
+</p>
+
+
+<pre class="src src-html">&lt;<span style="color: #b58900;">meta</span> <span style="color: #6c71c4;">http-equiv</span>=<span style="color: #2aa198;">"Expires"</span> <span style="color: #6c71c4;">contect</span>=<span style="color: #2aa198;">"Mon,12 May 2001 00:20:00 GMT"</span>&gt;
+</pre>
+
+
+<p>
+ç”¨äºè®¾å®šç¦æ­¢æµè§ˆå™¨ä»æœ¬åœ°æœºçš„ç¼“å­˜ä¸­è°ƒé˜…é¡µé¢å†…å®¹ï¼Œè®¾å®šåä¸€æ—¦ç¦»å¼€ç½‘é¡µå°±æ— æ³•ä»Cacheä¸­å†è°ƒå‡ºï¼›
+</p>
+
+
+<pre class="src src-html">&lt;<span style="color: #b58900;">meta</span> <span style="color: #6c71c4;">http-equiv</span>=<span style="color: #2aa198;">"Pragma"</span> <span style="color: #6c71c4;">contect</span>=<span style="color: #2aa198;">"no-cache"</span>&gt;
+</pre>
+
+
+<p>
+cookieè®¾å®šï¼Œå¦‚æœç½‘é¡µè¿‡æœŸï¼Œå­˜ç›˜çš„cookieå°†è¢«åˆ é™¤ã€‚éœ€è¦æ³¨æ„çš„ä¹Ÿæ˜¯å¿…é¡»ä½¿ç”¨GMTæ—¶é—´æ ¼å¼ï¼›
+</p>
+
+
+<pre class="src src-html">&lt;<span style="color: #b58900;">meta</span> <span style="color: #6c71c4;">http-equiv</span>=<span style="color: #2aa198;">"set-cookie"</span> <span style="color: #6c71c4;">contect</span>=<span style="color: #2aa198;">"Mon,12 May 2001 00:20:00 GMT"</span>&gt;
+</pre>
+
+
+<p>
+ç½‘é¡µç­‰çº§è¯„å®šï¼Œåœ¨IEçš„interneté€‰é¡¹ä¸­æœ‰ä¸€é¡¹å†…å®¹è®¾ç½®ï¼Œå¯ä»¥é˜²æ­¢æµè§ˆä¸€äº›å—é™åˆ¶çš„ç½‘ç«™ï¼Œè€Œç½‘ç«™çš„é™åˆ¶çº§åˆ«å°±æ˜¯é€šè¿‡metaå±æ€§æ¥è®¾ç½®çš„ï¼›
+</p>
+
+
+<pre class="src src-html">&lt;<span style="color: #b58900;">meta</span> <span style="color: #6c71c4;">http-equiv</span>=<span style="color: #2aa198;">"Pics-label"</span> <span style="color: #6c71c4;">contect</span>=<span style="color: #2aa198;">""</span>&gt;
+</pre>
+
+
+<p>
+å¼ºåˆ¶é¡µé¢åœ¨å½“å‰çª—å£ä¸­ä»¥ç‹¬ç«‹é¡µé¢æ˜¾ç¤ºï¼Œå¯ä»¥é˜²æ­¢è‡ªå·±çš„ç½‘é¡µè¢«åˆ«äººå½“ä½œä¸€ä¸ªframeé¡µè°ƒç”¨ï¼›
+</p>
+
+
+<pre class="src src-html">&lt;<span style="color: #b58900;">meta</span> <span style="color: #6c71c4;">http-equiv</span>=<span style="color: #2aa198;">"windows-Target"</span> <span style="color: #6c71c4;">contect</span>=<span style="color: #2aa198;">"_top"</span>&gt;
+</pre>
+
+
 
 </div>
 
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Ò»Ğ©³£ÓÃµÄmetaÉè¶¨£º</h2>
+<h2 id="sec-4"><span class="section-number-2">4</span> HTMLæ ‡ç­¾</h2>
 <div class="outline-text-2" id="text-4">
 
 
-<p>
-ÏòËÑË÷ÒıÇæËµÃ÷ÄãµÄÍøÒ³µÄ¹Ø¼ü´Ê£»
-</p>
 
 
-<pre class="src src-html">&lt;<span style="color: #cae682;">meta</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"KEYWords"</span> <span style="color: #cae682;">contect</span>=<span style="color: #95e454;">""</span>&gt;
-</pre>
-
-
-<p>
-¸æËßËÑË÷ÒıÇæÄãµÄÕ¾µãµÄÖ÷ÒªÄÚÈİ£»
-</p>
-
-
-<pre class="src src-html">&lt;<span style="color: #cae682;">meta</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"DEscription"</span> <span style="color: #cae682;">contect</span>=<span style="color: #95e454;">""</span>&gt;
-</pre>
-
-
-<p>
-¸æËßËÑË÷ÒıÇæÄãµÄÕ¾µãµÄÖÆ×÷µÄ×÷Õß£»
-</p>
-
-
-<pre class="src src-html">&lt;<span style="color: #cae682;">meta</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"Author"</span> <span style="color: #cae682;">contect</span>=<span style="color: #95e454;">"&#20320;&#30340;&#22995;&#21517;"</span>&gt;
-</pre>
-
-
-<p>
-Éè¶¨ËÑË÷ÒıÇæ¹æÔò£º
-</p>
-<p>
-¡¡¡¡ÆäÖĞµÄÊôĞÔËµÃ÷ÈçÏÂ£º
-</p>
-<p>
-¡¡¡¡Éè¶¨Îªall£ºÎÄ¼ş½«±»¼ìË÷£¬ÇÒÒ³ÃæÉÏµÄÁ´½Ó¿ÉÒÔ±»²éÑ¯£»
-</p>
-<p>
-¡¡¡¡Éè¶¨Îªnone£ºÎÄ¼ş½«²»±»¼ìË÷£¬ÇÒÒ³ÃæÉÏµÄÁ´½Ó²»¿ÉÒÔ±»²éÑ¯£»
-</p>
-<p>
-¡¡¡¡Éè¶¨Îªindex£ºÎÄ¼ş½«±»¼ìË÷£»
-</p>
-<p>
-¡¡¡¡Éè¶¨Îªfollow£ºÒ³ÃæÉÏµÄÁ´½Ó¿ÉÒÔ±»²éÑ¯£»
-</p>
-<p>
-¡¡¡¡Éè¶¨Îªnoindex£ºÎÄ¼ş½«²»±»¼ìË÷£¬µ«Ò³ÃæÉÏµÄÁ´½Ó¿ÉÒÔ±»²éÑ¯£»
-</p>
-<p>
-¡¡¡¡Éè¶¨Îªnofollow£ºÎÄ¼ş½«²»±»¼ìË÷£¬Ò³ÃæÉÏµÄÁ´½Ó¿ÉÒÔ±»²éÑ¯¡£
-</p>
-
-
-<pre class="src src-html">&lt;<span style="color: #cae682;">meta</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"Robots"</span> contect= <span style="color: #95e454;">"all|none|index|noindex|follow|nofollow"</span>&gt;
-</pre>
-
-
-<p>
-ÓÃÒÔËµÃ÷Ö÷Ò³ÖÆ×÷ËùÊ¹ÓÃµÄÎÄ×ÖÒÔ¼°ÓïÑÔ
-</p>
-
-
-<pre class="src src-html">&lt;<span style="color: #cae682;">meta</span> <span style="color: #cae682;">http-equiv</span>=<span style="color: #95e454;">"Content-Type"</span> <span style="color: #cae682;">contect</span>=<span style="color: #95e454;">"text/html"</span>;charset=gb_2312-80<span style="color: #95e454;">"&gt;</span>
-<span style="color: #95e454;">&lt;meta http-equiv="</span>Content-Language<span style="color: #95e454;">" contect="</span>zh-CN<span style="color: #95e454;">"&gt;</span>
-</pre>
-
-
-<p>
-¶¨Ê±ÈÃÍøÒ³ÔÚÖ¸¶¨µÄÊ±¼änÄÚ£¬Ìø×ªµ½Ò³Ãæ<a href="http://yourlink">http://yourlink</a>£»
-</p>
-
-
-<pre class="src src-html">&lt;<span style="color: #cae682;">meta</span> <span style="color: #cae682;">http-equiv</span>=<span style="color: #95e454;">"Refresh"</span> <span style="color: #cae682;">contect</span>=<span style="color: #95e454;">"n;url=http://yourlink"</span>&gt;
-</pre>
-
-
-<p>
-¿ÉÒÔÓÃÓÚÉè¶¨ÍøÒ³µÄµ½ÆÚÊ±¼ä£¬Ò»µ©¹ıÆÚÔò±ØĞëµ½·şÎñÆ÷ÉÏÖØĞÂµ÷ÓÃ¡£ĞèÒª×¢ÒâµÄÊÇ±ØĞëÊ¹ÓÃGMTÊ±¼ä¸ñÊ½£»
-</p>
-
-
-<pre class="src src-html">&lt;<span style="color: #cae682;">meta</span> <span style="color: #cae682;">http-equiv</span>=<span style="color: #95e454;">"Expires"</span> <span style="color: #cae682;">contect</span>=<span style="color: #95e454;">"Mon,12 May 2001 00:20:00 GMT"</span>&gt;
-</pre>
-
-
-<p>
-ÓÃÓÚÉè¶¨½ûÖ¹ä¯ÀÀÆ÷´Ó±¾µØ»úµÄ»º´æÖĞµ÷ÔÄÒ³ÃæÄÚÈİ£¬Éè¶¨ºóÒ»µ©Àë¿ªÍøÒ³¾ÍÎŞ·¨´ÓCacheÖĞÔÙµ÷³ö£»
-</p>
-
-
-<pre class="src src-html">&lt;<span style="color: #cae682;">meta</span> <span style="color: #cae682;">http-equiv</span>=<span style="color: #95e454;">"Pragma"</span> <span style="color: #cae682;">contect</span>=<span style="color: #95e454;">"no-cache"</span>&gt;
-</pre>
-
-
-<p>
-cookieÉè¶¨£¬Èç¹ûÍøÒ³¹ıÆÚ£¬´æÅÌµÄcookie½«±»É¾³ı¡£ĞèÒª×¢ÒâµÄÒ²ÊÇ±ØĞëÊ¹ÓÃGMTÊ±¼ä¸ñÊ½£»
-</p>
-
-
-<pre class="src src-html">&lt;<span style="color: #cae682;">meta</span> <span style="color: #cae682;">http-equiv</span>=<span style="color: #95e454;">"set-cookie"</span> <span style="color: #cae682;">contect</span>=<span style="color: #95e454;">"Mon,12 May 2001 00:20:00 GMT"</span>&gt;
-</pre>
-
-
-<p>
-ÍøÒ³µÈ¼¶ÆÀ¶¨£¬ÔÚIEµÄinternetÑ¡ÏîÖĞÓĞÒ»ÏîÄÚÈİÉèÖÃ£¬¿ÉÒÔ·ÀÖ¹ä¯ÀÀÒ»Ğ©ÊÜÏŞÖÆµÄÍøÕ¾£¬¶øÍøÕ¾µÄÏŞÖÆ¼¶±ğ¾ÍÊÇÍ¨¹ımetaÊôĞÔÀ´ÉèÖÃµÄ£»
-</p>
-
-
-<pre class="src src-html">&lt;<span style="color: #cae682;">meta</span> <span style="color: #cae682;">http-equiv</span>=<span style="color: #95e454;">"Pics-label"</span> <span style="color: #cae682;">contect</span>=<span style="color: #95e454;">""</span>&gt;
-</pre>
-
-
-<p>
-Ç¿ÖÆÒ³ÃæÔÚµ±Ç°´°¿ÚÖĞÒÔ¶ÀÁ¢Ò³ÃæÏÔÊ¾£¬¿ÉÒÔ·ÀÖ¹×Ô¼ºµÄÍøÒ³±»±ğÈËµ±×÷Ò»¸öframeÒ³µ÷ÓÃ£»
-</p>
-
-
-<pre class="src src-html">&lt;<span style="color: #cae682;">meta</span> <span style="color: #cae682;">http-equiv</span>=<span style="color: #95e454;">"windows-Target"</span> <span style="color: #cae682;">contect</span>=<span style="color: #95e454;">"_top"</span>&gt;
-</pre>
-
-
-
-</div>
-
-</div>
-
-<div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> HTML±êÇ©</h2>
-<div class="outline-text-2" id="text-5">
-
-
-
-
-<pre class="src src-html">&lt;<span style="color: #cae682;">cite</span>&gt;<span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">&#24341;&#29992; </span><span style="color: #99968b;">--&gt;</span>
-&lt;<span style="color: #cae682;">blockquote</span>&gt;<span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">&#25991;&#23383;&#35828;&#26126;&#27573;&#33853; </span><span style="color: #99968b;">--&gt;</span>
-&lt;<span style="color: #cae682;">optgroup</span>&gt;<span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">&#19979;&#25289;&#26694;&#20998;&#32452; </span><span style="color: #99968b;">--&gt;</span>
-&lt;<span style="color: #cae682;">acronym</span>&gt;<span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">&#29992;&#20110;&#23450;&#20041;&#25110;&#35299;&#37322;&#19968;&#32452;&#25991;&#23383;&#65292;&#38656;&#35201;&#20351;&#29992;title&#23646;&#24615;&#20316;&#20026;&#35299;&#37322;&#20869;&#23481; </span><span style="color: #99968b;">--&gt;</span>
-&lt;<span style="color: #cae682;">address</span>&gt;<span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">&#26174;&#31034;&#22320;&#22336; </span><span style="color: #99968b;">--&gt;</span>
-&lt;<span style="color: #cae682;">ins</span>&gt;<span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">&#21152;&#19979;&#21010;&#32447;&#65292;&#29992;&#20110;&#26356;&#25913;&#25991;&#26723;&#26102;&#26174;&#31034; </span><span style="color: #99968b;">--&gt;</span>
-&lt;<span style="color: #cae682;">del</span>&gt;<span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">&#21024;&#38500;&#65292;&#29992;&#20110;&#26356;&#25913;&#25991;&#26723;&#26102;&#26174;&#31034; </span><span style="color: #99968b;">--&gt;</span>
-&lt;<span style="color: #cae682;">abbr</span> <span style="color: #cae682;">title</span>=<span style="color: #95e454;">"xx"</span>&gt;X&lt;/<span style="color: #cae682;">abbr</span>&gt;<span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">&#29992;&#20110;&#32553;&#20889; </span><span style="color: #99968b;">--&gt;</span>
+<pre class="src src-html">&lt;<span style="color: #b58900;">cite</span>&gt;<span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">&#24341;&#29992; </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
+&lt;<span style="color: #b58900;">blockquote</span>&gt;<span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">&#25991;&#23383;&#35828;&#26126;&#27573;&#33853; </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
+&lt;<span style="color: #b58900;">optgroup</span>&gt;<span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">&#19979;&#25289;&#26694;&#20998;&#32452; </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
+&lt;<span style="color: #b58900;">acronym</span>&gt;<span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">&#29992;&#20110;&#23450;&#20041;&#25110;&#35299;&#37322;&#19968;&#32452;&#25991;&#23383;&#65292;&#38656;&#35201;&#20351;&#29992;title&#23646;&#24615;&#20316;&#20026;&#35299;&#37322;&#20869;&#23481; </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
+&lt;<span style="color: #b58900;">address</span>&gt;<span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">&#26174;&#31034;&#22320;&#22336; </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
+&lt;<span style="color: #b58900;">ins</span>&gt;<span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">&#21152;&#19979;&#21010;&#32447;&#65292;&#29992;&#20110;&#26356;&#25913;&#25991;&#26723;&#26102;&#26174;&#31034; </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
+&lt;<span style="color: #b58900;">del</span>&gt;<span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">&#21024;&#38500;&#65292;&#29992;&#20110;&#26356;&#25913;&#25991;&#26723;&#26102;&#26174;&#31034; </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
+&lt;<span style="color: #b58900;">abbr</span> <span style="color: #6c71c4;">title</span>=<span style="color: #2aa198;">"xx"</span>&gt;X&lt;/<span style="color: #b58900;">abbr</span>&gt;<span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">&#29992;&#20110;&#32553;&#20889; </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
 </pre>
 
 
@@ -319,85 +305,87 @@ cookieÉè¶¨£¬Èç¹ûÍøÒ³¹ıÆÚ£¬´æÅÌµÄcookie½«±»É¾³ı¡£ĞèÒª×¢ÒâµÄÒ²ÊÇ±ØĞëÊ¹ÓÃGMTÊ±¼ä¸ñÊ
 
 </div>
 
-<div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> ×¢ÒâÊÂÏî</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> æ³¨æ„äº‹é¡¹</h2>
+<div class="outline-text-2" id="text-5">
 
 
 <ol>
-<li>¿ÉÒÔ¶Ôweb·şÎñÆ÷Èçapache http server½øĞĞÅäÖÃ£¬Ê¹Æä½«½Å±¾ºÍcssÊ¹ÓÃgzip½øĞĞÑ¹Ëõºó´«Êä¡£apache½øĞĞÕâÒ»´¦ÀíµÄÄ£¿éÎªmod<sub>deflate¡£²»ĞèÒªÑ¹ËõpdfºÍÍ¼Æ¬£¬ÕâĞ©¶«Î÷ÒÑ¾­ÊÇÑ¹Ëõ¹ıµÄ¡£</sub>
+<li>å¯ä»¥å¯¹webæœåŠ¡å™¨å¦‚apache http serverè¿›è¡Œé…ç½®ï¼Œä½¿å…¶å°†è„šæœ¬å’Œcssä½¿ç”¨gzipè¿›è¡Œå‹ç¼©åä¼ è¾“ã€‚apacheè¿›è¡Œè¿™ä¸€å¤„ç†çš„æ¨¡å—ä¸ºmod<sub>deflateã€‚ä¸éœ€è¦å‹ç¼©pdfå’Œå›¾ç‰‡ï¼Œè¿™äº›ä¸œè¥¿å·²ç»æ˜¯å‹ç¼©è¿‡çš„ã€‚</sub>
 
 </li>
-<li>cssÒ»¶¨Òª·ÅÔÚheadÖĞ£¬Ò³ÃæÖĞµÄÔªËØµÄ¼ÓÔØË³ĞòÊÇ°´ÕÕÔÚÒ³ÃæÖĞµÄË³Ğò½øĞĞµÄ£¬Èç¹û½«css·Åµ½Ò³ÃæµÄÄ©Î²£¬ie½«µÈµ½ËùÓĞµÄcss¼ÓÔØÍê±Ïºó²Å»á½øĞĞÏÔÊ¾£¬ÕâÊ±ºòµÄÒ³Ãæ¾Í²»ÊÇÖğ²½³ÊÏÖµÄ£¬Ó°ÏìÓÃ»§ÌåÑé£¬¶ÔÓÚfirefox£¬ËäÈ»ÊÇÖğ²½³ÊÏÖµÄµ«ÊÇcss¼ÓÔØºó»áµ¼ÖÂÒ³ÃæÄÚÈİÉÁË¸Í¬ÑùÓ°ÏìÓÃ»§ÌåÑé¡£
+<li>cssä¸€å®šè¦æ”¾åœ¨headä¸­ï¼Œé¡µé¢ä¸­çš„å…ƒç´ çš„åŠ è½½é¡ºåºæ˜¯æŒ‰ç…§åœ¨é¡µé¢ä¸­çš„é¡ºåºè¿›è¡Œçš„ï¼Œå¦‚æœå°†cssæ”¾åˆ°é¡µé¢çš„æœ«å°¾ï¼Œieå°†ç­‰åˆ°æ‰€æœ‰çš„cssåŠ è½½å®Œæ¯•åæ‰ä¼šè¿›è¡Œæ˜¾ç¤ºï¼Œè¿™æ—¶å€™çš„é¡µé¢å°±ä¸æ˜¯é€æ­¥å‘ˆç°çš„ï¼Œå½±å“ç”¨æˆ·ä½“éªŒï¼Œå¯¹äºfirefoxï¼Œè™½ç„¶æ˜¯é€æ­¥å‘ˆç°çš„ä½†æ˜¯cssåŠ è½½åä¼šå¯¼è‡´é¡µé¢å†…å®¹é—ªçƒåŒæ ·å½±å“ç”¨æˆ·ä½“éªŒã€‚
 
 </li>
-<li>½Å±¾Òª·ÅÔÚÒ³ÃæÎ²²¿£¬ÒòÎªä¯ÀÀÆ÷¿ÉÒÔ½øĞĞ²¢ĞĞµÄ¼ÓÔØ¶à¸ö×é¼ş£¬µ«ÊÇ¶ÔÓÚ½Å±¾Ôò²»»á£¬Ô­ÒòÊÇ½Å±¾ÖĞ¿ÉÄÜ»áÊ¹ÓÃdocument.writeÀ´¸Ä±äÒ³ÃæÄÚÈİ£¬ÁíÍâ»¹ĞèÒª±£Ö¤½Å±¾°´Ë³ĞòÖ´ĞĞ¡£ËùÒÔ½Å±¾µÄÏÂÔØ»á×èÈûÆäËûµÄÏÂÔØ¡£
+<li>è„šæœ¬è¦æ”¾åœ¨é¡µé¢å°¾éƒ¨ï¼Œå› ä¸ºæµè§ˆå™¨å¯ä»¥è¿›è¡Œå¹¶è¡Œçš„åŠ è½½å¤šä¸ªç»„ä»¶ï¼Œä½†æ˜¯å¯¹äºè„šæœ¬åˆ™ä¸ä¼šï¼ŒåŸå› æ˜¯è„šæœ¬ä¸­å¯èƒ½ä¼šä½¿ç”¨document.writeæ¥æ”¹å˜é¡µé¢å†…å®¹ï¼Œå¦å¤–è¿˜éœ€è¦ä¿è¯è„šæœ¬æŒ‰é¡ºåºæ‰§è¡Œã€‚æ‰€ä»¥è„šæœ¬çš„ä¸‹è½½ä¼šé˜»å¡å…¶ä»–çš„ä¸‹è½½ã€‚
 
 </li>
-<li>jsp¹«¹²ÒıÓÃ²¿·ÖÊ¹ÓÃ&lt;%@ include file="" %&gt;ÒıÈëÒÔ±ÜÃâ¸ü»»jar°üÊ±¸÷ÖÖµØ·½¶¼ĞèÒª¸ü¸Ä¡£
+<li>jspå…¬å…±å¼•ç”¨éƒ¨åˆ†ä½¿ç”¨&lt;%@ include file="" %&gt;å¼•å…¥ä»¥é¿å…æ›´æ¢jaråŒ…æ—¶å„ç§åœ°æ–¹éƒ½éœ€è¦æ›´æ”¹ã€‚
 </li>
 </ol>
 
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> http</h2>
+<div class="outline-text-2" id="text-6">
+
+<p>eTag-ç”¨äºå¯¹æ–‡ä»¶æˆ–ç½‘é¡µç­‰è¿›è¡Œæ ‡è¯†ï¼ˆä½¿ç”¨èŒƒå›´å¯ä»¥å¾ˆå¹¿ï¼Œå¹¶æ²¡æœ‰å…·ä½“é™åˆ¶ï¼‰ï¼Œå¯ä»¥æ˜¯ä¸€ä¸ªç‰ˆæœ¬å·ã€‚ç”±æœåŠ¡å™¨ç«¯ç”Ÿæˆï¼Œå®¢æˆ·ç«¯åœ¨è¯·æ±‚çš„æ—¶å€™å°†å…¶å‘é€åˆ°æœåŠ¡å™¨ç«¯ï¼ŒæœåŠ¡å™¨ç«¯æ›´å…·è¯¥å·ç åˆ¤æ–­æ˜¯å¦è¿”å›304ï¼ˆç½‘é¡µå†…å®¹æœªå‘ç”Ÿå˜åŒ–ï¼‰ã€‚
+</p>
 
 </div>
 
 </div>
 
 <div id="outline-container-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> http</h2>
+<h2 id="sec-7"><span class="section-number-2">7</span> other</h2>
 <div class="outline-text-2" id="text-7">
 
-<p>eTag-ÓÃÓÚ¶ÔÎÄ¼ş»òÍøÒ³µÈ½øĞĞ±êÊ¶£¨Ê¹ÓÃ·¶Î§¿ÉÒÔºÜ¹ã£¬²¢Ã»ÓĞ¾ßÌåÏŞÖÆ£©£¬¿ÉÒÔÊÇÒ»¸ö°æ±¾ºÅ¡£ÓÉ·şÎñÆ÷¶ËÉú³É£¬¿Í»§¶ËÔÚÇëÇóµÄÊ±ºò½«Æä·¢ËÍµ½·şÎñÆ÷¶Ë£¬·şÎñÆ÷¶Ë¸ü¾ß¸ÃºÅÂëÅĞ¶ÏÊÇ·ñ·µ»Ø304£¨ÍøÒ³ÄÚÈİÎ´·¢Éú±ä»¯£©¡£
+
+<p>
+Listenerç»§æ‰¿springçš„ContextLoaderListenerç±»ï¼Œåœ¨public void contextInitialized(ServletContextEvent sce)æ–¹æ³•ä¸­è°ƒç”¨super.contextInitialized(sce);å¯ä»¥ä½¿å¾—springå¯¹web.xmlä¸­çš„æ‰€æœ‰å¯¹è±¡è¿›è¡Œåˆå§‹åŒ–ï¼Œè¿™å¯ä»¥ä¿è¯ç›‘å¬å™¨æŒ‰ç…§åœ¨web.xmlä¸­å£°æ˜çš„é¡ºåºè¿›è¡Œåˆå§‹åŒ–ã€‚
 </p>
+
+<p>
+åœ¨filterä¸­ä½¿ç”¨request.setCharacterEncoding("UTF-8");è®¾ç½®requestçš„ç¼–ç æ–¹å¼ã€‚
+</p>
+<p>
+ä½¿ç”¨URLDecoder.decode(path, "utf-8")å¯¹urlè¿›è¡Œè§£ç ï¼ŒåŒæ ·ä¹Ÿå¯ä»¥ä½¿ç”¨URLEncoder.encode()è¿›è¡Œç¼–ç ï¼Œè¯¦è§WebTestï¼ˆè¿›è¡Œencodeæ“ä½œçš„åŸå› åœ¨äºæ•°å­—ã€å­—æ¯ä¹‹å¤–çš„ç¬¦å·è¢«è®¤ä¸ºæ˜¯ä¸å®‰å…¨çš„éœ€è¦è¿›è¡Œè½¬ç ä¾‹å¦‚æœç´¢å¼•æ“ä¸­è¿›è¡Œæœç´¢æ—¶ä¼šå°†å…³é”®è¯è¿›è¡Œç¼–ç ï¼‰
+</p>
+
 </div>
 
 </div>
 
 <div id="outline-container-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> other</h2>
+<h2 id="sec-8"><span class="section-number-2">8</span> Google web development fundamental</h2>
 <div class="outline-text-2" id="text-8">
 
 
-<p>
-Listener¼Ì³ĞspringµÄContextLoaderListenerÀà£¬ÔÚpublic void contextInitialized(ServletContextEvent sce)·½·¨ÖĞµ÷ÓÃsuper.contextInitialized(sce);¿ÉÒÔÊ¹µÃspring¶Ôweb.xmlÖĞµÄËùÓĞ¶ÔÏó½øĞĞ³õÊ¼»¯£¬Õâ¿ÉÒÔ±£Ö¤¼àÌıÆ÷°´ÕÕÔÚweb.xmlÖĞÉùÃ÷µÄË³Ğò½øĞĞ³õÊ¼»¯¡£
-</p>
-
-<p>
-ÔÚfilterÖĞÊ¹ÓÃrequest.setCharacterEncoding("UTF-8");ÉèÖÃrequestµÄ±àÂë·½Ê½¡£
-</p>
-<p>
-Ê¹ÓÃURLDecoder.decode(path, "utf-8")¶Ôurl½øĞĞ½âÂë£¬Í¬ÑùÒ²¿ÉÒÔÊ¹ÓÃURLEncoder.encode()½øĞĞ±àÂë£¬Ïê¼ûWebTest£¨½øĞĞencode²Ù×÷µÄÔ­ÒòÔÚÓÚÊı×Ö¡¢×ÖÄ¸Ö®ÍâµÄ·ûºÅ±»ÈÏÎªÊÇ²»°²È«µÄĞèÒª½øĞĞ×ªÂëÀıÈçËÑË÷ÒıÇæÖĞ½øĞĞËÑË÷Ê±»á½«¹Ø¼ü´Ê½øĞĞ±àÂë£©
-</p>
 
 </div>
 
-</div>
-
-<div id="outline-container-9" class="outline-2">
-<h2 id="sec-9"><span class="section-number-2">9</span> Google web development fundamental</h2>
-<div class="outline-text-2" id="text-9">
-
+<div id="outline-container-8-1" class="outline-3">
+<h3 id="sec-8-1"><span class="section-number-3">8.1</span> Responsive web design</h3>
+<div class="outline-text-3" id="text-8-1">
 
 
 </div>
 
-<div id="outline-container-9-1" class="outline-3">
-<h3 id="sec-9-1"><span class="section-number-3">9.1</span> Responsive web design</h3>
-<div class="outline-text-3" id="text-9-1">
-
-
-</div>
-
-<div id="outline-container-9-1-1" class="outline-4">
-<h4 id="sec-9-1-1"><span class="section-number-4">9.1.1</span> Set viewport</h4>
-<div class="outline-text-4" id="text-9-1-1">
+<div id="outline-container-8-1-1" class="outline-4">
+<h4 id="sec-8-1-1"><span class="section-number-4">8.1.1</span> Set viewport</h4>
+<div class="outline-text-4" id="text-8-1-1">
 
 
 
 
-<pre class="src src-html"><span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">width=device-width: to match the width in device independent pixel. </span><span style="color: #99968b;">--&gt;</span>
-<span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">initial-scale=1.0: to establish a 1:1 relationship between pixel and device independent pixel. </span><span style="color: #99968b;">--&gt;</span>
-&lt;<span style="color: #cae682;">meta</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"viewport"</span> <span style="color: #cae682;">content</span>=<span style="color: #95e454;">"width=device-width, initial-scale=1.0"</span>&gt;
+<pre class="src src-html"><span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">width=device-width: to match the width in device independent pixel. </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
+<span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">initial-scale=1.0: to establish a 1:1 relationship between pixel and device independent pixel. </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
+&lt;<span style="color: #b58900;">meta</span> <span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"viewport"</span> <span style="color: #6c71c4;">content</span>=<span style="color: #2aa198;">"width=device-width, initial-scale=1.0"</span>&gt;
 </pre>
 
 
@@ -408,9 +396,9 @@ Besides initial-scale, minimum-scale, maximum-scale and user-scalable can be use
 
 </div>
 
-<div id="outline-container-9-1-2" class="outline-4">
-<h4 id="sec-9-1-2"><span class="section-number-4">9.1.2</span> Attention</h4>
-<div class="outline-text-4" id="text-9-1-2">
+<div id="outline-container-8-1-2" class="outline-4">
+<h4 id="sec-8-1-2"><span class="section-number-4">8.1.2</span> Attention</h4>
+<div class="outline-text-4" id="text-8-1-2">
 
 <p>Do not use large fixed width elements.
 </p>
@@ -427,45 +415,45 @@ An suggest english font (Roboto Condensed).
 
 </div>
 
-<div id="outline-container-9-1-3" class="outline-4">
-<h4 id="sec-9-1-3"><span class="section-number-4">9.1.3</span> Media query</h4>
-<div class="outline-text-4" id="text-9-1-3">
+<div id="outline-container-8-1-3" class="outline-4">
+<h4 id="sec-8-1-3"><span class="section-number-4">8.1.3</span> Media query</h4>
+<div class="outline-text-4" id="text-8-1-3">
 
 
 
 
-<pre class="src src-html"><span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">used for print </span><span style="color: #99968b;">--&gt;</span>
-&lt;<span style="color: #cae682;">link</span> <span style="color: #cae682;">rel</span>=<span style="color: #95e454;">"stylesheet"</span> <span style="color: #cae682;">href</span>=<span style="color: #95e454;">"print.css"</span> <span style="color: #cae682;">media</span>=<span style="color: #95e454;">"print"</span>&gt;
+<pre class="src src-html"><span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">used for print </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
+&lt;<span style="color: #b58900;">link</span> <span style="color: #6c71c4;">rel</span>=<span style="color: #2aa198;">"stylesheet"</span> <span style="color: #6c71c4;">href</span>=<span style="color: #2aa198;">"print.css"</span> <span style="color: #6c71c4;">media</span>=<span style="color: #2aa198;">"print"</span>&gt;
 
 </pre>
 
 
 
-<pre class="src src-css"><span style="color: #cae682;">&lt;!-- other ways to specify css only for print --&gt;</span>
-<span style="color: #e5786d;">@media</span><span style="color: #cae682;"> print </span>{
-	<span style="color: #99968b;">/* </span><span style="color: #99968b;">print style sheets go here </span><span style="color: #99968b;">*/</span>
+<pre class="src src-css"><span style="color: #b58900;">&lt;!-- other ways to specify css only for print --&gt;</span>
+<span style="color: #6c71c4;">@media</span><span style="color: #b58900;"> print </span>{
+        <span style="color: #93a1a1; font-style: italic;">/* </span><span style="color: #93a1a1; font-style: italic;">print style sheets go here </span><span style="color: #93a1a1; font-style: italic;">*/</span>
 }
-<span style="color: #e5786d;">@import</span> url(print.css) print;
+<span style="color: #6c71c4;">@import</span> url(print.css) print;
 </pre>
 
 
 
 
-<pre class="src src-html"><span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">for device width smaller than 640px </span><span style="color: #99968b;">--&gt;</span>
-&lt;<span style="color: #cae682;">link</span> <span style="color: #cae682;">rel</span>=<span style="color: #95e454;">"stylesheet"</span> <span style="color: #cae682;">media</span>=<span style="color: #95e454;">"(max-width: 640px)"</span> <span style="color: #cae682;">href</span>=<span style="color: #95e454;">"max-640px.css"</span>&gt;
-<span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">for device width larger than 640px </span><span style="color: #99968b;">--&gt;</span>
-&lt;<span style="color: #cae682;">link</span> <span style="color: #cae682;">rel</span>=<span style="color: #95e454;">"stylesheet"</span> <span style="color: #cae682;">media</span>=<span style="color: #95e454;">"(min-width: 640px)"</span> <span style="color: #cae682;">href</span>=<span style="color: #95e454;">"min-640px.css"</span>&gt;
-<span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">for device width larger than height </span><span style="color: #99968b;">--&gt;</span>
-&lt;<span style="color: #cae682;">link</span> <span style="color: #cae682;">rel</span>=<span style="color: #95e454;">"stylesheet"</span> <span style="color: #cae682;">media</span>=<span style="color: #95e454;">"(orientation: portrait)"</span> <span style="color: #cae682;">href</span>=<span style="color: #95e454;">"portrait.css"</span>&gt;
-<span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">for device width smaller than height </span><span style="color: #99968b;">--&gt;</span>
-&lt;<span style="color: #cae682;">link</span> <span style="color: #cae682;">rel</span>=<span style="color: #95e454;">"stylesheet"</span> <span style="color: #cae682;">media</span>=<span style="color: #95e454;">"(orientation: landscape)"</span> <span style="color: #cae682;">href</span>=<span style="color: #95e454;">"landscape.css"</span>&gt;
-&lt;<span style="color: #cae682;">style</span>&gt;
-			@media (min-width: 500px) and (max-width: 600px) {
-				h1 {
-					color: fuchsia;
-				}
-			}
-&lt;/<span style="color: #cae682;">style</span>&gt;
+<pre class="src src-html"><span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">for device width smaller than 640px </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
+&lt;<span style="color: #b58900;">link</span> <span style="color: #6c71c4;">rel</span>=<span style="color: #2aa198;">"stylesheet"</span> <span style="color: #6c71c4;">media</span>=<span style="color: #2aa198;">"(max-width: 640px)"</span> <span style="color: #6c71c4;">href</span>=<span style="color: #2aa198;">"max-640px.css"</span>&gt;
+<span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">for device width larger than 640px </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
+&lt;<span style="color: #b58900;">link</span> <span style="color: #6c71c4;">rel</span>=<span style="color: #2aa198;">"stylesheet"</span> <span style="color: #6c71c4;">media</span>=<span style="color: #2aa198;">"(min-width: 640px)"</span> <span style="color: #6c71c4;">href</span>=<span style="color: #2aa198;">"min-640px.css"</span>&gt;
+<span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">for device width larger than height </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
+&lt;<span style="color: #b58900;">link</span> <span style="color: #6c71c4;">rel</span>=<span style="color: #2aa198;">"stylesheet"</span> <span style="color: #6c71c4;">media</span>=<span style="color: #2aa198;">"(orientation: portrait)"</span> <span style="color: #6c71c4;">href</span>=<span style="color: #2aa198;">"portrait.css"</span>&gt;
+<span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">for device width smaller than height </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
+&lt;<span style="color: #b58900;">link</span> <span style="color: #6c71c4;">rel</span>=<span style="color: #2aa198;">"stylesheet"</span> <span style="color: #6c71c4;">media</span>=<span style="color: #2aa198;">"(orientation: landscape)"</span> <span style="color: #6c71c4;">href</span>=<span style="color: #2aa198;">"landscape.css"</span>&gt;
+&lt;<span style="color: #b58900;">style</span>&gt;
+                        @media (min-width: 500px) and (max-width: 600px) {
+                                h1 {
+                                        color: <span style="color: #ffffff; background-color: #FF00FF;">fuchsia</span>;
+                                }
+                        }
+&lt;/<span style="color: #b58900;">style</span>&gt;
 </pre>
 
 
@@ -475,19 +463,19 @@ An suggest english font (Roboto Condensed).
 
 </div>
 
-<div id="outline-container-9-2" class="outline-3">
-<h3 id="sec-9-2"><span class="section-number-3">9.2</span> Forms</h3>
-<div class="outline-text-3" id="text-9-2">
+<div id="outline-container-8-2" class="outline-3">
+<h3 id="sec-8-2"><span class="section-number-3">8.2</span> Forms</h3>
+<div class="outline-text-3" id="text-8-2">
 
 
 </div>
 
-<div id="outline-container-9-2-1" class="outline-4">
-<h4 id="sec-9-2-1"><span class="section-number-4">9.2.1</span> Input</h4>
-<div class="outline-text-4" id="text-9-2-1">
+<div id="outline-container-8-2-1" class="outline-4">
+<h4 id="sec-8-2-1"><span class="section-number-4">8.2.1</span> Input</h4>
+<div class="outline-text-4" id="text-8-2-1">
 
 <ul>
-<li id="sec-9-2-1-1">Types<br/>
+<li id="sec-8-2-1-1">Types<br/>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" />
 </colgroup>
@@ -513,17 +501,17 @@ An suggest english font (Roboto Condensed).
 </li>
 </ul>
 <ul>
-<li id="sec-9-2-1-2">Offer suggestions by using datalist<br/>
+<li id="sec-8-2-1-2">Offer suggestions by using datalist<br/>
 
 
 
-<pre class="src src-html">&lt;<span style="color: #cae682;">label</span> <span style="color: #cae682;">for</span>=<span style="color: #95e454;">"frmFavChocolate"</span>&gt;Favorite Type of Chocolate&lt;/<span style="color: #cae682;">label</span>&gt;
-&lt;<span style="color: #cae682;">input</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"text"</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"fav-choc"</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"frmFavChocolate"</span> <span style="color: #cae682;">list</span>=<span style="color: #95e454;">"chocType"</span>&gt;
-&lt;<span style="color: #cae682;">datalist</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"chocType"</span>&gt;
-	&lt;<span style="color: #cae682;">option</span> <span style="color: #cae682;">value</span>=<span style="color: #95e454;">"white"</span>&gt;
-	&lt;<span style="color: #cae682;">option</span> <span style="color: #cae682;">value</span>=<span style="color: #95e454;">"milk"</span>&gt;
-	&lt;<span style="color: #cae682;">option</span> <span style="color: #cae682;">value</span>=<span style="color: #95e454;">"dark"</span>&gt;
-&lt;/<span style="color: #cae682;">datalist</span>&gt;
+<pre class="src src-html">&lt;<span style="color: #b58900;">label</span> <span style="color: #6c71c4;">for</span>=<span style="color: #2aa198;">"frmFavChocolate"</span>&gt;Favorite Type of <span style="color: #ffffff; background-color: #D2691E;">Chocolate</span>&lt;/<span style="color: #b58900;">label</span>&gt;
+&lt;<span style="color: #b58900;">input</span> <span style="color: #6c71c4;">type</span>=<span style="color: #2aa198;">"text"</span> <span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"fav-choc"</span> <span style="color: #6c71c4;">id</span>=<span style="color: #2aa198;">"frmFavChocolate"</span> <span style="color: #6c71c4;">list</span>=<span style="color: #2aa198;">"chocType"</span>&gt;
+&lt;<span style="color: #b58900;">datalist</span> <span style="color: #6c71c4;">id</span>=<span style="color: #2aa198;">"chocType"</span>&gt;
+        &lt;<span style="color: #b58900;">option</span> <span style="color: #6c71c4;">value</span>=<span style="color: #2aa198;">"</span><span style="color: #000000; background-color: #FFFFFF;">white</span><span style="color: #2aa198;">"</span>&gt;
+        &lt;<span style="color: #b58900;">option</span> <span style="color: #6c71c4;">value</span>=<span style="color: #2aa198;">"milk"</span>&gt;
+        &lt;<span style="color: #b58900;">option</span> <span style="color: #6c71c4;">value</span>=<span style="color: #2aa198;">"dark"</span>&gt;
+&lt;/<span style="color: #b58900;">datalist</span>&gt;
 </pre>
 
 
@@ -531,12 +519,12 @@ An suggest english font (Roboto Condensed).
 </li>
 </ul>
 <ul>
-<li id="sec-9-2-1-3">Use placeholder to provide a hint to the user about how to fill in the input.<br/>
+<li id="sec-8-2-1-3">Use placeholder to provide a hint to the user about how to fill in the input.<br/>
 The placeholder should not be considered a label.
 
 
 
-<pre class="src src-html">&lt;<span style="color: #cae682;">input</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"text"</span> <span style="color: #cae682;">placeholder</span>=<span style="color: #95e454;">"MM-YYYY"</span> ...&gt;
+<pre class="src src-html">&lt;<span style="color: #b58900;">input</span> <span style="color: #6c71c4;">type</span>=<span style="color: #2aa198;">"text"</span> <span style="color: #6c71c4;">placeholder</span>=<span style="color: #2aa198;">"MM-YYYY"</span> ...&gt;
 </pre>
 
 
@@ -544,7 +532,7 @@ The placeholder should not be considered a label.
 </li>
 </ul>
 <ul>
-<li id="sec-9-2-1-4">Use metadata to enable auto-complete<br/>
+<li id="sec-8-2-1-4">Use metadata to enable auto-complete<br/>
 
 <p>
 Let the pc/phone help fill the input.
@@ -552,17 +540,17 @@ Let the pc/phone help fill the input.
 
 
 
-<pre class="src src-html">&lt;<span style="color: #cae682;">label</span> <span style="color: #cae682;">for</span>=<span style="color: #95e454;">"frmNameA"</span>&gt;Name&lt;/<span style="color: #cae682;">label</span>&gt;
-&lt;<span style="color: #cae682;">input</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"text"</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"name"</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"frmName"</span> <span style="color: #cae682;">placeholder</span>=<span style="color: #95e454;">"Full name"</span> required <span style="color: #cae682;">autocomplete</span>=<span style="color: #95e454;">"name"</span>&gt;
+<pre class="src src-html">&lt;<span style="color: #b58900;">label</span> <span style="color: #6c71c4;">for</span>=<span style="color: #2aa198;">"frmNameA"</span>&gt;Name&lt;/<span style="color: #b58900;">label</span>&gt;
+&lt;<span style="color: #b58900;">input</span> <span style="color: #6c71c4;">type</span>=<span style="color: #2aa198;">"text"</span> <span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"name"</span> <span style="color: #6c71c4;">id</span>=<span style="color: #2aa198;">"frmName"</span> <span style="color: #6c71c4;">placeholder</span>=<span style="color: #2aa198;">"Full name"</span> required <span style="color: #6c71c4;">autocomplete</span>=<span style="color: #2aa198;">"name"</span>&gt;
 
-&lt;<span style="color: #cae682;">label</span> <span style="color: #cae682;">for</span>=<span style="color: #95e454;">"frmEmailA"</span>&gt;Email&lt;/<span style="color: #cae682;">label</span>&gt;
-&lt;<span style="color: #cae682;">input</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"email"</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"email"</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"frmEmailA"</span> <span style="color: #cae682;">placeholder</span>=<span style="color: #95e454;">"name@example.com"</span> required <span style="color: #cae682;">autocomplete</span>=<span style="color: #95e454;">"email"</span>&gt;
+&lt;<span style="color: #b58900;">label</span> <span style="color: #6c71c4;">for</span>=<span style="color: #2aa198;">"frmEmailA"</span>&gt;Email&lt;/<span style="color: #b58900;">label</span>&gt;
+&lt;<span style="color: #b58900;">input</span> <span style="color: #6c71c4;">type</span>=<span style="color: #2aa198;">"email"</span> <span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"email"</span> <span style="color: #6c71c4;">id</span>=<span style="color: #2aa198;">"frmEmailA"</span> <span style="color: #6c71c4;">placeholder</span>=<span style="color: #2aa198;">"name@example.com"</span> required <span style="color: #6c71c4;">autocomplete</span>=<span style="color: #2aa198;">"email"</span>&gt;
 
-&lt;<span style="color: #cae682;">label</span> <span style="color: #cae682;">for</span>=<span style="color: #95e454;">"frmAddressA"</span>&gt;Address&lt;/<span style="color: #cae682;">label</span>&gt;
-&lt;<span style="color: #cae682;">input</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"text"</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"address"</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"frmAddressA"</span> required <span style="color: #cae682;">autocomplete</span>=<span style="color: #95e454;">"shipping street-address"</span>&gt; <span style="color: #99968b;">&lt;!-- </span><span style="color: #99968b;">available: street-address locality region postal-code country </span><span style="color: #99968b;">--&gt;</span>
+&lt;<span style="color: #b58900;">label</span> <span style="color: #6c71c4;">for</span>=<span style="color: #2aa198;">"frmAddressA"</span>&gt;Address&lt;/<span style="color: #b58900;">label</span>&gt;
+&lt;<span style="color: #b58900;">input</span> <span style="color: #6c71c4;">type</span>=<span style="color: #2aa198;">"text"</span> <span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"address"</span> <span style="color: #6c71c4;">id</span>=<span style="color: #2aa198;">"frmAddressA"</span> required <span style="color: #6c71c4;">autocomplete</span>=<span style="color: #2aa198;">"shipping street-address"</span>&gt; <span style="color: #93a1a1; font-style: italic;">&lt;!-- </span><span style="color: #93a1a1; font-style: italic;">available: street-address locality region postal-code country </span><span style="color: #93a1a1; font-style: italic;">--&gt;</span>
 
-&lt;<span style="color: #cae682;">label</span> <span style="color: #cae682;">for</span>=<span style="color: #95e454;">"frmPhoneNumA"</span>&gt;Phone&lt;/<span style="color: #cae682;">label</span>&gt;
-&lt;<span style="color: #cae682;">input</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"tel"</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"phone"</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"frmPhoneNumA"</span> <span style="color: #cae682;">placeholder</span>=<span style="color: #95e454;">"+1-555-555-1212"</span> required <span style="color: #cae682;">autocomplete</span>=<span style="color: #95e454;">"tel"</span>&gt;
+&lt;<span style="color: #b58900;">label</span> <span style="color: #6c71c4;">for</span>=<span style="color: #2aa198;">"frmPhoneNumA"</span>&gt;Phone&lt;/<span style="color: #b58900;">label</span>&gt;
+&lt;<span style="color: #b58900;">input</span> <span style="color: #6c71c4;">type</span>=<span style="color: #2aa198;">"tel"</span> <span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"phone"</span> <span style="color: #6c71c4;">id</span>=<span style="color: #2aa198;">"frmPhoneNumA"</span> <span style="color: #6c71c4;">placeholder</span>=<span style="color: #2aa198;">"+1-555-555-1212"</span> required <span style="color: #6c71c4;">autocomplete</span>=<span style="color: #2aa198;">"tel"</span>&gt;
 </pre>
 
 
@@ -573,17 +561,17 @@ Let the pc/phone help fill the input.
 
 </div>
 
-<div id="outline-container-9-2-2" class="outline-4">
-<h4 id="sec-9-2-2"><span class="section-number-4">9.2.2</span> Validation</h4>
-<div class="outline-text-4" id="text-9-2-2">
+<div id="outline-container-8-2-2" class="outline-4">
+<h4 id="sec-8-2-2"><span class="section-number-4">8.2.2</span> Validation</h4>
+<div class="outline-text-4" id="text-8-2-2">
 
 
 <ul>
-<li id="sec-9-2-2-1">Set attribute to enable realtime validation<br/>
+<li id="sec-8-2-2-1">Set attribute to enable realtime validation<br/>
 
 
 
-<pre class="src src-html">&lt;<span style="color: #cae682;">input</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"text"</span> <span style="color: #cae682;">pattern</span>=<span style="color: #95e454;">"^\d{5,6}(?:[-\s]\d{4})?$"</span> ...&gt;
+<pre class="src src-html">&lt;<span style="color: #b58900;">input</span> <span style="color: #6c71c4;">type</span>=<span style="color: #2aa198;">"text"</span> <span style="color: #6c71c4;">pattern</span>=<span style="color: #2aa198;">"^\d{5,6}(?:[-\s]\d{4})?$"</span> ...&gt;
 </pre>
 
 
@@ -605,15 +593,15 @@ Other validation attributes
 </p>
 
 
-<pre class="src src-html">&lt;<span style="color: #cae682;">input</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"number"</span> <span style="color: #cae682;">min</span>=<span style="color: #95e454;">"1"</span> <span style="color: #cae682;">max</span>=<span style="color: #95e454;">"13"</span> <span style="color: #cae682;">step</span>=<span style="color: #95e454;">"0.5"</span> ...&gt;
-&lt;<span style="color: #cae682;">input</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"text"</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"83filename"</span> <span style="color: #cae682;">maxlength</span>=<span style="color: #95e454;">"12"</span> ...&gt;
+<pre class="src src-html">&lt;<span style="color: #b58900;">input</span> <span style="color: #6c71c4;">type</span>=<span style="color: #2aa198;">"number"</span> <span style="color: #6c71c4;">min</span>=<span style="color: #2aa198;">"1"</span> <span style="color: #6c71c4;">max</span>=<span style="color: #2aa198;">"13"</span> <span style="color: #6c71c4;">step</span>=<span style="color: #2aa198;">"0.5"</span> ...&gt;
+&lt;<span style="color: #b58900;">input</span> <span style="color: #6c71c4;">type</span>=<span style="color: #2aa198;">"text"</span> <span style="color: #6c71c4;">id</span>=<span style="color: #2aa198;">"83filename"</span> <span style="color: #6c71c4;">maxlength</span>=<span style="color: #2aa198;">"12"</span> ...&gt;
 </pre>
 
 
 </li>
 </ul>
 <ul>
-<li id="sec-9-2-2-2">Use <a href="http://dev.w3.org/html5/spec-preview/constraints.html#constraint-validation">Constrains Validation API</a><br/>
+<li id="sec-8-2-2-2">Use <a href="http://dev.w3.org/html5/spec-preview/constraints.html#constraint-validation">Constrains Validation API</a><br/>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" />
 </colgroup>
@@ -631,7 +619,7 @@ Other validation attributes
 </li>
 </ul>
 <ul>
-<li id="sec-9-2-2-3">User Pseudo-class(CSS)<br/>
+<li id="sec-8-2-2-3">User Pseudo-class(CSS)<br/>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" />
 </colgroup>
@@ -651,19 +639,19 @@ Other validation attributes
 </li>
 </ul>
 <ul>
-<li id="sec-9-2-2-4">Use requestAutocomplete API<br/>
+<li id="sec-8-2-2-4">Use requestAutocomplete API<br/>
 
 
 
-<pre class="src src-html">&lt;<span style="color: #cae682;">form</span> <span style="color: #cae682;">method</span>=<span style="color: #95e454;">"post"</span> <span style="color: #cae682;">action</span>=<span style="color: #95e454;">""</span>&gt;
-&lt;<span style="color: #cae682;">label</span> <span style="color: #cae682;">for</span>=<span style="color: #95e454;">"frmNameA"</span>&gt;Name&lt;/<span style="color: #cae682;">label</span>&gt;
-&lt;<span style="color: #cae682;">input</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"text"</span> <span style="color: #cae682;">name</span>=<span style="color: #95e454;">"name"</span> <span style="color: #cae682;">id</span>=<span style="color: #95e454;">"frmName"</span> <span style="color: #cae682;">placeholder</span>=<span style="color: #95e454;">"Full name"</span> required <span style="color: #cae682;">autocomplete</span>=<span style="color: #95e454;">"name"</span>&gt;
-&lt;<span style="color: #cae682;">input</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"button"</span> <span style="color: #cae682;">onclick</span>=<span style="color: #95e454;">"doRequestAutocomplete"</span> <span style="color: #cae682;">value</span>=<span style="color: #95e454;">"Autocomplete &amp; submit"</span>&gt;
-&lt;/<span style="color: #cae682;">form</span>&gt;
-&lt;<span style="color: #cae682;">script</span>&gt;
-form.addEventListener(<span style="color: #95e454;">"autocompleteerror"</span>, requestAutocompleteError); // handle error when autocomplete failed.
-form.addEventListener(<span style="color: #95e454;">"autocomplete"</span>, requestAutocompleteCompleted); // handle autocomplete succeed.
-&lt;/<span style="color: #cae682;">script</span>&gt;
+<pre class="src src-html">&lt;<span style="color: #b58900;">form</span> <span style="color: #6c71c4;">method</span>=<span style="color: #2aa198;">"post"</span> <span style="color: #6c71c4;">action</span>=<span style="color: #2aa198;">""</span>&gt;
+&lt;<span style="color: #b58900;">label</span> <span style="color: #6c71c4;">for</span>=<span style="color: #2aa198;">"frmNameA"</span>&gt;Name&lt;/<span style="color: #b58900;">label</span>&gt;
+&lt;<span style="color: #b58900;">input</span> <span style="color: #6c71c4;">type</span>=<span style="color: #2aa198;">"text"</span> <span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"name"</span> <span style="color: #6c71c4;">id</span>=<span style="color: #2aa198;">"frmName"</span> <span style="color: #6c71c4;">placeholder</span>=<span style="color: #2aa198;">"Full name"</span> required <span style="color: #6c71c4;">autocomplete</span>=<span style="color: #2aa198;">"name"</span>&gt;
+&lt;<span style="color: #b58900;">input</span> <span style="color: #6c71c4;">type</span>=<span style="color: #2aa198;">"button"</span> <span style="color: #6c71c4;">onclick</span>=<span style="color: #2aa198;">"doRequestAutocomplete"</span> <span style="color: #6c71c4;">value</span>=<span style="color: #2aa198;">"Autocomplete &amp; submit"</span>&gt;
+&lt;/<span style="color: #b58900;">form</span>&gt;
+&lt;<span style="color: #b58900;">script</span>&gt;
+form.addEventListener(<span style="color: #2aa198;">"autocompleteerror"</span>, requestAutocompleteError); // handle error when autocomplete failed.
+form.addEventListener(<span style="color: #2aa198;">"autocomplete"</span>, requestAutocompleteCompleted); // handle autocomplete succeed.
+&lt;/<span style="color: #b58900;">script</span>&gt;
 </pre>
 
 
@@ -675,17 +663,17 @@ form.addEventListener(<span style="color: #95e454;">"autocomplete"</span>, reque
 
 </div>
 
-<div id="outline-container-9-3" class="outline-3">
-<h3 id="sec-9-3"><span class="section-number-3">9.3</span> Images</h3>
-<div class="outline-text-3" id="text-9-3">
+<div id="outline-container-8-3" class="outline-3">
+<h3 id="sec-8-3"><span class="section-number-3">8.3</span> Images</h3>
+<div class="outline-text-3" id="text-8-3">
 
 
 
 </div>
 
-<div id="outline-container-9-3-1" class="outline-4">
-<h4 id="sec-9-3-1"><span class="section-number-4">9.3.1</span> Img</h4>
-<div class="outline-text-4" id="text-9-3-1">
+<div id="outline-container-8-3-1" class="outline-4">
+<h4 id="sec-8-3-1"><span class="section-number-4">8.3.1</span> Img</h4>
+<div class="outline-text-4" id="text-8-3-1">
 
 
 <p>
@@ -697,7 +685,7 @@ Remember to use relative units when specifying image width.
 
 
 <pre class="src src-html">img, embed, object, video {
-	max-width: 100%;
+        max-width: 100%;
 }
 </pre>
 
@@ -707,27 +695,27 @@ Replace image with css
 </p>
 
 
-<pre class="src src-html">background: linear-gradient(to right, blue, white);
-background: repeating-linear-gradient(to bottom, #747474, #747474 6px, #fff 1px, #fff 9px);
+<pre class="src src-html">background: linear-gradient(to right, <span style="color: #ffffff; background-color: #0000FF;">blue</span>, <span style="color: #000000; background-color: #FFFFFF;">white</span>);
+background: repeating-linear-gradient(to bottom, <span style="color: #ffffff; background-color: #747474;">#747474</span>, <span style="color: #ffffff; background-color: #747474;">#747474</span> 6px, <span style="color: #000000; background-color: #fff;">#fff</span> 1px, <span style="color: #000000; background-color: #fff;">#fff</span> 9px);
 </pre>
 
 
 <p>
 Choose format
 </p><ul>
-<li id="sec-9-3-1-1">Use JPG for photographic images.<br/>
+<li id="sec-8-3-1-1">Use JPG for photographic images.<br/>
 </li>
 </ul>
 <ul>
-<li id="sec-9-3-1-2">Use SVG for vector art and solid color graphics such as logos and line art. If vector art is unavailable, try WebP or PNG.<br/>
+<li id="sec-8-3-1-2">Use SVG for vector art and solid color graphics such as logos and line art. If vector art is unavailable, try WebP or PNG.<br/>
 </li>
 </ul>
 <ul>
-<li id="sec-9-3-1-3">Use PNG rather than GIF as it allows for more colors and offers better compression ratios.<br/>
+<li id="sec-8-3-1-3">Use PNG rather than GIF as it allows for more colors and offers better compression ratios.<br/>
 </li>
 </ul>
 <ul>
-<li id="sec-9-3-1-4">For longer animations, consider using &lt;video&gt; which provide better image quality<br/>
+<li id="sec-8-3-1-4">For longer animations, consider using &lt;video&gt; which provide better image quality<br/>
 
 </li>
 </ul>
@@ -735,19 +723,19 @@ Choose format
 
 </div>
 
-<div id="outline-container-9-3-2" class="outline-4">
-<h4 id="sec-9-3-2"><span class="section-number-4">9.3.2</span> Video</h4>
-<div class="outline-text-4" id="text-9-3-2">
+<div id="outline-container-8-3-2" class="outline-4">
+<h4 id="sec-8-3-2"><span class="section-number-4">8.3.2</span> Video</h4>
+<div class="outline-text-4" id="text-8-3-2">
 
 
 
 
 
-<pre class="src src-html"> &lt;<span style="color: #cae682;">video</span> controls&gt;
-	&lt;<span style="color: #cae682;">source</span> <span style="color: #cae682;">src</span>=<span style="color: #95e454;">"chrome.webm"</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"video/webm"</span>&gt;
-	&lt;<span style="color: #cae682;">source</span> <span style="color: #cae682;">src</span>=<span style="color: #95e454;">"chrome.mp4"</span> <span style="color: #cae682;">type</span>=<span style="color: #95e454;">"video/mp4"</span>&gt;
-	&lt;<span style="color: #cae682;">p</span>&gt;This browser does not support the video element.&lt;/<span style="color: #cae682;">p</span>&gt;
-&lt;/<span style="color: #cae682;">video</span>&gt;
+<pre class="src src-html"> &lt;<span style="color: #b58900;">video</span> controls&gt;
+        &lt;<span style="color: #b58900;">source</span> <span style="color: #6c71c4;">src</span>=<span style="color: #2aa198;">"chrome.webm"</span> <span style="color: #6c71c4;">type</span>=<span style="color: #2aa198;">"video/webm"</span>&gt;
+        &lt;<span style="color: #b58900;">source</span> <span style="color: #6c71c4;">src</span>=<span style="color: #2aa198;">"chrome.mp4"</span> <span style="color: #6c71c4;">type</span>=<span style="color: #2aa198;">"video/mp4"</span>&gt;
+        &lt;<span style="color: #b58900;">p</span>&gt;This browser does not support the video element.&lt;/<span style="color: #b58900;">p</span>&gt;
+&lt;/<span style="color: #b58900;">video</span>&gt;
 </pre>
 
 
@@ -757,64 +745,42 @@ Choose format
 
 </div>
 
-<div id="outline-container-9-4" class="outline-3">
-<h3 id="sec-9-4"><span class="section-number-3">9.4</span> Performance</h3>
-<div class="outline-text-3" id="text-9-4">
+<div id="outline-container-8-4" class="outline-3">
+<h3 id="sec-8-4"><span class="section-number-3">8.4</span> Performance</h3>
+<div class="outline-text-3" id="text-8-4">
 
 
 
 </div>
 
-<div id="outline-container-9-4-1" class="outline-4">
-<h4 id="sec-9-4-1"><span class="section-number-4">9.4.1</span> Render page</h4>
-<div class="outline-text-4" id="text-9-4-1">
+<div id="outline-container-8-4-1" class="outline-4">
+<h4 id="sec-8-4-1"><span class="section-number-4">8.4.1</span> Render page</h4>
+<div class="outline-text-4" id="text-8-4-1">
 
 
 <ul>
-<li id="sec-9-4-1-1">Process HTML markup and build the DOM tree<br/>
+<li id="sec-8-4-1-1">Process HTML markup and build the DOM tree<br/>
 
 </li>
 </ul>
 <ul>
-<li id="sec-9-4-1-2">Process CSS markup and build the CSSOM tree<br/>
+<li id="sec-8-4-1-2">Process CSS markup and build the CSSOM tree<br/>
 
 </li>
 </ul>
 <ul>
-<li id="sec-9-4-1-3">Combine the DOM and CSSOM into a render tree<br/>
+<li id="sec-8-4-1-3">Combine the DOM and CSSOM into a render tree<br/>
 Hidden nodes are not included in the render tree.
 
 </li>
 </ul>
 <ul>
-<li id="sec-9-4-1-4">Run layout on the render tree to compute geometry of each node<br/>
+<li id="sec-8-4-1-4">Run layout on the render tree to compute geometry of each node<br/>
 
 </li>
 </ul>
 <ul>
-<li id="sec-9-4-1-5">Paint the individual nodes to the screen<br/>
-
-</li>
-</ul>
-</div>
-
-</div>
-
-<div id="outline-container-9-4-2" class="outline-4">
-<h4 id="sec-9-4-2"><span class="section-number-4">9.4.2</span> Critical path</h4>
-<div class="outline-text-4" id="text-9-4-2">
-
-
-<ul>
-<li id="sec-9-4-2-1">HTML<br/>
-</li>
-</ul>
-<ul>
-<li id="sec-9-4-2-2">css<br/>
-</li>
-</ul>
-<ul>
-<li id="sec-9-4-2-3">none async javascript(block DOM construction)<br/>
+<li id="sec-8-4-1-5">Paint the individual nodes to the screen<br/>
 
 </li>
 </ul>
@@ -822,31 +788,53 @@ Hidden nodes are not included in the render tree.
 
 </div>
 
-<div id="outline-container-9-4-3" class="outline-4">
-<h4 id="sec-9-4-3"><span class="section-number-4">9.4.3</span> Todos to gain performance</h4>
-<div class="outline-text-4" id="text-9-4-3">
+<div id="outline-container-8-4-2" class="outline-4">
+<h4 id="sec-8-4-2"><span class="section-number-4">8.4.2</span> Critical path</h4>
+<div class="outline-text-4" id="text-8-4-2">
 
 
 <ul>
-<li id="sec-9-4-3-1">Its better to divide css into different files for different use.(use media querys)<br/>
+<li id="sec-8-4-2-1">HTML<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-8-4-2-2">css<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-8-4-2-3">none async javascript(block DOM construction)<br/>
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-8-4-3" class="outline-4">
+<h4 id="sec-8-4-3"><span class="section-number-4">8.4.3</span> Todos to gain performance</h4>
+<div class="outline-text-4" id="text-8-4-3">
+
+
+<ul>
+<li id="sec-8-4-3-1">Its better to divide css into different files for different use.(use media querys)<br/>
 
 
 
-<pre class="src src-html">&lt;<span style="color: #cae682;">link</span> <span style="color: #cae682;">href</span>=<span style="color: #95e454;">"style.css"</span>    <span style="color: #cae682;">rel</span>=<span style="color: #95e454;">"stylesheet"</span>&gt;
-&lt;<span style="color: #cae682;">link</span> <span style="color: #cae682;">href</span>=<span style="color: #95e454;">"style.css"</span>    <span style="color: #cae682;">rel</span>=<span style="color: #95e454;">"stylesheet"</span> <span style="color: #cae682;">media</span>=<span style="color: #95e454;">"screen"</span>&gt;
-&lt;<span style="color: #cae682;">link</span> <span style="color: #cae682;">href</span>=<span style="color: #95e454;">"portrait.css"</span> <span style="color: #cae682;">rel</span>=<span style="color: #95e454;">"stylesheet"</span> <span style="color: #cae682;">media</span>=<span style="color: #95e454;">"orientation:portrait"</span>&gt;
-&lt;<span style="color: #cae682;">link</span> <span style="color: #cae682;">href</span>=<span style="color: #95e454;">"print.css"</span>    <span style="color: #cae682;">rel</span>=<span style="color: #95e454;">"stylesheet"</span> <span style="color: #cae682;">media</span>=<span style="color: #95e454;">"print"</span>&gt;
+<pre class="src src-html">&lt;<span style="color: #b58900;">link</span> <span style="color: #6c71c4;">href</span>=<span style="color: #2aa198;">"style.css"</span>    <span style="color: #6c71c4;">rel</span>=<span style="color: #2aa198;">"stylesheet"</span>&gt;
+&lt;<span style="color: #b58900;">link</span> <span style="color: #6c71c4;">href</span>=<span style="color: #2aa198;">"style.css"</span>    <span style="color: #6c71c4;">rel</span>=<span style="color: #2aa198;">"stylesheet"</span> <span style="color: #6c71c4;">media</span>=<span style="color: #2aa198;">"screen"</span>&gt;
+&lt;<span style="color: #b58900;">link</span> <span style="color: #6c71c4;">href</span>=<span style="color: #2aa198;">"portrait.css"</span> <span style="color: #6c71c4;">rel</span>=<span style="color: #2aa198;">"stylesheet"</span> <span style="color: #6c71c4;">media</span>=<span style="color: #2aa198;">"orientation:portrait"</span>&gt;
+&lt;<span style="color: #b58900;">link</span> <span style="color: #6c71c4;">href</span>=<span style="color: #2aa198;">"print.css"</span>    <span style="color: #6c71c4;">rel</span>=<span style="color: #2aa198;">"stylesheet"</span> <span style="color: #6c71c4;">media</span>=<span style="color: #2aa198;">"print"</span>&gt;
 </pre>
 
 
 </li>
 </ul>
 <ul>
-<li id="sec-9-4-3-2">Its better to mark the javascript as async so that browser does not have to pause the DOM construction.<br/>
+<li id="sec-8-4-3-2">Its better to mark the javascript as async so that browser does not have to pause the DOM construction.<br/>
 
 
 
-<pre class="src src-html">&lt;<span style="color: #cae682;">script</span> <span style="color: #cae682;">src</span>=<span style="color: #95e454;">"app.js"</span> async&gt;&lt;/<span style="color: #cae682;">script</span>&gt;
+<pre class="src src-html">&lt;<span style="color: #b58900;">script</span> <span style="color: #6c71c4;">src</span>=<span style="color: #2aa198;">"app.js"</span> async&gt;&lt;/<span style="color: #b58900;">script</span>&gt;
 </pre>
 
 
@@ -857,22 +845,64 @@ Hidden nodes are not included in the render tree.
 
 </div>
 
-<div id="outline-container-9-4-4" class="outline-4">
-<h4 id="sec-9-4-4"><span class="section-number-4">9.4.4</span> Event</h4>
-<div class="outline-text-4" id="text-9-4-4">
+<div id="outline-container-8-4-4" class="outline-4">
+<h4 id="sec-8-4-4"><span class="section-number-4">8.4.4</span> Event</h4>
+<div class="outline-text-4" id="text-8-4-4">
 
 <ul>
-<li id="sec-9-4-4-1">domInteractive marks when DOM is ready.<br/>
+<li id="sec-8-4-4-1">domInteractive marks when DOM is ready.<br/>
 </li>
 </ul>
 <ul>
-<li id="sec-9-4-4-2">domContentLoaded typically marks when both the DOM and CSSOM are ready.<br/>
+<li id="sec-8-4-4-2">domContentLoaded typically marks when both the DOM and CSSOM are ready.<br/>
 </li>
 </ul>
 <ul>
-<li id="sec-9-4-4-3">domComplete marks when the page and all of its subresources are ready.<br/>
+<li id="sec-8-4-4-3">domComplete marks when the page and all of its subresources are ready.<br/>
+
+
 </li>
 </ul>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-8-5" class="outline-3">
+<h3 id="sec-8-5"><span class="section-number-3">8.5</span> Caching</h3>
+<div class="outline-text-3" id="text-8-5">
+
+
+
+</div>
+
+<div id="outline-container-8-5-1" class="outline-4">
+<h4 id="sec-8-5-1"><span class="section-number-4">8.5.1</span> ETags</h4>
+<div class="outline-text-4" id="text-8-5-1">
+
+<p>When resource max-age has passed, the browser can send the ETags to server to decide if the resource need to reload.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-8-5-2" class="outline-4">
+<h4 id="sec-8-5-2"><span class="section-number-4">8.5.2</span> Cache-Control</h4>
+<div class="outline-text-4" id="text-8-5-2">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">Value</td><td class="left">Meaning</td></tr>
+<tr><td class="left">no-cache</td><td class="left">send request everytime with etags. Server will use the etags to decide weather to send the content back or a 304 header.</td></tr>
+<tr><td class="left">no-store</td><td class="left">send request everytime. It will get resource everytime from server.</td></tr>
+<tr><td class="left">public</td><td class="left">can cached by server side cache like CDN or by user's browser</td></tr>
+<tr><td class="left">private</td><td class="left">can cached by user's browser</td></tr>
+<tr><td class="left">max-age</td><td class="left">maximum time in seconds that the response is allowed to be resued</td></tr>
+</tbody>
+</table>
+
 </div>
 </div>
 </div>
@@ -880,8 +910,8 @@ Hidden nodes are not included in the render tree.
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2014-06-05T23:25+0900</p>
-<p class="author">Author: rex.houy</p>
+<p class="date">Date: 2015-01-05T13:23+0800</p>
+<p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
 

@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="gbk"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-							 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>sql</title>
-<meta http-equiv="Content-Type" content="text/html;charset=gbk"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="sql"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2014-02-07T00:07+0900"/>
-<meta name="author" content="rex.houy"/>
+<meta name="generated" content="2015-01-05T13:23+0800"/>
+<meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
 <link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
@@ -29,80 +29,132 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 º¯Êı</a></li>
+<li><a href="#sec-1">1 å‡½æ•°</a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> º¯Êı</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> å‡½æ•°</h2>
 <div class="outline-text-2" id="text-1">
 
-<p>1.minus×÷ÓÃ£º»ñÈ¡AÖĞÓĞ¶øBÖĞÃ»ÓĞµÄÊı¾İ¡£(Ö»Ö§³Öoracle)
+<p>1.minusä½œç”¨ï¼šè·å–Aä¸­æœ‰è€ŒBä¸­æ²¡æœ‰çš„æ•°æ®ã€‚(åªæ”¯æŒoracle)
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">select</span> a <span style="color: #e5786d;">from</span> A minus <span style="color: #8ac6f2; font-weight: bold;">select</span> b <span style="color: #e5786d;">from</span> B;
+<pre class="src src-sql">select a from A minus select b from B;
 </pre>
 
 
 <p>
-2.intersect×÷ÓÃ£º»ñÈ¡AÖĞºÍBÖĞÏàÍ¬µÄÊı¾İ¡£
+2.intersectä½œç”¨ï¼šè·å–Aä¸­å’ŒBä¸­ç›¸åŒçš„æ•°æ®ã€‚
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">select</span> a <span style="color: #e5786d;">from</span> A <span style="color: #8ac6f2; font-weight: bold;">intersect</span> <span style="color: #8ac6f2; font-weight: bold;">select</span> b <span style="color: #e5786d;">from</span> B;
+<pre class="src src-sql">select a from A intersect select b from B;
 </pre>
 
 
 <p>
-3.coalesce×÷ÓÃ£º½«nullÖµ×ªÎªĞèÒªµÄÖµ¡£
+3.coalesceä½œç”¨ï¼šå°†nullå€¼è½¬ä¸ºéœ€è¦çš„å€¼ã€‚
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">select</span> <span style="color: #e5786d;">coalesce</span>(a, 0) <span style="color: #e5786d;">from</span> A;
+<pre class="src src-sql">select coalesce(a, 0) from A;
 </pre>
 
 
 <p>
-4.length×÷ÓÃ£º»ñÈ¡×Ö·û´®³¤¶È¡£
+4.lengthä½œç”¨ï¼šè·å–å­—ç¬¦ä¸²é•¿åº¦ã€‚
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">select</span> <span style="color: #e5786d;">length</span>(a) <span style="color: #e5786d;">from</span> A;
+<pre class="src src-sql">select length(a) from A;
 </pre>
 
 
 <p>
-5.replace×÷ÓÃ£ºÌæ»»×Ö·û´®¡£(Ìæ»»aÖĞµÄ¡®1¡¯Îª¡®0¡¯)
+5.replaceä½œç”¨ï¼šæ›¿æ¢å­—ç¬¦ä¸²ã€‚(æ›¿æ¢aä¸­çš„â€˜1â€™ä¸ºâ€˜0â€™)
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">select</span> <span style="color: #e5786d;">replace</span>(a, <span style="color: #95e454;">'1'</span>, <span style="color: #95e454;">'0'</span>) <span style="color: #e5786d;">from</span> A;
+<pre class="src src-sql">select replace(a, <span style="color: #2aa198;">'1'</span>, <span style="color: #2aa198;">'0'</span>) from A;
 </pre>
 
 
 <p>
-6.case when &hellip; then &hellip; else &hellip; end×÷ÓÃ£ºÏàµ±ÓÚif elseÓï¾ä
+6.case when &hellip; then &hellip; else &hellip; endä½œç”¨ï¼šç›¸å½“äºif elseè¯­å¥
 </p>
 <p>
-7.substr×÷ÓÃ£º»ñÈ¡×Ó×Ö·û´®¡£(substr(a, start, length))
+7.substrä½œç”¨ï¼šè·å–å­å­—ç¬¦ä¸²ã€‚(substr(a, start, length))
 </p>
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">select</span> substr(a, 1, 2) <span style="color: #e5786d;">from</span> A;
+<pre class="src src-sql">select substr(a, 1, 2) from A;
 </pre>
 
 
 <p>
 8.avg()  sum()   min()  max()
-</p></div>
+</p>
+<p>
+9.insert or update
+</p>
+
+
+
+<pre class="src src-sql"><span style="color: #93a1a1; font-style: italic;">--Oracle (common)</span>
+MERGE INTO target_table dst
+USING (SELECT :col_a as a, :col_b as b FROM DUAL) src
+WHEN MATCHED THEN UPDATE dst SET dst.b = src.b
+WHEN NOT MATCHED THEN INSERT (dst.a, dst.b) VALUES (src.a, src.b)
+
+
+<span style="color: #93a1a1; font-style: italic;">--MySQL</span>
+INSERT INTO table (a,b,c) VALUES (1,2,3)
+        ON DUPLICATE KEY UPDATE c=c+1;
+
+</pre>
+
+
+<ol>
+<li>better user UNION ALL insdead of UNION. because UNION cost a lot.
+</li>
+</ol>
+
+
+
+<ol>
+<li>window function
+</li>
+</ol>
+
+
+
+
+
+<pre class="src src-sql"><span style="color: #93a1a1; font-style: italic;">-- its a good practice to use window functions instead of group by</span>
+SELECT SalesOrderID, ProductID, OrderQty
+                ,SUM(OrderQty) OVER(PARTITION BY SalesOrderID ORDER BY SalesOrderID) AS Total
+                ,AVG(OrderQty) OVER(PARTITION BY SalesOrderID) AS "Avg"
+                ,COUNT(OrderQty) OVER(PARTITION BY SalesOrderID) AS "Count"
+                ,MIN(OrderQty) OVER(PARTITION BY SalesOrderID) AS "Min"
+                ,MAX(OrderQty) OVER(PARTITION BY SalesOrderID) AS "Max"
+FROM Sales.SalesOrderDetail
+WHERE SalesOrderID IN(43659,43664);
+
+SELECT a, b, ROW_NUMBER() OVER(ORDER BY a) n
+WHERE n BETWEEN 10 AND 20
+
+</pre>
+
+</div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2014-02-07T00:07+0900</p>
-<p class="author">Author: rex.houy</p>
+<p class="date">Date: 2015-01-05T13:23+0800</p>
+<p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
 

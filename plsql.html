@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="gbk"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-							 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>plsql</title>
-<meta http-equiv="Content-Type" content="text/html;charset=gbk"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="plsql"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2014-02-07T00:07+0900"/>
-<meta name="author" content="rex.houy"/>
+<meta name="generated" content="2015-01-05T13:22+0800"/>
+<meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
 <link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
@@ -29,17 +29,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 注释</a></li>
-<li><a href="#sec-2">2 申明变量</a></li>
-<li><a href="#sec-3">3 变量类型</a></li>
-<li><a href="#sec-4">4 定义类型</a></li>
-<li><a href="#sec-5">5 关于NULL</a></li>
-<li><a href="#sec-6">6 IF语句</a></li>
-<li><a href="#sec-7">7 循环</a></li>
+<li><a href="#sec-1">1 娉ㄩ噴</a></li>
+<li><a href="#sec-2">2 鐢虫槑鍙橀噺</a></li>
+<li><a href="#sec-3">3 鍙橀噺绫诲瀷</a></li>
+<li><a href="#sec-4">4 瀹氫箟绫诲瀷</a></li>
+<li><a href="#sec-5">5 鍏充簬NULL</a></li>
+<li><a href="#sec-6">6 IF璇彞</a></li>
+<li><a href="#sec-7">7 寰幆</a></li>
 <li><a href="#sec-8">8 GOTO</a></li>
 <li><a href="#sec-9">9 CURSOR</a></li>
-<li><a href="#sec-10">10 动态SQL</a></li>
-<li><a href="#sec-11">11 自定义异常</a></li>
+<li><a href="#sec-10">10 鍔ㄦ�丼QL</a></li>
+<li><a href="#sec-11">11 鑷畾涔夊紓甯�</a></li>
 <li><a href="#sec-12">12 PROCEDURE</a></li>
 <li><a href="#sec-13">13 FUNCTION</a></li>
 <li><a href="#sec-14">14 PACKAGE</a></li>
@@ -50,26 +50,26 @@
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> 注释</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> 娉ㄩ噴</h2>
 <div class="outline-text-2" id="text-1">
 
-<p>   &ndash;单行注释
+<p>         &ndash;鍗曡娉ㄩ噴
 </p>
 <p>
-	 <i>*多行注释*</i>
+         <i>*澶氳娉ㄩ噴*</i>
 </p>
 </div>
 
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> 申明变量</h2>
+<h2 id="sec-2"><span class="section-number-2">2</span> 鐢虫槑鍙橀噺</h2>
 <div class="outline-text-2" id="text-2">
 
 
 
 
-<pre class="src src-sql">var_name [CONSTANT] var_type [<span style="color: #8ac6f2; font-weight: bold;">NOT</span> NUL] [:=<span style="color: #8ac6f2; font-weight: bold;">value</span>]|[<span style="color: #8ac6f2; font-weight: bold;">DEFAULT</span> <span style="color: #8ac6f2; font-weight: bold;">value</span>];
+<pre class="src src-sql">var_name [CONSTANT] var_type [NOT NUL] [:=value]|[DEFAULT value];
 </pre>
 
 
@@ -78,107 +78,107 @@
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> 变量类型</h2>
+<h2 id="sec-3"><span class="section-number-2">3</span> 鍙橀噺绫诲瀷</h2>
 <div class="outline-text-2" id="text-3">
 
 
 <p>
-table.field%TYPE:该类型在运行时可以随着表里字段类型变化，不会继承表的NOT NULL属性；
+table.field%TYPE:璇ョ被鍨嬪湪杩愯鏃跺彲浠ラ殢鐫�琛ㄩ噷瀛楁绫诲瀷鍙樺寲锛屼笉浼氱户鎵胯〃鐨凬OT NULL灞炴�э紱
 </p>
 <p>
-table%rowtype：也可以是cursor%rowtype，从而只得到表的部分字段或多个表的字段；
+table%rowtype锛氫篃鍙互鏄痗ursor%rowtype锛屼粠鑰屽彧寰楀埌琛ㄧ殑閮ㄥ垎瀛楁鎴栧涓〃鐨勫瓧娈碉紱
 </p>
 </div>
 
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> 定义类型</h2>
+<h2 id="sec-4"><span class="section-number-2">4</span> 瀹氫箟绫诲瀷</h2>
 <div class="outline-text-2" id="text-4">
 
 
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">TYPE</span> record_name <span style="color: #8ac6f2; font-weight: bold;">IS</span> RECORD(
- field1 type1 [<span style="color: #8ac6f2; font-weight: bold;">NOT</span> <span style="color: #8ac6f2; font-weight: bold;">NULL</span>] [:=expr1],
- field2 type2 [<span style="color: #8ac6f2; font-weight: bold;">NOT</span> <span style="color: #8ac6f2; font-weight: bold;">NULL</span>] [:=expr2],
+<pre class="src src-sql">TYPE record_name IS RECORD(
+ field1 type1 [NOT NULL] [:=expr1],
+ field2 type2 [NOT NULL] [:=expr2],
  ...
 );
 
-<span style="color: #8ac6f2; font-weight: bold;">TYPE</span> some_type <span style="color: #8ac6f2; font-weight: bold;">IS</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> <span style="color: #8ac6f2; font-weight: bold;">OF</span> base_type;
-<span style="color: #99968b;">--[example:]</span>
-<span style="color: #8ac6f2; font-weight: bold;">DECLARE</span>
- <span style="color: #8ac6f2; font-weight: bold;">TYPE</span> nest_type <span style="color: #8ac6f2; font-weight: bold;">IS</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> <span style="color: #8ac6f2; font-weight: bold;">OF</span> varchar2(10);
+TYPE some_type IS TABLE OF base_type;
+<span style="color: #93a1a1; font-style: italic;">--[example:]</span>
+DECLARE
+ TYPE nest_type IS TABLE OF varchar2(10);
  nest nest_type;
-<span style="color: #8ac6f2; font-weight: bold;">BEGIN</span>
- nest := nest_type(<span style="color: #95e454;">'a'</span>, <span style="color: #95e454;">'b'</span>, <span style="color: #95e454;">'c'</span>);
- <span style="color: #8ac6f2; font-weight: bold;">FOR</span> i <span style="color: #8ac6f2; font-weight: bold;">IN</span> nest.<span style="color: #8ac6f2; font-weight: bold;">FIRST</span> .. nest.<span style="color: #8ac6f2; font-weight: bold;">LAST</span> LOOP
-	<span style="color: #8ac6f2; font-weight: bold;">IF</span> nest(i) = <span style="color: #95e454;">'a'</span> <span style="color: #8ac6f2; font-weight: bold;">THEN</span>
-	 <span style="color: #8ac6f2; font-weight: bold;">NULL</span>;
-	<span style="color: #8ac6f2; font-weight: bold;">END</span> <span style="color: #8ac6f2; font-weight: bold;">IF</span>;
- <span style="color: #8ac6f2; font-weight: bold;">END</span> LOOP;
-<span style="color: #8ac6f2; font-weight: bold;">END</span>;
+BEGIN
+ nest := nest_type(<span style="color: #2aa198;">'a'</span>, <span style="color: #2aa198;">'b'</span>, <span style="color: #2aa198;">'c'</span>);
+ FOR i IN nest.FIRST .. nest.LAST LOOP
+        IF nest(i) = <span style="color: #2aa198;">'a'</span> THEN
+         NULL;
+        END IF;
+ END LOOP;
+END;
 
-<span style="color: #99968b;">--associative array:&#65288;&#31867;&#20284;&#20110;map&#65289;</span>
-<span style="color: #8ac6f2; font-weight: bold;">TYPE</span> table_type <span style="color: #8ac6f2; font-weight: bold;">IS</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> <span style="color: #8ac6f2; font-weight: bold;">OF</span> base_type <span style="color: #8ac6f2; font-weight: bold;">INDEX</span> <span style="color: #8ac6f2; font-weight: bold;">BY</span> index_type;
-<span style="color: #99968b;">--[example:]</span>
-<span style="color: #8ac6f2; font-weight: bold;">DECLARE</span>
- <span style="color: #8ac6f2; font-weight: bold;">TYPE</span> population <span style="color: #8ac6f2; font-weight: bold;">IS</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> <span style="color: #8ac6f2; font-weight: bold;">OF</span> <span style="color: #8ac6f2; font-weight: bold;">NUMBER</span> <span style="color: #8ac6f2; font-weight: bold;">INDEX</span> <span style="color: #8ac6f2; font-weight: bold;">BY</span> VARCHAR2(10);
+<span style="color: #93a1a1; font-style: italic;">--associative array:&#65288;&#31867;&#20284;&#20110;map&#65289;</span>
+TYPE table_type IS TABLE OF base_type INDEX BY index_type;
+<span style="color: #93a1a1; font-style: italic;">--[example:]</span>
+DECLARE
+ TYPE population IS TABLE OF NUMBER INDEX BY VARCHAR2(10);
  county_population population;
-<span style="color: #8ac6f2; font-weight: bold;">BEGIN</span>
- <span style="color: #e5786d;">count</span> <span style="color: #8ac6f2; font-weight: bold;">NUMBER</span>;
- county_population(<span style="color: #95e454;">'china'</span>) := 10000;
- county_population(<span style="color: #95e454;">'japan'</span>) := 4000;
- <span style="color: #e5786d;">count</span> := county_population(<span style="color: #95e454;">'china'</span>);
-<span style="color: #8ac6f2; font-weight: bold;">END</span>
+BEGIN
+ count NUMBER;
+ county_population(<span style="color: #2aa198;">'china'</span>) := 10000;
+ county_population(<span style="color: #2aa198;">'japan'</span>) := 4000;
+ count := county_population(<span style="color: #2aa198;">'china'</span>);
+END
 
-<span style="color: #99968b;">--varray:(&#25968;&#32452;&#65292;&#38656;&#35201;&#25351;&#23450;&#38271;&#24230;)</span>
-<span style="color: #99968b;">--&#23450;&#20041;&#19968;&#20010;&#38271;&#24230;&#20026;n&#30340;&#25968;&#32452;&#65292;&#31867;&#22411;&#20026;type&#65292;&#20854;&#20013;type&#19981;&#33021;&#20026;%rowtype</span>
-<span style="color: #8ac6f2; font-weight: bold;">TYPE</span> table_type <span style="color: #8ac6f2; font-weight: bold;">IS</span> VARRAY(n) <span style="color: #8ac6f2; font-weight: bold;">OF</span> <span style="color: #8ac6f2; font-weight: bold;">type</span>;
-<span style="color: #99968b;">--&#22312;&#36825;&#37324;type&#21487;&#20197;&#26159;%rowtype</span>
-<span style="color: #8ac6f2; font-weight: bold;">TYPE</span> table_type <span style="color: #8ac6f2; font-weight: bold;">IS</span> VARRAY <span style="color: #8ac6f2; font-weight: bold;">OF</span> <span style="color: #8ac6f2; font-weight: bold;">type</span>;
+<span style="color: #93a1a1; font-style: italic;">--varray:(&#25968;&#32452;&#65292;&#38656;&#35201;&#25351;&#23450;&#38271;&#24230;)</span>
+<span style="color: #93a1a1; font-style: italic;">--&#23450;&#20041;&#19968;&#20010;&#38271;&#24230;&#20026;n&#30340;&#25968;&#32452;&#65292;&#31867;&#22411;&#20026;type&#65292;&#20854;&#20013;type&#19981;&#33021;&#20026;%rowtype</span>
+TYPE table_type IS VARRAY(n) OF type;
+<span style="color: #93a1a1; font-style: italic;">--&#22312;&#36825;&#37324;type&#21487;&#20197;&#26159;%rowtype</span>
+TYPE table_type IS VARRAY OF type;
 
-<span style="color: #99968b;">--&#36890;&#36807;select&#23558;&#25968;&#25454;&#25554;&#20837;&#21040;&#21464;&#37327;&#20013;&#65306;</span>
-<span style="color: #99968b;">--1.&#21333;&#26465;&#35760;&#24405;&#65306;</span>
-<span style="color: #8ac6f2; font-weight: bold;">SELECT</span> <span style="color: #8ac6f2; font-weight: bold;">column</span> <span style="color: #8ac6f2; font-weight: bold;">INTO</span> var <span style="color: #e5786d;">FROM</span> <span style="color: #8ac6f2; font-weight: bold;">table</span>&#65307;
-<span style="color: #99968b;">--2.&#22810;&#26465;&#35760;&#24405;&#65306;</span>
-<span style="color: #8ac6f2; font-weight: bold;">SELECT</span> <span style="color: #8ac6f2; font-weight: bold;">column</span> BULK COLLECT <span style="color: #8ac6f2; font-weight: bold;">INTO</span> var <span style="color: #e5786d;">FROM</span> <span style="color: #8ac6f2; font-weight: bold;">table</span>&#65307;
-<span style="color: #99968b;">--[example:]</span>
-<span style="color: #8ac6f2; font-weight: bold;">DECLARE</span>
- <span style="color: #8ac6f2; font-weight: bold;">TYPE</span> id_type <span style="color: #8ac6f2; font-weight: bold;">IS</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> <span style="color: #8ac6f2; font-weight: bold;">OF</span> temp.id%<span style="color: #8ac6f2; font-weight: bold;">TYPE</span>;
+<span style="color: #93a1a1; font-style: italic;">--&#36890;&#36807;select&#23558;&#25968;&#25454;&#25554;&#20837;&#21040;&#21464;&#37327;&#20013;&#65306;</span>
+<span style="color: #93a1a1; font-style: italic;">--1.&#21333;&#26465;&#35760;&#24405;&#65306;</span>
+SELECT column INTO var FROM table&#65307;
+<span style="color: #93a1a1; font-style: italic;">--2.&#22810;&#26465;&#35760;&#24405;&#65306;</span>
+SELECT column BULK COLLECT INTO var FROM table&#65307;
+<span style="color: #93a1a1; font-style: italic;">--[example:]</span>
+DECLARE
+ TYPE id_type IS TABLE OF temp.id%TYPE;
  all_id id_type;
  single_id id_type;
-<span style="color: #8ac6f2; font-weight: bold;">BEGIN</span>
- <span style="color: #8ac6f2; font-weight: bold;">SELECT</span> id <span style="color: #8ac6f2; font-weight: bold;">INTO</span> single_id <span style="color: #e5786d;">FROM</span> temp <span style="color: #8ac6f2; font-weight: bold;">WHERE</span> <span style="color: #8ac6f2; font-weight: bold;">name</span>=<span style="color: #95e454;">'xx'</span>; <span style="color: #99968b;">--&#33719;&#21462;&#21333;&#26465;&#25968;&#25454;</span>
- <span style="color: #8ac6f2; font-weight: bold;">SELECT</span> id BULK COLLECT <span style="color: #8ac6f2; font-weight: bold;">INTO</span> all_id <span style="color: #e5786d;">FROM</span> temp;  <span style="color: #99968b;">--&#33719;&#21462;&#22810;&#26465;&#25968;&#25454;</span>
-<span style="color: #8ac6f2; font-weight: bold;">END</span>;
+BEGIN
+ SELECT id INTO single_id FROM temp WHERE name=<span style="color: #2aa198;">'xx'</span>; <span style="color: #93a1a1; font-style: italic;">--&#33719;&#21462;&#21333;&#26465;&#25968;&#25454;</span>
+ SELECT id BULK COLLECT INTO all_id FROM temp;  <span style="color: #93a1a1; font-style: italic;">--&#33719;&#21462;&#22810;&#26465;&#25968;&#25454;</span>
+END;
 /
 
-<span style="color: #99968b;">--&#22312;for&#35821;&#21477;&#20013;&#30452;&#25509;&#23558;&#25968;&#25454;&#25554;&#20837;&#21040;&#21464;&#37327;&#20013;&#65306;</span>
-<span style="color: #99968b;">--[example:]</span>
-<span style="color: #8ac6f2; font-weight: bold;">DECLARE</span>
- <span style="color: #8ac6f2; font-weight: bold;">TYPE</span> temp_typ <span style="color: #8ac6f2; font-weight: bold;">IS</span> <span style="color: #8ac6f2; font-weight: bold;">TABLE</span> <span style="color: #8ac6f2; font-weight: bold;">OF</span> temp%ROWTYPE;
+<span style="color: #93a1a1; font-style: italic;">--&#22312;for&#35821;&#21477;&#20013;&#30452;&#25509;&#23558;&#25968;&#25454;&#25554;&#20837;&#21040;&#21464;&#37327;&#20013;&#65306;</span>
+<span style="color: #93a1a1; font-style: italic;">--[example:]</span>
+DECLARE
+ TYPE temp_typ IS TABLE OF temp%ROWTYPE;
  item temp_typ;
-<span style="color: #8ac6f2; font-weight: bold;">BEGIN</span>
- <span style="color: #8ac6f2; font-weight: bold;">FOR</span> item <span style="color: #8ac6f2; font-weight: bold;">in</span> (<span style="color: #8ac6f2; font-weight: bold;">SELECT</span> * <span style="color: #e5786d;">FROM</span> temp)
+BEGIN
+ FOR item in (SELECT * FROM temp)
  LOOP
-	dbms_output.put_line(item.<span style="color: #8ac6f2; font-weight: bold;">name</span>);
- <span style="color: #8ac6f2; font-weight: bold;">END</span> LOOP;
-<span style="color: #8ac6f2; font-weight: bold;">END</span>;
+        dbms_output.put_line(item.name);
+ END LOOP;
+END;
 /
 
-<span style="color: #8ac6f2; font-weight: bold;">CASE</span> selector
- <span style="color: #8ac6f2; font-weight: bold;">WHEN</span> expression1 <span style="color: #8ac6f2; font-weight: bold;">THEN</span> result1
- <span style="color: #8ac6f2; font-weight: bold;">WHEN</span> expression2 <span style="color: #8ac6f2; font-weight: bold;">THEN</span> result2
- <span style="color: #8ac6f2; font-weight: bold;">ELSE</span> result3
-<span style="color: #8ac6f2; font-weight: bold;">END</span>
+CASE selector
+ WHEN expression1 THEN result1
+ WHEN expression2 THEN result2
+ ELSE result3
+END
 
-<span style="color: #8ac6f2; font-weight: bold;">CASE</span>
- <span style="color: #8ac6f2; font-weight: bold;">WHEN</span> condition1 <span style="color: #8ac6f2; font-weight: bold;">THEN</span> result1
- <span style="color: #8ac6f2; font-weight: bold;">WHEN</span> condition2 <span style="color: #8ac6f2; font-weight: bold;">THEN</span> result2
- <span style="color: #8ac6f2; font-weight: bold;">ELSE</span> result3
-<span style="color: #8ac6f2; font-weight: bold;">END</span>
-<span style="color: #99968b;">--&#21487;&#29992;&#20110;&#20195;&#26367;&#22823;&#37327;&#30340;if&#35821;&#21477;</span>
+CASE
+ WHEN condition1 THEN result1
+ WHEN condition2 THEN result2
+ ELSE result3
+END
+<span style="color: #93a1a1; font-style: italic;">--&#21487;&#29992;&#20110;&#20195;&#26367;&#22823;&#37327;&#30340;if&#35821;&#21477;</span>
 </pre>
 
 
@@ -187,32 +187,32 @@ table%rowtype：也可以是cursor%rowtype，从而只得到表的部分字段或多个表的字段；
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> 关于NULL</h2>
+<h2 id="sec-5"><span class="section-number-2">5</span> 鍏充簬NULL</h2>
 <div class="outline-text-2" id="text-5">
 
-<p>  包含NULL的比较语句返回NULL；
-	在判断语句的条件中如果得到NULL则该条件语句中的语句不被执行；
-	在case语句中使用WHEN NULL，如果selector是NULL该语句内的内容也不会被执行；
+<p>        鍖呭惈NULL鐨勬瘮杈冭鍙ヨ繑鍥濶ULL锛�
+        鍦ㄥ垽鏂鍙ョ殑鏉′欢涓鏋滃緱鍒癗ULL鍒欒鏉′欢璇彞涓殑璇彞涓嶈鎵ц锛�
+        鍦╟ase璇彞涓娇鐢╓HEN NULL锛屽鏋渟elector鏄疦ULL璇ヨ鍙ュ唴鐨勫唴瀹逛篃涓嶄細琚墽琛岋紱
 </p>
 </div>
 
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> IF语句</h2>
+<h2 id="sec-6"><span class="section-number-2">6</span> IF璇彞</h2>
 <div class="outline-text-2" id="text-6">
 
 
 
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">IF</span> condition <span style="color: #8ac6f2; font-weight: bold;">THEN</span>
+<pre class="src src-sql">IF condition THEN
  expression
-<span style="color: #8ac6f2; font-weight: bold;">ELSEIF</span> condition <span style="color: #8ac6f2; font-weight: bold;">THEN</span>
+ELSEIF condition THEN
  expression
-<span style="color: #8ac6f2; font-weight: bold;">ELSE</span>
+ELSE
  expression
-<span style="color: #8ac6f2; font-weight: bold;">END</span> <span style="color: #8ac6f2; font-weight: bold;">IF</span>;
+END IF;
 </pre>
 
 
@@ -221,46 +221,46 @@ table%rowtype：也可以是cursor%rowtype，从而只得到表的部分字段或多个表的字段；
 </div>
 
 <div id="outline-container-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> 循环</h2>
+<h2 id="sec-7"><span class="section-number-2">7</span> 寰幆</h2>
 <div class="outline-text-2" id="text-7">
 
 
 
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">FOR</span> i <span style="color: #8ac6f2; font-weight: bold;">IN</span> 1..10 LOOP
+<pre class="src src-sql">FOR i IN 1..10 LOOP
  expression;
-<span style="color: #8ac6f2; font-weight: bold;">END</span> LOOP;
+END LOOP;
 
 LOOP
  expression&#65307;
- EXIT; <span style="color: #99968b;">--&#31435;&#21363;&#36339;&#20986;&#24490;&#29615;</span>
-<span style="color: #8ac6f2; font-weight: bold;">END</span> LOOP;
+ EXIT; <span style="color: #93a1a1; font-style: italic;">--&#31435;&#21363;&#36339;&#20986;&#24490;&#29615;</span>
+END LOOP;
 
 LOOP
- EXIT <span style="color: #8ac6f2; font-weight: bold;">WHEN</span> condition;
-<span style="color: #8ac6f2; font-weight: bold;">END</span> LOOP;
+ EXIT WHEN condition;
+END LOOP;
 
-<span style="color: #99968b;">--&#21487;&#20197;&#36890;&#36807;&#20197;&#19979;&#20004;&#31181;&#26041;&#24335;&#20026;loop&#21462;&#21517;&#24182;&#22312;&#24490;&#29615;&#20013;&#25351;&#23450;&#30452;&#25509;&#36339;&#20986;&#26576;&#19968;&#24490;&#29615;&#12290;</span>
+<span style="color: #93a1a1; font-style: italic;">--&#21487;&#20197;&#36890;&#36807;&#20197;&#19979;&#20004;&#31181;&#26041;&#24335;&#20026;loop&#21462;&#21517;&#24182;&#22312;&#24490;&#29615;&#20013;&#25351;&#23450;&#30452;&#25509;&#36339;&#20986;&#26576;&#19968;&#24490;&#29615;&#12290;</span>
 &lt;&lt;laber1&gt;&gt;
 LOOP
- <span style="color: #99968b;">--expression&#65307;</span>
+ <span style="color: #93a1a1; font-style: italic;">--expression&#65307;</span>
 LOOP
- <span style="color: #99968b;">--expression&#65307;</span>
- EXIT laber1 <span style="color: #8ac6f2; font-weight: bold;">WHEN</span> condition;
- <span style="color: #8ac6f2; font-weight: bold;">END</span> LOOP;
-<span style="color: #8ac6f2; font-weight: bold;">END</span> LOOP;
+ <span style="color: #93a1a1; font-style: italic;">--expression&#65307;</span>
+ EXIT laber1 WHEN condition;
+ END LOOP;
+END LOOP;
 
 LOOP
  LOOP
-	EXIT laber1;
- <span style="color: #8ac6f2; font-weight: bold;">END</span> LOOP laber2;
-<span style="color: #8ac6f2; font-weight: bold;">END</span> LOOP laber1;
+        EXIT laber1;
+ END LOOP laber2;
+END LOOP laber1;
 
 
 WHILE condition LOOP
  expression
-<span style="color: #8ac6f2; font-weight: bold;">END</span> LOOP;
+END LOOP;
 </pre>
 
 
@@ -275,11 +275,11 @@ WHILE condition LOOP
 
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">BEGIN</span>
+<pre class="src src-sql">BEGIN
  &lt;&lt;lable&gt;&gt;
  expression;
- <span style="color: #8ac6f2; font-weight: bold;">GOTO</span> lable;
-<span style="color: #8ac6f2; font-weight: bold;">END</span>;
+ GOTO lable;
+END;
 </pre>
 
 
@@ -291,74 +291,74 @@ WHILE condition LOOP
 <h2 id="sec-9"><span class="section-number-2">9</span> CURSOR</h2>
 <div class="outline-text-2" id="text-9">
 
-<p>使用cursor:
+<p>浣跨敤cursor:
 </p>
 <p>
-定义cursor：
+瀹氫箟cursor锛�
 </p>
 
 
-<pre class="src src-sql">  <span style="color: #8ac6f2; font-weight: bold;">CURSOR</span> <span style="color: #8ac6f2; font-weight: bold;">cursor_name</span>(parameter1 type1, parameter2, type2) <span style="color: #8ac6f2; font-weight: bold;">IS</span> query_string;
+<pre class="src src-sql">        CURSOR cursor_name(parameter1 type1, parameter2, type2) IS query_string;
 
-<span style="color: #99968b;">--&#36941;&#21382;cursor&#65306;</span>
-<span style="color: #99968b;">--&#26041;&#27861;1&#65306;</span>
-<span style="color: #8ac6f2; font-weight: bold;">OPEN</span> <span style="color: #8ac6f2; font-weight: bold;">cursor_name</span>
+<span style="color: #93a1a1; font-style: italic;">--&#36941;&#21382;cursor&#65306;</span>
+<span style="color: #93a1a1; font-style: italic;">--&#26041;&#27861;1&#65306;</span>
+OPEN cursor_name
 LOOP
- <span style="color: #8ac6f2; font-weight: bold;">fetch</span> <span style="color: #8ac6f2; font-weight: bold;">cursor_name</span> <span style="color: #8ac6f2; font-weight: bold;">into</span> <span style="color: #8ac6f2; font-weight: bold;">variable</span>;
- EXIT <span style="color: #8ac6f2; font-weight: bold;">WHEN</span> <span style="color: #8ac6f2; font-weight: bold;">cursor_name</span>%NOTFOUND;
-	...
-<span style="color: #8ac6f2; font-weight: bold;">END</span> LOOP;
-<span style="color: #8ac6f2; font-weight: bold;">CLOSE</span> <span style="color: #8ac6f2; font-weight: bold;">cursor_name</span>;
+ fetch cursor_name into variable;
+ EXIT WHEN cursor_name%NOTFOUND;
+        ...
+END LOOP;
+CLOSE cursor_name;
 
-<span style="color: #99968b;">--&#26041;&#27861;2&#65306;</span>
-<span style="color: #8ac6f2; font-weight: bold;">FOR</span> <span style="color: #8ac6f2; font-weight: bold;">variable</span> <span style="color: #8ac6f2; font-weight: bold;">IN</span> <span style="color: #8ac6f2; font-weight: bold;">cursor_name</span> LOOP
+<span style="color: #93a1a1; font-style: italic;">--&#26041;&#27861;2&#65306;</span>
+FOR variable IN cursor_name LOOP
  ...
-<span style="color: #8ac6f2; font-weight: bold;">END</span> LOOP;
+END LOOP;
 
-<span style="color: #99968b;">--&#26041;&#27861;3&#65306;</span>
-<span style="color: #8ac6f2; font-weight: bold;">OPEN</span> <span style="color: #8ac6f2; font-weight: bold;">cursor_name</span>;
-<span style="color: #8ac6f2; font-weight: bold;">FETCH</span> <span style="color: #8ac6f2; font-weight: bold;">cursor_name</span> BULK COLLECT <span style="color: #8ac6f2; font-weight: bold;">INTO</span> <span style="color: #8ac6f2; font-weight: bold;">variable</span>;
-<span style="color: #8ac6f2; font-weight: bold;">CLOSE</span> <span style="color: #8ac6f2; font-weight: bold;">cursor_name</span>;
+<span style="color: #93a1a1; font-style: italic;">--&#26041;&#27861;3&#65306;</span>
+OPEN cursor_name;
+FETCH cursor_name BULK COLLECT INTO variable;
+CLOSE cursor_name;
 
-<span style="color: #99968b;">--ref cursor:(cursor&#31867;&#20284;&#19982;&#25968;&#32452;&#65292;&#32780;ref cursor&#31867;&#20284;&#20110;&#25351;&#38024;.&#26377;&#20004;&#31181;ref cursor&#65292;&#24369;&#31867;&#22411;(&#19981;&#21547;return)&#21644;&#24378;&#31867;&#22411;(&#21547;&#26377;return))</span>
+<span style="color: #93a1a1; font-style: italic;">--ref cursor:(cursor&#31867;&#20284;&#19982;&#25968;&#32452;&#65292;&#32780;ref cursor&#31867;&#20284;&#20110;&#25351;&#38024;.&#26377;&#20004;&#31181;ref cursor&#65292;&#24369;&#31867;&#22411;(&#19981;&#21547;return)&#21644;&#24378;&#31867;&#22411;(&#21547;&#26377;return))</span>
 
-<span style="color: #99968b;">--&#22312;package&#20013;&#23450;&#20041;cursor type&#65306;</span>
-<span style="color: #8ac6f2; font-weight: bold;">create</span> package <span style="color: #cae682;">package_name</span> <span style="color: #8ac6f2; font-weight: bold;">as</span>
- <span style="color: #8ac6f2; font-weight: bold;">type</span> cursor_type_name <span style="color: #8ac6f2; font-weight: bold;">is</span> <span style="color: #92a65e; font-weight: bold;">ref</span> <span style="color: #8ac6f2; font-weight: bold;">cursor</span> [<span style="color: #8ac6f2; font-weight: bold;">return</span> <span style="color: #8ac6f2; font-weight: bold;">table</span>%rowtype];
-<span style="color: #8ac6f2; font-weight: bold;">end</span> package_name;
+<span style="color: #93a1a1; font-style: italic;">--&#22312;package&#20013;&#23450;&#20041;cursor type&#65306;</span>
+create package package_name as
+ type cursor_type_name is ref cursor [return table%rowtype];
+end package_name;
 
-<span style="color: #99968b;">--&#20351;&#29992;package&#20013;&#23450;&#20041;&#30340;cursor&#31867;&#22411;&#65306;</span>
-<span style="color: #8ac6f2; font-weight: bold;">create</span> <span style="color: #8ac6f2; font-weight: bold;">procedure</span> <span style="color: #cae682;">procedure_name</span>(p_name <span style="color: #8ac6f2; font-weight: bold;">OUT</span> package_name.cursor_type_name) <span style="color: #8ac6f2; font-weight: bold;">as</span>
-<span style="color: #8ac6f2; font-weight: bold;">begin</span>
- <span style="color: #8ac6f2; font-weight: bold;">open</span> p_name <span style="color: #8ac6f2; font-weight: bold;">for</span> <span style="color: #8ac6f2; font-weight: bold;">select</span> * <span style="color: #e5786d;">from</span> ...;
-<span style="color: #8ac6f2; font-weight: bold;">end</span>;
+<span style="color: #93a1a1; font-style: italic;">--&#20351;&#29992;package&#20013;&#23450;&#20041;&#30340;cursor&#31867;&#22411;&#65306;</span>
+create procedure procedure_name(p_name OUT package_name.cursor_type_name) as
+begin
+ open p_name for select * from ...;
+end;
 </pre>
 
 
 <p>
-PL/SQL执行DML语句后，有四个属性保存在游标属性中，分别为
+PL/SQL鎵цDML璇彞鍚庯紝鏈夊洓涓睘鎬т繚瀛樺湪娓告爣灞炴�т腑锛屽垎鍒负
 </p>
 <p>
-SQL%ROWCOUNT,返回DML语句影响的行数；
+SQL%ROWCOUNT,杩斿洖DML璇彞褰卞搷鐨勮鏁帮紱
 </p>
 <p>
-SQL%FOUND, 返回true如果DML语句影响的行数大于0；
+SQL%FOUND, 杩斿洖true濡傛灉DML璇彞褰卞搷鐨勮鏁板ぇ浜�0锛�
 </p>
 <p>
-SQL%NOTFOUND, 与SQL%FOUND相反；
+SQL%NOTFOUND, 涓嶴QL%FOUND鐩稿弽锛�
 </p>
 <p>
-SQL%ISOPEN，返回true如果游标处于打开状态，如果使用隐式的游标如执行insert into&hellip;则将创建一个隐式的游标来处理，则当使用该属性时得到的结果一定为false；
+SQL%ISOPEN锛岃繑鍥瀟rue濡傛灉娓告爣澶勪簬鎵撳紑鐘舵�侊紝濡傛灉浣跨敤闅愬紡鐨勬父鏍囧鎵цinsert into&hellip;鍒欏皢鍒涘缓涓�涓殣寮忕殑娓告爣鏉ュ鐞嗭紝鍒欏綋浣跨敤璇ュ睘鎬ф椂寰楀埌鐨勭粨鏋滀竴瀹氫负false锛�
 </p>
 
 
 
-<pre class="src src-sql"><span style="color: #99968b;">--[example:]</span>
-<span style="color: #8ac6f2; font-weight: bold;">BEGIN</span>
- <span style="color: #8ac6f2; font-weight: bold;">UPDATE</span> temp <span style="color: #8ac6f2; font-weight: bold;">SET</span> id = id + 1;
- dbms_output.put_line(<span style="color: #8ac6f2; font-weight: bold;">SQL</span>%ROWCOUNT);
-<span style="color: #8ac6f2; font-weight: bold;">END</span>;
-/ <span style="color: #99968b;">--&#23558;&#24471;&#21040;update&#35821;&#21477;&#25152;&#26356;&#26032;&#30340;&#34892;&#25968;&#12290;</span>
+<pre class="src src-sql"><span style="color: #93a1a1; font-style: italic;">--[example:]</span>
+BEGIN
+ UPDATE temp SET id = id + 1;
+ dbms_output.put_line(SQL%ROWCOUNT);
+END;
+/       <span style="color: #93a1a1; font-style: italic;">--&#23558;&#24471;&#21040;update&#35821;&#21477;&#25152;&#26356;&#26032;&#30340;&#34892;&#25968;&#12290;</span>
 </pre>
 
 </div>
@@ -366,30 +366,30 @@ SQL%ISOPEN，返回true如果游标处于打开状态，如果使用隐式的游标如执行insert into&he
 </div>
 
 <div id="outline-container-10" class="outline-2">
-<h2 id="sec-10"><span class="section-number-2">10</span> 动态SQL</h2>
+<h2 id="sec-10"><span class="section-number-2">10</span> 鍔ㄦ�丼QL</h2>
 <div class="outline-text-2" id="text-10">
 
 
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">variable</span> x <span style="color: #8ac6f2; font-weight: bold;">number</span>;
-<span style="color: #8ac6f2; font-weight: bold;">exec</span> :x := 12;
-<span style="color: #8ac6f2; font-weight: bold;">SELECT</span> * <span style="color: #e5786d;">FROM</span> some_table <span style="color: #8ac6f2; font-weight: bold;">WHERE</span> some_column = :x;
+<pre class="src src-sql">variable x number;
+exec :x := 12;
+SELECT * FROM some_table WHERE some_column = :x;
 
-<span style="color: #99968b;">--&#20351;&#29992;EXECUTE IMMEDIATE&#25191;&#34892;dynamic sql&#12290;&#65288;&#20351;&#29992;USING&#23376;&#21477;&#35774;&#23450;&#21442;&#25968;&#65289;</span>
+<span style="color: #93a1a1; font-style: italic;">--&#20351;&#29992;EXECUTE IMMEDIATE&#25191;&#34892;dynamic sql&#12290;&#65288;&#20351;&#29992;USING&#23376;&#21477;&#35774;&#23450;&#21442;&#25968;&#65289;</span>
 sql_stmt VARCHAR2(100)
-sql_stmt := &#8217;<span style="color: #8ac6f2; font-weight: bold;">INSERT</span> <span style="color: #8ac6f2; font-weight: bold;">INTO</span> dept <span style="color: #8ac6f2; font-weight: bold;">VALUES</span> (:1, :2, :3)&#8217;;
-<span style="color: #8ac6f2; font-weight: bold;">EXECUTE</span> <span style="color: #8ac6f2; font-weight: bold;">IMMEDIATE</span> sql_stmt <span style="color: #8ac6f2; font-weight: bold;">USING</span> dept_id, dept_name, location;
+sql_stmt := &#8217;INSERT INTO dept VALUES (:1, :2, :3)&#8217;;
+EXECUTE IMMEDIATE sql_stmt USING dept_id, dept_name, location;
 
-plsql_block := <span style="color: #95e454;">'BEGIN create_dept(:a, :b, :c); END;'</span>;
-<span style="color: #8ac6f2; font-weight: bold;">EXECUTE</span> <span style="color: #8ac6f2; font-weight: bold;">IMMEDIATE</span> plsql_block <span style="color: #8ac6f2; font-weight: bold;">USING</span> <span style="color: #8ac6f2; font-weight: bold;">IN</span> <span style="color: #8ac6f2; font-weight: bold;">OUT</span> new_deptno, new_dname, new_loc;
+plsql_block := <span style="color: #2aa198;">'BEGIN create_dept(:a, :b, :c); END;'</span>;
+EXECUTE IMMEDIATE plsql_block USING IN OUT new_deptno, new_dname, new_loc;
 
-<span style="color: #99968b;">--(&#20351;&#29992;forall&#25191;&#34892;&#21442;&#25968;&#21015;&#34920;, returning&#33719;&#24471;&#38656;&#35201;&#30340;&#36820;&#22238;&#20540; )</span>
+<span style="color: #93a1a1; font-style: italic;">--(&#20351;&#29992;forall&#25191;&#34892;&#21442;&#25968;&#21015;&#34920;, returning&#33719;&#24471;&#38656;&#35201;&#30340;&#36820;&#22238;&#20540; )</span>
 empnos := NumList(1,2,3,4,5);
-FORALL i <span style="color: #8ac6f2; font-weight: bold;">IN</span> 1..5
-<span style="color: #8ac6f2; font-weight: bold;">EXECUTE</span> <span style="color: #8ac6f2; font-weight: bold;">IMMEDIATE</span>
-<span style="color: #95e454;">'UPDATE emp SET sal = sal * 1.1 WHERE empno = :1 RETURNING ename INTO :2'</span>
-<span style="color: #8ac6f2; font-weight: bold;">USING</span> empnos(i) RETURNING BULK COLLECT <span style="color: #8ac6f2; font-weight: bold;">INTO</span> enames;
+FORALL i IN 1..5
+EXECUTE IMMEDIATE
+<span style="color: #2aa198;">'UPDATE emp SET sal = sal * 1.1 WHERE empno = :1 RETURNING ename INTO :2'</span>
+USING empnos(i) RETURNING BULK COLLECT INTO enames;
 </pre>
 
 
@@ -398,19 +398,19 @@ FORALL i <span style="color: #8ac6f2; font-weight: bold;">IN</span> 1..5
 </div>
 
 <div id="outline-container-11" class="outline-2">
-<h2 id="sec-11"><span class="section-number-2">11</span> 自定义异常</h2>
+<h2 id="sec-11"><span class="section-number-2">11</span> 鑷畾涔夊紓甯�</h2>
 <div class="outline-text-2" id="text-11">
 
 
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">DECLARE</span>
- e_name <span style="color: #8ac6f2; font-weight: bold;">EXCEPTION</span>;
-<span style="color: #8ac6f2; font-weight: bold;">BEGIN</span>
+<pre class="src src-sql">DECLARE
+ e_name EXCEPTION;
+BEGIN
  RAISE e_name;
- <span style="color: #8ac6f2; font-weight: bold;">EXCEPTION</span>
- <span style="color: #8ac6f2; font-weight: bold;">WHEN</span> e_name <span style="color: #8ac6f2; font-weight: bold;">THEN</span> ...
-<span style="color: #8ac6f2; font-weight: bold;">END</span>;
+ EXCEPTION
+ WHEN e_name THEN ...
+END;
 </pre>
 
 
@@ -425,18 +425,18 @@ FORALL i <span style="color: #8ac6f2; font-weight: bold;">IN</span> 1..5
 
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">CREATE</span> [<span style="color: #8ac6f2; font-weight: bold;">OR</span> <span style="color: #e5786d;">REPLACE</span>] <span style="color: #8ac6f2; font-weight: bold;">PROCEDURE</span> proc_name (
- arg_name1   <span style="color: #8ac6f2; font-weight: bold;">IN</span>      type1,
- arg_name2   <span style="color: #8ac6f2; font-weight: bold;">OUT</span>     type2,
- arg_name3   <span style="color: #8ac6f2; font-weight: bold;">IN</span> <span style="color: #8ac6f2; font-weight: bold;">OUT</span>  type3 )
-<span style="color: #8ac6f2; font-weight: bold;">AS</span>
+<pre class="src src-sql">CREATE [OR REPLACE] PROCEDURE proc_name (
+ arg_name1   IN      type1,
+ arg_name2   OUT     type2,
+ arg_name3   IN OUT  type3 )
+AS
  var1  type1 [:=value1];
  var2  type2 [:=value2];
-<span style="color: #8ac6f2; font-weight: bold;">BEGIN</span>
+BEGIN
  ...
-<span style="color: #8ac6f2; font-weight: bold;">EXCEPTION</span>
+EXCEPTION
  ...
-<span style="color: #8ac6f2; font-weight: bold;">END</span>;
+END;
 </pre>
 
 
@@ -451,13 +451,13 @@ FORALL i <span style="color: #8ac6f2; font-weight: bold;">IN</span> 1..5
 
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">CREATE</span> [<span style="color: #8ac6f2; font-weight: bold;">OR</span> <span style="color: #e5786d;">REPLACE</span>] <span style="color: #8ac6f2; font-weight: bold;">FUNCTION</span> func_name
+<pre class="src src-sql">CREATE [OR REPLACE] FUNCTION func_name
  (args...)
- <span style="color: #8ac6f2; font-weight: bold;">RETURN</span> type1
-<span style="color: #8ac6f2; font-weight: bold;">AS</span>
-<span style="color: #8ac6f2; font-weight: bold;">BEGIN</span>
+ RETURN type1
+AS
+BEGIN
  ...
-<span style="color: #8ac6f2; font-weight: bold;">END</span>;
+END;
 </pre>
 
 
@@ -472,31 +472,31 @@ FORALL i <span style="color: #8ac6f2; font-weight: bold;">IN</span> 1..5
 
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">CREATE</span> [<span style="color: #8ac6f2; font-weight: bold;">OR</span> <span style="color: #e5786d;">REPLACE</span>] PACKAGE pack_name <span style="color: #8ac6f2; font-weight: bold;">AS</span>
- <span style="color: #8ac6f2; font-weight: bold;">PROCEDURE</span> procedure_name;
- <span style="color: #8ac6f2; font-weight: bold;">FUNCTION</span> function_name;
-	variables...
-	types...
-	exceptions...
-	cursors...
- <span style="color: #8ac6f2; font-weight: bold;">END</span> pack_name;
+<pre class="src src-sql">CREATE [OR REPLACE] PACKAGE pack_name AS
+ PROCEDURE procedure_name;
+ FUNCTION function_name;
+        variables...
+        types...
+        exceptions...
+        cursors...
+ END pack_name;
 
- <span style="color: #8ac6f2; font-weight: bold;">CREATE</span> [<span style="color: #8ac6f2; font-weight: bold;">OR</span> <span style="color: #e5786d;">REPLACE</span>] PACKAGE BODY pack_name <span style="color: #8ac6f2; font-weight: bold;">AS</span>
- <span style="color: #8ac6f2; font-weight: bold;">PROCEDURE</span> procedure_name <span style="color: #8ac6f2; font-weight: bold;">AS</span>
- <span style="color: #8ac6f2; font-weight: bold;">BEGIN</span>
-	...
- <span style="color: #8ac6f2; font-weight: bold;">END</span>
+ CREATE [OR REPLACE] PACKAGE BODY pack_name AS
+ PROCEDURE procedure_name AS
+ BEGIN
+        ...
+ END
 
- <span style="color: #8ac6f2; font-weight: bold;">FUNCTION</span> function_name <span style="color: #8ac6f2; font-weight: bold;">AS</span>
- <span style="color: #8ac6f2; font-weight: bold;">BEGIN</span>
-	...
- <span style="color: #8ac6f2; font-weight: bold;">END</span>
+ FUNCTION function_name AS
+ BEGIN
+        ...
+ END
 
  variables...
  types...
  exceptions...
  cursors...
-<span style="color: #8ac6f2; font-weight: bold;">END</span> pack_name;
+END pack_name;
 </pre>
 
 
@@ -511,14 +511,14 @@ FORALL i <span style="color: #8ac6f2; font-weight: bold;">IN</span> 1..5
 
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">CREATE</span> [<span style="color: #8ac6f2; font-weight: bold;">OR</span> <span style="color: #e5786d;">REPLACE</span>] <span style="color: #8ac6f2; font-weight: bold;">TRIGGER</span> <span style="color: #8ac6f2; font-weight: bold;">trigger_name</span>
- {<span style="color: #8ac6f2; font-weight: bold;">BEFORE</span>|<span style="color: #8ac6f2; font-weight: bold;">AFTER</span>|INSTEAD <span style="color: #8ac6f2; font-weight: bold;">OF</span>} trigger_event <span style="color: #8ac6f2; font-weight: bold;">ON</span> <span style="color: #8ac6f2; font-weight: bold;">table_name</span>
- [<span style="color: #8ac6f2; font-weight: bold;">FOR</span> <span style="color: #8ac6f2; font-weight: bold;">EACH</span> <span style="color: #92a65e; font-weight: bold;">ROW</span> [<span style="color: #8ac6f2; font-weight: bold;">WHEN</span> condition]]
-<span style="color: #8ac6f2; font-weight: bold;">DECLARE</span>
+<pre class="src src-sql">CREATE [OR REPLACE] TRIGGER trigger_name
+ {BEFORE|AFTER|INSTEAD OF} trigger_event ON table_name
+ [FOR EACH ROW [WHEN condition]]
+DECLARE
  ...
-<span style="color: #8ac6f2; font-weight: bold;">BEGIN</span>
+BEGIN
  ...
-<span style="color: #8ac6f2; font-weight: bold;">END</span>;
+END;
 </pre>
 
 
@@ -533,27 +533,27 @@ FORALL i <span style="color: #8ac6f2; font-weight: bold;">IN</span> 1..5
 
 
 
-<pre class="src src-sql"><span style="color: #8ac6f2; font-weight: bold;">DECLARE</span>
- <span style="color: #8ac6f2; font-weight: bold;">TYPE</span> emp_cur_typ <span style="color: #8ac6f2; font-weight: bold;">IS</span> <span style="color: #92a65e; font-weight: bold;">REF</span> <span style="color: #8ac6f2; font-weight: bold;">CURSOR</span>;
+<pre class="src src-sql">DECLARE
+ TYPE emp_cur_typ IS REF CURSOR;
  emp_cur emp_cur_typ;
- dept_name departments.department_name%<span style="color: #8ac6f2; font-weight: bold;">TYPE</span>;
- emp_name employees.last_name%<span style="color: #8ac6f2; font-weight: bold;">TYPE</span>;
- <span style="color: #8ac6f2; font-weight: bold;">CURSOR</span> c1 <span style="color: #8ac6f2; font-weight: bold;">IS</span> <span style="color: #8ac6f2; font-weight: bold;">SELECT</span> department_name,
- <span style="color: #8ac6f2; font-weight: bold;">CURSOR</span>(<span style="color: #8ac6f2; font-weight: bold;">SELECT</span> e.last_name <span style="color: #e5786d;">FROM</span> employees e <span style="color: #8ac6f2; font-weight: bold;">WHERE</span> e.department_id = d.department_id) employees <span style="color: #e5786d;">FROM</span> departments d  <span style="color: #8ac6f2; font-weight: bold;">WHERE</span> department_name <span style="color: #8ac6f2; font-weight: bold;">like</span> <span style="color: #95e454;">'A%'</span>;
-<span style="color: #8ac6f2; font-weight: bold;">BEGIN</span>
- <span style="color: #8ac6f2; font-weight: bold;">OPEN</span> c1;
+ dept_name departments.department_name%TYPE;
+ emp_name employees.last_name%TYPE;
+ CURSOR c1 IS SELECT department_name,
+ CURSOR(SELECT e.last_name FROM employees e WHERE e.department_id = d.department_id) employees FROM departments d  WHERE department_name like <span style="color: #2aa198;">'A%'</span>;
+BEGIN
+ OPEN c1;
  LOOP
-	<span style="color: #8ac6f2; font-weight: bold;">FETCH</span> c1 <span style="color: #8ac6f2; font-weight: bold;">INTO</span> dept_name, emp_cur;
-	EXIT <span style="color: #8ac6f2; font-weight: bold;">WHEN</span> c1%NOTFOUND;
-	dbms_output.put_line(<span style="color: #95e454;">'Department: '</span> || dept_name);
-	LOOP
-	 <span style="color: #8ac6f2; font-weight: bold;">FETCH</span> emp_cur <span style="color: #8ac6f2; font-weight: bold;">INTO</span> emp_name;
-	 EXIT <span style="color: #8ac6f2; font-weight: bold;">WHEN</span> emp_cur%NOTFOUND;
-	 dbms_output.put_line(<span style="color: #95e454;">' Employee: '</span> || emp_name);
-	<span style="color: #8ac6f2; font-weight: bold;">END</span> LOOP;
- <span style="color: #8ac6f2; font-weight: bold;">END</span> LOOP;
- <span style="color: #8ac6f2; font-weight: bold;">CLOSE</span> c1;
-<span style="color: #8ac6f2; font-weight: bold;">END</span>;
+        FETCH c1 INTO dept_name, emp_cur;
+        EXIT WHEN c1%NOTFOUND;
+        dbms_output.put_line(<span style="color: #2aa198;">'Department: '</span> || dept_name);
+        LOOP
+         FETCH emp_cur INTO emp_name;
+         EXIT WHEN emp_cur%NOTFOUND;
+         dbms_output.put_line(<span style="color: #2aa198;">' Employee: '</span> || emp_name);
+        END LOOP;
+ END LOOP;
+ CLOSE c1;
+END;
 /
 </pre>
 
@@ -562,8 +562,8 @@ FORALL i <span style="color: #8ac6f2; font-weight: bold;">IN</span> 1..5
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2014-02-07T00:07+0900</p>
-<p class="author">Author: rex.houy</p>
+<p class="date">Date: 2015-01-05T13:22+0800</p>
+<p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
 
