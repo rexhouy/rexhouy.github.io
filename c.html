@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>c</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="c"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2015-01-12T22:45+0800"/>
+<meta name="author" content="Rex.Houy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">c</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 C</a>
+<ul>
+<li><a href="#sec-1-1">1.1 </a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2 Assembly</a>
+<ul>
+<li><a href="#sec-2-1">2.1 Addressing</a></li>
+<li><a href="#sec-2-2">2.2 Move operand</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> C</h2>
+<div class="outline-text-2" id="text-1">
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> &gt;&gt;</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<p>算数右移与逻辑右移，算数右移动用符号位填充，逻辑用0填充。对于整型默认使用算数，无符号整型使用逻辑。Java使用&gt;&gt;&gt;进行逻辑右移。
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Assembly</h2>
+<div class="outline-text-2" id="text-2">
+
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Addressing</h3>
+<div class="outline-text-3" id="text-2-1">
+
+<p>Consider memory as an array, M[x] is the xth char of memory.
+Use the following method to represent an address.
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">format</td><td class="left">operand</td><td class="left"></td></tr>
+<tr><td class="left">$imm</td><td class="left">imm</td><td class="left">Constant</td></tr>
+<tr><td class="left">E</td><td class="left">R[E]</td><td class="left">Value of the register</td></tr>
+<tr><td class="left">imm</td><td class="left">M[imm]</td><td class="left"></td></tr>
+<tr><td class="left">(E)</td><td class="left">M[R[E]]</td><td class="left"></td></tr>
+<tr><td class="left">imm(E)</td><td class="left">M[imm + R[E]</td><td class="left"></td></tr>
+<tr><td class="left">(Ea, Eb)</td><td class="left">M(R[Ea] + R[Eb])</td><td class="left"></td></tr>
+<tr><td class="left">imm(Ea, Eb)</td><td class="left">M(imm + R[Ea] + R[Eb])</td><td class="left"></td></tr>
+<tr><td class="left">(,E, x)</td><td class="left">M[R[E] * x]</td><td class="left"></td></tr>
+<tr><td class="left">imm(,E, x)</td><td class="left">M[imm + R[E] * x]</td><td class="left"></td></tr>
+<tr><td class="left">(Ea, Eb, x)</td><td class="left">M[R[Ea] + R[Eb] * x]</td><td class="left"></td></tr>
+<tr><td class="left">imm(Ea, Eb, x)</td><td class="left">M[imm + R[Ea] + R[Eb] * x]</td><td class="left"></td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Move operand</h3>
+<div class="outline-text-3" id="text-2-2">
+
+<p>b-char, w-word, l-double word
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">movb</td><td class="left">movb S D</td><td class="left">Move char from S to D</td></tr>
+<tr><td class="left">movw</td><td class="left">movw $0x104 %ax</td><td class="left">Move word 0x104 -&gt; %ax</td></tr>
+<tr><td class="left">movl</td><td class="left">movl %eax 0x1</td><td class="left">Move double word R[%eax] -&gt; 0x1</td></tr>
+<tr><td class="left">movs</td><td class="left"></td><td class="left">较小数据复制到一个较大的数据位置，高位用符号位拓展。对应的指令为movsbw, movsbl, movswl</td></tr>
+<tr><td class="left">movz</td><td class="left"></td><td class="left">同上，高位用0拓展,movzbw, movzbl, movzwl</td></tr>
+<tr><td class="left">pushl</td><td class="left">pushl %eax</td><td class="left">%epx用于保存栈顶指针，该指令将会把%epx中的值-4（新的栈顶位置）,然后将R[%eax]保存到M[R[%epx]]</td></tr>
+<tr><td class="left">popl</td><td class="left">popl %eax</td><td class="left">将M[R[%epx]]保存到%eax，然后将%epx中的值+4</td></tr>
+</tbody>
+</table>
+
+*所有栈操作都在栈顶进行，栈底在高字节，栈顶在低字节，所以压栈时栈顶指针要-4.
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2015-01-12T22:45+0800</p>
+<p class="author">Author: Rex.Houy</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>
