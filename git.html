@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="git"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2014-12-19T16:44+0800"/>
+<meta name="generated" content="2015-01-14T19:09+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -43,6 +43,7 @@
 <li><a href="#sec-9-2">9.2 更新</a></li>
 </ul>
 </li>
+<li><a href="#sec-10">10 Fetch updates from upstream</a></li>
 </ul>
 </div>
 </div>
@@ -379,11 +380,54 @@ update .git/config
 git submodule sync
 </p></div>
 </div>
+
+</div>
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Fetch updates from upstream</h2>
+<div class="outline-text-2" id="text-10">
+
+<ol>
+<li>Config a remote that points to the upstream repository
+</li>
+</ol>
+
+
+
+
+<pre class="src src-bash">git remote add upstream xxx
+
+git remote -v # view configured remote
+</pre>
+
+<ol>
+<li>Fetch updates from upstream
+</li>
+</ol>
+
+
+
+
+<pre class="src src-bash">git fetch upstream
+</pre>
+
+<ol>
+<li>Merge updates into current brunch
+</li>
+</ol>
+
+
+
+
+<pre class="src src-bash">git merge upstream/master
+</pre>
+
+</div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2014-12-19T16:44+0800</p>
+<p class="date">Date: 2015-01-14T19:09+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

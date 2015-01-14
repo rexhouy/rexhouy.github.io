@@ -12,7 +12,6 @@
   <meta name="generated" content="<%= Time.now %>"/>
   <meta name="author" content="Rex.Houy"/>
   <link rel="stylesheet" href="styles/bootstrap.min.css" />
-  <link rel="stylesheet" href="styles/main.css" />
 </head>
 <body>
   <div class="container">
