@@ -7,11 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="rails"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-04T21:59+0800"/>
+<meta name="generated" content="2015-01-20T17:01+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
-<link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
+<link rel="stylesheet" type="text/css" href="styles/org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="styles/org-style-phone.css" media="only screen and (max-device-width: 480px)" />
 
 
 </head>
@@ -40,6 +40,7 @@
 <li><a href="#sec-3">3 Views</a>
 <ul>
 <li><a href="#sec-3-1">3.1 Path helper</a></li>
+<li><a href="#sec-3-2">3.2 Template</a></li>
 </ul>
 </li>
 <li><a href="#sec-4">4 DB migration</a>
@@ -257,6 +258,28 @@ validates <span style="color: #268bd2;">:id</span>, <span style="color: #268bd2;
 <tr><td class="left">Delete</td><td class="left">/users/id</td><td class="left">DELETE</td><td class="left">destroy</td><td class="left">user<sub>path</sub>(@user), method: :delete</td></tr>
 </tbody>
 </table>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Template</h3>
+<div class="outline-text-3" id="text-3-2">
+
+<p>Template file name starts with "_".
+</p>
+<p>
+Use template "<sub>order</sub>.html.erb" &amp; "<sub>product</sub>.html.erb"
+</p>
+
+
+<pre class="src src-ruby">render <span style="color: #268bd2;">partial</span>: <span style="color: #2aa198;">"order"</span>, <span style="color: #268bd2;">object</span>: <span style="color: #6c71c4;">@order</span>
+render <span style="color: #6c71c4;">@order</span> <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">A shorthand syntax for the upper one. Local variable order is passed into template.</span>
+
+render <span style="color: #268bd2;">partial</span>: <span style="color: #2aa198;">"product"</span>, <span style="color: #268bd2;">collection</span>: <span style="color: #6c71c4;">@products</span> <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Render collections. Use product as variable in template.</span>
+render <span style="color: #6c71c4;">@products</span>
+</pre>
 
 </div>
 </div>
@@ -719,7 +742,7 @@ gem 'bootstrap-sass', '~&gt; 3.1.1'
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-04T21:59+0800</p>
+<p class="date">Date: 2015-01-20T17:01+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

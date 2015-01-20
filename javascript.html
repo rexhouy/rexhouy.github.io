@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-							 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>javascript</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="javascript"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2014-02-07T00:01+0900"/>
-<meta name="author" content="rex.houy"/>
+<meta name="generated" content="2015-01-20T19:07+0800"/>
+<meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
-<link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<link rel='stylesheet' type='text/css' href='styles/org-style.css' media='only screen' />
+<link rel='stylesheet' type='text/css' href='styles/org-style-min-640px.css' media='only screen and (min-width: 640px) and (max-width: 900px)' />
+<link rel='stylesheet' type='text/css' href='styles/org-style-max-640px.css' media='only screen and (max-width: 640px)' />
 
 
 </head>
@@ -45,10 +48,10 @@
 
 
 
-<pre class="src src-javascript"><span style="color: #8ac6f2; font-weight: bold;">function</span> <span style="color: #cae682;">A</span>() {
- <span style="color: #e5786d;">this</span>.val = 1;
-}
-<span style="color: #8ac6f2; font-weight: bold;">var</span> <span style="color: #cae682;">a</span> = <span style="color: #8ac6f2; font-weight: bold;">new</span> <span style="color: #92a65e; font-weight: bold;">A</span>();
+<pre class="src src-javascript"><span style="color: #859900;">function</span> <span style="color: #b58900;">A</span><span style="color: #657b83;">()</span> <span style="color: #657b83;">{</span>
+ <span style="color: #268bd2;">this</span>.val = 1;
+<span style="color: #657b83;">}</span>
+<span style="color: #859900;">var</span> <span style="color: #6c71c4;">a</span> = <span style="color: #859900;">new</span> <span style="color: #268bd2;">A</span><span style="color: #657b83;">()</span>;
 </pre>
 
 <p>
@@ -80,7 +83,7 @@ new关键字调用A的construct函数（隐藏）完成4件事：
 
 
 
-<pre class="src src-javascript"><span style="color: #8ac6f2; font-weight: bold;">var</span> <span style="color: #cae682;">myObject</span> = Object.create(object);
+<pre class="src src-javascript"><span style="color: #859900;">var</span> <span style="color: #6c71c4;">myObject</span> = Object.create<span style="color: #657b83;">(</span>object<span style="color: #657b83;">)</span>;
 </pre>
 
 
@@ -96,7 +99,7 @@ new关键字调用A的construct函数（隐藏）完成4件事：
 </p>
 
 
-<pre class="src src-javascript">Object.preventExtension(obj);
+<pre class="src src-javascript">Object.preventExtension<span style="color: #657b83;">(</span>obj<span style="color: #657b83;">)</span>;
 </pre>
 
 <p>
@@ -104,7 +107,7 @@ new关键字调用A的construct函数（隐藏）完成4件事：
 </p>
 
 
-<pre class="src src-javascript">Object.seal(obj);
+<pre class="src src-javascript">Object.seal<span style="color: #657b83;">(</span>obj<span style="color: #657b83;">)</span>;
 </pre>
 
 <p>
@@ -112,7 +115,7 @@ new关键字调用A的construct函数（隐藏）完成4件事：
 </p>
 
 
-<pre class="src src-javascript">Object.freeze(obj);
+<pre class="src src-javascript">Object.freeze<span style="color: #657b83;">(</span>obj<span style="color: #657b83;">)</span>;
 </pre>
 
 
@@ -138,7 +141,7 @@ new关键字调用A的construct函数（隐藏）完成4件事：
 
 
 
-<pre class="src src-javascript">window.history.pushState(&#8220;object or string&#8221;, &#8220;Title&#8221;, &#8220;/<span style="color: #8ac6f2; font-weight: bold;">new</span>-url&#8221;);
+<pre class="src src-javascript">window.history.pushState<span style="color: #657b83;">(</span>&#8220;object or string&#8221;, &#8220;Title&#8221;, &#8220;/<span style="color: #859900;">new</span>-url&#8221;<span style="color: #657b83;">)</span>;
 </pre>
 
 
@@ -147,16 +150,16 @@ change the state of current. this will change the url of browser.
 </p>
 
 
-<pre class="src src-javascript">window.history.replaceState(&#8220;object or string&#8221;, &#8220;Title&#8221;, &#8220;/another-<span style="color: #8ac6f2; font-weight: bold;">new</span>-url&#8221;);
+<pre class="src src-javascript">window.history.replaceState<span style="color: #657b83;">(</span>&#8220;object or string&#8221;, &#8220;Title&#8221;, &#8220;/another-<span style="color: #859900;">new</span>-url&#8221;<span style="color: #657b83;">)</span>;
 </pre>
 
 
 
-<pre class="src src-javascript"><span style="color: #99968b;">// </span><span style="color: #99968b;">back</span>
-window.history.back();
+<pre class="src src-javascript"><span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">back</span>
+window.history.back<span style="color: #657b83;">()</span>;
 
-<span style="color: #99968b;">// </span><span style="color: #99968b;">forward</span>
-window.history.go(2);
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">forward</span>
+window.history.go<span style="color: #657b83;">(</span>2<span style="color: #657b83;">)</span>;
 </pre>
 
 </div>
@@ -164,8 +167,8 @@ window.history.go(2);
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2014-02-07T00:01+0900</p>
-<p class="author">Author: rex.houy</p>
+<p class="date">Date: 2015-01-20T19:07+0800</p>
+<p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
 

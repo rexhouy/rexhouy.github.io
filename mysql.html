@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="mysql"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-05T13:24+0800"/>
+<meta name="generated" content="2015-01-20T15:38+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -74,6 +74,15 @@
 <ul>
 <li><a href="#sec-10-1">10.1 对union查询的优化</a></li>
 <li><a href="#sec-10-2">10.2 对联接的优化</a></li>
+</ul>
+</li>
+<li><a href="#sec-11">11 Advice</a>
+<ul>
+<li><a href="#sec-11-1">11.1 MySQL Server Hardware and OS Tuning:</a></li>
+<li><a href="#sec-11-2">11.2 MySQL Configuration:</a></li>
+<li><a href="#sec-11-3">11.3 MySQL Schema Optimization:</a></li>
+<li><a href="#sec-11-4">11.4 Query Optimization:</a></li>
+<li><a href="#sec-11-5">11.5 MySQL Backup Procedures:</a></li>
 </ul>
 </li>
 </ul>
@@ -471,11 +480,369 @@ mysql会对优化遍历表的顺序，向访问最小页面数的方向进行优
 group by 或order by应该只引用一个表中的列，这样MySQL可以尝试对这些操作使用索引。
 </p></div>
 </div>
+
+</div>
+
+<div id="outline-container-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Advice</h2>
+<div class="outline-text-2" id="text-11">
+
+
+</div>
+
+<div id="outline-container-11-1" class="outline-3">
+<h3 id="sec-11-1"><span class="section-number-3">11.1</span> MySQL Server Hardware and OS Tuning:</h3>
+<div class="outline-text-3" id="text-11-1">
+
+<ol>
+<li>Have enough physical memory to load your entire InnoDB file into memory – InnoDB is much faster when the file can be accessed in memory rather than from disk.
+
+</li>
+<li>Avoid Swap at all costs – swapping is reading from disk, its slow.
+
+</li>
+<li>Use Battery-Backed RAM.
+
+</li>
+<li>Use an advanced RAID – preferably RAID10 or higher.
+
+</li>
+<li>Avoid RAID5 – the checksum needed to ensure integrity is costly.
+
+</li>
+<li>Separate your OS and data partitions, not just logically, but physically – costly OS writes and reads will impact your database performance.
+
+</li>
+<li>Put your mysql temp space and replication logs on a separate partition than your data – background writes will impact your database when it goes to write/read from disk.
+
+</li>
+<li>More disks equals more speed.
+
+</li>
+<li>Faster disks are better.
+
+</li>
+<li>Use SAS over SATA.
+
+</li>
+<li>Smaller disks are faster than larger disks, especially in RAID configs.
+
+</li>
+<li>Use Battery-Backed Cache RAID controllers.
+
+</li>
+<li>Avoid software raids.
+
+</li>
+<li>Consider using Solid State IO Cards (not disk drives) for your data partition – these cards can sustain over 2GB/s writes for almost any amount of data.
+
+</li>
+<li>On Linux set your swappiness value to 0 – no reason to cache files on a database server, this is more of a web server or desktop advantage.
+
+</li>
+<li>Mount filesystem with noatime and nodirtime if available – no reason to update database file modification times for access.
+
+</li>
+<li>Use XFS filesystem – a faster, smaller filesystem than ext3 and has more options for journaling, also ext3 has been shown to have double buffering issues with MySQL.
+
+</li>
+<li>Tune your XFS filesystem log and buffer variables – for maximum performance benchmark.
+
+</li>
+<li>On Linux systems, use NOOP or DEADLINE IO scheduler – the CFQ and ANTICIPATORY scheduler have been shown to be slow vs NOOP and DEADLINE scheduler.
+
+</li>
+<li>Use a 64-bit OS – more memory addressable and usable to MySQL.
+
+</li>
+<li>Remove unused packages and daemons from servers – less resource stealing.
+
+</li>
+<li>Put your host that use MySQL and your MySQL host in a hosts file – no dns lookups.
+
+</li>
+<li>Never force kill a MySQL process – you will corrupt your database and be running for the backups.
+
+</li>
+<li>Dedicate your server to MySQL – background processes and other services can steal from the db cpu time.
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-11-2" class="outline-3">
+<h3 id="sec-11-2"><span class="section-number-3">11.2</span> MySQL Configuration:</h3>
+<div class="outline-text-3" id="text-11-2">
+
+<ol>
+<li>Use innodb<sub>flush</sub><sub>method</sub>=O<sub>DIRECT</sub> to avoid a double buffer when writing.
+
+</li>
+<li>Avoid O<sub>DIRECT</sub> and EXT3 filesystem – you will serialize all your writes.
+
+</li>
+<li>Allocate enough innodb<sub>buffer</sub><sub>pool</sub><sub>size</sub> to load your entire InnoDB file into memory – less reads from disk.
+
+</li>
+<li>Do not make innodb<sub>log</sub><sub>file</sub><sub>size</sub> too big, with faster and more disks – flushing more often is good and lowers the recovery time during crashes.
+
+</li>
+<li>Do not mix innodb<sub>thread</sub><sub>concurrency</sub> and thread<sub>concurrency</sub> variables – these two values are not compatible.
+
+</li>
+<li>Allocate a minimal amount for max<sub>connections</sub> – too many connections can use up your RAM and lock up your MySQL server.
+
+</li>
+<li>Keep thread<sub>cache</sub> at a relatively high number, about 16 – to prevent slowness when opening connections.
+
+</li>
+<li>Use  skip-name-resolve – to remove dns lookups.
+
+</li>
+<li>Use query cache if your queries are repetitive and your data does not change often – however using query cache on data that changes often will give you a performance hit.
+
+</li>
+<li>Increase temp<sub>table</sub><sub>size</sub> – to prevent disk writes.
+
+</li>
+<li>Increase max<sub>heap</sub><sub>table</sub><sub>size</sub> – to prevent disk writes.
+
+</li>
+<li>Do not set your sort<sub>buffer</sub><sub>size</sub> too high – this is per connection and can use up memory fast.
+
+</li>
+<li>Monitor key<sub>read</sub><sub>requests</sub> and key<sub>reads</sub> to determine your key<sub>buffer</sub> size – the key read requests should be higher than your key<sub>reads</sub>, otherwise you are not efficiently using your key<sub>buffer</sub>.
+
+</li>
+<li>Set innodb<sub>flush</sub><sub>log</sub><sub>at</sub><sub>trx</sub><sub>commit</sub> = 0 will improve performance, but leaving it to default (1), you will ensure data integrity, you will also ensure replication is not lagging
+
+</li>
+<li>Have a test environment where you can test your configs and restart often, without affecting production.
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-11-3" class="outline-3">
+<h3 id="sec-11-3"><span class="section-number-3">11.3</span> MySQL Schema Optimization:</h3>
+<div class="outline-text-3" id="text-11-3">
+
+<ol>
+<li>Keep your database trim.
+
+</li>
+<li>Archive old data – to remove excessive row returns or searches on queries.
+
+</li>
+<li>Put indexes on your data.
+
+</li>
+<li>Do not overuse indexes, compare with your queries.
+
+</li>
+<li>Compress text and blob data types – to save space and reduce number of disk reads.
+
+</li>
+<li>UTF 8 and UTF16 is slower than latin1.
+
+</li>
+<li>Use Triggers sparingly.
+
+</li>
+<li>Keep redundant data to a minimum – do not duplicate data unnecessarily.
+
+</li>
+<li>Use linking tables rather than extending rows.
+
+</li>
+<li>Pay attention to your data types, use the smallest one possible for your real data.
+
+</li>
+<li>Separate blob/text data from other data if other data is often used for queries when blob/text are not.
+
+</li>
+<li>Check and optimize tables often.
+
+</li>
+<li>Rewrite InnoDB tables often to optimize.
+
+</li>
+<li>Sometimes, it is faster to drop indexes when adding columns and then add indexes back.
+
+</li>
+<li>Use different storage engines for different needs.
+
+</li>
+<li>Use ARCHIVE storage engine for Logging tables or Auditing tables – this is much more efficient for writes.
+
+</li>
+<li>Store session data in memcache rather than MySQL – memcache allows for auto-expiring values and prevents you from having to create costly reads and writes to MySQL for temporal data.
+
+</li>
+<li>Use VARCHAR instead CHAR when storing variable length strings – to save space since CHAR is fixed length and VARCHAR is not (utf8 is not affected by this).
+
+</li>
+<li>Make schema changes incrementally – a small change can have drastic effects.
+
+</li>
+<li>Test all schema changes in a development environment that mirrors production.
+
+</li>
+<li>Do NOT arbitrarily change values in your config file, it can have disastrous affects.
+
+</li>
+<li>Sometimes less is more in MySQL configs.
+
+</li>
+<li>When in doubt use a generic MySQL config file.
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-11-4" class="outline-3">
+<h3 id="sec-11-4"><span class="section-number-3">11.4</span> Query Optimization:</h3>
+<div class="outline-text-3" id="text-11-4">
+
+<ol>
+<li>Use the slow query log to find slow queries.
+
+</li>
+<li>Use EXPLAIN to determine queries are functioning appropriately.
+
+</li>
+<li>Test your queries often to see if they are performing optimally – performance will change over time.
+
+</li>
+<li>Avoid count(*) on entire tables, it can lock the entire table.
+
+</li>
+<li>Make queries uniform so subsequent similar queries will use query cache.
+
+</li>
+<li>Use GROUP BY instead of DISTINCT when appropriate.
+
+</li>
+<li>Use indexed columns in WHERE, GROUP BY, and ORDER BY clauses.
+
+</li>
+<li>Keep indexes simple, do not reuse a column in multiple indexes.
+
+</li>
+<li>Sometimes MySQL chooses the wrong index, use USE INDEX for this case
+
+</li>
+<li>Check for issues using SQL<sub>MODE</sub>=STRICT.
+
+</li>
+<li>Use a LIMIT on UNION instead of OR for less than 5 indexed fields.
+
+</li>
+<li>Use INSERT ON DUPLICATE KEY or INSERT IGNORE instead of UPDATE to avoid the SELECT prior to update.
+
+</li>
+<li>Use a indexed field and ORDER BY instead of MAX.
+
+</li>
+<li>Avoid using ORDER BY RAND().
+
+</li>
+<li>LIMIT M,N can actually slow down queries in certain circumstances, use sparingly.
+
+</li>
+<li>Use UNION instead of sub-queries in WHERE clauses.
+
+</li>
+<li>For UPDATES, use SHARE MODE to prevent exclusive locks.
+
+</li>
+<li>On restarts of MySQL, remember to warm your database, to ensure that your data is in memory and queries are fast.
+
+</li>
+<li>Use DROP TABLE then CREATE TABLE instead of DELETE FROM to remove all data from a table.
+
+</li>
+<li>Minimize the data in your query to only the data you need, using * is overkill most of the time.
+
+</li>
+<li>Consider persistent connections instead of multiple connections to reduce overhead.
+
+</li>
+<li>Benchmark queries, including using load on the server, sometimes a simple query can have affects on other queries.
+
+</li>
+<li>When load increases on your server, use SHOW PROCESSLIST to view slow/problematic queries.
+
+</li>
+<li>Test all suspect queries in a development environment where you have mirrored production data.
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-11-5" class="outline-3">
+<h3 id="sec-11-5"><span class="section-number-3">11.5</span> MySQL Backup Procedures:</h3>
+<div class="outline-text-3" id="text-11-5">
+
+<ol>
+<li>Backup from secondary replicated server.
+
+</li>
+<li>Stop replication during backups to prevent inconsistencies on data dependencies and foreign constraints.
+
+</li>
+<li>Stop MySQL altogether and take a backup of the database files.
+
+</li>
+<li>Backup binary logs at same time as dumpfile if MySQL dump used – to make sure replication does not break.
+
+</li>
+<li>Do not trust an LVM snapshot for backups – this could create data inconsistencies that will give you issues in the future.
+
+</li>
+<li>Make dumps per table for easier single table recovery – if data is isolated from other tables.
+
+</li>
+<li>Use –opt when using mysqldump.
+
+</li>
+<li>Check and Optimize tables before a backup.
+
+</li>
+<li>When importing temporarily disable foreign constraints for a faster import.
+
+</li>
+<li>When importing temporarily disable unique checks for a faster import.
+
+</li>
+<li>Calculate size of database/tables data and indexes after each backup to monitor growth.
+
+</li>
+<li>Monitor slave replication for errors and delay with a cron script.
+
+</li>
+<li>Perform Backups regularly.
+
+</li>
+<li>Test your backups regularly.
+</li>
+</ol>
+
+</div>
+</div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-05T13:24+0800</p>
+<p class="date">Date: 2015-01-20T15:38+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
