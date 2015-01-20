@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-							 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>ruby</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="ruby"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2014-10-08T11:57+0800"/>
+<meta name="generated" content="2015-01-20T19:18+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
-<link rel="stylesheet" type="text/css" href="org-style.css" media="only screen and (min-device-width: 480px)" /><link rel="stylesheet" type="text/css" href="org-style-phone.css" media="only screen and (max-device-width: 480px)" />
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<link rel='stylesheet' type='text/css' href='styles/org-style.css' media='only screen' />
+<link rel='stylesheet' type='text/css' href='styles/org-style-min-640px.css' media='only screen and (min-width: 640px) and (max-width: 900px)' />
+<link rel='stylesheet' type='text/css' href='styles/org-style-max-640px.css' media='only screen and (max-width: 640px)' />
 
 
 </head>
@@ -50,6 +53,7 @@
 <ul>
 <li><a href="#sec-5-1">5.1 Array</a></li>
 <li><a href="#sec-5-2">5.2 Fixnum</a></li>
+<li><a href="#sec-5-3">5.3 Fiber</a></li>
 </ul>
 </li>
 </ul>
@@ -78,7 +82,7 @@
 
 
 
-<pre class="src src-shell">gem install activerecord
+<pre class="src src-bash">gem install activerecord
 gem install mysql2
 </pre>
 
@@ -88,7 +92,7 @@ if install mysql2 got makefile problems:
 </p>
 
 
-<pre class="src src-shell">sudo apt-get install libmysql-ruby libmysqlclient-dev
+<pre class="src src-bash">sudo apt-get install libmysql-ruby libmysqlclient-dev
 </pre>
 
 
@@ -103,11 +107,11 @@ if install mysql2 got makefile problems:
 
 
 
-<pre class="src src-ruby">require <span style="color: #95e454;">"rubygems"</span>
-require <span style="color: #95e454;">"active_record"</span>
+<pre class="src src-ruby">require <span style="color: #2aa198;">"rubygems"</span>
+require <span style="color: #2aa198;">"active_record"</span>
 
-config = <span style="color: #92a65e; font-weight: bold;">YAML</span>.load_file( <span style="color: #95e454;">'./database.yml'</span> )
-<span style="color: #92a65e; font-weight: bold;">ActiveRecord</span>::<span style="color: #92a65e; font-weight: bold;">Base</span>.establish_connection(config[<span style="color: #95e454;">"development"</span>])
+config = <span style="color: #268bd2;">YAML</span>.load_file( <span style="color: #2aa198;">'./database.yml'</span> )
+<span style="color: #268bd2;">ActiveRecord</span>::<span style="color: #268bd2;">Base</span>.establish_connection(config[<span style="color: #2aa198;">"development"</span>])
 </pre>
 
 
@@ -116,14 +120,13 @@ database.yml
 </p>
 
 
-<pre class="src src-yml">development:
-	adapter:  mysql2
-	host:     localhost
-	username: xxx
-	password: xxx
-	database: xxx
+<pre class="src src-ruby"><span style="color: #268bd2;">development</span>:
+        <span style="color: #268bd2;">adapter</span>:  mysql2
+        <span style="color: #268bd2;">host</span>:     localhost
+        <span style="color: #268bd2;">username</span>: xxx
+        <span style="color: #268bd2;">password</span>: xxx
+        <span style="color: #268bd2;">database</span>: xxx
 </pre>
-
 
 
 </div>
@@ -148,7 +151,7 @@ database.yml
 
 
 
-<pre class="src src-shell">gem install bundle
+<pre class="src src-bash">gem install bundle
 </pre>
 
 
@@ -179,7 +182,7 @@ install gems specified in gemfile
 </p>
 
 
-<pre class="src src-shell">bundle install
+<pre class="src src-bash">bundle install
 </pre>
 
 
@@ -199,13 +202,13 @@ config.ru
 </p>
 
 
-<pre class="src src-ruby">require <span style="color: #95e454;">"./api"</span>
-run <span style="color: #92a65e; font-weight: bold;">Web</span>::<span style="color: #92a65e; font-weight: bold;">API</span>
+<pre class="src src-ruby">require <span style="color: #2aa198;">"./api"</span>
+run <span style="color: #268bd2;">Web</span>::<span style="color: #268bd2;">API</span>
 </pre>
 
 
 
-<pre class="src src-shell">rackup
+<pre class="src src-bash">rackup
 </pre>
 
 
@@ -264,7 +267,7 @@ arr.delete_at(index)
 
 arr.delete(obj)
 
-arr.compact // remove all <span style="color: #cae682;">nil</span> elements
+arr.compact // remove all <span style="color: #6c71c4;">nil</span> elements
 
 arr.uniq
 
@@ -319,13 +322,45 @@ num.abs
 
 </pre>
 
+
+</div>
+
+</div>
+
+<div id="outline-container-5-3" class="outline-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> Fiber</h3>
+<div class="outline-text-3" id="text-5-3">
+
+
+<p>
+light weight cooperative concurrency.
+Control context swap by hand.
+</p>
+
+
+
+<pre class="src src-ruby">fiber = <span style="color: #268bd2;">Fiber</span>.new <span style="color: #859900;">do</span> |tasks|
+                <span style="color: #859900;">while</span> tasks.any? <span style="color: #859900;">do</span>
+                                tasks.shift.execute
+                                <span style="color: #268bd2;">Fiber</span>.yield tasks <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Stop execution</span>
+                <span style="color: #859900;">end</span>
+                <span style="color: #2aa198;">"All works are done."</span>
+<span style="color: #859900;">end</span>
+
+<span style="color: #859900;">while</span> fiber.alive? <span style="color: #859900;">do</span>
+                fiber.resume tasks <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Run</span>
+                puts <span style="color: #2aa198;">"We have finished a task"</span>
+<span style="color: #859900;">end</span>
+
+</pre>
+
 </div>
 </div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2014-10-08T11:57+0800</p>
+<p class="date">Date: 2015-01-20T19:18+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
