@@ -11,7 +11,7 @@
   <meta name="generator" content="Rex.Houy Index Page Generator"/>
   <meta name="generated" content="<%= Time.now %>"/>
   <meta name="author" content="Rex.Houy"/>
-  <link rel="stylesheet" href="styles/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
 </head>
 <body>
   <div class="container">
