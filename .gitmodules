@@ -1,0 +1,3 @@
+[submodule "emacs-org-html-style"]
+	path = emacs-org-html-style
+	url = https://github.com/rexhouy/emacs-org-html-style.git
