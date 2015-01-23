@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="linux"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-21T11:53+0800"/>
+<meta name="generated" content="2015-01-22T17:09+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -47,6 +47,7 @@
 <li><a href="#sec-3">3 File system</a>
 <ul>
 <li><a href="#sec-3-1">3.1 inode</a></li>
+<li><a href="#sec-3-2">3.2 FHS</a></li>
 </ul>
 </li>
 </ul>
@@ -60,8 +61,10 @@
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" />
 </colgroup>
+<thead>
+<tr><th scope="col" class="left">key</th><th scope="col" class="left">Command</th></tr>
+</thead>
 <tbody>
-<tr><td class="left">key</td><td class="left">Command</td></tr>
 <tr><td class="left">C-h</td><td class="left">backspace</td></tr>
 </tbody>
 </table>
@@ -101,8 +104,10 @@ Use "." command to run a bash file in current shell instead of its child. The ".
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" /><col class="left" />
 </colgroup>
+<thead>
+<tr><th scope="col" class="left">Shell</th><th scope="col" class="left">Usage</th><th scope="col" class="left">Function</th></tr>
+</thead>
 <tbody>
-<tr><td class="left">Shell</td><td class="left">Usage</td><td class="left">Function</td></tr>
 <tr><td class="left">write</td><td class="left">write user<sub>name</sub></td><td class="left">Send message to someone</td></tr>
 <tr><td class="left">ll</td><td class="left">ll -t</td><td class="left">List order by time</td></tr>
 <tr><td class="left">who</td><td class="left">who</td><td class="left">Show who is logged on</td></tr>
@@ -144,8 +149,10 @@ exit 1; "execution failed"(any number except 0 are stand for false)
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" />
 </colgroup>
+<thead>
+<tr><th scope="col" class="left">Operator</th><th scope="col" class="left">Functionality</th></tr>
+</thead>
 <tbody>
-<tr><td class="left">Operator</td><td class="left">Functionality</td></tr>
 <tr><td class="left">&gt;</td><td class="left">Redirect stdin to file</td></tr>
 <tr><td class="left">&gt;&gt;</td><td class="left">Redirect stdin to file(append)</td></tr>
 <tr><td class="left">&lt;</td><td class="left">Read file into stdin</td></tr>
@@ -228,8 +235,10 @@ Use trap to catch exit singnal
 </p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="right" /><col class="left" />
 </colgroup>
+<thead>
+<tr><th scope="col" class="right">Singnal</th><th scope="col" class="left">Meaning</th></tr>
+</thead>
 <tbody>
-<tr><td class="right">Singnal</td><td class="left">Meaning</td></tr>
 <tr><td class="right">0</td><td class="left">Exit normally</td></tr>
 <tr><td class="right">1</td><td class="left">parse</td></tr>
 <tr><td class="right">2</td><td class="left">ctrl+d</td></tr>
@@ -314,12 +323,39 @@ inode保存文件的的字节数，userid，groupid，authorize，timestamp，�
 <p>
 硬链接就是创建一个指向某inode的链接，而软链接则只是指向了该文件的文件名。
 </p></div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> FHS</h3>
+<div class="outline-text-3" id="text-3-2">
+
+<p>Filesystem Hierarchy Standard
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Directory</th><th scope="col" class="left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">/bin</td><td class="left">Commands available for all users</td></tr>
+<tr><td class="left">/etc</td><td class="left">Static configuration files</td></tr>
+<tr><td class="left">/usr</td><td class="left">Read-only user data</td></tr>
+<tr><td class="left">/var</td><td class="left">Variable files</td></tr>
+<tr><td class="left">/var/log</td><td class="left">Log files</td></tr>
+<tr><td class="left">/var/run</td><td class="left">pid files</td></tr>
+<tr><td class="left">/var/lock</td><td class="left">lock files</td></tr>
+<tr><td class="left">/var/mail</td><td class="left">mail box</td></tr>
+</tbody>
+</table>
+
+</div>
 </div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-21T11:53+0800</p>
+<p class="date">Date: 2015-01-22T17:09+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

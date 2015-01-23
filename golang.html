@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>golang</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="golang"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2015-01-23T09:26+0800"/>
+<meta name="author" content="Rex.Houy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style.css' media='only screen' />
+<link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-min-640px.css' media='only screen and (min-width: 640px) and (max-width: 960px)' />
+<link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-max-640px.css' media='only screen and (max-width: 640px)' />
+<script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
+<script src='emacs-org-html-style/nav.js'></script>
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">golang</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Grama</a>
+<ul>
+<li><a href="#sec-1-1">1.1 Control structures</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1 If</a></li>
+<li><a href="#sec-1-1-2">1.1.2 For</a></li>
+<li><a href="#sec-1-1-3">1.1.3 Switch case</a></li>
+<li><a href="#sec-1-1-4">1.1.4 Function</a></li>
+<li><a href="#sec-1-1-5">1.1.5 Defer</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2 Type</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Grama</h2>
+<div class="outline-text-2" id="text-1">
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Control structures</h3>
+<div class="outline-text-3" id="text-1-1">
+
+
+</div>
+
+<div id="outline-container-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> If</h4>
+<div class="outline-text-4" id="text-1-1-1">
+
+
+
+
+<pre class="src src-go"><span style="color: #859900;">if</span> err := file.<span style="color: #b58900;">Chmod</span>(0664); err != <span style="color: #268bd2;">nil</span> {
+    log.<span style="color: #b58900;">Print</span>(err)
+    <span style="color: #859900;">return</span> err
+}
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> For</h4>
+<div class="outline-text-4" id="text-1-1-2">
+
+
+
+
+<pre class="src src-go"><span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Like a C for</span>
+<span style="color: #859900;">for</span> init; condition; post { }
+
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Like a C while</span>
+<span style="color: #859900;">for</span> condition { }
+
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Like a C for(;;)</span>
+<span style="color: #859900;">for</span> { }
+
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Loop</span>
+<span style="color: #859900;">for</span> key, value := <span style="color: #859900;">range</span> oldMap {
+    newMap[key] = value
+}
+
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Looping over a string</span>
+<span style="color: #859900;">for</span> index, char := <span style="color: #859900;">range</span> <span style="color: #2aa198;">"Hello, world!"</span> {
+}
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Switch case</h4>
+<div class="outline-text-4" id="text-1-1-3">
+
+
+
+
+<pre class="src src-go"><span style="color: #859900;">switch</span> {
+<span style="color: #859900;">case</span> <span style="color: #2aa198;">'0'</span> &lt;= c &amp;&amp; c &lt;= <span style="color: #2aa198;">'9'</span>:
+    <span style="color: #859900;">return</span> c - <span style="color: #2aa198;">'0'</span>
+<span style="color: #859900;">case</span> <span style="color: #2aa198;">'a'</span> &lt;= c &amp;&amp; c &lt;= <span style="color: #2aa198;">'f'</span>:
+    <span style="color: #859900;">return</span> c - <span style="color: #2aa198;">'a'</span> + 10
+<span style="color: #859900;">case</span> <span style="color: #2aa198;">'A'</span> &lt;= c &amp;&amp; c &lt;= <span style="color: #2aa198;">'F'</span>:
+    <span style="color: #859900;">return</span> c - <span style="color: #2aa198;">'A'</span> + 10
+}
+
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Match multiple values</span>
+<span style="color: #859900;">switch</span> c {
+<span style="color: #859900;">case</span> <span style="color: #2aa198;">' '</span>, <span style="color: #2aa198;">'?'</span>, <span style="color: #2aa198;">'&amp;'</span>, <span style="color: #2aa198;">'='</span>, <span style="color: #2aa198;">'#'</span>, <span style="color: #2aa198;">'+'</span>, <span style="color: #2aa198;">'%'</span>:
+    <span style="color: #859900;">return</span> <span style="color: #268bd2;">true</span>
+}
+
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Break and jump to label</span>
+<span style="color: #268bd2;">Loop</span>:
+    <span style="color: #859900;">for</span> n := 0; n &lt; <span style="color: #6c71c4;">len</span>(src); n += size {
+        <span style="color: #859900;">switch</span> {
+        <span style="color: #859900;">case</span> src[n] &lt; sizeTwo:
+            <span style="color: #859900;">if</span> validateOnly {
+                <span style="color: #859900;">break</span> <span style="color: #268bd2;">Loop</span>
+            }
+        }
+    }
+
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Type match</span>
+<span style="color: #859900;">switch</span> t := t.(<span style="color: #859900;">type</span>) {
+<span style="color: #859900;">default</span>:
+    fmt.<span style="color: #b58900;">Printf</span>(<span style="color: #2aa198;">"unexpected type %T"</span>, t)       <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">%T prints whatever type t has</span>
+<span style="color: #859900;">case</span> bool:
+    fmt.<span style="color: #b58900;">Printf</span>(<span style="color: #2aa198;">"boolean %t\n"</span>, t)             <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">t has type bool</span>
+<span style="color: #859900;">case</span> int:
+    fmt.<span style="color: #b58900;">Printf</span>(<span style="color: #2aa198;">"integer %d\n"</span>, t)             <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">t has type int</span>
+<span style="color: #859900;">case</span> *bool:
+    fmt.<span style="color: #b58900;">Printf</span>(<span style="color: #2aa198;">"pointer to boolean %t\n"</span>, *t) <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">t has type *bool</span>
+<span style="color: #859900;">case</span> *int:
+    fmt.<span style="color: #b58900;">Printf</span>(<span style="color: #2aa198;">"pointer to integer %d\n"</span>, *t) <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">t has type *int</span>
+}
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Function</h4>
+<div class="outline-text-4" id="text-1-1-4">
+
+
+
+
+<pre class="src src-go"><span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Named result parameters</span>
+<span style="color: #859900;">func</span> <span style="color: #b58900;">ReadFull</span>(r <span style="color: #268bd2;">Reader</span>, buf []<span style="color: #268bd2;">byte</span>) (n <span style="color: #268bd2;">int</span>, err <span style="color: #268bd2;">error</span>) {
+    <span style="color: #859900;">for</span> <span style="color: #6c71c4;">len</span>(buf) &gt; 0 &amp;&amp; err == <span style="color: #268bd2;">nil</span> {
+        <span style="color: #859900;">var</span> nr int
+        nr, err = r.<span style="color: #b58900;">Read</span>(buf)
+        n += nr
+        buf = buf[nr:]
+    }
+    <span style="color: #859900;">return</span>
+}
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-5" class="outline-4">
+<h4 id="sec-1-1-5"><span class="section-number-4">1.1.5</span> Defer</h4>
+<div class="outline-text-4" id="text-1-1-5">
+
+<p>Same as finally in java
+</p>
+
+
+<pre class="src src-go"><span style="color: #859900;">func</span> <span style="color: #b58900;">Contents</span>(filename <span style="color: #268bd2;">string</span>) (<span style="color: #268bd2;">string</span>, <span style="color: #268bd2;">error</span>) {
+    f, err := os.<span style="color: #b58900;">Open</span>(filename)
+    <span style="color: #859900;">if</span> err != <span style="color: #268bd2;">nil</span> {
+        <span style="color: #859900;">return</span> <span style="color: #2aa198;">""</span>, err
+    }
+    <span style="color: #859900;">defer</span> f.<span style="color: #b58900;">Close</span>()  <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">f.Close will run when we're finished.</span>
+
+    ...
+}
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Type</h3>
+<div class="outline-text-3" id="text-1-2">
+
+
+
+
+<pre class="src src-go"><span style="color: #859900;">type</span> <span style="color: #268bd2;">SyncedBuffer</span> <span style="color: #859900;">struct</span> {
+    lock    sync.Mutex
+    buffer  bytes.Buffer
+}
+
+p := <span style="color: #6c71c4;">new</span>(<span style="color: #268bd2;">SyncedBuffer</span>)  <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">type *SyncedBuffer</span>
+<span style="color: #859900;">var</span> v SyncedBuffer      <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">type  SyncedBuffer</span>
+</pre>
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2015-01-23T09:26+0800</p>
+<p class="author">Author: Rex.Houy</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>
