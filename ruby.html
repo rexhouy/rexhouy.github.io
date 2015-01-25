@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="ruby"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-23T12:23+0800"/>
+<meta name="generated" content="2015-01-25T14:17+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -34,33 +34,34 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 active record</a>
+<li><a href="#sec-1">active record</a>
 <ul>
-<li><a href="#sec-1-1">1.1 env</a>
+<li><a href="#sec-1-1">env</a>
 <ul>
-<li><a href="#sec-1-1-1">1.1.1 install</a></li>
-<li><a href="#sec-1-1-2">1.1.2 code</a></li>
+<li><a href="#sec-1-1-1">install</a></li>
+<li><a href="#sec-1-1-2">code</a></li>
 </ul></li>
 </ul>
 </li>
-<li><a href="#sec-2">2 bundle</a>
+<li><a href="#sec-2">bundle</a>
 <ul>
-<li><a href="#sec-2-1">2.1 install</a></li>
-<li><a href="#sec-2-2">2.2 usage</a></li>
+<li><a href="#sec-2-1">install</a></li>
+<li><a href="#sec-2-2">usage</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">3 rack</a></li>
-<li><a href="#sec-4">4 grape</a></li>
-<li><a href="#sec-5">5 API</a>
+<li><a href="#sec-3">rack</a></li>
+<li><a href="#sec-4">grape</a></li>
+<li><a href="#sec-5">API</a>
 <ul>
-<li><a href="#sec-5-1">5.1 Array</a></li>
-<li><a href="#sec-5-2">5.2 Fixnum</a></li>
-<li><a href="#sec-5-3">5.3 Fiber</a></li>
+<li><a href="#sec-5-1">Array</a></li>
+<li><a href="#sec-5-2">Fixnum</a></li>
+<li><a href="#sec-5-3">Fiber</a></li>
 </ul>
 </li>
-<li><a href="#sec-6">6 Meta Programing</a>
+<li><a href="#sec-6">Meta Programing</a>
 <ul>
-<li><a href="#sec-6-1">6.1 Class</a></li>
+<li><a href="#sec-6-1">Class</a></li>
+<li><a href="#sec-6-2">Methods</a></li>
 </ul>
 </li>
 </ul>
@@ -68,14 +69,14 @@
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> active record</h2>
+<h2 id="sec-1">active record</h2>
 <div class="outline-text-2" id="text-1">
 
 
 </div>
 
 <div id="outline-container-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> env</h3>
+<h3 id="sec-1-1">env</h3>
 <div class="outline-text-3" id="text-1-1">
 
 
@@ -83,7 +84,7 @@
 </div>
 
 <div id="outline-container-1-1-1" class="outline-4">
-<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> install</h4>
+<h4 id="sec-1-1-1">install</h4>
 <div class="outline-text-4" id="text-1-1-1">
 
 
@@ -108,7 +109,7 @@ if install mysql2 got makefile problems:
 </div>
 
 <div id="outline-container-1-1-2" class="outline-4">
-<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> code</h4>
+<h4 id="sec-1-1-2">code</h4>
 <div class="outline-text-4" id="text-1-1-2">
 
 
@@ -143,7 +144,7 @@ database.yml
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> bundle</h2>
+<h2 id="sec-2">bundle</h2>
 <div class="outline-text-2" id="text-2">
 
 <p>manage application dependencies
@@ -152,7 +153,7 @@ database.yml
 </div>
 
 <div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> install</h3>
+<h3 id="sec-2-1">install</h3>
 <div class="outline-text-3" id="text-2-1">
 
 
@@ -167,7 +168,7 @@ database.yml
 </div>
 
 <div id="outline-container-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> usage</h3>
+<h3 id="sec-2-2">usage</h3>
 <div class="outline-text-3" id="text-2-2">
 
 <p>put Gemfile in project root directory. file name is case sensitive.
@@ -199,7 +200,7 @@ install gems specified in gemfile
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> rack</h2>
+<h2 id="sec-3">rack</h2>
 <div class="outline-text-2" id="text-3">
 
 <p>web server interface
@@ -224,7 +225,7 @@ run <span style="color: #268bd2;">Web</span>::<span style="color: #268bd2;">API<
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> grape</h2>
+<h2 id="sec-4">grape</h2>
 <div class="outline-text-2" id="text-4">
 
 <p>rest api tool, can be used with rack.
@@ -234,14 +235,14 @@ run <span style="color: #268bd2;">Web</span>::<span style="color: #268bd2;">API<
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> API</h2>
+<h2 id="sec-5">API</h2>
 <div class="outline-text-2" id="text-5">
 
 
 </div>
 
 <div id="outline-container-5-1" class="outline-3">
-<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Array</h3>
+<h3 id="sec-5-1">Array</h3>
 <div class="outline-text-3" id="text-5-1">
 
 
@@ -313,7 +314,7 @@ arr.sort { |a, b| a &lt;=&gt; b }
 </div>
 
 <div id="outline-container-5-2" class="outline-3">
-<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Fixnum</h3>
+<h3 id="sec-5-2">Fixnum</h3>
 <div class="outline-text-3" id="text-5-2">
 
 
@@ -334,7 +335,7 @@ num.abs
 </div>
 
 <div id="outline-container-5-3" class="outline-3">
-<h3 id="sec-5-3"><span class="section-number-3">5.3</span> Fiber</h3>
+<h3 id="sec-5-3">Fiber</h3>
 <div class="outline-text-3" id="text-5-3">
 
 
@@ -366,14 +367,14 @@ Control context swap by hand.
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Meta Programing</h2>
+<h2 id="sec-6">Meta Programing</h2>
 <div class="outline-text-2" id="text-6">
 
 
 </div>
 
 <div id="outline-container-6-1" class="outline-3">
-<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Class</h3>
+<h3 id="sec-6-1">Class</h3>
 <div class="outline-text-3" id="text-6-1">
 
 <ol>
@@ -413,13 +414,68 @@ Control context swap by hand.
 <span style="color: #268bd2;">Module</span>.nesting //&#33719;&#21462;&#24403;&#21069;&#36335;&#24452;
 </pre>
 
+
+</div>
+
+</div>
+
+<div id="outline-container-6-2" class="outline-3">
+<h3 id="sec-6-2">Methods</h3>
+<div class="outline-text-3" id="text-6-2">
+
+<ol>
+<li>调用一个方法就是给这个对象发送一个消息。
+</li>
+</ol>
+
+
+
+
+<pre class="src src-ruby">obj.send(<span style="color: #268bd2;">:method_name</span>, parameter)
+</pre>
+
+
+<ol>
+<li>动态创建方法。
+</li>
+</ol>
+
+
+
+
+<pre class="src src-ruby"><span style="color: #268bd2;">MyClass</span>.define_mehtod <span style="color: #268bd2;">:method_name</span> { |arg|
+    ...
+}
+</pre>
+
+
+<ol>
+<li>通过method_missing响应对不存在的方法的调用。
+</li>
+</ol>
+
+
+
+
+<pre class="src src-ruby"><span style="color: #859900;">def</span> <span style="color: #b58900;">method_missing</span>(method, *args)
+    ...
+    <span style="color: #859900;">super</span> <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Remember to call super at last.</span>
+<span style="color: #859900;">end</span>
+<span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Remember to rewrite respond_to? method.</span>
+<span style="color: #859900;">def</span> <span style="color: #b58900;">respond_to?</span>(method)
+    ...
+    <span style="color: #859900;">super</span>
+<span style="color: #859900;">end</span>
+</pre>
+
+
 </div>
 </div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-23T12:23+0800</p>
+<p class="date">Date: 2015-01-25T14:17+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

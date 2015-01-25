@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="hibernate"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-21T11:52+0800"/>
+<meta name="generated" content="2015-01-25T14:14+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -34,29 +34,29 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 查询</a>
+<li><a href="#sec-1">查询</a>
 <ul>
-<li><a href="#sec-1-1">1.1 延迟加载</a></li>
-<li><a href="#sec-1-2">1.2 n+1查询</a></li>
+<li><a href="#sec-1-1">延迟加载</a></li>
+<li><a href="#sec-1-2">n+1查询</a></li>
 </ul>
 </li>
-<li><a href="#sec-2">2 缓存</a></li>
-<li><a href="#sec-3">3 锁</a></li>
-<li><a href="#sec-4">4 方法</a></li>
-<li><a href="#sec-5">5 关系</a>
+<li><a href="#sec-2">缓存</a></li>
+<li><a href="#sec-3">锁</a></li>
+<li><a href="#sec-4">方法</a></li>
+<li><a href="#sec-5">关系</a>
 <ul>
-<li><a href="#sec-5-1">5.1 继承</a></li>
-<li><a href="#sec-5-2">5.2 单表继承映射</a></li>
-<li><a href="#sec-5-3">5.3 other</a></li>
+<li><a href="#sec-5-1">继承</a></li>
+<li><a href="#sec-5-2">单表继承映射</a></li>
+<li><a href="#sec-5-3">other</a></li>
 </ul>
 </li>
-<li><a href="#sec-6">6 other</a></li>
+<li><a href="#sec-6">other</a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> 查询</h2>
+<h2 id="sec-1">查询</h2>
 <div class="outline-text-2" id="text-1">
 
 
@@ -64,7 +64,7 @@
 </div>
 
 <div id="outline-container-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> 延迟加载</h3>
+<h3 id="sec-1-1">延迟加载</h3>
 <div class="outline-text-3" id="text-1-1">
 
 <p>对于hibernate查询，延迟加载，代理使用的说明：（这两个都使用lazy设置）
@@ -104,7 +104,7 @@ session.save(bid);
 </div>
 
 <div id="outline-container-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> n+1查询</h3>
+<h3 id="sec-1-2">n+1查询</h3>
 <div class="outline-text-3" id="text-1-2">
 
 <p>n+1查询（lazy=true）：
@@ -149,7 +149,7 @@ hibernate的执行情况为，当使用createQuery时，查询出item对象列�
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> 缓存</h2>
+<h2 id="sec-2">缓存</h2>
 <div class="outline-text-2" id="text-2">
 
 <p>一级缓存：session范围。
@@ -177,7 +177,7 @@ flush() 刷新一级缓存区的内容,使之与数据库数据保持同步.
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> 锁</h2>
+<h2 id="sec-3">锁</h2>
 <div class="outline-text-2" id="text-3">
 
 <p>悲观锁：
@@ -192,7 +192,7 @@ flush() 刷新一级缓存区的内容,使之与数据库数据保持同步.
 LockMode.UPGRADE不管是否存在对象，总是通过select到数据库中加载对象。如果数据库系统支持悲观锁(如ORACLE与MYSQL)，就执行select &hellip; for update。如果不支持，就执行普通的select语句。
 </p>
 <p>
-LockMode.UPGRADE<sub>NOWAIT　同LockMode</sub>.UPGRADE相同，此外，对ORACLE数据库，执行select &hellip; for update nowait，表示如果不能立刻获得悲观锁，不等待其他事务释放锁，而是抛出锁定异常。
+LockMode.UPGRADE_NOWAIT　同LockMode.UPGRADE相同，此外，对ORACLE数据库，执行select &hellip; for update nowait，表示如果不能立刻获得悲观锁，不等待其他事务释放锁，而是抛出锁定异常。
 </p>
 <p>
 乐观锁：配置&lt;version&gt;元素或&lt;timestamp&gt;元素
@@ -202,16 +202,16 @@ LockMode.UPGRADE<sub>NOWAIT　同LockMode</sub>.UPGRADE相同，此外，对ORAC
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> 方法</h2>
+<h2 id="sec-4">方法</h2>
 <div class="outline-text-2" id="text-4">
 
 <p>session.save()保存对象；
 </p>
 <p>
-session.load(class<sub>name</sub>.class, id)查询相应id的对象，将返回代理（直到使用该对象的某方法时才查询数据库），不会同时查询出相关联的对象，如果没有查到将抛出无法恢复的异常；
+session.load(class_name.class, id)查询相应id的对象，将返回代理（直到使用该对象的某方法时才查询数据库），不会同时查询出相关联的对象，如果没有查到将抛出无法恢复的异常；
 </p>
 <p>
-session.get(class<sub>name</sub>.class, id, LockMode.UPGRADE)查询相应id的对象,立即查询，没有数据则返回null，其中lockmode是可选的；
+session.get(class_name.class, id, LockMode.UPGRADE)查询相应id的对象,立即查询，没有数据则返回null，其中lockmode是可选的；
 </p>
 <p>
 session.refresh()刷新某个对象，同时也会查询出与之关联的对象。
@@ -230,7 +230,7 @@ session.saveOrUpdate()如果该对象没有id或verion表明该对象为新对�
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> 关系</h2>
+<h2 id="sec-5">关系</h2>
 <div class="outline-text-2" id="text-5">
 
 
@@ -238,7 +238,7 @@ session.saveOrUpdate()如果该对象没有id或verion表明该对象为新对�
 </div>
 
 <div id="outline-container-5-1" class="outline-3">
-<h3 id="sec-5-1"><span class="section-number-3">5.1</span> 继承</h3>
+<h3 id="sec-5-1">继承</h3>
 <div class="outline-text-3" id="text-5-1">
 
 <p>使用union连接：(可以替代union查询，hql不支持union，如果abstract设置为false那么还将会union查询父类所对应的表)
@@ -260,7 +260,7 @@ session.saveOrUpdate()如果该对象没有id或verion表明该对象为新对�
 </div>
 
 <div id="outline-container-5-2" class="outline-3">
-<h3 id="sec-5-2"><span class="section-number-3">5.2</span> 单表继承映射</h3>
+<h3 id="sec-5-2">单表继承映射</h3>
 <div class="outline-text-3" id="text-5-2">
 
 
@@ -276,7 +276,7 @@ session.saveOrUpdate()如果该对象没有id或verion表明该对象为新对�
 </div>
 
 <div id="outline-container-5-3" class="outline-3">
-<h3 id="sec-5-3"><span class="section-number-3">5.3</span> other</h3>
+<h3 id="sec-5-3">other</h3>
 <div class="outline-text-3" id="text-5-3">
 
 <p>cascade属性（all、delete-orphan、delete、update、create；all包含了delete、update和create）
@@ -331,7 +331,7 @@ java中的对象关系为parent.setChild(child);child.setParent(parent);两边�
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> other</h2>
+<h2 id="sec-6">other</h2>
 <div class="outline-text-2" id="text-6">
 
 <p>按照指定顺序排序:
@@ -358,7 +358,7 @@ cglib库：封装了asm。asm用于生成字节码。这种方法不要求被代
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-21T11:52+0800</p>
+<p class="date">Date: 2015-01-25T14:14+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

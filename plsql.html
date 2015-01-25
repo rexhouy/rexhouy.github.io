@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="plsql"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-21T11:53+0800"/>
+<meta name="generated" content="2015-01-25T14:16+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -34,28 +34,28 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 注释</a></li>
-<li><a href="#sec-2">2 申明变量</a></li>
-<li><a href="#sec-3">3 变量类型</a></li>
-<li><a href="#sec-4">4 定义类型</a></li>
-<li><a href="#sec-5">5 关于NULL</a></li>
-<li><a href="#sec-6">6 IF语句</a></li>
-<li><a href="#sec-7">7 循环</a></li>
-<li><a href="#sec-8">8 GOTO</a></li>
-<li><a href="#sec-9">9 CURSOR</a></li>
-<li><a href="#sec-10">10 动态SQL</a></li>
-<li><a href="#sec-11">11 自定义异常</a></li>
-<li><a href="#sec-12">12 PROCEDURE</a></li>
-<li><a href="#sec-13">13 FUNCTION</a></li>
-<li><a href="#sec-14">14 PACKAGE</a></li>
-<li><a href="#sec-15">15 TRIGGER</a></li>
-<li><a href="#sec-16">16 example</a></li>
+<li><a href="#sec-1">注释</a></li>
+<li><a href="#sec-2">申明变量</a></li>
+<li><a href="#sec-3">变量类型</a></li>
+<li><a href="#sec-4">定义类型</a></li>
+<li><a href="#sec-5">关于NULL</a></li>
+<li><a href="#sec-6">IF语句</a></li>
+<li><a href="#sec-7">循环</a></li>
+<li><a href="#sec-8">GOTO</a></li>
+<li><a href="#sec-9">CURSOR</a></li>
+<li><a href="#sec-10">动态SQL</a></li>
+<li><a href="#sec-11">自定义异常</a></li>
+<li><a href="#sec-12">PROCEDURE</a></li>
+<li><a href="#sec-13">FUNCTION</a></li>
+<li><a href="#sec-14">PACKAGE</a></li>
+<li><a href="#sec-15">TRIGGER</a></li>
+<li><a href="#sec-16">example</a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> 注释</h2>
+<h2 id="sec-1">注释</h2>
 <div class="outline-text-2" id="text-1">
 
 <p>         &ndash;单行注释
@@ -68,7 +68,7 @@
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> 申明变量</h2>
+<h2 id="sec-2">申明变量</h2>
 <div class="outline-text-2" id="text-2">
 
 
@@ -83,7 +83,7 @@
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> 变量类型</h2>
+<h2 id="sec-3">变量类型</h2>
 <div class="outline-text-2" id="text-3">
 
 
@@ -98,7 +98,7 @@ table%rowtype：也可以是cursor%rowtype，从而只得到表的部分字段�
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> 定义类型</h2>
+<h2 id="sec-4">定义类型</h2>
 <div class="outline-text-2" id="text-4">
 
 
@@ -192,7 +192,7 @@ END
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> 关于NULL</h2>
+<h2 id="sec-5">关于NULL</h2>
 <div class="outline-text-2" id="text-5">
 
 <p>        包含NULL的比较语句返回NULL；
@@ -204,7 +204,7 @@ END
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> IF语句</h2>
+<h2 id="sec-6">IF语句</h2>
 <div class="outline-text-2" id="text-6">
 
 
@@ -226,7 +226,7 @@ END IF;
 </div>
 
 <div id="outline-container-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> 循环</h2>
+<h2 id="sec-7">循环</h2>
 <div class="outline-text-2" id="text-7">
 
 
@@ -274,7 +274,7 @@ END LOOP;
 </div>
 
 <div id="outline-container-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> GOTO</h2>
+<h2 id="sec-8">GOTO</h2>
 <div class="outline-text-2" id="text-8">
 
 
@@ -293,7 +293,7 @@ END;
 </div>
 
 <div id="outline-container-9" class="outline-2">
-<h2 id="sec-9"><span class="section-number-2">9</span> CURSOR</h2>
+<h2 id="sec-9">CURSOR</h2>
 <div class="outline-text-2" id="text-9">
 
 <p>使用cursor:
@@ -371,7 +371,7 @@ END;
 </div>
 
 <div id="outline-container-10" class="outline-2">
-<h2 id="sec-10"><span class="section-number-2">10</span> 动态SQL</h2>
+<h2 id="sec-10">动态SQL</h2>
 <div class="outline-text-2" id="text-10">
 
 
@@ -403,7 +403,7 @@ USING empnos(i) RETURNING BULK COLLECT INTO enames;
 </div>
 
 <div id="outline-container-11" class="outline-2">
-<h2 id="sec-11"><span class="section-number-2">11</span> 自定义异常</h2>
+<h2 id="sec-11">自定义异常</h2>
 <div class="outline-text-2" id="text-11">
 
 
@@ -424,7 +424,7 @@ END;
 </div>
 
 <div id="outline-container-12" class="outline-2">
-<h2 id="sec-12"><span class="section-number-2">12</span> PROCEDURE</h2>
+<h2 id="sec-12">PROCEDURE</h2>
 <div class="outline-text-2" id="text-12">
 
 
@@ -450,7 +450,7 @@ END;
 </div>
 
 <div id="outline-container-13" class="outline-2">
-<h2 id="sec-13"><span class="section-number-2">13</span> FUNCTION</h2>
+<h2 id="sec-13">FUNCTION</h2>
 <div class="outline-text-2" id="text-13">
 
 
@@ -471,7 +471,7 @@ END;
 </div>
 
 <div id="outline-container-14" class="outline-2">
-<h2 id="sec-14"><span class="section-number-2">14</span> PACKAGE</h2>
+<h2 id="sec-14">PACKAGE</h2>
 <div class="outline-text-2" id="text-14">
 
 
@@ -510,7 +510,7 @@ END pack_name;
 </div>
 
 <div id="outline-container-15" class="outline-2">
-<h2 id="sec-15"><span class="section-number-2">15</span> TRIGGER</h2>
+<h2 id="sec-15">TRIGGER</h2>
 <div class="outline-text-2" id="text-15">
 
 
@@ -532,7 +532,7 @@ END;
 </div>
 
 <div id="outline-container-16" class="outline-2">
-<h2 id="sec-16"><span class="section-number-2">16</span> example</h2>
+<h2 id="sec-16">example</h2>
 <div class="outline-text-2" id="text-16">
 
 
@@ -567,7 +567,7 @@ END;
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-21T11:53+0800</p>
+<p class="date">Date: 2015-01-25T14:16+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

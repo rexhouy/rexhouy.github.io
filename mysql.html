@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="mysql"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-21T11:53+0800"/>
+<meta name="generated" content="2015-01-25T14:16+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -34,60 +34,60 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 服务器端架构：</a></li>
-<li><a href="#sec-2">2 服务器端线程：</a></li>
-<li><a href="#sec-3">3 事务</a>
+<li><a href="#sec-1">服务器端架构：</a></li>
+<li><a href="#sec-2">服务器端线程：</a></li>
+<li><a href="#sec-3">事务</a>
 <ul>
-<li><a href="#sec-3-1">3.1 事务隔离级别</a></li>
-<li><a href="#sec-3-2">3.2 事务日志</a></li>
-<li><a href="#sec-3-3">3.3 默认为autocommit（自动提交）</a></li>
-<li><a href="#sec-3-4">3.4 对数据的写操作不会阻塞读操作</a></li>
+<li><a href="#sec-3-1">事务隔离级别</a></li>
+<li><a href="#sec-3-2">事务日志</a></li>
+<li><a href="#sec-3-3">默认为autocommit（自动提交）</a></li>
+<li><a href="#sec-3-4">对数据的写操作不会阻塞读操作</a></li>
 </ul>
 </li>
-<li><a href="#sec-4">4 查看表的详细信息：</a></li>
-<li><a href="#sec-5">5 引擎</a>
+<li><a href="#sec-4">查看表的详细信息：</a></li>
+<li><a href="#sec-5">引擎</a>
 <ul>
-<li><a href="#sec-5-1">5.1 MySQL常用引擎</a></li>
-<li><a href="#sec-5-2">5.2 选择合适的引擎需要考虑的因素</a></li>
+<li><a href="#sec-5-1">MySQL常用引擎</a></li>
+<li><a href="#sec-5-2">选择合适的引擎需要考虑的因素</a></li>
 </ul>
 </li>
-<li><a href="#sec-6">6 数据类型</a>
+<li><a href="#sec-6">数据类型</a>
 <ul>
-<li><a href="#sec-6-1">6.1 整数</a></li>
-<li><a href="#sec-6-2">6.2 实数</a></li>
-<li><a href="#sec-6-3">6.3 VARCHAR和CHAR</a></li>
-<li><a href="#sec-6-4">6.4 BINARY和VARBINARY</a></li>
-<li><a href="#sec-6-5">6.5 BLOB和TEXT</a></li>
-<li><a href="#sec-6-6">6.6 DATETIME和TIMESTAMP</a></li>
-<li><a href="#sec-6-7">6.7 其他数据类型：</a></li>
-<li><a href="#sec-6-8">6.8 为标识符选择合适的数据类型：</a></li>
-<li><a href="#sec-6-9">6.9 保存IP地址：</a></li>
+<li><a href="#sec-6-1">整数</a></li>
+<li><a href="#sec-6-2">实数</a></li>
+<li><a href="#sec-6-3">VARCHAR和CHAR</a></li>
+<li><a href="#sec-6-4">BINARY和VARBINARY</a></li>
+<li><a href="#sec-6-5">BLOB和TEXT</a></li>
+<li><a href="#sec-6-6">DATETIME和TIMESTAMP</a></li>
+<li><a href="#sec-6-7">其他数据类型：</a></li>
+<li><a href="#sec-6-8">为标识符选择合适的数据类型：</a></li>
+<li><a href="#sec-6-9">保存IP地址：</a></li>
 </ul>
 </li>
-<li><a href="#sec-7">7 索引</a>
+<li><a href="#sec-7">索引</a>
 <ul>
-<li><a href="#sec-7-1">7.1 B-Tree索引：</a></li>
-<li><a href="#sec-7-2">7.2 哈希索引：</a></li>
-<li><a href="#sec-7-3">7.3 不会使用索引的查询方式：</a></li>
-<li><a href="#sec-7-4">7.4 优化索引：</a></li>
-<li><a href="#sec-7-5">7.5 聚集索引（Clustered Index）：</a></li>
+<li><a href="#sec-7-1">B-Tree索引：</a></li>
+<li><a href="#sec-7-2">哈希索引：</a></li>
+<li><a href="#sec-7-3">不会使用索引的查询方式：</a></li>
+<li><a href="#sec-7-4">优化索引：</a></li>
+<li><a href="#sec-7-5">聚集索引（Clustered Index）：</a></li>
 </ul>
 </li>
-<li><a href="#sec-8">8 通信方式：</a></li>
-<li><a href="#sec-9">9 查询方式：</a></li>
-<li><a href="#sec-10">10 union</a>
+<li><a href="#sec-8">通信方式：</a></li>
+<li><a href="#sec-9">查询方式：</a></li>
+<li><a href="#sec-10">union</a>
 <ul>
-<li><a href="#sec-10-1">10.1 对union查询的优化</a></li>
-<li><a href="#sec-10-2">10.2 对联接的优化</a></li>
+<li><a href="#sec-10-1">对union查询的优化</a></li>
+<li><a href="#sec-10-2">对联接的优化</a></li>
 </ul>
 </li>
-<li><a href="#sec-11">11 Advice</a>
+<li><a href="#sec-11">Advice</a>
 <ul>
-<li><a href="#sec-11-1">11.1 MySQL Server Hardware and OS Tuning:</a></li>
-<li><a href="#sec-11-2">11.2 MySQL Configuration:</a></li>
-<li><a href="#sec-11-3">11.3 MySQL Schema Optimization:</a></li>
-<li><a href="#sec-11-4">11.4 Query Optimization:</a></li>
-<li><a href="#sec-11-5">11.5 MySQL Backup Procedures:</a></li>
+<li><a href="#sec-11-1">MySQL Server Hardware and OS Tuning:</a></li>
+<li><a href="#sec-11-2">MySQL Configuration:</a></li>
+<li><a href="#sec-11-3">MySQL Schema Optimization:</a></li>
+<li><a href="#sec-11-4">Query Optimization:</a></li>
+<li><a href="#sec-11-5">MySQL Backup Procedures:</a></li>
 </ul>
 </li>
 </ul>
@@ -95,7 +95,7 @@
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> 服务器端架构：</h2>
+<h2 id="sec-1">服务器端架构：</h2>
 <div class="outline-text-2" id="text-1">
 
 <p>网络通信层-&gt;sql分析、优化，查询缓存-&gt;存储引擎
@@ -108,7 +108,7 @@
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> 服务器端线程：</h2>
+<h2 id="sec-2">服务器端线程：</h2>
 <div class="outline-text-2" id="text-2">
 
 <p>每一个客户端连接对应一个服务器端线程
@@ -118,7 +118,7 @@
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> 事务</h2>
+<h2 id="sec-3">事务</h2>
 <div class="outline-text-2" id="text-3">
 
 
@@ -126,7 +126,7 @@
 </div>
 
 <div id="outline-container-3-1" class="outline-3">
-<h3 id="sec-3-1"><span class="section-number-3">3.1</span> 事务隔离级别</h3>
+<h3 id="sec-3-1">事务隔离级别</h3>
 <div class="outline-text-3" id="text-3-1">
 
 <p>默认为nonrepeatable能避免不可重复读不能避免幻象读。
@@ -139,7 +139,7 @@
 </div>
 
 <div id="outline-container-3-2" class="outline-3">
-<h3 id="sec-3-2"><span class="section-number-3">3.2</span> 事务日志</h3>
+<h3 id="sec-3-2">事务日志</h3>
 <div class="outline-text-3" id="text-3-2">
 
 <p>当发生更新操作，先更新内存中的数据，然后保存日志。出现错误之后的回滚根据日志来处理。
@@ -149,7 +149,7 @@
 </div>
 
 <div id="outline-container-3-3" class="outline-3">
-<h3 id="sec-3-3"><span class="section-number-3">3.3</span> 默认为autocommit（自动提交）</h3>
+<h3 id="sec-3-3">默认为autocommit（自动提交）</h3>
 <div class="outline-text-3" id="text-3-3">
 
 <p>show variables like 'autocommit';查询是否开启了自动提交。
@@ -162,7 +162,7 @@
 </div>
 
 <div id="outline-container-3-4" class="outline-3">
-<h3 id="sec-3-4"><span class="section-number-3">3.4</span> 对数据的写操作不会阻塞读操作</h3>
+<h3 id="sec-3-4">对数据的写操作不会阻塞读操作</h3>
 <div class="outline-text-3" id="text-3-4">
 
 <p>innoDB的工作原理与oracle一致（MVCC），只在read committed和nonrepeatable read中有效。
@@ -173,7 +173,7 @@
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> 查看表的详细信息：</h2>
+<h2 id="sec-4">查看表的详细信息：</h2>
 <div class="outline-text-2" id="text-4">
 
 <p>show table status like 'user' \G。查看user表的信息(\G选项提供不同的显示方式)。
@@ -183,14 +183,14 @@
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> 引擎</h2>
+<h2 id="sec-5">引擎</h2>
 <div class="outline-text-2" id="text-5">
 
 
 </div>
 
 <div id="outline-container-5-1" class="outline-3">
-<h3 id="sec-5-1"><span class="section-number-3">5.1</span> MySQL常用引擎</h3>
+<h3 id="sec-5-1">MySQL常用引擎</h3>
 <div class="outline-text-3" id="text-5-1">
 
 <p>MyISAM、InnoDB、Memory、Archive、CSV、Federated、Blackhole、NDB Cluster、Falcon、solidDB、PBXT、Maria等。
@@ -203,7 +203,7 @@
 </div>
 
 <div id="outline-container-5-2" class="outline-3">
-<h3 id="sec-5-2"><span class="section-number-3">5.2</span> 选择合适的引擎需要考虑的因素</h3>
+<h3 id="sec-5-2">选择合适的引擎需要考虑的因素</h3>
 <div class="outline-text-3" id="text-5-2">
 
 <p>事务、并发、备份、崩溃后恢复、特有特性
@@ -214,14 +214,14 @@
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> 数据类型</h2>
+<h2 id="sec-6">数据类型</h2>
 <div class="outline-text-2" id="text-6">
 
 
 </div>
 
 <div id="outline-container-6-1" class="outline-3">
-<h3 id="sec-6-1"><span class="section-number-3">6.1</span> 整数</h3>
+<h3 id="sec-6-1">整数</h3>
 <div class="outline-text-3" id="text-6-1">
 
 <p>包括：TINYINT、SMALLINT、MEDIUMINT、INT、BIGINT，占用空间分别为8、16、24、32、64。
@@ -237,7 +237,7 @@
 </div>
 
 <div id="outline-container-6-2" class="outline-3">
-<h3 id="sec-6-2"><span class="section-number-3">6.2</span> 实数</h3>
+<h3 id="sec-6-2">实数</h3>
 <div class="outline-text-3" id="text-6-2">
 
 <p>包括：DECIMAL、FLOAT、DOUBLE，FLOAT占用4个字节、DOUBLE占用8个字节。
@@ -250,7 +250,7 @@ DECIMAL需要占用额外的字节和计算开销所以只适合于使用在需�
 </div>
 
 <div id="outline-container-6-3" class="outline-3">
-<h3 id="sec-6-3"><span class="section-number-3">6.3</span> VARCHAR和CHAR</h3>
+<h3 id="sec-6-3">VARCHAR和CHAR</h3>
 <div class="outline-text-3" id="text-6-3">
 
 <p>VARCHAR是可变长的，使用额外的字节来存储长度。长度经常变动或者长度差距很大的情况下不适用，应为这会给存储带来额外的问题（碎片）。
@@ -266,7 +266,7 @@ VARCHAR可以定义最大长度，这个长度的大小将会对存储、临时�
 </div>
 
 <div id="outline-container-6-4" class="outline-3">
-<h3 id="sec-6-4"><span class="section-number-3">6.4</span> BINARY和VARBINARY</h3>
+<h3 id="sec-6-4">BINARY和VARBINARY</h3>
 <div class="outline-text-3" id="text-6-4">
 
 <p>与CHAR和VARCHAR相似。保存二进制字符长。
@@ -276,7 +276,7 @@ VARCHAR可以定义最大长度，这个长度的大小将会对存储、临时�
 </div>
 
 <div id="outline-container-6-5" class="outline-3">
-<h3 id="sec-6-5"><span class="section-number-3">6.5</span> BLOB和TEXT</h3>
+<h3 id="sec-6-5">BLOB和TEXT</h3>
 <div class="outline-text-3" id="text-6-5">
 
 <p>BLOB以二进制形式保存数据，TEXT以字符形式保存数据。
@@ -289,7 +289,7 @@ BLOB和TEXT一般都保存在特殊的存储区域。如果需要进行排序最
 </div>
 
 <div id="outline-container-6-6" class="outline-3">
-<h3 id="sec-6-6"><span class="section-number-3">6.6</span> DATETIME和TIMESTAMP</h3>
+<h3 id="sec-6-6">DATETIME和TIMESTAMP</h3>
 <div class="outline-text-3" id="text-6-6">
 
 <p>MySQL的时间日期都只能精确到秒，所以如果要保存更精确的数据只能使用其他类型。
@@ -311,7 +311,7 @@ TIMESTAMP默认是not null的，在插入与更新时如果没有对该值进行
 </div>
 
 <div id="outline-container-6-7" class="outline-3">
-<h3 id="sec-6-7"><span class="section-number-3">6.7</span> 其他数据类型：</h3>
+<h3 id="sec-6-7">其他数据类型：</h3>
 <div class="outline-text-3" id="text-6-7">
 
 <p>bit：用二进制位保存数据，可以定义长度，最大为64位。存储的是二进制位0、1查询出来的时候使用字符串的形式表示0、1.适合用于保存true、false。
@@ -321,7 +321,7 @@ TIMESTAMP默认是not null的，在插入与更新时如果没有对该值进行
 </div>
 
 <div id="outline-container-6-8" class="outline-3">
-<h3 id="sec-6-8"><span class="section-number-3">6.8</span> 为标识符选择合适的数据类型：</h3>
+<h3 id="sec-6-8">为标识符选择合适的数据类型：</h3>
 <div class="outline-text-3" id="text-6-8">
 
 <p>一个数据类型占用存储空间的大小不仅与存储空间相关，当它作为外键的时候较小的数据类型能减少很多性能消耗，同时在进行运算的使用临时表的使用上也能够带来更小的消耗。
@@ -337,10 +337,10 @@ TIMESTAMP默认是not null的，在插入与更新时如果没有对该值进行
 </div>
 
 <div id="outline-container-6-9" class="outline-3">
-<h3 id="sec-6-9"><span class="section-number-3">6.9</span> 保存IP地址：</h3>
+<h3 id="sec-6-9">保存IP地址：</h3>
 <div class="outline-text-3" id="text-6-9">
 
-<p>最好使用无符号整形进行保存，利用mysql提供的INET<sub>ATON</sub>(ip)得到整数，使用INET<sub>NTOA</sub>(num)获取对应的ip。
+<p>最好使用无符号整形进行保存，利用mysql提供的INET_ATON(ip)得到整数，使用INET_NTOA(num)获取对应的ip。
 </p>
 </div>
 </div>
@@ -348,24 +348,24 @@ TIMESTAMP默认是not null的，在插入与更新时如果没有对该值进行
 </div>
 
 <div id="outline-container-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> 索引</h2>
+<h2 id="sec-7">索引</h2>
 <div class="outline-text-2" id="text-7">
 
 
 </div>
 
 <div id="outline-container-7-1" class="outline-3">
-<h3 id="sec-7-1"><span class="section-number-3">7.1</span> B-Tree索引：</h3>
+<h3 id="sec-7-1">B-Tree索引：</h3>
 <div class="outline-text-3" id="text-7-1">
 
-<p>绝大部分索引都为该类型，一个包含多列的索引（例如包含first<sub>name</sub> last<sub>name）在使用中只有在where子句中同时包含first</sub><sub>name和last</sub><sub>name或者只包含first</sub><sub>name时能够被使用。</sub>
+<p>绝大部分索引都为该类型，一个包含多列的索引（例如包含first_name last_name）在使用中只有在where子句中同时包含first_name和last_name或者只包含first_name时能够被使用。
 </p>
 </div>
 
 </div>
 
 <div id="outline-container-7-2" class="outline-3">
-<h3 id="sec-7-2"><span class="section-number-3">7.2</span> 哈希索引：</h3>
+<h3 id="sec-7-2">哈希索引：</h3>
 <div class="outline-text-3" id="text-7-2">
 
 <p>索引包括哈希值和行指针，查询数据时将where子句中的条件转换为哈希值再查找。
@@ -383,27 +383,27 @@ TIMESTAMP默认是not null的，在插入与更新时如果没有对该值进行
 不论键的大小，索引大小都是一定的。
 </p>
 <p>
-通过使用哈希索引来优化B-Tree索引，例如当查找url时，可以新建一列url<sub>crc用于保存url列的哈希值，然后在url</sub><sub>crc上建立b</sub>-tree索引，查找时使用where url='&hellip;' and url<sub>crc</sub>=crc('&hellip;')进行查找，能够加快查找速度，并且使得索引很小。
+通过使用哈希索引来优化B-Tree索引，例如当查找url时，可以新建一列url_crc用于保存url列的哈希值，然后在url_crc上建立b-tree索引，查找时使用where url='&hellip;' and url_crc=crc('&hellip;')进行查找，能够加快查找速度，并且使得索引很小。
 </p>
 </div>
 
 </div>
 
 <div id="outline-container-7-3" class="outline-3">
-<h3 id="sec-7-3"><span class="section-number-3">7.3</span> 不会使用索引的查询方式：</h3>
+<h3 id="sec-7-3">不会使用索引的查询方式：</h3>
 <div class="outline-text-3" id="text-7-3">
 
 <p>where子句中的索引列包含运算时将不会使用索引，如：
 </p>
 <p>
-select .. where to<sub>days</sub>(current<sub>date</sub>) - to<sub>days</sub>(date<sub>col</sub>) &lt;=10;因为使用了to<sub>days函数所以不会使用date</sub><sub>col上的索引，需要对该子句进行优化。</sub>
+select .. where to_days(current_date) - to_days(date_col) &lt;=10;因为使用了to_days函数所以不会使用date_col上的索引，需要对该子句进行优化。
 </p>
 </div>
 
 </div>
 
 <div id="outline-container-7-4" class="outline-3">
-<h3 id="sec-7-4"><span class="section-number-3">7.4</span> 优化索引：</h3>
+<h3 id="sec-7-4">优化索引：</h3>
 <div class="outline-text-3" id="text-7-4">
 
 <p>当需要索引的列包含很多数据的时候，过大的索引消耗空间同时也降低索引速度。这时可以通过20中提到的方式模拟哈希索引。另外也可以使用该列数据的前面n的字符作为索引内容进行索引。
@@ -413,7 +413,7 @@ select .. where to<sub>days</sub>(current<sub>date</sub>) - to<sub>days</sub>(da
 </div>
 
 <div id="outline-container-7-5" class="outline-3">
-<h3 id="sec-7-5"><span class="section-number-3">7.5</span> 聚集索引（Clustered Index）：</h3>
+<h3 id="sec-7-5">聚集索引（Clustered Index）：</h3>
 <div class="outline-text-3" id="text-7-5">
 
 <p>表实际的数据行与索引保存在一起。
@@ -427,30 +427,30 @@ select .. where to<sub>days</sub>(current<sub>date</sub>) - to<sub>days</sub>(da
 </div>
 
 <div id="outline-container-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> 通信方式：</h2>
+<h2 id="sec-8">通信方式：</h2>
 <div class="outline-text-2" id="text-8">
 
-<p>半双工，同一时间只能进行一种操作（发送或接收）。客户端发送请求，服务器端接受到请求后就不会再接收客户端的信息，在执行查询完毕之后将所有数据都发送到客户端，客户端无法在中途告知服务器端停止发送。所以一个查询中的通信只有一个来回。由于客户端需要用一个数据包将数据发送到服务端所以max<sub>packet</sub><sub>size参数对大查询时很有意义的。</sub>
+<p>半双工，同一时间只能进行一种操作（发送或接收）。客户端发送请求，服务器端接受到请求后就不会再接收客户端的信息，在执行查询完毕之后将所有数据都发送到客户端，客户端无法在中途告知服务器端停止发送。所以一个查询中的通信只有一个来回。由于客户端需要用一个数据包将数据发送到服务端所以max_packet_size参数对大查询时很有意义的。
 </p>
 </div>
 
 </div>
 
 <div id="outline-container-9" class="outline-2">
-<h2 id="sec-9"><span class="section-number-2">9</span> 查询方式：</h2>
+<h2 id="sec-9">查询方式：</h2>
 <div class="outline-text-2" id="text-9">
 
 <p>单表或多表查询的方式是使用嵌套循环的方式进行。每一个循环遍历一张表，嵌套的循环遍历另一张表。
 </p>
 <p>
-mysql会对优化遍历表的顺序，向访问最小页面数的方向进行优化。当多张表连接时连接的组合数是n的阶乘如果有很多表要进行连接那么进行优化就会消耗很多性能，所以当表的数量超过optimize<sub>search</sub><sub>depth值的时候就会放弃优化。</sub>
+mysql会对优化遍历表的顺序，向访问最小页面数的方向进行优化。当多张表连接时连接的组合数是n的阶乘如果有很多表要进行连接那么进行优化就会消耗很多性能，所以当表的数量超过optimize_search_depth值的时候就会放弃优化。
 </p>
 </div>
 
 </div>
 
 <div id="outline-container-10" class="outline-2">
-<h2 id="sec-10"><span class="section-number-2">10</span> union</h2>
+<h2 id="sec-10">union</h2>
 <div class="outline-text-2" id="text-10">
 
 
@@ -458,7 +458,7 @@ mysql会对优化遍历表的顺序，向访问最小页面数的方向进行优
 </div>
 
 <div id="outline-container-10-1" class="outline-3">
-<h3 id="sec-10-1"><span class="section-number-3">10.1</span> 对union查询的优化</h3>
+<h3 id="sec-10-1">对union查询的优化</h3>
 <div class="outline-text-3" id="text-10-1">
 
 <p>union查询的外部条件不会被运用到子查询中。如
@@ -476,7 +476,7 @@ mysql会对优化遍历表的顺序，向访问最小页面数的方向进行优
 </div>
 
 <div id="outline-container-10-2" class="outline-3">
-<h3 id="sec-10-2"><span class="section-number-3">10.2</span> 对联接的优化</h3>
+<h3 id="sec-10-2">对联接的优化</h3>
 <div class="outline-text-3" id="text-10-2">
 
 <p>确保两个表进行联接所使用的列上有索引，一般来说只需要在联接的第2个表上使用索引。
@@ -489,14 +489,14 @@ group by 或order by应该只引用一个表中的列，这样MySQL可以尝试�
 </div>
 
 <div id="outline-container-11" class="outline-2">
-<h2 id="sec-11"><span class="section-number-2">11</span> Advice</h2>
+<h2 id="sec-11">Advice</h2>
 <div class="outline-text-2" id="text-11">
 
 
 </div>
 
 <div id="outline-container-11-1" class="outline-3">
-<h3 id="sec-11-1"><span class="section-number-3">11.1</span> MySQL Server Hardware and OS Tuning:</h3>
+<h3 id="sec-11-1">MySQL Server Hardware and OS Tuning:</h3>
 <div class="outline-text-3" id="text-11-1">
 
 <ol>
@@ -578,29 +578,29 @@ group by 或order by应该只引用一个表中的列，这样MySQL可以尝试�
 </div>
 
 <div id="outline-container-11-2" class="outline-3">
-<h3 id="sec-11-2"><span class="section-number-3">11.2</span> MySQL Configuration:</h3>
+<h3 id="sec-11-2">MySQL Configuration:</h3>
 <div class="outline-text-3" id="text-11-2">
 
 <ol>
-<li>Use innodb<sub>flush</sub><sub>method</sub>=O<sub>DIRECT</sub> to avoid a double buffer when writing.
+<li>Use innodb_flush_method=O_DIRECT to avoid a double buffer when writing.
 
 </li>
-<li>Avoid O<sub>DIRECT</sub> and EXT3 filesystem – you will serialize all your writes.
+<li>Avoid O_DIRECT and EXT3 filesystem – you will serialize all your writes.
 
 </li>
-<li>Allocate enough innodb<sub>buffer</sub><sub>pool</sub><sub>size</sub> to load your entire InnoDB file into memory – less reads from disk.
+<li>Allocate enough innodb_buffer_pool_size to load your entire InnoDB file into memory – less reads from disk.
 
 </li>
-<li>Do not make innodb<sub>log</sub><sub>file</sub><sub>size</sub> too big, with faster and more disks – flushing more often is good and lowers the recovery time during crashes.
+<li>Do not make innodb_log_file_size too big, with faster and more disks – flushing more often is good and lowers the recovery time during crashes.
 
 </li>
-<li>Do not mix innodb<sub>thread</sub><sub>concurrency</sub> and thread<sub>concurrency</sub> variables – these two values are not compatible.
+<li>Do not mix innodb_thread_concurrency and thread_concurrency variables – these two values are not compatible.
 
 </li>
-<li>Allocate a minimal amount for max<sub>connections</sub> – too many connections can use up your RAM and lock up your MySQL server.
+<li>Allocate a minimal amount for max_connections – too many connections can use up your RAM and lock up your MySQL server.
 
 </li>
-<li>Keep thread<sub>cache</sub> at a relatively high number, about 16 – to prevent slowness when opening connections.
+<li>Keep thread_cache at a relatively high number, about 16 – to prevent slowness when opening connections.
 
 </li>
 <li>Use  skip-name-resolve – to remove dns lookups.
@@ -609,19 +609,19 @@ group by 或order by应该只引用一个表中的列，这样MySQL可以尝试�
 <li>Use query cache if your queries are repetitive and your data does not change often – however using query cache on data that changes often will give you a performance hit.
 
 </li>
-<li>Increase temp<sub>table</sub><sub>size</sub> – to prevent disk writes.
+<li>Increase temp_table_size – to prevent disk writes.
 
 </li>
-<li>Increase max<sub>heap</sub><sub>table</sub><sub>size</sub> – to prevent disk writes.
+<li>Increase max_heap_table_size – to prevent disk writes.
 
 </li>
-<li>Do not set your sort<sub>buffer</sub><sub>size</sub> too high – this is per connection and can use up memory fast.
+<li>Do not set your sort_buffer_size too high – this is per connection and can use up memory fast.
 
 </li>
-<li>Monitor key<sub>read</sub><sub>requests</sub> and key<sub>reads</sub> to determine your key<sub>buffer</sub> size – the key read requests should be higher than your key<sub>reads</sub>, otherwise you are not efficiently using your key<sub>buffer</sub>.
+<li>Monitor key_read_requests and key_reads to determine your key_buffer size – the key read requests should be higher than your key_reads, otherwise you are not efficiently using your key_buffer.
 
 </li>
-<li>Set innodb<sub>flush</sub><sub>log</sub><sub>at</sub><sub>trx</sub><sub>commit</sub> = 0 will improve performance, but leaving it to default (1), you will ensure data integrity, you will also ensure replication is not lagging
+<li>Set innodb_flush_log_at_trx_commit = 0 will improve performance, but leaving it to default (1), you will ensure data integrity, you will also ensure replication is not lagging
 
 </li>
 <li>Have a test environment where you can test your configs and restart often, without affecting production.
@@ -633,7 +633,7 @@ group by 或order by应该只引用一个表中的列，这样MySQL可以尝试�
 </div>
 
 <div id="outline-container-11-3" class="outline-3">
-<h3 id="sec-11-3"><span class="section-number-3">11.3</span> MySQL Schema Optimization:</h3>
+<h3 id="sec-11-3">MySQL Schema Optimization:</h3>
 <div class="outline-text-3" id="text-11-3">
 
 <ol>
@@ -712,7 +712,7 @@ group by 或order by应该只引用一个表中的列，这样MySQL可以尝试�
 </div>
 
 <div id="outline-container-11-4" class="outline-3">
-<h3 id="sec-11-4"><span class="section-number-3">11.4</span> Query Optimization:</h3>
+<h3 id="sec-11-4">Query Optimization:</h3>
 <div class="outline-text-3" id="text-11-4">
 
 <ol>
@@ -743,7 +743,7 @@ group by 或order by应该只引用一个表中的列，这样MySQL可以尝试�
 <li>Sometimes MySQL chooses the wrong index, use USE INDEX for this case
 
 </li>
-<li>Check for issues using SQL<sub>MODE</sub>=STRICT.
+<li>Check for issues using SQL_MODE=STRICT.
 
 </li>
 <li>Use a LIMIT on UNION instead of OR for less than 5 indexed fields.
@@ -794,7 +794,7 @@ group by 或order by应该只引用一个表中的列，这样MySQL可以尝试�
 </div>
 
 <div id="outline-container-11-5" class="outline-3">
-<h3 id="sec-11-5"><span class="section-number-3">11.5</span> MySQL Backup Procedures:</h3>
+<h3 id="sec-11-5">MySQL Backup Procedures:</h3>
 <div class="outline-text-3" id="text-11-5">
 
 <ol>
@@ -847,7 +847,7 @@ group by 或order by应该只引用一个表中的列，这样MySQL可以尝试�
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-21T11:53+0800</p>
+<p class="date">Date: 2015-01-25T14:16+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

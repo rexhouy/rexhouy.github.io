@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="linux"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-22T17:09+0800"/>
+<meta name="generated" content="2015-01-25T14:14+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -34,20 +34,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 Hot-keys</a></li>
-<li><a href="#sec-2">2 Shell</a>
+<li><a href="#sec-1">Hot-keys</a></li>
+<li><a href="#sec-2">Shell</a>
 <ul>
-<li><a href="#sec-2-1">2.1 Command</a></li>
-<li><a href="#sec-2-2">2.2 Programming</a></li>
-<li><a href="#sec-2-3">2.3 Control structures</a></li>
-<li><a href="#sec-2-4">2.4 Priority</a></li>
-<li><a href="#sec-2-5">2.5 tee</a></li>
+<li><a href="#sec-2-1">Command</a></li>
+<li><a href="#sec-2-2">Programming</a></li>
+<li><a href="#sec-2-3">Control structures</a></li>
+<li><a href="#sec-2-4">Priority</a></li>
+<li><a href="#sec-2-5">tee</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">3 File system</a>
+<li><a href="#sec-3">File system</a>
 <ul>
-<li><a href="#sec-3-1">3.1 inode</a></li>
-<li><a href="#sec-3-2">3.2 FHS</a></li>
+<li><a href="#sec-3-1">inode</a></li>
+<li><a href="#sec-3-2">FHS</a></li>
 </ul>
 </li>
 </ul>
@@ -55,7 +55,7 @@
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Hot-keys</h2>
+<h2 id="sec-1">Hot-keys</h2>
 <div class="outline-text-2" id="text-1">
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -75,7 +75,7 @@
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Shell</h2>
+<h2 id="sec-2">Shell</h2>
 <div class="outline-text-2" id="text-2">
 
 
@@ -98,7 +98,7 @@ Use "." command to run a bash file in current shell instead of its child. The ".
 </div>
 
 <div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Command</h3>
+<h3 id="sec-2-1">Command</h3>
 <div class="outline-text-3" id="text-2-1">
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -108,7 +108,7 @@ Use "." command to run a bash file in current shell instead of its child. The ".
 <tr><th scope="col" class="left">Shell</th><th scope="col" class="left">Usage</th><th scope="col" class="left">Function</th></tr>
 </thead>
 <tbody>
-<tr><td class="left">write</td><td class="left">write user<sub>name</sub></td><td class="left">Send message to someone</td></tr>
+<tr><td class="left">write</td><td class="left">write user_name</td><td class="left">Send message to someone</td></tr>
 <tr><td class="left">ll</td><td class="left">ll -t</td><td class="left">List order by time</td></tr>
 <tr><td class="left">who</td><td class="left">who</td><td class="left">Show who is logged on</td></tr>
 <tr><td class="left">date</td><td class="left">date</td><td class="left">Show current date</td></tr>
@@ -135,7 +135,7 @@ Use "." command to run a bash file in current shell instead of its child. The ".
 </div>
 
 <div id="outline-container-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Programming</h3>
+<h3 id="sec-2-2">Programming</h3>
 <div class="outline-text-3" id="text-2-2">
 
 <p>Return value:
@@ -188,7 +188,7 @@ exit 1; "execution failed"(any number except 0 are stand for false)
 </div>
 
 <div id="outline-container-2-3" class="outline-3">
-<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Control structures</h3>
+<h3 id="sec-2-3">Control structures</h3>
 <div class="outline-text-3" id="text-2-3">
 
 
@@ -260,7 +260,7 @@ Use trap to catch exit singnal
 </div>
 
 <div id="outline-container-2-4" class="outline-3">
-<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Priority</h3>
+<h3 id="sec-2-4">Priority</h3>
 <div class="outline-text-3" id="text-2-4">
 
 <p>Use bracket to change command execute priority.
@@ -276,7 +276,7 @@ Use trap to catch exit singnal
 </div>
 
 <div id="outline-container-2-5" class="outline-3">
-<h3 id="sec-2-5"><span class="section-number-3">2.5</span> tee</h3>
+<h3 id="sec-2-5">tee</h3>
 <div class="outline-text-3" id="text-2-5">
 
 <p>Save the result to file and then use the result as output
@@ -293,14 +293,14 @@ Use trap to catch exit singnal
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> File system</h2>
+<h2 id="sec-3">File system</h2>
 <div class="outline-text-2" id="text-3">
 
 
 </div>
 
 <div id="outline-container-3-1" class="outline-3">
-<h3 id="sec-3-1"><span class="section-number-3">3.1</span> inode</h3>
+<h3 id="sec-3-1">inode</h3>
 <div class="outline-text-3" id="text-3-1">
 
 <p>每个分区都被分为两部分，一部分用于保存meta data（inode）另一部分用于保存文件。
@@ -327,7 +327,7 @@ inode保存文件的的字节数，userid，groupid，authorize，timestamp，�
 </div>
 
 <div id="outline-container-3-2" class="outline-3">
-<h3 id="sec-3-2"><span class="section-number-3">3.2</span> FHS</h3>
+<h3 id="sec-3-2">FHS</h3>
 <div class="outline-text-3" id="text-3-2">
 
 <p>Filesystem Hierarchy Standard
@@ -355,7 +355,7 @@ inode保存文件的的字节数，userid，groupid，authorize，timestamp，�
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-22T17:09+0800</p>
+<p class="date">Date: 2015-01-25T14:14+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

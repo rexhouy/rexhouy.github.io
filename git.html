@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="git"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-22T22:18+0800"/>
+<meta name="generated" content="2015-01-25T14:11+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -34,27 +34,27 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 安装配置</a></li>
-<li><a href="#sec-2">2 创建新仓库</a></li>
-<li><a href="#sec-3">3 检出仓库</a></li>
-<li><a href="#sec-4">4 添加，删除与提交</a></li>
-<li><a href="#sec-5">5 推送改动</a></li>
-<li><a href="#sec-6">6 分支</a></li>
-<li><a href="#sec-7">7 更新与合并</a></li>
-<li><a href="#sec-8">8 替换本地改动</a></li>
-<li><a href="#sec-9">9 引用repository</a>
+<li><a href="#sec-1">安装配置</a></li>
+<li><a href="#sec-2">创建新仓库</a></li>
+<li><a href="#sec-3">检出仓库</a></li>
+<li><a href="#sec-4">添加，删除与提交</a></li>
+<li><a href="#sec-5">推送改动</a></li>
+<li><a href="#sec-6">分支</a></li>
+<li><a href="#sec-7">更新与合并</a></li>
+<li><a href="#sec-8">替换本地改动</a></li>
+<li><a href="#sec-9">引用repository</a>
 <ul>
-<li><a href="#sec-9-1">9.1 删除submodule</a></li>
-<li><a href="#sec-9-2">9.2 更新</a></li>
+<li><a href="#sec-9-1">删除submodule</a></li>
+<li><a href="#sec-9-2">更新</a></li>
 </ul>
 </li>
-<li><a href="#sec-10">10 Fetch updates from upstream</a></li>
+<li><a href="#sec-10">Fetch updates from upstream</a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> 安装配置</h2>
+<h2 id="sec-1">安装配置</h2>
 <div class="outline-text-2" id="text-1">
 
 
@@ -109,7 +109,7 @@ $ git config --global user.email rex.houy@gmail.com
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> 创建新仓库</h2>
+<h2 id="sec-2">创建新仓库</h2>
 <div class="outline-text-2" id="text-2">
 
 <p>创建新文件夹，打开，然后执行
@@ -127,7 +127,7 @@ $ git config --global user.email rex.houy@gmail.com
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> 检出仓库</h2>
+<h2 id="sec-3">检出仓库</h2>
 <div class="outline-text-2" id="text-3">
 
 <p>执行如下命令以创建一个本地仓库的克隆版本：
@@ -151,7 +151,7 @@ $ git config --global user.email rex.houy@gmail.com
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> 添加，删除与提交</h2>
+<h2 id="sec-4">添加，删除与提交</h2>
 <div class="outline-text-2" id="text-4">
 
 <p>你可以计划改动（把它们添加到缓存区），使用如下命令：
@@ -180,7 +180,7 @@ git rm -r &lt;directory&gt;
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> 推送改动</h2>
+<h2 id="sec-5">推送改动</h2>
 <div class="outline-text-2" id="text-5">
 
 <p>你的改动现在已经在本地仓库的 HEAD 中了。执行如下命令以将这些改动提交到远端仓库：
@@ -209,14 +209,14 @@ git rm -r &lt;directory&gt;
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> 分支</h2>
+<h2 id="sec-6">分支</h2>
 <div class="outline-text-2" id="text-6">
 
 <p>分支是用来将特性开发绝缘开来的。在你创建仓库的时候，master 是“默认的”。在其他分支上进行开发，完成后再将它们合并到主分支上。
 </p>
 
 <p>
-创建一个叫做“feature<sub>x”的分支，并切换过去：</sub>
+创建一个叫做“feature_x”的分支，并切换过去：
 </p>
 
 
@@ -253,7 +253,7 @@ git rm -r &lt;directory&gt;
 </div>
 
 <div id="outline-container-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> 更新与合并</h2>
+<h2 id="sec-7">更新与合并</h2>
 <div class="outline-text-2" id="text-7">
 
 <p>要更新你的本地仓库至最新改动，执行：
@@ -294,7 +294,7 @@ git rm -r &lt;directory&gt;
 </div>
 
 <div id="outline-container-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> 替换本地改动</h2>
+<h2 id="sec-8">替换本地改动</h2>
 <div class="outline-text-2" id="text-8">
 
 <p>假如你做错事（自然，这是不可能的），你可以使用如下命令替换掉本地改动：
@@ -321,7 +321,7 @@ git reset --hard origin/master
 </div>
 
 <div id="outline-container-9" class="outline-2">
-<h2 id="sec-9"><span class="section-number-2">9</span> 引用repository</h2>
+<h2 id="sec-9">引用repository</h2>
 <div class="outline-text-2" id="text-9">
 
 <p>add Common.git as a submodule at the path "common" inside this repo
@@ -362,7 +362,7 @@ update submodules
 </div>
 
 <div id="outline-container-9-1" class="outline-3">
-<h3 id="sec-9-1"><span class="section-number-3">9.1</span> 删除submodule</h3>
+<h3 id="sec-9-1">删除submodule</h3>
 <div class="outline-text-3" id="text-9-1">
 
 <p>Remove relevent info from .gitmodule
@@ -371,7 +371,7 @@ update submodules
 Remove relevent info from .git/config
 </p>
 <p>
-git rm &ndash;cached module<sub>path</sub>
+git rm &ndash;cached module_path
 </p>
 <p>
 if git rm report error, try git add .gitmodule, and then run git rm again.
@@ -381,7 +381,7 @@ if git rm report error, try git add .gitmodule, and then run git rm again.
 </div>
 
 <div id="outline-container-9-2" class="outline-3">
-<h3 id="sec-9-2"><span class="section-number-3">9.2</span> 更新</h3>
+<h3 id="sec-9-2">更新</h3>
 <div class="outline-text-3" id="text-9-2">
 
 <p>Update .gitmodule
@@ -397,7 +397,7 @@ git submodule sync
 </div>
 
 <div id="outline-container-10" class="outline-2">
-<h2 id="sec-10"><span class="section-number-2">10</span> Fetch updates from upstream</h2>
+<h2 id="sec-10">Fetch updates from upstream</h2>
 <div class="outline-text-2" id="text-10">
 
 <ol>
@@ -440,7 +440,7 @@ git remote -v # view configured remote
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-22T22:18+0800</p>
+<p class="date">Date: 2015-01-25T14:11+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

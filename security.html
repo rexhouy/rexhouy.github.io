@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="security"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-21T11:53+0800"/>
+<meta name="generated" content="2015-01-25T14:16+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -34,16 +34,16 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 摘要认证（digest authentication headers）</a></li>
-<li><a href="#sec-2">2 x.509</a></li>
-<li><a href="#sec-3">3 OpenID</a></li>
-<li><a href="#sec-4">4 SSO CAS</a></li>
+<li><a href="#sec-1">摘要认证（digest authentication headers）</a></li>
+<li><a href="#sec-2">x.509</a></li>
+<li><a href="#sec-3">OpenID</a></li>
+<li><a href="#sec-4">SSO CAS</a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> 摘要认证（digest authentication headers）</h2>
+<h2 id="sec-1">摘要认证（digest authentication headers）</h2>
 <div class="outline-text-2" id="text-1">
 
 <p>服务器端生成一个nonce（基于过期时间戳以及随机数），客户端使用该nonce与用户名密码进行hash运算加密后返回给服务器端，服务器端解析出其中的信息进行验证同时根据nonce中的时间戳判断是否过期。另外可以将nonce设置为只使用一次，这样可以防止回放攻击。
@@ -54,7 +54,7 @@
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> x.509</h2>
+<h2 id="sec-2">x.509</h2>
 <div class="outline-text-2" id="text-2">
 
 <p>采用public/private key的不对称加密，将公钥公开，私钥自己保留，客户端使用公钥对信息进行加密并传送到服务端，服务端使用私钥进行解密。对于公钥的安全保证（证明该公钥确实来自于可信任的机构）是通过CA（认证中心）的数字签名来实现的，客户端会保存一些CA的信息（公钥）。服务器端发送给客户端的凭证是在公钥后加上一个CA的数字签名构成的。客户端收到该凭证后使用CA的公钥对CA数字签名进行解密并根据该结果验证发送过来的公钥是否被修改。如果客户端没有该CA的信息，将会提示用户凭证无效的警告，如果该公钥使用的CA是自定义的则需要在客户端加入该CA的信息，证明该CA是可信任的。
@@ -75,7 +75,7 @@
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> OpenID</h2>
+<h2 id="sec-3">OpenID</h2>
 <div class="outline-text-2" id="text-3">
 
 <p>当终端用户登录一个支持OpenID的网站（RP）时，与在该网站直接进行用户登录方式不同（该终端用户也许没有在该网站注册过），该用户选择了以OpenID的方式登录该网站。OpenID是该用户在另一个网站（OP）注册的一个URL。RP就会根据用户提供的OpenID去发现OP，然后请求该OP对该用户身份进行鉴权。OP收到RP请求后，会要求用户登录OP认证页面进行鉴权，鉴权后，OP会提醒该用户是否容许外部网站对你鉴权。用户同意后，OP将鉴权结果返回给RP.
@@ -86,7 +86,7 @@
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> SSO CAS</h2>
+<h2 id="sec-4">SSO CAS</h2>
 <div class="outline-text-2" id="text-4">
 
 <p>用户访问cas client，如果没有ticket则重定向到cas server，由cas server来完成认证，之后cas server将生成的ticket发送给客户端，客户端重定向到cas client并使用该ticket，cas client访问server以验证该ticket是否有效，之后将信息发送给用户。使用cas进行跨域cookie共享时可以使用cas server的cookie。
@@ -95,7 +95,7 @@
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-21T11:53+0800</p>
+<p class="date">Date: 2015-01-25T14:16+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

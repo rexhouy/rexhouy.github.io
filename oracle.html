@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="oracle"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-21T11:53+0800"/>
+<meta name="generated" content="2015-01-25T14:11+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -34,31 +34,31 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 概念</a></li>
-<li><a href="#sec-2">2 结构</a></li>
-<li><a href="#sec-3">3 sql</a></li>
-<li><a href="#sec-4">4 事物隔离级别</a></li>
-<li><a href="#sec-5">5 锁</a></li>
-<li><a href="#sec-6">6 Object</a>
+<li><a href="#sec-1">概念</a></li>
+<li><a href="#sec-2">结构</a></li>
+<li><a href="#sec-3">sql</a></li>
+<li><a href="#sec-4">事物隔离级别</a></li>
+<li><a href="#sec-5">锁</a></li>
+<li><a href="#sec-6">Object</a>
 <ul>
-<li><a href="#sec-6-1">6.1 Dimention</a></li>
-<li><a href="#sec-6-2">6.2 IOT表</a></li>
-<li><a href="#sec-6-3">6.3 sequence</a></li>
+<li><a href="#sec-6-1">Dimention</a></li>
+<li><a href="#sec-6-2">IOT表</a></li>
+<li><a href="#sec-6-3">sequence</a></li>
 </ul>
 </li>
-<li><a href="#sec-7">7 调优</a></li>
-<li><a href="#sec-8">8 DDL</a></li>
-<li><a href="#sec-9">9 other</a></li>
+<li><a href="#sec-7">调优</a></li>
+<li><a href="#sec-8">DDL</a></li>
+<li><a href="#sec-9">other</a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> 概念</h2>
+<h2 id="sec-1">概念</h2>
 <div class="outline-text-2" id="text-1">
 
 <ol>
-<li>系统提供了一些view，通过这些view可以间接的查看data dictionary中的一些信息。包括以user、all、dba为前缀的一些view分别提供给不同权限的用户查询相应的信息。如user<sub>objects\all</sub><sub>objects\sys</sub>.dba<sub>objects</sub>.
+<li>系统提供了一些view，通过这些view可以间接的查看data dictionary中的一些信息。包括以user、all、dba为前缀的一些view分别提供给不同权限的用户查询相应的信息。如user_objects\all_objects\sys.dba_objects.
 
 </li>
 <li>dynamic performance tables记录当前数据库活动信息的虚拟表，sys用户拥有这些表，这些表的名字以V_$开头，依赖于这些表的视图以V$开头。
@@ -118,7 +118,7 @@
 <li>oracle中的语句、存储过程都是原子性的，在失败后都会回滚到执行之前。（如果一条语句触发了trriger那么如果在任何一处出错则整个都将回滚）。但是在存储过程中加入when others then&hellip;这样的语句后会破坏存储过程的原子性，使得该存储过程在出错后不会回滚到执行前的状态，所以当需要进行类似的异常处理时需要注意，可以显示的调用savepoint进行回滚。
 
 </li>
-<li>oracle将在每一条sql语句执行完之后进行完整性约束检查，对于违反约束条件的更改将会失败。通过设置该约束为推迟到commit是执行可以使得在事务中违反该约束条件（例如可以进行级联更新操作）。（set constraint con<sub>name</sub> immediate：立即检查 set constraint con<sub>name</sub> deferred：推迟执行）（并不推荐）
+<li>oracle将在每一条sql语句执行完之后进行完整性约束检查，对于违反约束条件的更改将会失败。通过设置该约束为推迟到commit是执行可以使得在事务中违反该约束条件（例如可以进行级联更新操作）。（set constraint con_name immediate：立即检查 set constraint con_name deferred：推迟执行）（并不推荐）
 
 </li>
 <li>oracle high water mark:用于标记表的末尾（会随着表中数据的增加而增加），在该标记与表的开头之间有许多数据块，这些数据块不一定是满的。当使用count(*)时，会计算两者之间的数据块是否为空。
@@ -173,7 +173,7 @@
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> 结构</h2>
+<h2 id="sec-2">结构</h2>
 <div class="outline-text-2" id="text-2">
 
 <ol>
@@ -202,7 +202,7 @@
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> sql</h2>
+<h2 id="sec-3">sql</h2>
 <div class="outline-text-2" id="text-3">
 
 
@@ -291,7 +291,7 @@ extract(year|month|day|hour|... FROM DATE date) <span style="color: #93a1a1; fon
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> 事物隔离级别</h2>
+<h2 id="sec-4">事物隔离级别</h2>
 <div class="outline-text-2" id="text-4">
 
 <p>oracle只有两个事物隔离级别：read committed（默认，能避免脏读）、serializable（能避免脏读、不可重复读、幻像读）
@@ -317,7 +317,7 @@ SET TRANSACTION READ ONLY;
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> 锁</h2>
+<h2 id="sec-5">锁</h2>
 <div class="outline-text-2" id="text-5">
 
 
@@ -331,13 +331,13 @@ SET TRANSACTION READ ONLY;
 如果需要对一个表中的绝大多数数据进行更新等操作则可以使用LOCK TABLE IN EXCLUSIVE MODE该语句将会锁定该表。
 </p>
 <p>
-可以使用DBMS<sub>LOCK包创建自己的锁定。</sub>
+可以使用DBMS_LOCK包创建自己的锁定。
 </p>
 <p>
 Oracle中的锁定可以分为几类：DML lock（data lock），DDL lock（dictionary lock)和internal lock/latch。
 </p>
 <p>
-DML lock又可以分为row lock和table lock。row lock在select.. for update/insert/update/delete时隐式自动产生，而table lock除了隐式产生，也可以调用lock table &lt;table<sub>name&gt</sub>; in &lt;/table<sub>name&gt</sub>; name来显示锁定。
+DML lock又可以分为row lock和table lock。row lock在select.. for update/insert/update/delete时隐式自动产生，而table lock除了隐式产生，也可以调用lock table &lt;table_name&gt; in &lt;/table_name&gt; name来显示锁定。
 </p>
 
 
@@ -353,14 +353,14 @@ lock table table_name in share row exclusive mode&#65288;SRX&#65289;
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Object</h2>
+<h2 id="sec-6">Object</h2>
 <div class="outline-text-2" id="text-6">
 
 
 </div>
 
 <div id="outline-container-6-1" class="outline-3">
-<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Dimention</h3>
+<h3 id="sec-6-1">Dimention</h3>
 <div class="outline-text-3" id="text-6-1">
 
 <p>创建Dimention：（用于为物化视图的查询重写服务）
@@ -397,7 +397,7 @@ lock table table_name in share row exclusive mode&#65288;SRX&#65289;
 </div>
 
 <div id="outline-container-6-2" class="outline-3">
-<h3 id="sec-6-2"><span class="section-number-3">6.2</span> IOT表</h3>
+<h3 id="sec-6-2">IOT表</h3>
 <div class="outline-text-3" id="text-6-2">
 
 <p>IOT表将整行数据按照索引的组织进行存储，这与正常的堆组织表是不同的。（插入慢）
@@ -416,7 +416,7 @@ lock table table_name in share row exclusive mode&#65288;SRX&#65289;
 </div>
 
 <div id="outline-container-6-3" class="outline-3">
-<h3 id="sec-6-3"><span class="section-number-3">6.3</span> sequence</h3>
+<h3 id="sec-6-3">sequence</h3>
 <div class="outline-text-3" id="text-6-3">
 
 
@@ -426,10 +426,10 @@ lock table table_name in share row exclusive mode&#65288;SRX&#65289;
 </pre>
 
 <p>
-seq<sub>name</sub>.currval得到当前的序列号.
+seq_name.currval得到当前的序列号.
 </p>
 <p>
-seq<sub>name</sub>.nextval得到下一个序列号，并将该序列号存入currval中。
+seq_name.nextval得到下一个序列号，并将该序列号存入currval中。
 </p>
 </div>
 </div>
@@ -437,7 +437,7 @@ seq<sub>name</sub>.nextval得到下一个序列号，并将该序列号存入cur
 </div>
 
 <div id="outline-container-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> 调优</h2>
+<h2 id="sec-7">调优</h2>
 <div class="outline-text-2" id="text-7">
 
 
@@ -454,7 +454,7 @@ B*tree索引不为null的数据创建索引
 当删除或更新父表中的主键时，将会锁定子表，并且会对子表进行全扫描，这时候就需要给子表的外键加上索引。如果没有这些情况则可以不进行索引。
 </p>
 <p>
-使用alter session set sql<sub>trace</sub>=true;alter session set timed<sub>statistics</sub>=true;来设置保存跟踪文件用于优化，跟踪文件的位置记录在user<sub>dump</sub><sub>dest参数中，可通过show</sub> parameter user<sub>dump</sub><sub>dest或从V</sub>$PARAMETER视图中查看。相应的信息将会保存到trc文件中，通过使用tkprof工具可以对其进行格式转换，命令为：
+使用alter session set sql_trace=true;alter session set timed_statistics=true;来设置保存跟踪文件用于优化，跟踪文件的位置记录在user_dump_dest参数中，可通过show parameter user_dump_dest或从V$PARAMETER视图中查看。相应的信息将会保存到trc文件中，通过使用tkprof工具可以对其进行格式转换，命令为：
 </p>
 
 
@@ -478,7 +478,7 @@ B*tree索引不为null的数据创建索引
 </div>
 
 <div id="outline-container-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> DDL</h2>
+<h2 id="sec-8">DDL</h2>
 <div class="outline-text-2" id="text-8">
 
 
@@ -546,7 +546,7 @@ truncate不产生回滚，会重置high water mark，属于ddl（执行后不能
 </div>
 
 <div id="outline-container-9" class="outline-2">
-<h2 id="sec-9"><span class="section-number-2">9</span> other</h2>
+<h2 id="sec-9">other</h2>
 <div class="outline-text-2" id="text-9">
 
 
@@ -557,19 +557,19 @@ sqlplus username/password@sid登录。
 oracle $exp $imp 进行导入导出
 </p>
 <p>
-all<sub>tables表；所有用户的表</sub>
+all_tables表；所有用户的表
 </p>
 <p>
-user<sub>tables表；当前用户的表</sub>
+user_tables表；当前用户的表
 </p>
 <p>
-all<sub>source表；包括存储过程等各种资源</sub>
+all_source表；包括存储过程等各种资源
 </p>
 <p>
 sqlplus username/password as sysdba;使用dba权限登录。
 </p>
 <p>
-dbms<sub>output</sub>.put<sub>line</sub>('xxx');输出（dbms<sub>output提供了一些用于输出的方法）</sub>
+dbms_output.put_line('xxx');输出（dbms_output提供了一些用于输出的方法）
 </p>
 <p>
 set serveroutput on（在屏幕上看到输出的内容）
@@ -590,7 +590,7 @@ tnsping orcl;查看tns监听是否启动，orcl为sid在tnsnames.ora中配置。
 oracle在创建constraint的时候会同时为该列建立B+树index,例如在创建主键时将会自动创建索引。
 </p>
 <p>
-dba创建的表的信息在DBA<sub>TABLES中能够查询，其余用户创建的表在USER</sub><sub>TABLES中能够查询；同样index可以在DBA</sub><sub>INDEXES和USER</sub><sub>INEXES中查询。</sub>
+dba创建的表的信息在DBA_TABLES中能够查询，其余用户创建的表在USER_TABLES中能够查询；同样index可以在DBA_INDEXES和USER_INEXES中查询。
 </p>
 <p>
 三个环境变量的设置：
@@ -623,7 +623,7 @@ set feedback on/off
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-21T11:53+0800</p>
+<p class="date">Date: 2015-01-25T14:11+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
