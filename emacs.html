@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>emacs</title>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="emacs"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-27T14:22+0800"/>
+<meta name="generated" content="2015-01-28T19:18+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -35,11 +35,13 @@
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">Basic</a></li>
-<li><a href="#sec-2">Find key bindings</a></li>
-<li><a href="#sec-3">File system management</a></li>
-<li><a href="#sec-4">Rails (rinari)</a></li>
-<li><a href="#sec-5">Package management</a></li>
-<li><a href="#sec-6">Custom</a></li>
+<li><a href="#sec-2">Region</a></li>
+<li><a href="#sec-3">Key macro</a></li>
+<li><a href="#sec-4">Find key bindings</a></li>
+<li><a href="#sec-5">File system management</a></li>
+<li><a href="#sec-6">Rails (rinari)</a></li>
+<li><a href="#sec-7">Package management</a></li>
+<li><a href="#sec-8">Custom</a></li>
 </ul>
 </div>
 </div>
@@ -56,15 +58,17 @@
 </thead>
 <tbody>
 <tr><td class="left">c-/</td><td class="left">Undo</td></tr>
-<tr><td class="left">m-%</td><td class="left">Replace</td></tr>
-<tr><td class="left">c-r</td><td class="left">Find prev</td></tr>
-<tr><td class="left">c-s</td><td class="left">Find next</td></tr>
-<tr><td class="left">m-u</td><td class="left">Uppercase</td></tr>
-<tr><td class="left">m-l</td><td class="left">Lowercase</td></tr>
-<tr><td class="left">m-c</td><td class="left">Capitalize</td></tr>
-<tr><td class="left">m-;</td><td class="left">Clipboard</td></tr>
+<tr><td class="left">M-%</td><td class="left">Replace</td></tr>
+<tr><td class="left">C-r</td><td class="left">Search backward</td></tr>
+<tr><td class="left">C-s</td><td class="left">Search forward</td></tr>
+<tr><td class="left">M-u</td><td class="left">Uppercase</td></tr>
+<tr><td class="left">M-l</td><td class="left">Lowercase</td></tr>
+<tr><td class="left">M-c</td><td class="left">Capitalize</td></tr>
+<tr><td class="left">M-;</td><td class="left">Clipboard</td></tr>
 <tr><td class="left">C-x 1</td><td class="left">Close other windows</td></tr>
 <tr><td class="left">C-x o</td><td class="left">Switch window</td></tr>
+<tr><td class="left">M-g g</td><td class="left">Go to line</td></tr>
+<tr><td class="left">C-M-S</td><td class="left">Regular expression search</td></tr>
 </tbody>
 </table>
 
@@ -73,8 +77,52 @@
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">Find key bindings</h2>
+<h2 id="sec-2">Region</h2>
 <div class="outline-text-2" id="text-2">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Key</th><th scope="col" class="left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">C-x h</td><td class="left">Select all</td></tr>
+<tr><td class="left">M-h</td><td class="left">Select current paragraph</td></tr>
+<tr><td class="left">C-w</td><td class="left">Cut</td></tr>
+<tr><td class="left">M-w</td><td class="left">Copy</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Key macro</h2>
+<div class="outline-text-2" id="text-3">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">key</th><th scope="col" class="left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">C-u times command</td><td class="left">Repeat command</td></tr>
+<tr><td class="left">F3</td><td class="left">Start define macro</td></tr>
+<tr><td class="left">F4</td><td class="left">End define macro</td></tr>
+<tr><td class="left">F4</td><td class="left">Execute macro</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">Find key bindings</h2>
+<div class="outline-text-2" id="text-4">
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" />
@@ -93,9 +141,9 @@
 
 </div>
 
-<div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">File system management</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">File system management</h2>
+<div class="outline-text-2" id="text-5">
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" />
@@ -120,9 +168,9 @@
 
 </div>
 
-<div id="outline-container-4" class="outline-2">
-<h2 id="sec-4">Rails (rinari)</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">Rails (rinari)</h2>
+<div class="outline-text-2" id="text-6">
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" />
@@ -144,9 +192,9 @@
 
 </div>
 
-<div id="outline-container-5" class="outline-2">
-<h2 id="sec-5">Package management</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">Package management</h2>
+<div class="outline-text-2" id="text-7">
 
 
 
@@ -173,9 +221,9 @@
 
 </div>
 
-<div id="outline-container-6" class="outline-2">
-<h2 id="sec-6">Custom</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8">Custom</h2>
+<div class="outline-text-2" id="text-8">
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" />
@@ -193,7 +241,7 @@
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-27T14:22+0800</p>
+<p class="date">Date: 2015-01-28T19:18+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

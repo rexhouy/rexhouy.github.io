@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>golang</title>
-<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="golang"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-25T14:12+0800"/>
+<meta name="generated" content="2015-01-28T21:50+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -34,7 +34,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Grama</a>
+<li><a href="#sec-1">Grammar</a>
 <ul>
 <li><a href="#sec-1-1">Control structures</a>
 <ul>
@@ -45,7 +45,16 @@
 <li><a href="#sec-1-1-5">Defer</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-2">Type</a></li>
+<li><a href="#sec-1-2">Type</a>
+<ul>
+<li><a href="#sec-1-2-1">Struct</a></li>
+<li><a href="#sec-1-2-2">Slice</a></li>
+<li><a href="#sec-1-2-3">Map</a></li>
+<li><a href="#sec-1-2-4">Function</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-3">goroutine</a></li>
+<li><a href="#sec-1-4">Handle exceptions</a></li>
 </ul>
 </li>
 </ul>
@@ -53,7 +62,7 @@
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1">Grama</h2>
+<h2 id="sec-1">Grammar</h2>
 <div class="outline-text-2" id="text-1">
 
 
@@ -135,6 +144,18 @@
     <span style="color: #859900;">return</span> <span style="color: #268bd2;">true</span>
 }
 
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">No break</span>
+<span style="color: #859900;">switch</span> c {
+<span style="color: #859900;">case</span> 1:
+    ...
+<span style="color: #859900;">case</span> 2:
+    <span style="color: #859900;">fallthrough</span>
+<span style="color: #859900;">case</span> 3:
+    ...
+<span style="color: #859900;">default</span>
+    ...
+}
+
 <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Break and jump to label</span>
 <span style="color: #268bd2;">Loop</span>:
     <span style="color: #859900;">for</span> n := 0; n &lt; <span style="color: #6c71c4;">len</span>(src); n += size {
@@ -182,6 +203,12 @@
     }
     <span style="color: #859900;">return</span>
 }
+
+<span style="color: #859900;">func</span> <span style="color: #b58900;">myfunc</span>(args ...<span style="color: #268bd2;">int</span>) {
+    <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">One or more arguments.</span>
+    <span style="color: #859900;">for</span> _, arg := <span style="color: #859900;">range</span> args {
+    }
+}
 </pre>
 
 </div>
@@ -217,15 +244,182 @@
 <div class="outline-text-3" id="text-1-2">
 
 
+</div>
+
+<div id="outline-container-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1">Struct</h4>
+<div class="outline-text-4" id="text-1-2-1">
 
 
-<pre class="src src-go"><span style="color: #859900;">type</span> <span style="color: #268bd2;">SyncedBuffer</span> <span style="color: #859900;">struct</span> {
-    lock    sync.Mutex
-    buffer  bytes.Buffer
+
+
+<pre class="src src-go"><span style="color: #859900;">type</span> <span style="color: #268bd2;">Point</span> <span style="color: #859900;">struct</span> {
+    X, Y int
 }
 
-p := <span style="color: #6c71c4;">new</span>(<span style="color: #268bd2;">SyncedBuffer</span>)  <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">type *SyncedBuffer</span>
-<span style="color: #859900;">var</span> v SyncedBuffer      <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">type  SyncedBuffer</span>
+p := <span style="color: #6c71c4;">new</span>(<span style="color: #268bd2;">Point</span>)  <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">type *Point</span>
+p := <span style="color: #268bd2;">Point</span>{X: 3} <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">type Point</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2">Slice</h4>
+<div class="outline-text-4" id="text-1-2-2">
+
+
+
+
+<pre class="src src-go"><span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Array</span>
+<span style="color: #859900;">var</span> a = [10]<span style="color: #268bd2;">int</span>
+a := []<span style="color: #268bd2;">int</span> {1, 2, 3, 4, 5}
+b := a[1:2] <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">return []int{2}</span>
+c := a[:2] <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">return []int{1, 2}</span>
+d := a[3:] <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">return []int{4, 5}</span>
+
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Slice</span>
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">make a slice, the length of slice is 0 and capability is 10.</span>
+<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">make will initialize a empty array &amp; return a pointer points to that array.</span>
+a := <span style="color: #6c71c4;">make</span>([]<span style="color: #268bd2;">int</span>, 0, 10)
+a = <span style="color: #6c71c4;">append</span>(a, 1) <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">append value to a, returns the new slice.</span>
+a = <span style="color: #6c71c4;">append</span>(a, slice2...) <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">append slice2 to a.</span>
+<span style="color: #6c71c4;">copy</span>(dest, src) <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">copy src to dest</span>
+capacity := <span style="color: #6c71c4;">cap</span>(a)
+length := <span style="color: #6c71c4;">len</span>(a)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3">Map</h4>
+<div class="outline-text-4" id="text-1-2-3">
+
+
+
+
+<pre class="src src-go"><span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Use make not new to create a map.</span>
+m := <span style="color: #6c71c4;">make</span>(<span style="color: #859900;">map</span>[<span style="color: #268bd2;">int</span>]<span style="color: #268bd2;">string</span>)
+m := <span style="color: #6c71c4;">make</span>(<span style="color: #859900;">map</span>[<span style="color: #268bd2;">int</span>]<span style="color: #268bd2;">string</span>, capacity)
+m := <span style="color: #859900;">map</span>[<span style="color: #268bd2;">int</span>]<span style="color: #268bd2;">Point</span> {
+    <span style="color: #268bd2;">0</span>: {10, 10},
+    <span style="color: #268bd2;">1</span>: {20, 20},
+}
+<span style="color: #6c71c4;">delete</span>(m, 0) <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">remove element from map</span>
+point, exist =: m[0] <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">get the value and if the value exists.</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4">Function</h4>
+<div class="outline-text-4" id="text-1-2-4">
+
+
+
+
+<pre class="src src-go"><span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">function is first class type</span>
+swap := <span style="color: #859900;">func</span>(x, y <span style="color: #268bd2;">int</span>) (<span style="color: #268bd2;">int</span>, <span style="color: #268bd2;">int</span>) {
+    x, y = y, x
+    <span style="color: #859900;">return</span> x, y
+}
+
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">closure</span>
+<span style="color: #859900;">func</span> <span style="color: #b58900;">sum</span>() (<span style="color: #859900;">func</span>(<span style="color: #268bd2;">int</span>) <span style="color: #268bd2;">int</span>) {
+    <span style="color: #859900;">var</span> sum int
+    <span style="color: #859900;">return</span> <span style="color: #859900;">func</span>(y <span style="color: #268bd2;">int</span>) <span style="color: #268bd2;">int</span> {
+        sum += y
+        <span style="color: #859900;">return</span> sum
+    }
+}
+</pre>
+
+
+<ol>
+<li>Class &amp; Interface
+</li>
+</ol>
+
+<p>没有类的概念，可以将函数绑定到一个类型来实现。
+</p>
+<p>
+接口实现是隐式的，不需要使用implement来声明类型实现了某个接口
+</p>
+
+
+<pre class="src src-go"><span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">interface from fmt package, like toString in java.</span>
+<span style="color: #859900;">type</span> <span style="color: #268bd2;">stringer</span> <span style="color: #859900;">interface</span> {
+    <span style="color: #b58900;">String</span>() string
+}
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3">goroutine</h3>
+<div class="outline-text-3" id="text-1-3">
+
+
+
+
+<pre class="src src-go"><span style="color: #859900;">go</span> <span style="color: #b58900;">function</span>(a, b) <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">run function in goroutine</span>
+
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">use channel to communication between goroutines.</span>
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">channel with buffer, the buffer size is optional</span>
+ch := <span style="color: #6c71c4;">make</span>(<span style="color: #859900;">chan</span> <span style="color: #268bd2;">int</span>, 3)
+ch &lt;- 1
+x, isClosed := &lt;-ch <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">the 2nd value can be used to detect if the channel has been closed.</span>
+<span style="color: #6c71c4;">close</span>(ch) <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">close channel</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-4" class="outline-3">
+<h3 id="sec-1-4">Handle exceptions</h3>
+<div class="outline-text-3" id="text-1-4">
+
+<p>error interface
+</p>
+
+
+<pre class="src src-go"><span style="color: #859900;">type</span> <span style="color: #268bd2;">error</span> <span style="color: #859900;">interface</span> {
+    <span style="color: #b58900;">Error</span>() string
+}
+</pre>
+
+
+<p>
+panic &amp; recover
+</p>
+
+
+<pre class="src src-go"><span style="color: #859900;">func</span> <span style="color: #6c71c4;">panic</span>(<span style="color: #859900;">interface</span>{})
+<span style="color: #859900;">func</span> <span style="color: #6c71c4;">recover</span>() <span style="color: #859900;">interface</span>{}
+
+<span style="color: #859900;">func</span> <span style="color: #b58900;">test</span>() {
+    ...
+    <span style="color: #859900;">defer</span> <span style="color: #859900;">func</span>() {
+        <span style="color: #859900;">if</span> r := <span style="color: #6c71c4;">recover</span>(); r!= <span style="color: #268bd2;">nil</span> { <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">recover from exception</span>
+            ...
+        }
+    }()
+    ...
+    <span style="color: #6c71c4;">panic</span>(404) <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">throw exception</span>
+}
 </pre>
 
 </div>
@@ -234,7 +428,7 @@ p := <span style="color: #6c71c4;">new</span>(<span style="color: #268bd2;">Sync
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-25T14:12+0800</p>
+<p class="date">Date: 2015-01-28T21:50+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
