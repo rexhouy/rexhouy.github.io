@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="golang"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-02-04T22:16+0800"/>
+<meta name="generated" content="2015-02-06T08:58+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -47,19 +47,22 @@
 </li>
 <li><a href="#sec-1-2">Type</a>
 <ul>
-<li><a href="#sec-1-2-1">Struct</a></li>
-<li><a href="#sec-1-2-2">Slice</a></li>
-<li><a href="#sec-1-2-3">Map</a></li>
-<li><a href="#sec-1-2-4">Function</a></li>
+<li><a href="#sec-1-2-1">Const</a></li>
+<li><a href="#sec-1-2-2">string</a></li>
+<li><a href="#sec-1-2-3">Struct</a></li>
+<li><a href="#sec-1-2-4">Slice</a></li>
+<li><a href="#sec-1-2-5">Map</a></li>
+<li><a href="#sec-1-2-6">Function</a></li>
+<li><a href="#sec-1-2-7">Pass by value &amp; pass by reference</a></li>
+<li><a href="#sec-1-2-8">make &amp; new</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-3">Class &amp; Interface</a></li>
-<li><a href="#sec-1-4">goroutine</a></li>
-<li><a href="#sec-1-5">Handle exceptions</a></li>
-<li><a href="#sec-1-6">Type</a>
+<li><a href="#sec-1-3">goroutine</a></li>
+<li><a href="#sec-1-4">Handle exceptions</a></li>
+<li><a href="#sec-1-5">Type</a>
 <ul>
-<li><a href="#sec-1-6-1">Type search</a></li>
-<li><a href="#sec-1-6-2">Type composite</a></li>
+<li><a href="#sec-1-5-1">Type search</a></li>
+<li><a href="#sec-1-5-2">Type composite</a></li>
 </ul>
 </li>
 </ul>
@@ -155,9 +158,9 @@
 <span style="color: #859900;">switch</span> c {
 <span style="color: #859900;">case</span> 1:
     ...
-<span style="color: #859900;">case</span> 2:
+<span style="color: #859900;">case</span> 2, 3, 4:
     <span style="color: #859900;">fallthrough</span>
-<span style="color: #859900;">case</span> 3:
+<span style="color: #859900;">case</span> 5:
     ...
 <span style="color: #859900;">default</span>
     ...
@@ -254,8 +257,56 @@
 </div>
 
 <div id="outline-container-1-2-1" class="outline-4">
-<h4 id="sec-1-2-1">Struct</h4>
+<h4 id="sec-1-2-1">Const</h4>
 <div class="outline-text-4" id="text-1-2-1">
+
+
+
+
+<pre class="src src-go"><span style="color: #859900;">const</span> Pi float32 = 3.1415926
+<span style="color: #859900;">const</span> Max = 10
+<span style="color: #859900;">const</span> (
+    Monday = <span style="color: #268bd2;">iota</span> <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">0</span>
+    Tuesday <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">1</span>
+    Wednesday <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">2</span>
+    Thursday <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">3</span>
+    Friday <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">4</span>
+    Saturday <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">5</span>
+    Sunday <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">6</span>
+)
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2">string</h4>
+<div class="outline-text-4" id="text-1-2-2">
+
+
+
+
+<pre class="src src-go">s := <span style="color: #2aa198;">"test"</span>
+s1 := s[1:] <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">substring</span>
+
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">change string</span>
+b1 := []<span style="color: #b58900;">byte</span>(s)
+b1[1] = <span style="color: #2aa198;">'a'</span>
+s2 := <span style="color: #b58900;">string</span>(b1)
+
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">raw</span>
+s3 := <span style="color: #2aa198;">`line one</span>
+<span style="color: #2aa198;">       line two`</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3">Struct</h4>
+<div class="outline-text-4" id="text-1-2-3">
 
 
 
@@ -273,19 +324,18 @@ p := <span style="color: #268bd2;">Point</span>{X: 3} <span style="color: #93a1a
 
 </div>
 
-<div id="outline-container-1-2-2" class="outline-4">
-<h4 id="sec-1-2-2">Slice</h4>
-<div class="outline-text-4" id="text-1-2-2">
+<div id="outline-container-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4">Slice</h4>
+<div class="outline-text-4" id="text-1-2-4">
 
 
 
 
-<pre class="src src-go"><span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Array</span>
-<span style="color: #859900;">var</span> a = [10]<span style="color: #268bd2;">int</span>
-a := []<span style="color: #268bd2;">int</span> {1, 2, 3, 4, 5}
-b := a[1:2] <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">return []int{2}</span>
-c := a[:2] <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">return []int{1, 2}</span>
-d := a[3:] <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">return []int{4, 5}</span>
+<pre class="src src-go"><span style="color: #859900;">var</span> a = [10]<span style="color: #268bd2;">int</span> <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Array</span>
+a := [...]<span style="color: #268bd2;">int</span> {1, 2, 3, 4, 5} <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Array</span>
+a := [3]<span style="color: #268bd2;">int</span> {1, 2, 3} <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Array</span>
+a := []<span style="color: #268bd2;">int</span> <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">slice</span>
+a := []<span style="color: #268bd2;">int</span> {1, 2, 3} <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">slice</span>
 
 <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Slice</span>
 <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">make a slice, the length of slice is 0 and capability is 10.</span>
@@ -293,6 +343,9 @@ d := a[3:] <span style="color: #93a1a1; font-style: italic;">// </span><span sty
 a := <span style="color: #6c71c4;">make</span>([]<span style="color: #268bd2;">int</span>, 0, 10)
 a = <span style="color: #6c71c4;">append</span>(a, 1) <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">append value to a, returns the new slice.</span>
 a = <span style="color: #6c71c4;">append</span>(a, slice2...) <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">append slice2 to a.</span>
+b := a[1:2] <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">return []int{2}</span>
+c := a[:2] <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">return []int{1, 2}</span>
+d := a[3:] <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">return []int{4, 5}</span>
 <span style="color: #6c71c4;">copy</span>(dest, src) <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">copy src to dest</span>
 capacity := <span style="color: #6c71c4;">cap</span>(a)
 length := <span style="color: #6c71c4;">len</span>(a)
@@ -303,9 +356,9 @@ length := <span style="color: #6c71c4;">len</span>(a)
 
 </div>
 
-<div id="outline-container-1-2-3" class="outline-4">
-<h4 id="sec-1-2-3">Map</h4>
-<div class="outline-text-4" id="text-1-2-3">
+<div id="outline-container-1-2-5" class="outline-4">
+<h4 id="sec-1-2-5">Map</h4>
+<div class="outline-text-4" id="text-1-2-5">
 
 
 
@@ -326,9 +379,9 @@ point, exist =: m[0] <span style="color: #93a1a1; font-style: italic;">// </span
 
 </div>
 
-<div id="outline-container-1-2-4" class="outline-4">
-<h4 id="sec-1-2-4">Function</h4>
-<div class="outline-text-4" id="text-1-2-4">
+<div id="outline-container-1-2-6" class="outline-4">
+<h4 id="sec-1-2-6">Function</h4>
+<div class="outline-text-4" id="text-1-2-6">
 
 
 
@@ -350,15 +403,33 @@ swap := <span style="color: #859900;">func</span>(x, y <span style="color: #268b
 </pre>
 
 </div>
-</div>
 
 </div>
 
-<div id="outline-container-1-3" class="outline-3">
-<h3 id="sec-1-3">Class &amp; Interface</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-1-2-7" class="outline-4">
+<h4 id="sec-1-2-7">Pass by value &amp; pass by reference</h4>
+<div class="outline-text-4" id="text-1-2-7">
 
-<p>没有类的概念，可以将函数绑定到一个类型来实现。
+<p>slice, map, string are pass by reference by default.
+</p>
+<p>
+others are pass by value.
+</p></div>
+
+</div>
+
+<div id="outline-container-1-2-8" class="outline-4">
+<h4 id="sec-1-2-8">make &amp; new</h4>
+<div class="outline-text-4" id="text-1-2-8">
+
+<p>make is used for map slice &amp; chan
+</p>
+<p>
+make returns type T
+</p>
+<p>
+new returns type <b>T *</b>  Class &amp; Interface 
+没有类的概念，可以将函数绑定到一个类型来实现。
 </p>
 <p>
 接口实现是隐式的，不需要使用implement来声明类型实现了某个接口
@@ -373,12 +444,13 @@ swap := <span style="color: #859900;">func</span>(x, y <span style="color: #268b
 
 
 </div>
+</div>
 
 </div>
 
-<div id="outline-container-1-4" class="outline-3">
-<h3 id="sec-1-4">goroutine</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3">goroutine</h3>
+<div class="outline-text-3" id="text-1-3">
 
 
 
@@ -398,9 +470,9 @@ x, isClosed := &lt;-ch <span style="color: #93a1a1; font-style: italic;">// </sp
 
 </div>
 
-<div id="outline-container-1-5" class="outline-3">
-<h3 id="sec-1-5">Handle exceptions</h3>
-<div class="outline-text-3" id="text-1-5">
+<div id="outline-container-1-4" class="outline-3">
+<h3 id="sec-1-4">Handle exceptions</h3>
+<div class="outline-text-3" id="text-1-4">
 
 <p>error interface
 </p>
@@ -436,16 +508,16 @@ panic &amp; recover
 
 </div>
 
-<div id="outline-container-1-6" class="outline-3">
-<h3 id="sec-1-6">Type</h3>
-<div class="outline-text-3" id="text-1-6">
+<div id="outline-container-1-5" class="outline-3">
+<h3 id="sec-1-5">Type</h3>
+<div class="outline-text-3" id="text-1-5">
 
 
 </div>
 
-<div id="outline-container-1-6-1" class="outline-4">
-<h4 id="sec-1-6-1">Type search</h4>
-<div class="outline-text-4" id="text-1-6-1">
+<div id="outline-container-1-5-1" class="outline-4">
+<h4 id="sec-1-5-1">Type search</h4>
+<div class="outline-text-4" id="text-1-5-1">
 
 
 
@@ -465,9 +537,9 @@ panic &amp; recover
 
 </div>
 
-<div id="outline-container-1-6-2" class="outline-4">
-<h4 id="sec-1-6-2">Type composite</h4>
-<div class="outline-text-4" id="text-1-6-2">
+<div id="outline-container-1-5-2" class="outline-4">
+<h4 id="sec-1-5-2">Type composite</h4>
+<div class="outline-text-4" id="text-1-5-2">
 
 
 
@@ -508,7 +580,7 @@ panic &amp; recover
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-02-04T22:16+0800</p>
+<p class="date">Date: 2015-02-06T08:58+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

@@ -11,7 +11,8 @@ def each_article(dir, &block)
   Dir.chdir(dir)
   Dir.foreach(dir) { |entryName|
     isHtml = entryName.end_with?(".html") && File.file?(entryName)
-    yield entryName if isHtml
+    isIndex = entryName.eql? "index.html"
+    yield entryName if isHtml && !isIndex
   }
 end
 
@@ -38,9 +39,22 @@ def read_articles(dir)
   articles
 end
 
+def group_by_date(articles)
+  articles.reduce(Hash.new) { |hash, article|
+    if hash.include? article.date
+      hash[article.date] << article
+    else
+      hash[article.date] = [article]
+    end
+    hash
+  }
+end
+
 # Generate index.html
 File.open("index.html", "w") { |f|
   articles = read_articles("./")
+  articles = group_by_date(articles)
+  articles.keys.sort
   f.write(render("index.template", articles))
   puts "index.html generated"
 }
