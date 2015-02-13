@@ -54,7 +54,6 @@ end
 File.open("index.html", "w") { |f|
   articles = read_articles("./")
   articles = group_by_date(articles)
-  articles.keys.sort
   f.write(render("index.template", articles))
   puts "index.html generated"
 }

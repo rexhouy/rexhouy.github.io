@@ -24,7 +24,8 @@
 
   <div class="container">
     <section>
-      <% articles.each do |date, ats| %>
+      <% articles.keys.sort.reverse.each do |date| %>
+      <% ats = articles[date] %>
       <div class="articles">
         <span class="date"><%= date %></span>
         <ul>
