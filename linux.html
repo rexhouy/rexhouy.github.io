@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="linux"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-30T11:45+0800"/>
+<meta name="generated" content="2015-02-25T09:03+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -60,6 +60,7 @@
 <li><a href="#sec-4-6">Add user to sudo group</a></li>
 </ul>
 </li>
+<li><a href="#sec-5">Usful command</a></li>
 </ul>
 </div>
 </div>
@@ -459,11 +460,34 @@ inode保存文件的的字节数，userid，groupid，authorize，timestamp，�
 
 </div>
 </div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">Usful command</h2>
+<div class="outline-text-2" id="text-5">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Command</th><th scope="col" class="left">Parameters</th><th scope="col" class="left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">find</td><td class="left">-mtime</td><td class="left">[find ./ -mtime +10] Files modified 10 days ago.</td></tr>
+<tr><td class="left"></td><td class="left">-size</td><td class="left">[find ./ -size +10M] Files larger than 10M.</td></tr>
+<tr><td class="left"></td><td class="left">\!</td><td class="left">[find ./ \! -mtime +10] Files modifed no more than 10 days. Same as find ./ -mtime -10</td></tr>
+<tr><td class="left"></td><td class="left">-name</td><td class="left">[find ./ -name test] Find file named test.</td></tr>
+<tr><td class="left"></td><td class="left">-exec</td><td class="left">[find ./ -name test -exec rm {} \;] Execute command on found files, {} will be replaced with files and exec ends when ; appeared.</td></tr>
+</tbody>
+</table>
+
+</div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-30T11:45+0800</p>
+<p class="date">Date: 2015-02-25T09:03+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
