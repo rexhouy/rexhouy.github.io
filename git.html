@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="git"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-25T14:11+0800"/>
+<meta name="generated" content="2015-03-06T14:05+0800"/>
 <meta name="author" content="Rex.Houy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -34,28 +34,75 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">安装配置</a></li>
-<li><a href="#sec-2">创建新仓库</a></li>
-<li><a href="#sec-3">检出仓库</a></li>
-<li><a href="#sec-4">添加，删除与提交</a></li>
-<li><a href="#sec-5">推送改动</a></li>
-<li><a href="#sec-6">分支</a></li>
-<li><a href="#sec-7">更新与合并</a></li>
-<li><a href="#sec-8">替换本地改动</a></li>
-<li><a href="#sec-9">引用repository</a>
+<li><a href="#sec-1">概述</a></li>
+<li><a href="#sec-2">原理</a></li>
+<li><a href="#sec-3">安装配置</a></li>
+<li><a href="#sec-4">本地仓库</a>
 <ul>
-<li><a href="#sec-9-1">删除submodule</a></li>
-<li><a href="#sec-9-2">更新</a></li>
+<li><a href="#sec-4-1">创建新仓库</a></li>
+<li><a href="#sec-4-2">检出仓库</a></li>
+<li><a href="#sec-4-3">添加，删除与提交</a></li>
+<li><a href="#sec-4-4">回滚</a></li>
+<li><a href="#sec-4-5">使用服务器端的版本替换本地改动</a></li>
+<li><a href="#sec-4-6">回滚到指定版本</a></li>
+<li><a href="#sec-4-7">总结</a></li>
+<li><a href="#sec-4-8">Stash操作</a></li>
 </ul>
 </li>
-<li><a href="#sec-10">Fetch updates from upstream</a></li>
+<li><a href="#sec-5">远程仓库</a>
+<ul>
+<li><a href="#sec-5-1">推送改动</a></li>
+<li><a href="#sec-5-2">分支</a></li>
+<li><a href="#sec-5-3">更新与合并</a></li>
+<li><a href="#sec-5-4">引用repository</a>
+<ul>
+<li><a href="#sec-5-4-1">删除submodule</a></li>
+<li><a href="#sec-5-4-2">更新</a></li>
+</ul>
+</li>
+<li><a href="#sec-5-5">Fetch updates from upstream</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">.gitignore</a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1">安装配置</h2>
+<h2 id="sec-1">概述</h2>
 <div class="outline-text-2" id="text-1">
+
+<p>git是分布式的版本管理系统，每个终端都包含有一个本地仓库(repository)，使用git push，git pull在不同仓库间同步信息。
+</p>
+<p>
+通过git init创建一个本地仓库。本地仓库位于.git文件夹下。
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">原理</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>git有4中对象：
+</p><ol>
+<li>blob:保存文件对象
+</li>
+<li>tree:管理blob和tree对象，类似文件系统。
+</li>
+<li>commit:指向一个tree对象（这个tree对象保存了一个提交时的workspace快照），记录提交者、注释。
+</li>
+<li>tag:指向一个commit。
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">安装配置</h2>
+<div class="outline-text-2" id="text-3">
 
 
 <p>
@@ -108,9 +155,16 @@ $ git config --global user.email rex.houy@gmail.com
 
 </div>
 
-<div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">创建新仓库</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">本地仓库</h2>
+<div class="outline-text-2" id="text-4">
+
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1">创建新仓库</h3>
+<div class="outline-text-3" id="text-4-1">
 
 <p>创建新文件夹，打开，然后执行
 </p>
@@ -126,9 +180,9 @@ $ git config --global user.email rex.houy@gmail.com
 
 </div>
 
-<div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">检出仓库</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2">检出仓库</h3>
+<div class="outline-text-3" id="text-4-2">
 
 <p>执行如下命令以创建一个本地仓库的克隆版本：
 </p>
@@ -150,9 +204,9 @@ $ git config --global user.email rex.houy@gmail.com
 
 </div>
 
-<div id="outline-container-4" class="outline-2">
-<h2 id="sec-4">添加，删除与提交</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-4-3" class="outline-3">
+<h3 id="sec-4-3">添加，删除与提交</h3>
+<div class="outline-text-3" id="text-4-3">
 
 <p>你可以计划改动（把它们添加到缓存区），使用如下命令：
 </p>
@@ -164,6 +218,9 @@ git rm &lt;filename&gt;
 git rm -r &lt;directory&gt;
 </pre>
 
+<p>
+可以使用git diff, git status查看workspace与repository的状态。（有哪些文件是未被跟踪的，有哪些文件发生了变动）
+</p>
 <p>
 这是 git 基本工作流程的第一步；使用如下命令以实际提交改动：
 </p>
@@ -179,9 +236,106 @@ git rm -r &lt;directory&gt;
 
 </div>
 
+<div id="outline-container-4-4" class="outline-3">
+<h3 id="sec-4-4">回滚</h3>
+<div class="outline-text-3" id="text-4-4">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-5" class="outline-3">
+<h3 id="sec-4-5">使用服务器端的版本替换本地改动</h3>
+<div class="outline-text-3" id="text-4-5">
+
+<p>假如你做错事（自然，这是不可能的），你可以使用如下命令替换掉本地改动：
+</p>
+
+
+<pre class="src src-bash">git checkout -- &lt;filename&gt;
+</pre>
+
+<p>
+此命令会使用 HEAD 中的最新内容替换掉你的工作目录中的文件。已添加到缓存区的改动（commit），以及新文件，都不受影响。
+</p>
+<p>
+假如你想要丢弃你所有的本地改动与提交，可以到服务器上获取最新的版本并将你本地主分支指向到它：
+</p>
+
+
+<pre class="src src-bash">git fetch origin
+git reset --hard origin/master
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-6" class="outline-3">
+<h3 id="sec-4-6">回滚到指定版本</h3>
+<div class="outline-text-3" id="text-4-6">
+
+
+
+
+<pre class="src src-bash">git rest --hard &lt;commit id&gt;
+</pre>
+
+<p>
+&lt;commit id&gt;可以通过git log或者git reflog查找。
+</p></div>
+
+</div>
+
+<div id="outline-container-4-7" class="outline-3">
+<h3 id="sec-4-7">总结</h3>
+<div class="outline-text-3" id="text-4-7">
+
+<p><img src="./images/git-local-repository.jpg"  alt="./images/git-local-repository.jpg" />
+</p></div>
+
+</div>
+
+<div id="outline-container-4-8" class="outline-3">
+<h3 id="sec-4-8">Stash操作</h3>
+<div class="outline-text-3" id="text-4-8">
+
+<p>用于保存当前状态。每次通过stash保存的内容都会被压入stash栈。
+保存stash
+</p>
+
+
+<pre class="src src-bash">git stash save
+</pre>
+
+<p>
+恢复stash
+</p>
+
+
+<pre class="src src-bash"># &#20351;&#29992;&#26632;&#39030;&#26469;&#36824;&#21407;WorkSpace
+git stash apply
+# &#20351;&#29992;&#26632;&#39030;&#26469;&#36824;&#21407;WorkSpace&#65292;&#21516;&#26102;&#20174;stash&#26632;&#20013;&#21024;&#38500;&#24403;&#21069;&#30340;&#26632;&#39030;stash
+git stash pop
+# &#36824;&#21407;&#21040;&#26576;&#20010;stash&#65292;&#21487;&#20197;&#36890;&#36807;&#36807;git stash list&#26469;&#26597;&#23547;stash
+git stash apply stash@{n}
+</pre>
+
+</div>
+</div>
+
+</div>
+
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5">推送改动</h2>
+<h2 id="sec-5">远程仓库</h2>
 <div class="outline-text-2" id="text-5">
+
+
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1">推送改动</h3>
+<div class="outline-text-3" id="text-5-1">
 
 <p>你的改动现在已经在本地仓库的 HEAD 中了。执行如下命令以将这些改动提交到远端仓库：
 </p>
@@ -208,9 +362,9 @@ git rm -r &lt;directory&gt;
 
 </div>
 
-<div id="outline-container-6" class="outline-2">
-<h2 id="sec-6">分支</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-5-2" class="outline-3">
+<h3 id="sec-5-2">分支</h3>
+<div class="outline-text-3" id="text-5-2">
 
 <p>分支是用来将特性开发绝缘开来的。在你创建仓库的时候，master 是“默认的”。在其他分支上进行开发，完成后再将它们合并到主分支上。
 </p>
@@ -252,9 +406,9 @@ git rm -r &lt;directory&gt;
 
 </div>
 
-<div id="outline-container-7" class="outline-2">
-<h2 id="sec-7">更新与合并</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-5-3" class="outline-3">
+<h3 id="sec-5-3">更新与合并</h3>
+<div class="outline-text-3" id="text-5-3">
 
 <p>要更新你的本地仓库至最新改动，执行：
 </p>
@@ -293,36 +447,9 @@ git rm -r &lt;directory&gt;
 
 </div>
 
-<div id="outline-container-8" class="outline-2">
-<h2 id="sec-8">替换本地改动</h2>
-<div class="outline-text-2" id="text-8">
-
-<p>假如你做错事（自然，这是不可能的），你可以使用如下命令替换掉本地改动：
-</p>
-
-
-<pre class="src src-bash">git checkout -- &lt;filename&gt;
-</pre>
-
-<p>
-此命令会使用 HEAD 中的最新内容替换掉你的工作目录中的文件。已添加到缓存区的改动，以及新文件，都不受影响。
-</p>
-<p>
-假如你想要丢弃你所有的本地改动与提交，可以到服务器上获取最新的版本并将你本地主分支指向到它：
-</p>
-
-
-<pre class="src src-bash">git fetch origin
-git reset --hard origin/master
-</pre>
-
-</div>
-
-</div>
-
-<div id="outline-container-9" class="outline-2">
-<h2 id="sec-9">引用repository</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-5-4" class="outline-3">
+<h3 id="sec-5-4">引用repository</h3>
+<div class="outline-text-3" id="text-5-4">
 
 <p>add Common.git as a submodule at the path "common" inside this repo
 </p>
@@ -361,9 +488,9 @@ update submodules
 
 </div>
 
-<div id="outline-container-9-1" class="outline-3">
-<h3 id="sec-9-1">删除submodule</h3>
-<div class="outline-text-3" id="text-9-1">
+<div id="outline-container-5-4-1" class="outline-4">
+<h4 id="sec-5-4-1">删除submodule</h4>
+<div class="outline-text-4" id="text-5-4-1">
 
 <p>Remove relevent info from .gitmodule
 </p>
@@ -380,9 +507,9 @@ if git rm report error, try git add .gitmodule, and then run git rm again.
 
 </div>
 
-<div id="outline-container-9-2" class="outline-3">
-<h3 id="sec-9-2">更新</h3>
-<div class="outline-text-3" id="text-9-2">
+<div id="outline-container-5-4-2" class="outline-4">
+<h4 id="sec-5-4-2">更新</h4>
+<div class="outline-text-4" id="text-5-4-2">
 
 <p>Update .gitmodule
 </p>
@@ -396,9 +523,9 @@ git submodule sync
 
 </div>
 
-<div id="outline-container-10" class="outline-2">
-<h2 id="sec-10">Fetch updates from upstream</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-5-5" class="outline-3">
+<h3 id="sec-5-5">Fetch updates from upstream</h3>
+<div class="outline-text-3" id="text-5-5">
 
 <ol>
 <li>Config a remote that points to the upstream repository
@@ -437,10 +564,42 @@ git remote -v # view configured remote
 
 </div>
 </div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">.gitignore</h2>
+<div class="outline-text-2" id="text-6">
+
+<ol>
+<li>”/”开头表示目录
+</li>
+<li>”*”通配多个字符
+</li>
+<li>”?”通配单个字符
+</li>
+<li>”[]“包含单个字符的匹配列表
+</li>
+<li>”!”表示不忽略匹配到的文件或目录
+</li>
+</ol>
+
+<p>例子：
+</p>
+<p>
+foo/*：忽略目录 foo下的全部内容
+</p>
+<p>
+*.[oa]：忽略所有.o和.a文件
+</p>
+<p>
+!calc.o：不能忽略calc.o文件
+</p></div>
+</div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-25T14:11+0800</p>
+<p class="date">Date: 2015-03-06T14:05+0800</p>
 <p class="author">Author: Rex.Houy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
