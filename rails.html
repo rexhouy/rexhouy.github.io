@@ -7,8 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="rails"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-25T14:15+0800"/>
-<meta name="author" content="Rex.Houy"/>
+<meta name="generated" content="2015-03-09T17:37+0800"/>
+<meta name="author" content="rexhouy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
@@ -71,11 +71,13 @@
 </li>
 <li><a href="#sec-5-5">Update</a></li>
 <li><a href="#sec-5-6">Delete</a></li>
+<li><a href="#sec-5-7">Callbacks</a></li>
+<li><a href="#sec-5-8">Validations</a></li>
+<li><a href="#sec-5-9">Associations</a></li>
 </ul>
 </li>
-<li><a href="#sec-6">Validations</a></li>
-<li><a href="#sec-7">Logger</a></li>
-<li><a href="#sec-8">Others</a></li>
+<li><a href="#sec-6">Logger</a></li>
+<li><a href="#sec-7">Others</a></li>
 </ul>
 </div>
 </div>
@@ -707,21 +709,53 @@ user.destroy
 </pre>
 
 </div>
+
+</div>
+
+<div id="outline-container-5-7" class="outline-3">
+<h3 id="sec-5-7">Callbacks</h3>
+<div class="outline-text-3" id="text-5-7">
+
+</div>
+
+</div>
+
+<div id="outline-container-5-8" class="outline-3">
+<h3 id="sec-5-8">Validations</h3>
+<div class="outline-text-3" id="text-5-8">
+
+</div>
+
+</div>
+
+<div id="outline-container-5-9" class="outline-3">
+<h3 id="sec-5-9">Associations</h3>
+<div class="outline-text-3" id="text-5-9">
+
+<p>Type of associations:
+</p><ol>
+<li>belongs_to(one 2 one relation, contains foreign key)
+</li>
+<li>has_one(one 2 one relation, foreign key on other side)
+</li>
+<li>has_many(one 2 many )
+</li>
+<li>has_many :through(many 2 many)
+</li>
+<li>has_one :through
+</li>
+<li>has_and_belongs_to_many(direct many-to-many table name must be tableA_tableB)
+</li>
+</ol>
+
+</div>
 </div>
 
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6">Validations</h2>
+<h2 id="sec-6">Logger</h2>
 <div class="outline-text-2" id="text-6">
-
-</div>
-
-</div>
-
-<div id="outline-container-7" class="outline-2">
-<h2 id="sec-7">Logger</h2>
-<div class="outline-text-2" id="text-7">
 
 <p>Saved in /log/[development|test|production].log
 </p>
@@ -735,9 +769,9 @@ logger.info(<span style="color: #2aa198;">"infomation"</span>)
 
 </div>
 
-<div id="outline-container-8" class="outline-2">
-<h2 id="sec-8">Others</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">Others</h2>
+<div class="outline-text-2" id="text-7">
 
 
 <p>
@@ -747,8 +781,8 @@ gem 'bootstrap-sass', '~&gt; 3.1.1'
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-25T14:15+0800</p>
-<p class="author">Author: Rex.Houy</p>
+<p class="date">Date: 2015-03-09T17:37+0800</p>
+<p class="author">Author: rexhouy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
 
