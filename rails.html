@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="rails"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-03-10T10:29+0800"/>
+<meta name="generated" content="2015-03-11T16:48+0800"/>
 <meta name="author" content="rexhouy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -45,7 +45,17 @@
 <li><a href="#sec-3">Views</a>
 <ul>
 <li><a href="#sec-3-1">Path helper</a></li>
-<li><a href="#sec-3-2">Template</a></li>
+<li><a href="#sec-3-2">Asset helper</a></li>
+<li><a href="#sec-3-3">Partials</a></li>
+<li><a href="#sec-3-4">Caches</a></li>
+<li><a href="#sec-3-5">Date helper</a></li>
+<li><a href="#sec-3-6">Debug helper</a></li>
+<li><a href="#sec-3-7">Form helper</a></li>
+<li><a href="#sec-3-8">Number helper</a></li>
+<li><a href="#sec-3-9">Request object</a></li>
+<li><a href="#sec-3-10">Response object</a></li>
+<li><a href="#sec-3-11">Global exception handling</a></li>
+<li><a href="#sec-3-12">Force https</a></li>
 </ul>
 </li>
 <li><a href="#sec-4">DB migration</a>
@@ -59,28 +69,32 @@
 <li><a href="#sec-5">ActiveRecord</a>
 <ul>
 <li><a href="#sec-5-1">Naming conventions</a></li>
-<li><a href="#sec-5-2">Single table inheritance</a></li>
-<li><a href="#sec-5-3">Create</a></li>
-<li><a href="#sec-5-4">Read</a>
+<li><a href="#sec-5-2">Create</a></li>
+<li><a href="#sec-5-3">Read</a>
 <ul>
-<li><a href="#sec-5-4-1">Query methods</a></li>
-<li><a href="#sec-5-4-2">Eager loading</a></li>
-<li><a href="#sec-5-4-3">Scopes</a></li>
-<li><a href="#sec-5-4-4">Dynamic finders</a></li>
+<li><a href="#sec-5-3-1">Query methods</a></li>
+<li><a href="#sec-5-3-2">Eager loading</a></li>
+<li><a href="#sec-5-3-3">Scopes</a></li>
+<li><a href="#sec-5-3-4">Dynamic finders</a></li>
 </ul>
 </li>
-<li><a href="#sec-5-5">Update</a></li>
-<li><a href="#sec-5-6">Delete</a></li>
-<li><a href="#sec-5-7">Callbacks</a></li>
-<li><a href="#sec-5-8">Validations</a></li>
-<li><a href="#sec-5-9">Associations</a>
+<li><a href="#sec-5-4">Update</a></li>
+<li><a href="#sec-5-5">Delete</a></li>
+<li><a href="#sec-5-6">Callbacks</a></li>
+<li><a href="#sec-5-7">Validations</a></li>
+<li><a href="#sec-5-8">Associations</a>
 <ul>
-<li><a href="#sec-5-9-1">Type of associations</a></li>
-<li><a href="#sec-5-9-2">Polymorphic Associations</a></li>
-<li><a href="#sec-5-9-3">Self joins</a></li>
+<li><a href="#sec-5-8-1">Type of associations</a></li>
+<li><a href="#sec-5-8-2">Polymorphic Associations</a></li>
+<li><a href="#sec-5-8-3">Self joins</a></li>
 </ul>
 </li>
-<li><a href="#sec-5-10">Cache control</a></li>
+<li><a href="#sec-5-9">Cache control</a></li>
+<li><a href="#sec-5-10">Locking</a>
+<ul>
+<li><a href="#sec-5-10-1">Optimistic Locking</a></li>
+<li><a href="#sec-5-10-2">Pessimistic Locking</a></li>
+</ul></li>
 </ul>
 </li>
 <li><a href="#sec-6">Logger</a></li>
@@ -261,8 +275,10 @@ validates <span style="color: #268bd2;">:id</span>, <span style="color: #268bd2;
 </p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" /><col class="left" />
 </colgroup>
+<thead>
+<tr><th scope="col" class="left">#</th><th scope="col" class="left">URL Pattern</th><th scope="col" class="left">Method</th><th scope="col" class="left">Action</th><th scope="col" class="left">Path String</th></tr>
+</thead>
 <tbody>
-<tr><td class="left">#</td><td class="left">URL Pattern</td><td class="left">Method</td><td class="left">Action</td><td class="left">Path String</td></tr>
 <tr><td class="left">To List Page</td><td class="left">/users</td><td class="left">GET</td><td class="left">index</td><td class="left">users_path</td></tr>
 <tr><td class="left">To Edit Page</td><td class="left">/users/id/eidt</td><td class="left">GET</td><td class="left">edit</td><td class="left">edit_user_path(@user)</td></tr>
 <tr><td class="left">To Detail Page</td><td class="left">/users/id</td><td class="left">GET</td><td class="left">show</td><td class="left">user_path(@user)</td></tr>
@@ -278,10 +294,53 @@ validates <span style="color: #268bd2;">:id</span>, <span style="color: #268bd2;
 </div>
 
 <div id="outline-container-3-2" class="outline-3">
-<h3 id="sec-3-2">Template</h3>
+<h3 id="sec-3-2">Asset helper</h3>
 <div class="outline-text-3" id="text-3-2">
 
-<p>Template file name starts with "_".
+<p>Images
+</p>
+
+
+<pre class="src src-ruby">config.action_controller.asset_host = <span style="color: #2aa198;">"assets.example.com"</span>
+image_tag(<span style="color: #2aa198;">"rails.png"</span>) 
+<span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">=&gt; &lt;img src="http://assets.example.com/images/rails.png" alt="Rails" /&gt;</span>
+</pre>
+
+<p>
+Javascripts
+</p>
+
+
+<pre class="src src-ruby"><span style="color: #268bd2;">ActionView</span>::<span style="color: #268bd2;">Helpers</span>::<span style="color: #268bd2;">AssetTagHelper</span>.register_javascript_expansion <span style="color: #268bd2;">monkey</span>: [<span style="color: #2aa198;">"head"</span>, <span style="color: #2aa198;">"body"</span>, <span style="color: #2aa198;">"tail"</span>]
+javascript_include_tag <span style="color: #268bd2;">:monkey</span>
+<span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">=&gt;</span>
+<span style="color: #93a1a1; font-style: italic;">#  </span><span style="color: #93a1a1; font-style: italic;">&lt;script src="/assets/head.js"&gt;&lt;/script&gt;</span>
+<span style="color: #93a1a1; font-style: italic;">#  </span><span style="color: #93a1a1; font-style: italic;">&lt;script src="/assets/body.js"&gt;&lt;/script&gt;</span>
+<span style="color: #93a1a1; font-style: italic;">#  </span><span style="color: #93a1a1; font-style: italic;">&lt;script src="/assets/tail.js"&gt;&lt;/script&gt;</span>
+</pre>
+
+<p>
+Stylesheet
+</p>
+
+
+<pre class="src src-ruby"><span style="color: #268bd2;">ActionView</span>::<span style="color: #268bd2;">Helpers</span>::<span style="color: #268bd2;">AssetTagHelper</span>.register_stylesheet_expansion <span style="color: #268bd2;">monkey</span>: [<span style="color: #2aa198;">"head"</span>, <span style="color: #2aa198;">"body"</span>, <span style="color: #2aa198;">"tail"</span>]
+stylesheet_link_tag <span style="color: #268bd2;">:monkey</span> 
+<span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">=&gt;</span>
+<span style="color: #93a1a1; font-style: italic;">#  </span><span style="color: #93a1a1; font-style: italic;">&lt;link href="/assets/head.css" media="screen" rel="stylesheet" /&gt;</span>
+<span style="color: #93a1a1; font-style: italic;">#  </span><span style="color: #93a1a1; font-style: italic;">&lt;link href="/assets/body.css" media="screen" rel="stylesheet" /&gt;</span>
+<span style="color: #93a1a1; font-style: italic;">#  </span><span style="color: #93a1a1; font-style: italic;">&lt;link href="/assets/tail.css" media="screen" rel="stylesheet" /&gt;</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3">Partials</h3>
+<div class="outline-text-3" id="text-3-3">
+
+<p>Partial file name starts with "_".
 </p>
 <p>
 Use template "_order.html.erb" &amp; "_product.html.erb"
@@ -293,6 +352,189 @@ render <span style="color: #6c71c4;">@order</span> <span style="color: #93a1a1; 
 
 render <span style="color: #268bd2;">partial</span>: <span style="color: #2aa198;">"product"</span>, <span style="color: #268bd2;">collection</span>: <span style="color: #6c71c4;">@products</span> <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Render collections. Use product as variable in template.</span>
 render <span style="color: #6c71c4;">@products</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-4" class="outline-3">
+<h3 id="sec-3-4">Caches</h3>
+<div class="outline-text-3" id="text-3-4">
+
+
+
+
+<pre class="src src-ruby">&lt;% cache <span style="color: #859900;">do</span> <span style="color: #2aa198;">%&gt;</span>
+<span style="color: #2aa198;">  &lt;%= render "shared/footer" %&gt;</span>
+&lt;% <span style="color: #859900;">end</span> <span style="color: #2aa198;">%&gt;</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-5" class="outline-3">
+<h3 id="sec-3-5">Date helper</h3>
+<div class="outline-text-3" id="text-3-5">
+
+
+
+
+<pre class="src src-ruby">date_select(<span style="color: #2aa198;">"post"</span>, <span style="color: #2aa198;">"published_on"</span>)
+datetime_select(<span style="color: #2aa198;">"post"</span>, <span style="color: #2aa198;">"published_on"</span>)
+distance_of_time_in_words(<span style="color: #268bd2;">Time</span>.now, <span style="color: #268bd2;">Time</span>.now + 15.seconds)  <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">=&gt; less than a minute</span>
+time_ago_in_words(3.minutes.from_now)  <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">=&gt; 3 minutes</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-6" class="outline-3">
+<h3 id="sec-3-6">Debug helper</h3>
+<div class="outline-text-3" id="text-3-6">
+
+
+
+
+<pre class="src src-ruby">debug(my_hash) <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Dump my_hash into yaml, useful 4 debugging</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-7" class="outline-3">
+<h3 id="sec-3-7">Form helper</h3>
+<div class="outline-text-3" id="text-3-7">
+
+
+
+
+<pre class="src src-ruby">&lt;<span style="color: #2aa198;">%= form_for @person, url: {action: "create"} do |f| %&gt;</span>
+<span style="color: #2aa198;">  &lt;%=</span> f.label <span style="color: #268bd2;">:title</span>, <span style="color: #2aa198;">'Title'</span> <span style="color: #2aa198;">%&gt;:</span>
+<span style="color: #2aa198;">  &lt;%= f.text_field :title %&gt;</span>&lt;br /&gt;
+  &lt;<span style="color: #2aa198;">%= check_box("post", "validated") %&gt;</span>
+<span style="color: #2aa198;">  &lt;%=</span> file_field(<span style="color: #268bd2;">:user</span>, <span style="color: #268bd2;">:avatar</span>) <span style="color: #2aa198;">%&gt;</span>
+<span style="color: #2aa198;">  &lt;%= hidden_field(:user, :token) %&gt;</span>
+  &lt;<span style="color: #2aa198;">%= password_field(:login, :pass) %&gt;</span>
+<span style="color: #2aa198;">  &lt;%=</span> radio_button(<span style="color: #2aa198;">"post"</span>, <span style="color: #2aa198;">"category"</span>, <span style="color: #2aa198;">"rails"</span>) <span style="color: #2aa198;">%&gt;</span>
+<span style="color: #2aa198;">  &lt;%= text_area(:comment, :text, size: "20x30") %&gt;</span>
+  &lt;<span style="color: #2aa198;">%= collection_select(:post, :author_id, Author.all, :id, :name_with_initial, {prompt: true}) %&gt;</span>
+<span style="color: #2aa198;">  &lt;%=</span> collection_radio_buttons(<span style="color: #268bd2;">:post</span>, <span style="color: #268bd2;">:author_id</span>, <span style="color: #268bd2;">Author</span>.all, <span style="color: #268bd2;">:id</span>, <span style="color: #268bd2;">:name_with_initial</span>) <span style="color: #2aa198;">%&gt;</span>
+<span style="color: #2aa198;">  &lt;%= collection_check_boxes(:post, :author_ids, Author.all, :id, :name_with_initial) %&gt;</span>
+  &lt;<span style="color: #2aa198;">%= submit_tag 'Create' %&gt;</span>
+<span style="color: #2aa198;">&lt;% end %&gt;</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-8" class="outline-3">
+<h3 id="sec-3-8">Number helper</h3>
+<div class="outline-text-3" id="text-3-8">
+
+
+
+
+<pre class="src src-ruby">number_to_currency(1234567890.50) <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">=&gt; $1,234,567,890.50</span>
+number_to_human_size(1234)          <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">=&gt; 1.2 KB</span>
+number_to_percentage(100, <span style="color: #268bd2;">:precision</span> =&gt; 0)        <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">=&gt; 100%</span>
+number_to_phone(1235551234) <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">=&gt; 123-555-1234</span>
+number_with_delimiter(12345678) <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">=&gt; 12,345,678</span>
+number_with_precision(111.2345, 2)  <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">=&gt; 111.23</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-9" class="outline-3">
+<h3 id="sec-3-9">Request object</h3>
+<div class="outline-text-3" id="text-3-9">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Property of request</th><th scope="col" class="left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">host</td><td class="left">The hostname used for this request.</td></tr>
+<tr><td class="left">domain(n=2)</td><td class="left">The hostname's first n segments, starting from the right (the TLD).</td></tr>
+<tr><td class="left">format</td><td class="left">The content type requested by the client.</td></tr>
+<tr><td class="left">method</td><td class="left">The HTTP method used for the request.</td></tr>
+<tr><td class="left">get?, post?, patch?, put?, delete?, head?</td><td class="left">Returns true if the HTTP method is GET/POST/PATCH/PUT/DELETE/HEAD.</td></tr>
+<tr><td class="left">headers</td><td class="left">Returns a hash containing the headers associated with the request.</td></tr>
+<tr><td class="left">port</td><td class="left">The port number (integer) used for the request.</td></tr>
+<tr><td class="left">protocol</td><td class="left">Returns a string containing the protocol used plus "://".</td></tr>
+<tr><td class="left">query_string</td><td class="left">The query string part of the URL, i.e., everything after "?".</td></tr>
+<tr><td class="left">remote_ip</td><td class="left">The IP address of the client.</td></tr>
+<tr><td class="left">url</td><td class="left">The entire URL used for the request.</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-10" class="outline-3">
+<h3 id="sec-3-10">Response object</h3>
+<div class="outline-text-3" id="text-3-10">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Property of response</th><th scope="col" class="left">Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">body</td><td class="left">This is the string of data being sent back to the client. This is most often HTML.</td></tr>
+<tr><td class="left">status</td><td class="left">The HTTP status code for the response, like 200 for a successful request or 404 for file not found.</td></tr>
+<tr><td class="left">location</td><td class="left">The URL the client is being redirected to, if any.</td></tr>
+<tr><td class="left">content_type</td><td class="left">The content type of the response.</td></tr>
+<tr><td class="left">charset</td><td class="left">The character set being used for the response. Default is "utf-8".</td></tr>
+<tr><td class="left">headers</td><td class="left">Headers used for the response.</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-11" class="outline-3">
+<h3 id="sec-3-11">Global exception handling</h3>
+<div class="outline-text-3" id="text-3-11">
+
+
+
+
+<pre class="src src-ruby"><span style="color: #859900;">class</span> <span style="color: #268bd2;">ApplicationController</span> &lt; <span style="color: #268bd2;">ActionController</span>::<span style="color: #268bd2;">Base</span>
+  rescue_from <span style="color: #268bd2;">ActiveRecord</span>::<span style="color: #268bd2;">RecordNotFound</span>, <span style="color: #268bd2;">with</span>: <span style="color: #268bd2;">:record_not_found</span>
+
+  <span style="color: #859900;">private</span>
+  <span style="color: #859900;">def</span> <span style="color: #b58900;">record_not_found</span>
+    render <span style="color: #268bd2;">text</span>: <span style="color: #2aa198;">"404 Not Found"</span>, <span style="color: #268bd2;">status</span>: 404
+  <span style="color: #859900;">end</span>
+<span style="color: #859900;">end</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-12" class="outline-3">
+<h3 id="sec-3-12">Force https</h3>
+<div class="outline-text-3" id="text-3-12">
+
+
+
+
+<pre class="src src-ruby"><span style="color: #859900;">class</span> <span style="color: #268bd2;">DinnerController</span>
+  force_ssl
+<span style="color: #859900;">end</span>
 </pre>
 
 </div>
@@ -346,7 +588,6 @@ Supported
 <tr><td class="left">null</td><td class="left">Allows or disallows NULL values in the column.</td></tr>
 </tbody>
 </table>
-
 
 
 
@@ -491,8 +732,10 @@ Supported
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" />
 </colgroup>
+<thead>
+<tr><th scope="col" class="left">Class</th><th scope="col" class="left">Schema</th><th scope="col" class="left">Foreign keys</th><th scope="col" class="left">Primary key</th></tr>
+</thead>
 <tbody>
-<tr><td class="left">Class</td><td class="left">Schema</td><td class="left">Foreign keys</td><td class="left">Primary key</td></tr>
 <tr><td class="left">Post</td><td class="left">posts</td><td class="left">post_id</td><td class="left">id</td></tr>
 <tr><td class="left">LineItem</td><td class="left">line_items</td><td class="left">line_item_id</td><td class="left">id</td></tr>
 </tbody>
@@ -503,16 +746,8 @@ Supported
 </div>
 
 <div id="outline-container-5-2" class="outline-3">
-<h3 id="sec-5-2">Single table inheritance</h3>
+<h3 id="sec-5-2">Create</h3>
 <div class="outline-text-3" id="text-5-2">
-
-</div>
-
-</div>
-
-<div id="outline-container-5-3" class="outline-3">
-<h3 id="sec-5-3">Create</h3>
-<div class="outline-text-3" id="text-5-3">
 
 <p>Create &amp; save
 </p>
@@ -531,16 +766,16 @@ user.save
 
 </div>
 
-<div id="outline-container-5-4" class="outline-3">
-<h3 id="sec-5-4">Read</h3>
-<div class="outline-text-3" id="text-5-4">
+<div id="outline-container-5-3" class="outline-3">
+<h3 id="sec-5-3">Read</h3>
+<div class="outline-text-3" id="text-5-3">
 
 
 </div>
 
-<div id="outline-container-5-4-1" class="outline-4">
-<h4 id="sec-5-4-1">Query methods</h4>
-<div class="outline-text-4" id="text-5-4-1">
+<div id="outline-container-5-3-1" class="outline-4">
+<h4 id="sec-5-3-1">Query methods</h4>
+<div class="outline-text-4" id="text-5-3-1">
 
 
 
@@ -556,8 +791,10 @@ Every methods has a .*! version, those methods will throw an exception if no rec
 </p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" />
 </colgroup>
+<thead>
+<tr><th scope="col" class="left">Methods</th><th scope="col" class="left">Function</th><th scope="col" class="left">Parameters</th><th scope="col" class="left">Example</th></tr>
+</thead>
 <tbody>
-<tr><td class="left">Methods</td><td class="left">Function</td><td class="left">Parameters</td><td class="left">Example</td></tr>
 <tr><td class="left">take</td><td class="left">Find records without ordering</td><td class="left">limit(optional)</td><td class="left"></td></tr>
 <tr><td class="left">first</td><td class="left">Find the 1st record ordered by primary key</td><td class="left">limit(optional)</td><td class="left"></td></tr>
 <tr><td class="left">last</td><td class="left">Find the last record ordered by primary key</td><td class="left">limit(optional)</td><td class="left"></td></tr>
@@ -568,6 +805,7 @@ Every methods has a .*! version, those methods will throw an exception if no rec
 <tr><td class="left">count</td><td class="left">Find count</td><td class="left"></td><td class="left"></td></tr>
 <tr><td class="left">minimum</td><td class="left"></td><td class="left">field</td><td class="left"></td></tr>
 <tr><td class="left">maximum</td><td class="left"></td><td class="left">field</td><td class="left"></td></tr>
+<tr><td class="left">exists?</td><td class="left">Check if the record exists</td><td class="left">id or none</td><td class="left"></td></tr>
 </tbody>
 </table>
 
@@ -585,8 +823,10 @@ Every methods below returns a chainable relation object(ActiveRecord::Relation).
 </p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" />
 </colgroup>
+<thead>
+<tr><th scope="col" class="left">Methods</th><th scope="col" class="left">Function</th><th scope="col" class="left">Parameters</th><th scope="col" class="left">Example</th></tr>
+</thead>
 <tbody>
-<tr><td class="left">Methods</td><td class="left">Function</td><td class="left">Parameters</td><td class="left">Example</td></tr>
 <tr><td class="left">where</td><td class="left"></td><td class="left">sql, param / hash</td><td class="left">T</td></tr>
 <tr><td class="left">select</td><td class="left">Set select fields</td><td class="left">fields</td><td class="left">T</td></tr>
 <tr><td class="left">limit</td><td class="left">Set records limit</td><td class="left">limit</td><td class="left"></td></tr>
@@ -623,13 +863,22 @@ Every methods below returns a chainable relation object(ActiveRecord::Relation).
 <span style="color: #268bd2;">User</span>.joins(<span style="color: #268bd2;">address</span>: <span style="color: #268bd2;">:nations</span>) <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Nested join</span>
 </pre>
 
-</div>
+
+<p>
+Using SQL
+</p>
+
+
+<pre class="src src-ruby"><span style="color: #268bd2;">Client</span>.connection.select_all(<span style="color: #2aa198;">"SELECT * FROM clients WHERE id = '1'"</span>) <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Return array of hashes.</span>
+</pre>
 
 </div>
 
-<div id="outline-container-5-4-2" class="outline-4">
-<h4 id="sec-5-4-2">Eager loading</h4>
-<div class="outline-text-4" id="text-5-4-2">
+</div>
+
+<div id="outline-container-5-3-2" class="outline-4">
+<h4 id="sec-5-3-2">Eager loading</h4>
+<div class="outline-text-4" id="text-5-3-2">
 
 <p>Associated records are loaded when it is used.
 </p>
@@ -645,9 +894,9 @@ There are some methods to eagerly load those records.
 
 </div>
 
-<div id="outline-container-5-4-3" class="outline-4">
-<h4 id="sec-5-4-3">Scopes</h4>
-<div class="outline-text-4" id="text-5-4-3">
+<div id="outline-container-5-3-3" class="outline-4">
+<h4 id="sec-5-3-3">Scopes</h4>
+<div class="outline-text-4" id="text-5-3-3">
 
 <p>Predefine a query(condition) that can be used easily as method.
 </p>
@@ -674,9 +923,9 @@ default_scope { where(<span style="color: #2aa198;">"removed_at IS NULL"</span>)
 
 </div>
 
-<div id="outline-container-5-4-4" class="outline-4">
-<h4 id="sec-5-4-4">Dynamic finders</h4>
-<div class="outline-text-4" id="text-5-4-4">
+<div id="outline-container-5-3-4" class="outline-4">
+<h4 id="sec-5-3-4">Dynamic finders</h4>
+<div class="outline-text-4" id="text-5-3-4">
 
 <p>ActiveRecord defined query methods for every fields. Use find_by_field_name to query by field.
 </p>
@@ -685,9 +934,9 @@ default_scope { where(<span style="color: #2aa198;">"removed_at IS NULL"</span>)
 
 </div>
 
-<div id="outline-container-5-5" class="outline-3">
-<h3 id="sec-5-5">Update</h3>
-<div class="outline-text-3" id="text-5-5">
+<div id="outline-container-5-4" class="outline-3">
+<h3 id="sec-5-4">Update</h3>
+<div class="outline-text-3" id="text-5-4">
 
 
 
@@ -704,9 +953,9 @@ user.update(<span style="color: #268bd2;">name</span>: <span style="color: #2aa1
 
 </div>
 
-<div id="outline-container-5-6" class="outline-3">
-<h3 id="sec-5-6">Delete</h3>
-<div class="outline-text-3" id="text-5-6">
+<div id="outline-container-5-5" class="outline-3">
+<h3 id="sec-5-5">Delete</h3>
+<div class="outline-text-3" id="text-5-5">
 
 
 
@@ -719,8 +968,16 @@ user.destroy
 
 </div>
 
+<div id="outline-container-5-6" class="outline-3">
+<h3 id="sec-5-6">Callbacks</h3>
+<div class="outline-text-3" id="text-5-6">
+
+</div>
+
+</div>
+
 <div id="outline-container-5-7" class="outline-3">
-<h3 id="sec-5-7">Callbacks</h3>
+<h3 id="sec-5-7">Validations</h3>
 <div class="outline-text-3" id="text-5-7">
 
 </div>
@@ -728,46 +985,38 @@ user.destroy
 </div>
 
 <div id="outline-container-5-8" class="outline-3">
-<h3 id="sec-5-8">Validations</h3>
+<h3 id="sec-5-8">Associations</h3>
 <div class="outline-text-3" id="text-5-8">
 
-</div>
 
 </div>
 
-<div id="outline-container-5-9" class="outline-3">
-<h3 id="sec-5-9">Associations</h3>
-<div class="outline-text-3" id="text-5-9">
-
-
-</div>
-
-<div id="outline-container-5-9-1" class="outline-4">
-<h4 id="sec-5-9-1">Type of associations</h4>
-<div class="outline-text-4" id="text-5-9-1">
+<div id="outline-container-5-8-1" class="outline-4">
+<h4 id="sec-5-8-1">Type of associations</h4>
+<div class="outline-text-4" id="text-5-8-1">
 
 <ul>
-<li id="sec-5-9-1-1">belongs_to(one 2 one relation, contains foreign key)<br/>
+<li id="sec-5-8-1-1">belongs_to(one 2 one relation, contains foreign key)<br/>
 </li>
 </ul>
 <ul>
-<li id="sec-5-9-1-2">has_one(one 2 one relation, foreign key on other side)<br/>
+<li id="sec-5-8-1-2">has_one(one 2 one relation, foreign key on other side)<br/>
 </li>
 </ul>
 <ul>
-<li id="sec-5-9-1-3">has_many(one 2 many )<br/>
+<li id="sec-5-8-1-3">has_many(one 2 many )<br/>
 </li>
 </ul>
 <ul>
-<li id="sec-5-9-1-4">has_many :through(many 2 many)<br/>
+<li id="sec-5-8-1-4">has_many :through(many 2 many)<br/>
 </li>
 </ul>
 <ul>
-<li id="sec-5-9-1-5">has_one :through<br/>
+<li id="sec-5-8-1-5">has_one :through<br/>
 </li>
 </ul>
 <ul>
-<li id="sec-5-9-1-6">has_and_belongs_to_many(direct many-to-many table name must be tableA_tableB)<br/>
+<li id="sec-5-8-1-6">has_and_belongs_to_many(direct many-to-many table name must be tableA_tableB)<br/>
 
 
 
@@ -780,7 +1029,7 @@ user.destroy
 <span style="color: #859900;">end</span>
 
 <span style="color: #859900;">class</span> <span style="color: #268bd2;">CreateAssembliesPartsJoinTable</span> &lt; <span style="color: #268bd2;">ActiveRecord</span>::<span style="color: #268bd2;">Migration</span>
-  <span style="color: #859900;">def</span> <span style="color: #b58900;">change</span>
+  <span style="color: #859900;">def</span> <span style="color: #b58900;">change</span> <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">This table should not have an id, it's not an entity.</span>
     create_table <span style="color: #268bd2;">:assemblies_parts</span>, <span style="color: #268bd2;">id</span>: <span style="color: #6c71c4;">false</span> <span style="color: #859900;">do</span> |t|
       t.integer <span style="color: #268bd2;">:assembly_id</span>
       t.integer <span style="color: #268bd2;">:part_id</span>
@@ -789,22 +1038,15 @@ user.destroy
 <span style="color: #859900;">end</span>
 </pre>
 
-
-
-
-<pre class="src src-ruby"><span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Foreign key definition</span>
-belongs_to <span style="color: #268bd2;">:part</span>
-</pre>
-
 </li>
 </ul>
 </div>
 
 </div>
 
-<div id="outline-container-5-9-2" class="outline-4">
-<h4 id="sec-5-9-2">Polymorphic Associations</h4>
-<div class="outline-text-4" id="text-5-9-2">
+<div id="outline-container-5-8-2" class="outline-4">
+<h4 id="sec-5-8-2">Polymorphic Associations</h4>
+<div class="outline-text-4" id="text-5-8-2">
 
 <p>Picture would belongs to both product &amp; employee. In this situation the PICTURES table should contain a foreign key named "IMAGEABLE_ID".
 </p>
@@ -835,9 +1077,9 @@ Foreign key definition in migration file.
 
 </div>
 
-<div id="outline-container-5-9-3" class="outline-4">
-<h4 id="sec-5-9-3">Self joins</h4>
-<div class="outline-text-4" id="text-5-9-3">
+<div id="outline-container-5-8-3" class="outline-4">
+<h4 id="sec-5-8-3">Self joins</h4>
+<div class="outline-text-4" id="text-5-8-3">
 
 
 
@@ -855,11 +1097,53 @@ Foreign key definition in migration file.
 
 </div>
 
+<div id="outline-container-5-9" class="outline-3">
+<h3 id="sec-5-9">Cache control</h3>
+<div class="outline-text-3" id="text-5-9">
+
+
+</div>
+
+</div>
+
 <div id="outline-container-5-10" class="outline-3">
-<h3 id="sec-5-10">Cache control</h3>
+<h3 id="sec-5-10">Locking</h3>
 <div class="outline-text-3" id="text-5-10">
 
 
+</div>
+
+<div id="outline-container-5-10-1" class="outline-4">
+<h4 id="sec-5-10-1">Optimistic Locking</h4>
+<div class="outline-text-4" id="text-5-10-1">
+
+<p>Using lock_version column to record version info. If conflict occured, an ActiveRecord::StaleObjectError will be raisen.
+</p></div>
+
+</div>
+
+<div id="outline-container-5-10-2" class="outline-4">
+<h4 id="sec-5-10-2">Pessimistic Locking</h4>
+<div class="outline-text-4" id="text-5-10-2">
+
+
+
+
+<pre class="src src-ruby"><span style="color: #268bd2;">Item</span>.transaction <span style="color: #859900;">do</span>
+  i = <span style="color: #268bd2;">Item</span>.lock.first
+  i.name = <span style="color: #2aa198;">'Jones'</span>
+  i.save
+<span style="color: #859900;">end</span>
+<span style="color: #2aa198;">//</span> <span style="color: #268bd2;">Or</span> <span style="color: #859900;">if</span> already have the item.
+item = <span style="color: #268bd2;">Item</span>.first
+item.with_lock <span style="color: #859900;">do</span>
+  <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">This block is called within a transaction,</span>
+  <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">item is already locked.</span>
+  item.increment!(<span style="color: #268bd2;">:views</span>)
+<span style="color: #859900;">end</span>
+</pre>
+
+</div>
 </div>
 </div>
 
@@ -893,7 +1177,7 @@ gem 'bootstrap-sass', '~&gt; 3.1.1'
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-03-10T10:29+0800</p>
+<p class="date">Date: 2015-03-11T16:48+0800</p>
 <p class="author">Author: rexhouy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
