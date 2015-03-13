@@ -24,7 +24,6 @@ h1 {
     list-style: none;
     margin: 0;
     padding: 0;
-
 }
 
 .articles ul a {
@@ -60,4 +59,11 @@ h1 {
     float: left;
     width: 100%;
     max-width: 240px;
+}
+
+@media (max-width: 640px)  {
+    .container {
+        width: auto;
+        margin: 0 20px;
+    }
 }
