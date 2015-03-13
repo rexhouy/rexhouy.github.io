@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="rails"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-03-11T16:48+0800"/>
+<meta name="generated" content="2015-03-13T10:44+0800"/>
 <meta name="author" content="rexhouy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -15,6 +15,7 @@
 <link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style.css' media='only screen' />
 <link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-min-640px.css' media='only screen and (min-width: 640px) and (max-width: 960px)' />
 <link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-max-640px.css' media='only screen and (max-width: 640px)' />
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
 <script src='emacs-org-html-style/nav.js'></script>
 
@@ -47,58 +48,82 @@
 <li><a href="#sec-3-1">Path helper</a></li>
 <li><a href="#sec-3-2">Asset helper</a></li>
 <li><a href="#sec-3-3">Partials</a></li>
-<li><a href="#sec-3-4">Caches</a></li>
-<li><a href="#sec-3-5">Date helper</a></li>
-<li><a href="#sec-3-6">Debug helper</a></li>
-<li><a href="#sec-3-7">Form helper</a></li>
-<li><a href="#sec-3-8">Number helper</a></li>
-<li><a href="#sec-3-9">Request object</a></li>
-<li><a href="#sec-3-10">Response object</a></li>
-<li><a href="#sec-3-11">Global exception handling</a></li>
-<li><a href="#sec-3-12">Force https</a></li>
+<li><a href="#sec-3-4">Date helper</a></li>
+<li><a href="#sec-3-5">Debug helper</a></li>
+<li><a href="#sec-3-6">Form helper</a></li>
+<li><a href="#sec-3-7">Number helper</a></li>
+<li><a href="#sec-3-8">Request object</a></li>
+<li><a href="#sec-3-9">Response object</a></li>
+<li><a href="#sec-3-10">Global exception handling</a></li>
+<li><a href="#sec-3-11">Force https</a></li>
 </ul>
 </li>
-<li><a href="#sec-4">DB migration</a>
+<li><a href="#sec-4">Routs</a></li>
+<li><a href="#sec-5">DB migration</a>
 <ul>
-<li><a href="#sec-4-1">Create</a></li>
-<li><a href="#sec-4-2">Update</a></li>
-<li><a href="#sec-4-3">Delete</a></li>
-<li><a href="#sec-4-4">Index</a></li>
+<li><a href="#sec-5-1">Create</a></li>
+<li><a href="#sec-5-2">Update</a></li>
+<li><a href="#sec-5-3">Delete</a></li>
+<li><a href="#sec-5-4">Index</a></li>
 </ul>
 </li>
-<li><a href="#sec-5">ActiveRecord</a>
+<li><a href="#sec-6">ActiveRecord</a>
 <ul>
-<li><a href="#sec-5-1">Naming conventions</a></li>
-<li><a href="#sec-5-2">Create</a></li>
-<li><a href="#sec-5-3">Read</a>
+<li><a href="#sec-6-1">Naming conventions</a></li>
+<li><a href="#sec-6-2">Create</a></li>
+<li><a href="#sec-6-3">Read</a>
 <ul>
-<li><a href="#sec-5-3-1">Query methods</a></li>
-<li><a href="#sec-5-3-2">Eager loading</a></li>
-<li><a href="#sec-5-3-3">Scopes</a></li>
-<li><a href="#sec-5-3-4">Dynamic finders</a></li>
+<li><a href="#sec-6-3-1">Query methods</a></li>
+<li><a href="#sec-6-3-2">Eager loading</a></li>
+<li><a href="#sec-6-3-3">Scopes</a></li>
+<li><a href="#sec-6-3-4">Dynamic finders</a></li>
 </ul>
 </li>
-<li><a href="#sec-5-4">Update</a></li>
-<li><a href="#sec-5-5">Delete</a></li>
-<li><a href="#sec-5-6">Callbacks</a></li>
-<li><a href="#sec-5-7">Validations</a></li>
-<li><a href="#sec-5-8">Associations</a>
+<li><a href="#sec-6-4">Update</a></li>
+<li><a href="#sec-6-5">Delete</a></li>
+<li><a href="#sec-6-6">Callbacks</a></li>
+<li><a href="#sec-6-7">Validations</a></li>
+<li><a href="#sec-6-8">Associations</a>
 <ul>
-<li><a href="#sec-5-8-1">Type of associations</a></li>
-<li><a href="#sec-5-8-2">Polymorphic Associations</a></li>
-<li><a href="#sec-5-8-3">Self joins</a></li>
+<li><a href="#sec-6-8-1">Type of associations</a></li>
+<li><a href="#sec-6-8-2">Polymorphic Associations</a></li>
+<li><a href="#sec-6-8-3">Self joins</a></li>
 </ul>
 </li>
-<li><a href="#sec-5-9">Cache control</a></li>
-<li><a href="#sec-5-10">Locking</a>
+<li><a href="#sec-6-9">Locking</a>
 <ul>
-<li><a href="#sec-5-10-1">Optimistic Locking</a></li>
-<li><a href="#sec-5-10-2">Pessimistic Locking</a></li>
+<li><a href="#sec-6-9-1">Optimistic Locking</a></li>
+<li><a href="#sec-6-9-2">Pessimistic Locking</a></li>
 </ul></li>
 </ul>
 </li>
-<li><a href="#sec-6">Logger</a></li>
-<li><a href="#sec-7">Others</a></li>
+<li><a href="#sec-7">Testing</a>
+<ul>
+<li><a href="#sec-7-1">Preparing data(fixtures)</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">Security</a>
+<ul>
+<li><a href="#sec-8-1">Session Hijacking</a></li>
+<li><a href="#sec-8-2">Replay attacks</a></li>
+<li><a href="#sec-8-3">Session Fixation</a></li>
+<li><a href="#sec-8-4">Log files</a></li>
+</ul>
+</li>
+<li><a href="#sec-9">Caching</a>
+<ul>
+<li><a href="#sec-9-1">Cache stores</a>
+<ul>
+<li><a href="#sec-9-1-1">Implements own store</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-10">Debug</a>
+<ul>
+<li><a href="#sec-10-1">Logger</a></li>
+</ul>
+</li>
+<li><a href="#sec-11">Others</a></li>
 </ul>
 </div>
 </div>
@@ -359,24 +384,8 @@ render <span style="color: #6c71c4;">@products</span>
 </div>
 
 <div id="outline-container-3-4" class="outline-3">
-<h3 id="sec-3-4">Caches</h3>
+<h3 id="sec-3-4">Date helper</h3>
 <div class="outline-text-3" id="text-3-4">
-
-
-
-
-<pre class="src src-ruby">&lt;% cache <span style="color: #859900;">do</span> <span style="color: #2aa198;">%&gt;</span>
-<span style="color: #2aa198;">  &lt;%= render "shared/footer" %&gt;</span>
-&lt;% <span style="color: #859900;">end</span> <span style="color: #2aa198;">%&gt;</span>
-</pre>
-
-</div>
-
-</div>
-
-<div id="outline-container-3-5" class="outline-3">
-<h3 id="sec-3-5">Date helper</h3>
-<div class="outline-text-3" id="text-3-5">
 
 
 
@@ -391,9 +400,9 @@ time_ago_in_words(3.minutes.from_now)  <span style="color: #93a1a1; font-style: 
 
 </div>
 
-<div id="outline-container-3-6" class="outline-3">
-<h3 id="sec-3-6">Debug helper</h3>
-<div class="outline-text-3" id="text-3-6">
+<div id="outline-container-3-5" class="outline-3">
+<h3 id="sec-3-5">Debug helper</h3>
+<div class="outline-text-3" id="text-3-5">
 
 
 
@@ -405,9 +414,9 @@ time_ago_in_words(3.minutes.from_now)  <span style="color: #93a1a1; font-style: 
 
 </div>
 
-<div id="outline-container-3-7" class="outline-3">
-<h3 id="sec-3-7">Form helper</h3>
-<div class="outline-text-3" id="text-3-7">
+<div id="outline-container-3-6" class="outline-3">
+<h3 id="sec-3-6">Form helper</h3>
+<div class="outline-text-3" id="text-3-6">
 
 
 
@@ -432,9 +441,9 @@ time_ago_in_words(3.minutes.from_now)  <span style="color: #93a1a1; font-style: 
 
 </div>
 
-<div id="outline-container-3-8" class="outline-3">
-<h3 id="sec-3-8">Number helper</h3>
-<div class="outline-text-3" id="text-3-8">
+<div id="outline-container-3-7" class="outline-3">
+<h3 id="sec-3-7">Number helper</h3>
+<div class="outline-text-3" id="text-3-7">
 
 
 
@@ -451,9 +460,9 @@ number_with_precision(111.2345, 2)  <span style="color: #93a1a1; font-style: ita
 
 </div>
 
-<div id="outline-container-3-9" class="outline-3">
-<h3 id="sec-3-9">Request object</h3>
-<div class="outline-text-3" id="text-3-9">
+<div id="outline-container-3-8" class="outline-3">
+<h3 id="sec-3-8">Request object</h3>
+<div class="outline-text-3" id="text-3-8">
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" />
@@ -480,9 +489,9 @@ number_with_precision(111.2345, 2)  <span style="color: #93a1a1; font-style: ita
 
 </div>
 
-<div id="outline-container-3-10" class="outline-3">
-<h3 id="sec-3-10">Response object</h3>
-<div class="outline-text-3" id="text-3-10">
+<div id="outline-container-3-9" class="outline-3">
+<h3 id="sec-3-9">Response object</h3>
+<div class="outline-text-3" id="text-3-9">
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" />
@@ -504,9 +513,9 @@ number_with_precision(111.2345, 2)  <span style="color: #93a1a1; font-style: ita
 
 </div>
 
-<div id="outline-container-3-11" class="outline-3">
-<h3 id="sec-3-11">Global exception handling</h3>
-<div class="outline-text-3" id="text-3-11">
+<div id="outline-container-3-10" class="outline-3">
+<h3 id="sec-3-10">Global exception handling</h3>
+<div class="outline-text-3" id="text-3-10">
 
 
 
@@ -525,9 +534,9 @@ number_with_precision(111.2345, 2)  <span style="color: #93a1a1; font-style: ita
 
 </div>
 
-<div id="outline-container-3-12" class="outline-3">
-<h3 id="sec-3-12">Force https</h3>
-<div class="outline-text-3" id="text-3-12">
+<div id="outline-container-3-11" class="outline-3">
+<h3 id="sec-3-11">Force https</h3>
+<div class="outline-text-3" id="text-3-11">
 
 
 
@@ -543,8 +552,22 @@ number_with_precision(111.2345, 2)  <span style="color: #93a1a1; font-style: ita
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4">DB migration</h2>
+<h2 id="sec-4">Routs</h2>
 <div class="outline-text-2" id="text-4">
+
+
+
+
+<pre class="src src-ruby">assert_routing({ <span style="color: #268bd2;">path</span>: <span style="color: #2aa198;">'photos'</span>, <span style="color: #268bd2;">method</span>: <span style="color: #268bd2;">:post</span> }, { <span style="color: #268bd2;">controller</span>: <span style="color: #2aa198;">'photos'</span>, <span style="color: #268bd2;">action</span>: <span style="color: #2aa198;">'create'</span> })
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">DB migration</h2>
+<div class="outline-text-2" id="text-5">
 
 <p>Change db
 </p>
@@ -593,9 +616,9 @@ Supported
 
 </div>
 
-<div id="outline-container-4-1" class="outline-3">
-<h3 id="sec-4-1">Create</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1">Create</h3>
+<div class="outline-text-3" id="text-5-1">
 
 
 
@@ -615,9 +638,9 @@ Supported
 
 </div>
 
-<div id="outline-container-4-2" class="outline-3">
-<h3 id="sec-4-2">Update</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-5-2" class="outline-3">
+<h3 id="sec-5-2">Update</h3>
+<div class="outline-text-3" id="text-5-2">
 
 
 
@@ -656,9 +679,9 @@ Supported
 
 </div>
 
-<div id="outline-container-4-3" class="outline-3">
-<h3 id="sec-4-3">Delete</h3>
-<div class="outline-text-3" id="text-4-3">
+<div id="outline-container-5-3" class="outline-3">
+<h3 id="sec-5-3">Delete</h3>
+<div class="outline-text-3" id="text-5-3">
 
 
 
@@ -681,9 +704,9 @@ Supported
 
 </div>
 
-<div id="outline-container-4-4" class="outline-3">
-<h3 id="sec-4-4">Index</h3>
-<div class="outline-text-3" id="text-4-4">
+<div id="outline-container-5-4" class="outline-3">
+<h3 id="sec-5-4">Index</h3>
+<div class="outline-text-3" id="text-5-4">
 
 
 
@@ -718,16 +741,16 @@ Supported
 
 </div>
 
-<div id="outline-container-5" class="outline-2">
-<h2 id="sec-5">ActiveRecord</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">ActiveRecord</h2>
+<div class="outline-text-2" id="text-6">
 
 
 </div>
 
-<div id="outline-container-5-1" class="outline-3">
-<h3 id="sec-5-1">Naming conventions</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-6-1" class="outline-3">
+<h3 id="sec-6-1">Naming conventions</h3>
+<div class="outline-text-3" id="text-6-1">
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" />
@@ -745,9 +768,9 @@ Supported
 
 </div>
 
-<div id="outline-container-5-2" class="outline-3">
-<h3 id="sec-5-2">Create</h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-6-2" class="outline-3">
+<h3 id="sec-6-2">Create</h3>
+<div class="outline-text-3" id="text-6-2">
 
 <p>Create &amp; save
 </p>
@@ -766,16 +789,16 @@ user.save
 
 </div>
 
-<div id="outline-container-5-3" class="outline-3">
-<h3 id="sec-5-3">Read</h3>
-<div class="outline-text-3" id="text-5-3">
+<div id="outline-container-6-3" class="outline-3">
+<h3 id="sec-6-3">Read</h3>
+<div class="outline-text-3" id="text-6-3">
 
 
 </div>
 
-<div id="outline-container-5-3-1" class="outline-4">
-<h4 id="sec-5-3-1">Query methods</h4>
-<div class="outline-text-4" id="text-5-3-1">
+<div id="outline-container-6-3-1" class="outline-4">
+<h4 id="sec-6-3-1">Query methods</h4>
+<div class="outline-text-4" id="text-6-3-1">
 
 
 
@@ -876,9 +899,9 @@ Using SQL
 
 </div>
 
-<div id="outline-container-5-3-2" class="outline-4">
-<h4 id="sec-5-3-2">Eager loading</h4>
-<div class="outline-text-4" id="text-5-3-2">
+<div id="outline-container-6-3-2" class="outline-4">
+<h4 id="sec-6-3-2">Eager loading</h4>
+<div class="outline-text-4" id="text-6-3-2">
 
 <p>Associated records are loaded when it is used.
 </p>
@@ -894,9 +917,9 @@ There are some methods to eagerly load those records.
 
 </div>
 
-<div id="outline-container-5-3-3" class="outline-4">
-<h4 id="sec-5-3-3">Scopes</h4>
-<div class="outline-text-4" id="text-5-3-3">
+<div id="outline-container-6-3-3" class="outline-4">
+<h4 id="sec-6-3-3">Scopes</h4>
+<div class="outline-text-4" id="text-6-3-3">
 
 <p>Predefine a query(condition) that can be used easily as method.
 </p>
@@ -923,9 +946,9 @@ default_scope { where(<span style="color: #2aa198;">"removed_at IS NULL"</span>)
 
 </div>
 
-<div id="outline-container-5-3-4" class="outline-4">
-<h4 id="sec-5-3-4">Dynamic finders</h4>
-<div class="outline-text-4" id="text-5-3-4">
+<div id="outline-container-6-3-4" class="outline-4">
+<h4 id="sec-6-3-4">Dynamic finders</h4>
+<div class="outline-text-4" id="text-6-3-4">
 
 <p>ActiveRecord defined query methods for every fields. Use find_by_field_name to query by field.
 </p>
@@ -934,9 +957,9 @@ default_scope { where(<span style="color: #2aa198;">"removed_at IS NULL"</span>)
 
 </div>
 
-<div id="outline-container-5-4" class="outline-3">
-<h3 id="sec-5-4">Update</h3>
-<div class="outline-text-3" id="text-5-4">
+<div id="outline-container-6-4" class="outline-3">
+<h3 id="sec-6-4">Update</h3>
+<div class="outline-text-3" id="text-6-4">
 
 
 
@@ -953,9 +976,9 @@ user.update(<span style="color: #268bd2;">name</span>: <span style="color: #2aa1
 
 </div>
 
-<div id="outline-container-5-5" class="outline-3">
-<h3 id="sec-5-5">Delete</h3>
-<div class="outline-text-3" id="text-5-5">
+<div id="outline-container-6-5" class="outline-3">
+<h3 id="sec-6-5">Delete</h3>
+<div class="outline-text-3" id="text-6-5">
 
 
 
@@ -968,55 +991,55 @@ user.destroy
 
 </div>
 
-<div id="outline-container-5-6" class="outline-3">
-<h3 id="sec-5-6">Callbacks</h3>
-<div class="outline-text-3" id="text-5-6">
+<div id="outline-container-6-6" class="outline-3">
+<h3 id="sec-6-6">Callbacks</h3>
+<div class="outline-text-3" id="text-6-6">
 
 </div>
 
 </div>
 
-<div id="outline-container-5-7" class="outline-3">
-<h3 id="sec-5-7">Validations</h3>
-<div class="outline-text-3" id="text-5-7">
+<div id="outline-container-6-7" class="outline-3">
+<h3 id="sec-6-7">Validations</h3>
+<div class="outline-text-3" id="text-6-7">
 
 </div>
 
 </div>
 
-<div id="outline-container-5-8" class="outline-3">
-<h3 id="sec-5-8">Associations</h3>
-<div class="outline-text-3" id="text-5-8">
+<div id="outline-container-6-8" class="outline-3">
+<h3 id="sec-6-8">Associations</h3>
+<div class="outline-text-3" id="text-6-8">
 
 
 </div>
 
-<div id="outline-container-5-8-1" class="outline-4">
-<h4 id="sec-5-8-1">Type of associations</h4>
-<div class="outline-text-4" id="text-5-8-1">
+<div id="outline-container-6-8-1" class="outline-4">
+<h4 id="sec-6-8-1">Type of associations</h4>
+<div class="outline-text-4" id="text-6-8-1">
 
 <ul>
-<li id="sec-5-8-1-1">belongs_to(one 2 one relation, contains foreign key)<br/>
+<li id="sec-6-8-1-1">belongs_to(one 2 one relation, contains foreign key)<br/>
 </li>
 </ul>
 <ul>
-<li id="sec-5-8-1-2">has_one(one 2 one relation, foreign key on other side)<br/>
+<li id="sec-6-8-1-2">has_one(one 2 one relation, foreign key on other side)<br/>
 </li>
 </ul>
 <ul>
-<li id="sec-5-8-1-3">has_many(one 2 many )<br/>
+<li id="sec-6-8-1-3">has_many(one 2 many )<br/>
 </li>
 </ul>
 <ul>
-<li id="sec-5-8-1-4">has_many :through(many 2 many)<br/>
+<li id="sec-6-8-1-4">has_many :through(many 2 many)<br/>
 </li>
 </ul>
 <ul>
-<li id="sec-5-8-1-5">has_one :through<br/>
+<li id="sec-6-8-1-5">has_one :through<br/>
 </li>
 </ul>
 <ul>
-<li id="sec-5-8-1-6">has_and_belongs_to_many(direct many-to-many table name must be tableA_tableB)<br/>
+<li id="sec-6-8-1-6">has_and_belongs_to_many(direct many-to-many table name must be tableA_tableB)<br/>
 
 
 
@@ -1044,9 +1067,9 @@ user.destroy
 
 </div>
 
-<div id="outline-container-5-8-2" class="outline-4">
-<h4 id="sec-5-8-2">Polymorphic Associations</h4>
-<div class="outline-text-4" id="text-5-8-2">
+<div id="outline-container-6-8-2" class="outline-4">
+<h4 id="sec-6-8-2">Polymorphic Associations</h4>
+<div class="outline-text-4" id="text-6-8-2">
 
 <p>Picture would belongs to both product &amp; employee. In this situation the PICTURES table should contain a foreign key named "IMAGEABLE_ID".
 </p>
@@ -1077,9 +1100,9 @@ Foreign key definition in migration file.
 
 </div>
 
-<div id="outline-container-5-8-3" class="outline-4">
-<h4 id="sec-5-8-3">Self joins</h4>
-<div class="outline-text-4" id="text-5-8-3">
+<div id="outline-container-6-8-3" class="outline-4">
+<h4 id="sec-6-8-3">Self joins</h4>
+<div class="outline-text-4" id="text-6-8-3">
 
 
 
@@ -1097,34 +1120,25 @@ Foreign key definition in migration file.
 
 </div>
 
-<div id="outline-container-5-9" class="outline-3">
-<h3 id="sec-5-9">Cache control</h3>
-<div class="outline-text-3" id="text-5-9">
+<div id="outline-container-6-9" class="outline-3">
+<h3 id="sec-6-9">Locking</h3>
+<div class="outline-text-3" id="text-6-9">
 
 
 </div>
 
-</div>
-
-<div id="outline-container-5-10" class="outline-3">
-<h3 id="sec-5-10">Locking</h3>
-<div class="outline-text-3" id="text-5-10">
-
-
-</div>
-
-<div id="outline-container-5-10-1" class="outline-4">
-<h4 id="sec-5-10-1">Optimistic Locking</h4>
-<div class="outline-text-4" id="text-5-10-1">
+<div id="outline-container-6-9-1" class="outline-4">
+<h4 id="sec-6-9-1">Optimistic Locking</h4>
+<div class="outline-text-4" id="text-6-9-1">
 
 <p>Using lock_version column to record version info. If conflict occured, an ActiveRecord::StaleObjectError will be raisen.
 </p></div>
 
 </div>
 
-<div id="outline-container-5-10-2" class="outline-4">
-<h4 id="sec-5-10-2">Pessimistic Locking</h4>
-<div class="outline-text-4" id="text-5-10-2">
+<div id="outline-container-6-9-2" class="outline-4">
+<h4 id="sec-6-9-2">Pessimistic Locking</h4>
+<div class="outline-text-4" id="text-6-9-2">
 
 
 
@@ -1149,11 +1163,243 @@ item.with_lock <span style="color: #859900;">do</span>
 
 </div>
 
-<div id="outline-container-6" class="outline-2">
-<h2 id="sec-6">Logger</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">Testing</h2>
+<div class="outline-text-2" id="text-7">
 
-<p>Saved in /log/[development|test|production].log
+
+</div>
+
+<div id="outline-container-7-1" class="outline-3">
+<h3 id="sec-7-1">Preparing data(fixtures)</h3>
+<div class="outline-text-3" id="text-7-1">
+
+<p>Fixtures are located at "test/fixtures/". Following are some fixture examples.
+</p>
+
+
+<pre class="src src-yaml"><span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">In fixtures/categories.yml</span>
+<span style="color: #6c71c4;">about</span>:
+  <span style="color: #6c71c4;">name</span>: About
+
+<span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">In fixtures/articles.yml</span>
+<span style="color: #6c71c4;">one</span>:
+  <span style="color: #6c71c4;">title</span>: Welcome to Rails!
+  <span style="color: #6c71c4;">body</span>: Hello world!
+  <span style="color: #6c71c4;">category</span>: about
+
+</pre>
+
+
+
+<pre class="src src-ruby"><span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Multiple records</span>
+&lt;% 1000.times <span style="color: #859900;">do</span> |n| <span style="color: #2aa198;">%&gt;</span>
+<span style="color: #2aa198;">user_&lt;%= n %&gt;</span>:
+  <span style="color: #268bd2;">username</span>: &lt;<span style="color: #2aa198;">%= "use</span><span style="color: #6c71c4;">r#{n}</span><span style="color: #2aa198;">" %&gt;</span>
+<span style="color: #2aa198;">  email: &lt;%=</span> <span style="color: #2aa198;">"use</span><span style="color: #6c71c4;">r#{n}</span><span style="color: #2aa198;">@example.com"</span> <span style="color: #2aa198;">%&gt;</span>
+<span style="color: #2aa198;">&lt;% end %&gt;</span>
+</pre>
+
+<p>
+Using fixtures:
+</p>
+
+
+<pre class="src src-ruby"><span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">Fixtures are instances of Active Record. Use it directly in test code.</span>
+user1 = <span style="color: #268bd2;">User</span>(<span style="color: #268bd2;">:user1</span>)
+</pre>
+
+
+<p>
+Initialize test database
+</p>
+
+
+<pre class="src src-bash">rake db:migrate
+rake db:test:load
+</pre>
+
+<p>
+Rake task for testing.
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">Tasks</td><td class="left">Description</td></tr>
+<tr><td class="left">rake db:test:clone    Recreate the test database from the current environment's database schema</td></tr>
+</tbody>
+</table>
+
+rake db:test:clone_structure    Recreate the test database from the development structure
+rake db:test:load       Recreate the test database from the current schema.rb
+rake db:test:prepare    Check for pending migrations and load the test schema
+rake db:test:purge      Empty the test database.
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8">Security</h2>
+<div class="outline-text-2" id="text-8">
+
+
+</div>
+
+<div id="outline-container-8-1" class="outline-3">
+<h3 id="sec-8-1">Session Hijacking</h3>
+<div class="outline-text-3" id="text-8-1">
+
+<p>By default sessions are saved in cookies. a secrit key(Application.config.secret_key_base) is used to calculate a digist, 
+this digist is saved in cookie too, in this way server can know if the cookie has been changed.
+</p>
+<p>
+In order to prevent session stealing from http request, set "force_ssl" to Application(or set nginx).
+</p></div>
+
+</div>
+
+<div id="outline-container-8-2" class="outline-3">
+<h3 id="sec-8-2">Replay attacks</h3>
+<div class="outline-text-3" id="text-8-2">
+
+<p>User save the cookie content =&gt; do something =&gt; replace the cookie with the saved one.
+</p>
+<p>
+To solve the problem, do not save important info in sessions.
+</p></div>
+
+</div>
+
+<div id="outline-container-8-3" class="outline-3">
+<h3 id="sec-8-3">Session Fixation</h3>
+<div class="outline-text-3" id="text-8-3">
+
+<p>Change the victims session id(Due to an xss vulnerable website) =&gt; Ask the victim to login =&gt; Attackers can use the session id now.
+</p>
+<p>
+"reset_session" after user login.
+</p></div>
+
+</div>
+
+<div id="outline-container-8-4" class="outline-3">
+<h3 id="sec-8-4">Log files</h3>
+<div class="outline-text-3" id="text-8-4">
+
+<p>Log files should not contain password, credit card number etc.
+</p>
+
+
+<pre class="src src-ruby">config.filter_parameters &lt;&lt; <span style="color: #268bd2;">:password</span>
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9">Caching</h2>
+<div class="outline-text-2" id="text-9">
+
+<p>By default rails using fragment cache(binded to an action).
+</p>
+
+
+<pre class="src src-erb">&lt;% cache do %&gt;
+  &lt;p&gt;This cache bind to the action.&lt;/p&gt;
+&lt;% end %&gt;
+
+&lt;% cache(action: 'recent', action_suffix: 'fragment_1') do %&gt;
+  &lt;p&gt;If more than one fragment needs be cached in one action, a 'action_suffix' is needed.&lt;/p&gt;
+&lt;% end %&gt;
+
+&lt;% cache(<span style="color: #2aa198;">"fragment_cache_1"</span>) %&gt;
+  &lt;p&gt;Name a cache, then the cache can be used all actions in this controller.&lt;/p&gt;
+&lt;% end %&gt;
+
+&lt;% cache(obj) %&gt;
+  &lt;%= debug obj %&gt;
+  &lt;p&gt;It is a good idea to use an object as the cache key, the key will be something like 'obj/id-updat_at_timestamp'. 
+  In this case, when the object has been updated, the cache will not be used.&lt;/p&gt;
+&lt;% end %&gt;
+
+# Use expire_fragment method to expire cache.
+expire_fragment(controller: 'products', action: 'recent', action_suffix: 'all_products')
+expire_fragment(<span style="color: #2aa198;">"fragment_cache_1"</span>)
+</pre>
+
+
+</div>
+
+<div id="outline-container-9-1" class="outline-3">
+<h3 id="sec-9-1">Cache stores</h3>
+<div class="outline-text-3" id="text-9-1">
+
+<p>Set cache store in configuration files.
+</p>
+
+
+<pre class="src src-ruby"><span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">config/application.rb</span>
+config.cache_store = <span style="color: #268bd2;">:memory_store</span>
+</pre>
+
+
+</div>
+
+<div id="outline-container-9-1-1" class="outline-4">
+<h4 id="sec-9-1-1">Implements own store</h4>
+<div class="outline-text-4" id="text-9-1-1">
+
+
+
+
+<pre class="src src-ruby"><span style="color: #859900;">class</span> <span style="color: #268bd2;">MyStore</span> &lt; <span style="color: #268bd2;">ActiveSupport</span>::<span style="color: #268bd2;">Cache</span>::<span style="color: #268bd2;">Store</span>
+    <span style="color: #859900;">def</span> <span style="color: #b58900;">initialize</span>(<span style="color: #268bd2;">:namespace</span>,
+                   <span style="color: #268bd2;">:expires_in</span>, <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">cache expires time.</span>
+                   <span style="color: #268bd2;">:race_condition_ttl</span>)
+        <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">:race_condition_ttl option will prevent race conditions </span>
+        <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">when cache entries expire by preventing multiple processes </span>
+        <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">from simultaneously regenerating the same entry. </span>
+        <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">It sets the number of seconds that an expired entry can be reused while a new value is being regenerated.</span>
+    <span style="color: #859900;">end</span>
+    <span style="color: #859900;">def</span> <span style="color: #b58900;">read</span> <span style="color: #859900;">end</span>
+    <span style="color: #859900;">def</span> <span style="color: #b58900;">write</span> <span style="color: #859900;">end</span>
+    <span style="color: #859900;">def</span> <span style="color: #b58900;">delete</span> <span style="color: #859900;">end</span>
+    <span style="color: #859900;">def</span> <span style="color: #b58900;">exist?</span> <span style="color: #859900;">end</span>
+    <span style="color: #859900;">def</span> <span style="color: #b58900;">fetch</span> 
+        <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">The fetch method takes a block and will either return an existing value from the cache, </span>
+        <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">or evaluate the block and write the result to the cache if no value exists.</span>
+    <span style="color: #859900;">end</span> 
+<span style="color: #859900;">end</span>
+</pre>
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10">Debug</h2>
+<div class="outline-text-2" id="text-10">
+
+<p>Print object in yaml format in view.
+</p>
+
+
+<pre class="src src-ruby">&lt;<span style="color: #2aa198;">%= debug @post %&gt;</span>
+</pre>
+
+
+</div>
+
+<div id="outline-container-10-1" class="outline-3">
+<h3 id="sec-10-1">Logger</h3>
+<div class="outline-text-3" id="text-10-1">
+
+<p>Saved in /log/[development|test|production].log as default.
 </p>
 
 
@@ -1161,23 +1407,35 @@ item.with_lock <span style="color: #859900;">do</span>
 logger.info(<span style="color: #2aa198;">"infomation"</span>)
 </pre>
 
-</div>
+<p>
+Logger can be changed in environment.rb.
+</p>
 
-</div>
 
-<div id="outline-container-7" class="outline-2">
-<h2 id="sec-7">Others</h2>
-<div class="outline-text-2" id="text-7">
-
+<pre class="src src-ruby"><span style="color: #268bd2;">Rails</span>.logger = <span style="color: #268bd2;">Logger</span>.new(<span style="color: #268bd2;">STDOUT</span>)
+<span style="color: #268bd2;">Rails</span>.logger = <span style="color: #268bd2;">Log4r</span>::<span style="color: #268bd2;">Logger</span>.new(<span style="color: #2aa198;">"Application Log"</span>)
+<span style="color: #268bd2;">Rails</span>.logger.level = 0 <span style="color: #93a1a1; font-style: italic;"># </span><span style="color: #93a1a1; font-style: italic;">at any time</span>
+</pre>
 
 <p>
-gem 'bootstrap-sass', '~&gt; 3.1.1'
+Logger level is info in production &amp; debug in both test and development by default.
 </p></div>
+</div>
+
+</div>
+
+<div id="outline-container-11" class="outline-2">
+<h2 id="sec-11">Others</h2>
+<div class="outline-text-2" id="text-11">
+
+<p>gem 'bootstrap-sass', '~&gt; 3.1.1'
+</p>
+</div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-03-11T16:48+0800</p>
+<p class="date">Date: 2015-03-13T10:44+0800</p>
 <p class="author">Author: rexhouy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
