@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="rails"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-03-13T10:44+0800"/>
+<meta name="generated" content="2015-03-16T14:19+0800"/>
 <meta name="author" content="rexhouy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -569,7 +569,23 @@ number_with_precision(111.2345, 2)  <span style="color: #93a1a1; font-style: ita
 <h2 id="sec-5">DB migration</h2>
 <div class="outline-text-2" id="text-5">
 
-<p>Change db
+<p>Create db
+</p>
+
+
+<pre class="src src-bash">rake db:create
+</pre>
+
+<p>
+Drop db
+</p>
+
+
+<pre class="src src-bash">rake db:drop
+</pre>
+
+<p>
+Change db
 </p>
 
 
@@ -1428,14 +1444,27 @@ Logger level is info in production &amp; debug in both test and development by d
 <h2 id="sec-11">Others</h2>
 <div class="outline-text-2" id="text-11">
 
-<p>gem 'bootstrap-sass', '~&gt; 3.1.1'
+<p>Bootstrap integration
 </p>
+
+
+<pre class="src src-ruby">gem <span style="color: #2aa198;">'bootstrap-sass'</span>, <span style="color: #2aa198;">'~&gt; 3.1.1'</span>
+</pre>
+
+<p>
+Load config files
+</p>
+
+
+<pre class="src src-ruby"><span style="color: #268bd2;">YAML</span>.load_file(<span style="color: #268bd2;">Rails</span>.root.join(<span style="color: #2aa198;">"config/drawing.yml"</span>))
+</pre>
+
 </div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-03-13T10:44+0800</p>
+<p class="date">Date: 2015-03-16T14:19+0800</p>
 <p class="author">Author: rexhouy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
