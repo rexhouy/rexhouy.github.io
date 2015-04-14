@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="ubuntu"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-03-30T15:45+0800"/>
+<meta name="generated" content="2015-04-13T16:38+0800"/>
 <meta name="author" content="rexhouy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -43,6 +43,7 @@
 <li><a href="#sec-1-4">Install ia32-libs</a></li>
 <li><a href="#sec-1-5">Usb</a></li>
 <li><a href="#sec-1-6">Break notification</a></li>
+<li><a href="#sec-1-7">SSH</a></li>
 </ul>
 </li>
 </ul>
@@ -146,12 +147,32 @@ Users &amp; Groups -&gt; add current user to vboxusers group -&gt; add virtualbo
 </pre>
 
 </div>
+
+</div>
+
+<div id="outline-container-1-7" class="outline-3">
+<h3 id="sec-1-7">SSH</h3>
+<div class="outline-text-3" id="text-1-7">
+
+<p>在~/.ssh/config文件中配置如下内容
+</p>
+
+
+<pre class="src src-text">Host name
+   HostName 127.0.0.1
+   User rexhouy
+   IdentityFile /home/rexhouy/.ssh/secret.pem
+</pre>
+
+<p>
+使用ssh name连接
+</p></div>
 </div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-03-30T15:45+0800</p>
+<p class="date">Date: 2015-04-13T16:38+0800</p>
 <p class="author">Author: rexhouy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
