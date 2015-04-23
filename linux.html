@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="linux"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-03-31T11:21+0800"/>
+<meta name="generated" content="2015-04-23T12:12+0800"/>
 <meta name="author" content="rexhouy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -59,6 +59,7 @@
 <li><a href="#sec-4-4">Add or Change Password</a></li>
 <li><a href="#sec-4-5">Change User</a></li>
 <li><a href="#sec-4-6">Add user to sudo group</a></li>
+<li><a href="#sec-4-7">Change default shell for user</a></li>
 </ul>
 </li>
 <li><a href="#sec-5">Usful command</a></li>
@@ -462,10 +463,27 @@ inode保存文件的的字节数，userid，groupid，authorize，timestamp，�
 <h3 id="sec-4-6">Add user to sudo group</h3>
 <div class="outline-text-3" id="text-4-6">
 
+<p>Any of the following commands are ok.
+</p>
 
 
+<pre class="src src-bash">usermod -a -G sudo {username}
+sudo adduser {username} sudo
+</pre>
 
-<pre class="src src-bash">sudo adduser {username} sudo
+</div>
+
+</div>
+
+<div id="outline-container-4-7" class="outline-3">
+<h3 id="sec-4-7">Change default shell for user</h3>
+<div class="outline-text-3" id="text-4-7">
+
+<p>If user is created /bin/sh as its login shell, the arrow keys and tab key wont work as usual. Change the login shell to bash to solve the problem.
+</p>
+
+
+<pre class="src src-bash">sudo chsh -s /bin/bash &lt;username&gt;
 </pre>
 
 </div>
@@ -646,7 +664,7 @@ Readable: Print sizes in human readable format.
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-03-31T11:21+0800</p>
+<p class="date">Date: 2015-04-23T12:12+0800</p>
 <p class="author">Author: rexhouy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

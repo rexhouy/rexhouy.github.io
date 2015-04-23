@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>css</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="css"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2015-04-21T09:03+0800"/>
+<meta name="author" content="rexhouy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style.css' media='only screen' />
+<link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-min-640px.css' media='only screen and (min-width: 640px) and (max-width: 960px)' />
+<link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-max-640px.css' media='only screen and (max-width: 640px)' />
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
+<script src='emacs-org-html-style/nav.js'></script>
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">css</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Helpers</a>
+<ul>
+<li><a href="#sec-1-1">Screen size</a></li>
+<li><a href="#sec-1-2">Centralize</a></li>
+<li><a href="#sec-1-3">Display Elements in different screen size</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">Helpers</h2>
+<div class="outline-text-2" id="text-1">
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1">Screen size</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<p>Bootstrap compatible
+</p>
+
+
+<pre class="src src-css"><span style="color: #6c71c4;">@media</span> (max-width: 768px) {
+    <span style="color: #93a1a1; font-style: italic;">// Small screen</span>
+}
+<span style="color: #6c71c4;">@media</span> (min-width:768px) and (max-width: 1200px) {
+    <span style="color: #93a1a1; font-style: italic;">// Middle screen</span>
+}
+<span style="color: #6c71c4;">@media</span> (min-width: 1200px) {
+    <span style="color: #93a1a1; font-style: italic;">// Large screen</span>
+}
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2">Centralize</h3>
+<div class="outline-text-3" id="text-1-2">
+
+
+
+
+<pre class="src src-css"><span style="color: #b58900;">.table-center-wrap </span>{
+    <span style="color: #6c71c4;">display</span>: table;
+    <span style="color: #6c71c4;">table-layout</span>: fixed;
+}
+<span style="color: #b58900;">.table-center </span>{
+    <span style="color: #6c71c4;">display</span>: table-cell;
+    <span style="color: #6c71c4;">vertical-align</span>: middle;
+}
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3">Display Elements in different screen size</h3>
+<div class="outline-text-3" id="text-1-3">
+
+
+
+
+<pre class="src src-css"><span style="color: #b58900;">.large-screen, .middle-screen, .small-screen, .not-large-screen, .not-middle-screen, .not-small-screen </span>{
+    <span style="color: #6c71c4;">display</span>: none;
+}
+<span style="color: #6c71c4;">@media</span> (max-width: 768px) {
+<span style="color: #b58900;">    .small-screen, .not-large-screen, .not-middle-screen </span>{
+        <span style="color: #6c71c4;">display</span>: block;
+    }
+}
+<span style="color: #6c71c4;">@media</span> (min-width:768px) and (max-width: 1200px) {
+<span style="color: #b58900;">    .middle-screen, .not-small-screen, .not-large-screen </span>{
+        <span style="color: #6c71c4;">display</span>: block;
+    }
+}
+<span style="color: #6c71c4;">@media</span> (min-width: 1200px) {
+<span style="color: #b58900;">    .large-screen, .not-small-screen, .not-middle-screen </span>{
+        <span style="color: #6c71c4;">display</span>: block;
+    }
+}
+</pre>
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2015-04-21T09:03+0800</p>
+<p class="author">Author: rexhouy</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>
