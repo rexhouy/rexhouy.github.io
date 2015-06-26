@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="rails"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-04-14T21:58+0800"/>
+<meta name="generated" content="2015-06-25T21:38+0800"/>
 <meta name="author" content="rexhouy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -124,7 +124,27 @@
 <li><a href="#sec-11-1">Logger</a></li>
 </ul>
 </li>
-<li><a href="#sec-12">Others</a></li>
+<li><a href="#sec-12">Others</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-12-1">Bootstrap integration</a></li>
+<li><a href="#sec-12-2">Load config files</a></li>
+<li><a href="#sec-12-3">Nested attributes</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-13">Publish</a>
+<ul>
+<li><a href="#sec-13-1">Install ruby with rvm</a></li>
+<li><a href="#sec-13-2">install rails</a></li>
+<li><a href="#sec-13-3">Using Passanger</a>
+<ul>
+<li><a href="#sec-13-3-1">nginx settings</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -1463,28 +1483,161 @@ Logger level is info in production &amp; debug in both test and development by d
 <h2 id="sec-12">Others</h2>
 <div class="outline-text-2" id="text-12">
 
-<p>Bootstrap integration
-</p>
+
+</div>
+
+<div id="outline-container-12-1" class="outline-4">
+<h4 id="sec-12-1">Bootstrap integration</h4>
+<div class="outline-text-4" id="text-12-1">
+
+
 
 
 <pre class="src src-ruby">gem <span style="color: #2aa198;">'bootstrap-sass'</span>, <span style="color: #2aa198;">'~&gt; 3.1.1'</span>
 </pre>
 
 <p>
-Add "*= require bootstrap" to application.css
-Load config files
+Add "= require bootstrap" to application.css
+</p><ul>
+<li id="sec-12-1-1">Define custom varaibles &amp; use bootstrap variables<br/>
+Instead of add "*= require bootstrap" to application.css. use @import to import bootstrap.
+
+
+
+<pre class="src src-css"><span style="color: #93a1a1; font-style: italic;">/* </span><span style="color: #93a1a1; font-style: italic;">varaibles.scss </span><span style="color: #93a1a1; font-style: italic;">*/</span>
+<span style="color: #6c71c4;">@import</span> <span style="color: #2aa198;">"bootstrap/variables"</span>;
+$brand-primary: <span style="color: #000000; background-color: #ddd;">#ddd</span>; # Add custom variables;
+</pre>
+
+
+<pre class="src src-css"><span style="color: #93a1a1; font-style: italic;">/* </span><span style="color: #93a1a1; font-style: italic;">bootstrap_custom.scss </span><span style="color: #93a1a1; font-style: italic;">*/</span>
+<span style="color: #6c71c4;">@import</span> <span style="color: #2aa198;">"bootstrap-sprockets"</span>; # Do not change the order
+<span style="color: #6c71c4;">@import</span> <span style="color: #2aa198;">"variables"</span>;
+<span style="color: #6c71c4;">@import</span> <span style="color: #2aa198;">"bootstrap"</span>;
+</pre>
+
+<p>
+Rename application.css to application.scss
 </p>
+
+
+<pre class="src src-css"><span style="color: #93a1a1; font-style: italic;">/* </span><span style="color: #93a1a1; font-style: italic;">application.scss </span><span style="color: #93a1a1; font-style: italic;">*/</span>
+<span style="color: #6c71c4;">@import</span> <span style="color: #2aa198;">"bootstrap_custom"</span>
+</pre>
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-12-2" class="outline-4">
+<h4 id="sec-12-2">Load config files</h4>
+<div class="outline-text-4" id="text-12-2">
+
+
 
 
 <pre class="src src-ruby"><span style="color: #268bd2;">YAML</span>.load_file(<span style="color: #268bd2;">Rails</span>.root.join(<span style="color: #2aa198;">"config/drawing.yml"</span>))
 </pre>
 
 </div>
+
+</div>
+
+<div id="outline-container-12-3" class="outline-4">
+<h4 id="sec-12-3">Nested attributes</h4>
+<div class="outline-text-4" id="text-12-3">
+
+<p>Remember to add accepts_nested_attributes_for method to tell rails, treat that attribute as a nested array.
+</p>
+
+
+<pre class="src src-ruby"><span style="color: #859900;">class</span> <span style="color: #268bd2;">Product</span> &lt; <span style="color: #268bd2;">ActiveRecord</span>::<span style="color: #268bd2;">Base</span>
+        has_many <span style="color: #268bd2;">:attrs</span>
+        accepts_nested_attributes_for <span style="color: #268bd2;">:attrs</span>
+<span style="color: #859900;">end</span>
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-13" class="outline-2">
+<h2 id="sec-13">Publish</h2>
+<div class="outline-text-2" id="text-13">
+
+
+</div>
+
+<div id="outline-container-13-1" class="outline-3">
+<h3 id="sec-13-1">Install ruby with rvm</h3>
+<div class="outline-text-3" id="text-13-1">
+
+
+
+
+<pre class="src src-bash">curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+curl -sSL https://get.rvm.io | bash -s stable --ruby
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-13-2" class="outline-3">
+<h3 id="sec-13-2">install rails</h3>
+<div class="outline-text-3" id="text-13-2">
+
+
+
+
+<pre class="src src-bash">gem install rails
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-13-3" class="outline-3">
+<h3 id="sec-13-3">Using Passanger</h3>
+<div class="outline-text-3" id="text-13-3">
+
+
+
+
+<pre class="src src-bash">gem install passenger
+rvmsudo passenger-install-nginx-module
+</pre>
+
+
+</div>
+
+<div id="outline-container-13-3-1" class="outline-4">
+<h4 id="sec-13-3-1">nginx settings</h4>
+<div class="outline-text-4" id="text-13-3-1">
+
+<p>nginx.conf
+</p>
+
+
+<pre class="src src-text">server { 
+listen 80; 
+server_name example.com; 
+passenger_enabled on; 
+root /var/www/my_awesome_rails_app/public; 
+}
+</pre>
+
+</div>
+</div>
+</div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-04-14T21:58+0800</p>
+<p class="date">Date: 2015-06-25T21:38+0800</p>
 <p class="author">Author: rexhouy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
