@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="mysql"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-06-25T20:31+0800"/>
+<meta name="generated" content="2015-08-28T15:41+0800"/>
 <meta name="author" content="rexhouy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -92,6 +92,14 @@
 </ul>
 </li>
 <li><a href="#sec-12">Installation</a></li>
+<li><a href="#sec-13">Encoding</a>
+<ul>
+<li><a href="#sec-13-1">Specify encoding</a></li>
+<li><a href="#sec-13-2">Change encoding</a></li>
+<li><a href="#sec-13-3">Show encoding</a></li>
+</ul>
+</li>
+<li><a href="#sec-14">Disable constraint</a></li>
 </ul>
 </div>
 </div>
@@ -860,11 +868,89 @@ group by 或order by应该只引用一个表中的列，这样MySQL可以尝试�
 </pre>
 
 </div>
+
+</div>
+
+<div id="outline-container-13" class="outline-2">
+<h2 id="sec-13">Encoding</h2>
+<div class="outline-text-2" id="text-13">
+
+
+</div>
+
+<div id="outline-container-13-1" class="outline-3">
+<h3 id="sec-13-1">Specify encoding</h3>
+<div class="outline-text-3" id="text-13-1">
+
+
+
+
+<pre class="src src-sql">create database database_name character set utf8;
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-13-2" class="outline-3">
+<h3 id="sec-13-2">Change encoding</h3>
+<div class="outline-text-3" id="text-13-2">
+
+
+
+
+<pre class="src src-sql">ALTER DATABASE databasename CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE tablename CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-13-3" class="outline-3">
+<h3 id="sec-13-3">Show encoding</h3>
+<div class="outline-text-3" id="text-13-3">
+
+
+
+
+<pre class="src src-sql">SELECT default_character_set_name FROM information_schema.SCHEMATA S
+WHERE schema_name = "schemaname";
+
+SELECT CCSA.character_set_name FROM information_schema.`TABLES` T,
+       information_schema.`COLLATION_CHARACTER_SET_APPLICABILITY` CCSA
+WHERE CCSA.collation_name = T.table_collation
+  AND T.table_schema = "schemaname"
+  AND T.table_name = "tablename";
+
+SELECT character_set_name FROM information_schema.`COLUMNS` C
+WHERE table_schema = "schemaname"
+  AND table_name = "tablename"
+  AND column_name = "columnname";
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-14" class="outline-2">
+<h2 id="sec-14">Disable constraint</h2>
+<div class="outline-text-2" id="text-14">
+
+
+
+
+<pre class="src src-sql">SET foreign_key_checks = 0;
+SET foreign_key_checks = 1;
+</pre>
+
+</div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-06-25T20:31+0800</p>
+<p class="date">Date: 2015-08-28T15:41+0800</p>
 <p class="author">Author: rexhouy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

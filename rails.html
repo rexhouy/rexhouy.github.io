@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="rails"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-06-25T21:38+0800"/>
+<meta name="generated" content="2015-09-15T10:05+0800"/>
 <meta name="author" content="rexhouy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -138,9 +138,12 @@
 <ul>
 <li><a href="#sec-13-1">Install ruby with rvm</a></li>
 <li><a href="#sec-13-2">install rails</a></li>
-<li><a href="#sec-13-3">Using Passanger</a>
+<li><a href="#sec-13-3">Using Passenger</a>
 <ul>
-<li><a href="#sec-13-3-1">nginx settings</a></li>
+<li><a href="#sec-13-3-1">Install passenger</a></li>
+<li><a href="#sec-13-3-2">nginx settings</a></li>
+<li><a href="#sec-13-3-3">Environment settings</a></li>
+<li><a href="#sec-13-3-4">Common errors</a></li>
 </ul>
 </li>
 </ul>
@@ -621,6 +624,22 @@ Drop db
 
 
 <pre class="src src-bash">rake db:drop
+</pre>
+
+<p>
+Load schema
+</p>
+
+
+<pre class="src src-bash">rake db:schema:load
+</pre>
+
+<p>
+Load seed
+</p>
+
+
+<pre class="src src-bash">rake db:seed
 </pre>
 
 <p>
@@ -1601,22 +1620,95 @@ curl -sSL https://get.rvm.io | bash -s stable --ruby
 </div>
 
 <div id="outline-container-13-3" class="outline-3">
-<h3 id="sec-13-3">Using Passanger</h3>
+<h3 id="sec-13-3">Using Passenger</h3>
 <div class="outline-text-3" id="text-13-3">
-
-
-
-
-<pre class="src src-bash">gem install passenger
-rvmsudo passenger-install-nginx-module
-</pre>
 
 
 </div>
 
 <div id="outline-container-13-3-1" class="outline-4">
-<h4 id="sec-13-3-1">nginx settings</h4>
+<h4 id="sec-13-3-1">Install passenger</h4>
 <div class="outline-text-4" id="text-13-3-1">
+
+<ul>
+<li id="sec-13-3-1-1">Install software<br/>
+
+
+
+<pre class="src src-bash">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7
+sudo apt-get install apt-transport-https ca-certificates
+</pre>
+
+</li>
+</ul>
+<ul>
+<li id="sec-13-3-1-2">Create or edit file /etc/apt/sources.list.d/passenger.list<br/>
+
+
+
+<pre class="src src-text"># Ubuntu 14.04
+deb https://oss-binaries.phusionpassenger.com/apt/passenger trusty main
+</pre>
+
+</li>
+</ul>
+<ul>
+<li id="sec-13-3-1-3">Update APT cache<br/>
+
+
+
+<pre class="src src-text">sudo chown root: /etc/apt/sources.list.d/passenger.list
+sudo chmod 600 /etc/apt/sources.list.d/passenger.list
+sudo apt-get update
+</pre>
+
+</li>
+</ul>
+<ul>
+<li id="sec-13-3-1-4">Installation<br/>
+
+
+
+<pre class="src src-bash">sudo apt-get install nginx-extras passenger
+</pre>
+
+</li>
+</ul>
+<ul>
+<li id="sec-13-3-1-5">Edit /etc/nginx/nginx.conf<br/>
+uncomment passenger_root and passenger_ruby
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Parameter</th><th scope="col" class="left">Command to find the path</th><th scope="col" class="left">Notice</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">passenger_root</td><td class="left">/usr/bin/passenger-config &ndash;root</td><td class="left"></td></tr>
+<tr><td class="left">passenger_ruby</td><td class="left">whereis ruby</td><td class="left">must use symblic</td></tr>
+</tbody>
+</table>
+
+</li>
+</ul>
+<ul>
+<li id="sec-13-3-1-6">Restart nginx<br/>
+
+
+
+<pre class="src src-bash">sudo nginx -s stop
+sudo nginx
+</pre>
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-13-3-2" class="outline-4">
+<h4 id="sec-13-3-2">nginx settings</h4>
+<div class="outline-text-4" id="text-13-3-2">
 
 <p>nginx.conf
 </p>
@@ -1631,13 +1723,71 @@ root /var/www/my_awesome_rails_app/public;
 </pre>
 
 </div>
+
+</div>
+
+<div id="outline-container-13-3-3" class="outline-4">
+<h4 id="sec-13-3-3">Environment settings</h4>
+<div class="outline-text-4" id="text-13-3-3">
+
+
+
+
+<pre class="src src-bash">export RAILS_ENV=production
+</pre>
+
+<ul>
+<li id="sec-13-3-3-1">Create database<br/>
+
+
+
+<pre class="src src-bash">bundle install
+rake db:create
+rake db:schema:load
+</pre>
+
+</li>
+</ul>
+<ul>
+<li id="sec-13-3-3-2">Config settings<br/>
+config/database.yml
+
+<p>
+config/secrets.yml
+</p>
+<p>
+Use "rake secret" to generate secret
+</p>
+<p>
+config/environments/production.rb
+</p>
+
+
+<pre class="src src-text">config.assets.compile=true
+</pre>
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-13-3-4" class="outline-4">
+<h4 id="sec-13-3-4">Common errors</h4>
+<div class="outline-text-4" id="text-13-3-4">
+
+<p>Remember to use same version of ruby.
+</p>
+<p>
+Install libmysqlclient.
+</p></div>
 </div>
 </div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-06-25T21:38+0800</p>
+<p class="date">Date: 2015-09-15T10:05+0800</p>
 <p class="author">Author: rexhouy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

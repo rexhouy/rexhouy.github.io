@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="linux"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-04-24T09:56+0800"/>
+<meta name="generated" content="2015-07-08T08:49+0800"/>
 <meta name="author" content="rexhouy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -66,27 +66,33 @@
 <li><a href="#sec-7-1">Install oracle 11g express in centos7</a></li>
 </ul>
 </li>
-<li><a href="#sec-8">Security</a>
+<li><a href="#sec-8">User managemet</a>
 <ul>
-<li><a href="#sec-8-1">User managemet</a>
+<li><a href="#sec-8-1">User info lookup</a></li>
+<li><a href="#sec-8-2">Add user</a></li>
+<li><a href="#sec-8-3">Add Group</a></li>
+<li><a href="#sec-8-4">Add or Change Password</a></li>
+<li><a href="#sec-8-5">Change User</a></li>
+<li><a href="#sec-8-6">Add user to sudo group</a></li>
+<li><a href="#sec-8-7">Change default shell for user</a></li>
+<li><a href="#sec-8-8">Groups</a>
 <ul>
-<li><a href="#sec-8-1-1">User info lookup</a></li>
-<li><a href="#sec-8-1-2">Add user</a></li>
-<li><a href="#sec-8-1-3">Add Group</a></li>
-<li><a href="#sec-8-1-4">Add or Change Password</a></li>
-<li><a href="#sec-8-1-5">Change User</a></li>
-<li><a href="#sec-8-1-6">Add user to sudo group</a></li>
-<li><a href="#sec-8-1-7">Change default shell for user</a></li>
-</ul>
-</li>
-<li><a href="#sec-8-2">Config firewall</a></li>
-<li><a href="#sec-8-3">Secure server from dictionary attacks</a>
-<ul>
-<li><a href="#sec-8-3-1">Fail2Ban</a></li>
+<li><a href="#sec-8-8-1">Add user to exist group</a></li>
+<li><a href="#sec-8-8-2">Show groups user belongs to.</a></li>
+<li><a href="#sec-8-8-3">Groups authorities</a></li>
 </ul></li>
 </ul>
 </li>
-<li><a href="#sec-9">Network</a></li>
+<li><a href="#sec-9">Security</a>
+<ul>
+<li><a href="#sec-9-1">Config firewall</a></li>
+<li><a href="#sec-9-2">Secure server from dictionary attacks</a>
+<ul>
+<li><a href="#sec-9-2-1">Fail2Ban</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-10">Network</a></li>
 </ul>
 </div>
 </div>
@@ -591,22 +597,15 @@ SQL&gt; connect sys/Password as sysdba
 </div>
 
 <div id="outline-container-8" class="outline-2">
-<h2 id="sec-8">Security</h2>
+<h2 id="sec-8">User managemet</h2>
 <div class="outline-text-2" id="text-8">
 
 
 </div>
 
 <div id="outline-container-8-1" class="outline-3">
-<h3 id="sec-8-1">User managemet</h3>
+<h3 id="sec-8-1">User info lookup</h3>
 <div class="outline-text-3" id="text-8-1">
-
-
-</div>
-
-<div id="outline-container-8-1-1" class="outline-4">
-<h4 id="sec-8-1-1">User info lookup</h4>
-<div class="outline-text-4" id="text-8-1-1">
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup><col class="left" /><col class="left" />
@@ -624,9 +623,9 @@ SQL&gt; connect sys/Password as sysdba
 
 </div>
 
-<div id="outline-container-8-1-2" class="outline-4">
-<h4 id="sec-8-1-2">Add user</h4>
-<div class="outline-text-4" id="text-8-1-2">
+<div id="outline-container-8-2" class="outline-3">
+<h3 id="sec-8-2">Add user</h3>
+<div class="outline-text-3" id="text-8-2">
 
 
 
@@ -638,9 +637,9 @@ SQL&gt; connect sys/Password as sysdba
 
 </div>
 
-<div id="outline-container-8-1-3" class="outline-4">
-<h4 id="sec-8-1-3">Add Group</h4>
-<div class="outline-text-4" id="text-8-1-3">
+<div id="outline-container-8-3" class="outline-3">
+<h3 id="sec-8-3">Add Group</h3>
+<div class="outline-text-3" id="text-8-3">
 
 
 
@@ -652,9 +651,9 @@ SQL&gt; connect sys/Password as sysdba
 
 </div>
 
-<div id="outline-container-8-1-4" class="outline-4">
-<h4 id="sec-8-1-4">Add or Change Password</h4>
-<div class="outline-text-4" id="text-8-1-4">
+<div id="outline-container-8-4" class="outline-3">
+<h3 id="sec-8-4">Add or Change Password</h3>
+<div class="outline-text-3" id="text-8-4">
 
 
 
@@ -666,9 +665,9 @@ SQL&gt; connect sys/Password as sysdba
 
 </div>
 
-<div id="outline-container-8-1-5" class="outline-4">
-<h4 id="sec-8-1-5">Change User</h4>
-<div class="outline-text-4" id="text-8-1-5">
+<div id="outline-container-8-5" class="outline-3">
+<h3 id="sec-8-5">Change User</h3>
+<div class="outline-text-3" id="text-8-5">
 
 
 
@@ -680,9 +679,9 @@ SQL&gt; connect sys/Password as sysdba
 
 </div>
 
-<div id="outline-container-8-1-6" class="outline-4">
-<h4 id="sec-8-1-6">Add user to sudo group</h4>
-<div class="outline-text-4" id="text-8-1-6">
+<div id="outline-container-8-6" class="outline-3">
+<h3 id="sec-8-6">Add user to sudo group</h3>
+<div class="outline-text-3" id="text-8-6">
 
 <p>Any of the following commands are ok.
 </p>
@@ -696,9 +695,9 @@ sudo adduser {username} sudo
 
 </div>
 
-<div id="outline-container-8-1-7" class="outline-4">
-<h4 id="sec-8-1-7">Change default shell for user</h4>
-<div class="outline-text-4" id="text-8-1-7">
+<div id="outline-container-8-7" class="outline-3">
+<h3 id="sec-8-7">Change default shell for user</h3>
+<div class="outline-text-3" id="text-8-7">
 
 <p>If user is created /bin/sh as its login shell, the arrow keys and tab key wont work as usual. Change the login shell to bash to solve the problem.
 </p>
@@ -708,16 +707,86 @@ sudo adduser {username} sudo
 </pre>
 
 </div>
+
+</div>
+
+<div id="outline-container-8-8" class="outline-3">
+<h3 id="sec-8-8">Groups</h3>
+<div class="outline-text-3" id="text-8-8">
+
+
+</div>
+
+<div id="outline-container-8-8-1" class="outline-4">
+<h4 id="sec-8-8-1">Add user to exist group</h4>
+<div class="outline-text-4" id="text-8-8-1">
+
+
+
+
+<pre class="src src-bash">usermod -a -G &lt;group&gt; &lt;username&gt;
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-8-8-2" class="outline-4">
+<h4 id="sec-8-8-2">Show groups user belongs to.</h4>
+<div class="outline-text-4" id="text-8-8-2">
+
+
+
+
+<pre class="src src-bash">groups &lt;username&gt;
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-8-8-3" class="outline-4">
+<h4 id="sec-8-8-3">Groups authorities</h4>
+<div class="outline-text-4" id="text-8-8-3">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Name</th><th scope="col" class="left">Authority</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">admin</td><td class="left">can run programs with root privileges</td></tr>
+<tr><td class="left">adm</td><td class="left">Monitor system logs</td></tr>
+<tr><td class="left">cdrom</td><td class="left">Use CD-ROM drives</td></tr>
+<tr><td class="left">padmin</td><td class="left">Configure printers</td></tr>
+<tr><td class="left">sudo</td><td class="left">administer the system</td></tr>
+<tr><td class="left">sambashare</td><td class="left">Share files with the local network</td></tr>
+<tr><td class="left">dip</td><td class="left">Connect to the Internet using a modem</td></tr>
+<tr><td class="left">plugdev</td><td class="left">Access external storage devices</td></tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
 </div>
 
 </div>
 
-<div id="outline-container-8-2" class="outline-3">
-<h3 id="sec-8-2">Config firewall</h3>
-<div class="outline-text-3" id="text-8-2">
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9">Security</h2>
+<div class="outline-text-2" id="text-9">
+
+
+</div>
+
+<div id="outline-container-9-1" class="outline-3">
+<h3 id="sec-9-1">Config firewall</h3>
+<div class="outline-text-3" id="text-9-1">
 
 <ul>
-<li id="sec-8-2-1">Create a file(/etc/iptables.firewall.rules) with following configuration.<br/>
+<li id="sec-9-1-1">Create a file(/etc/iptables.firewall.rules) with following configuration.<br/>
 These rules allow HTTP (80), HTTPS (443), SSH (22), and ping traffic only.
 
 
@@ -762,7 +831,7 @@ COMMIT
 </li>
 </ul>
 <ul>
-<li id="sec-8-2-2">Activate the firewall rules.<br/>
+<li id="sec-9-1-2">Activate the firewall rules.<br/>
 
 
 
@@ -774,7 +843,7 @@ If "no command specified" error encounted, try to add a new line after commit. I
 </p></li>
 </ul>
 <ul>
-<li id="sec-8-2-3">Check if the firewall is working<br/>
+<li id="sec-9-1-3">Check if the firewall is working<br/>
 
 
 
@@ -784,7 +853,7 @@ If "no command specified" error encounted, try to add a new line after commit. I
 </li>
 </ul>
 <ul>
-<li id="sec-8-2-4">Make firewall rules load at booting.<br/>
+<li id="sec-9-1-4">Make firewall rules load at booting.<br/>
 Add following script into /etc/network/if-pre-up.d/firewall
 
 
@@ -807,16 +876,16 @@ Make sure /etc/iptables.firewall.rules is executable.
 
 </div>
 
-<div id="outline-container-8-3" class="outline-3">
-<h3 id="sec-8-3">Secure server from dictionary attacks</h3>
-<div class="outline-text-3" id="text-8-3">
+<div id="outline-container-9-2" class="outline-3">
+<h3 id="sec-9-2">Secure server from dictionary attacks</h3>
+<div class="outline-text-3" id="text-9-2">
 
 
 </div>
 
-<div id="outline-container-8-3-1" class="outline-4">
-<h4 id="sec-8-3-1">Fail2Ban</h4>
-<div class="outline-text-4" id="text-8-3-1">
+<div id="outline-container-9-2-1" class="outline-4">
+<h4 id="sec-9-2-1">Fail2Ban</h4>
+<div class="outline-text-4" id="text-9-2-1">
 
 <p>When Fail2Ban detects multiple failed login attempts from the same IP address, it creates temporary firewall rules that block traffic from the attacker’s IP address.
 </p>
@@ -831,9 +900,9 @@ Make sure /etc/iptables.firewall.rules is executable.
 
 </div>
 
-<div id="outline-container-9" class="outline-2">
-<h2 id="sec-9">Network</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10">Network</h2>
+<div class="outline-text-2" id="text-10">
 
 <p>When configuring network, we always meet something like "127.0.0.1/8", "192.168.0.1/16" etc.
 The "/8","/16" are for the subnet mast. /8 is class A (255.0.0.0), /16 is class B (255.255.0.0), and class C is /24 (255.255.255.0). the number after the / is the number of bits used to make the number.
@@ -842,7 +911,7 @@ The "/8","/16" are for the subnet mast. /8 is class A (255.0.0.0), /16 is class 
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-04-24T09:56+0800</p>
+<p class="date">Date: 2015-07-08T08:49+0800</p>
 <p class="author">Author: rexhouy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
