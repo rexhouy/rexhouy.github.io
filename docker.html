@@ -1,20 +1,21 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>docker</title>
-<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="docker"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-25T14:14+0800"/>
-<meta name="author" content="Rex.Houy"/>
+<meta name="generated" content="2016-02-28T11:00+0800"/>
+<meta name="author" content="rexhouy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 <link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style.css' media='only screen' />
 <link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-min-640px.css' media='only screen and (min-width: 640px) and (max-width: 960px)' />
 <link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-max-640px.css' media='only screen and (max-width: 640px)' />
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
 <script src='emacs-org-html-style/nav.js'></script>
 
@@ -34,14 +35,107 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Docker usage example</a></li>
+<li><a href="#sec-1">技术基础</a>
+<ul>
+<li><a href="#sec-1-1">进程隔离</a></li>
+<li><a href="#sec-1-2">网络隔离</a></li>
+<li><a href="#sec-1-3">文件系统隔离</a></li>
+<li><a href="#sec-1-4">用户隔离</a></li>
+<li><a href="#sec-1-5">独立的hostname, domain</a></li>
+<li><a href="#sec-1-6">CGroup</a></li>
+<li><a href="#sec-1-7">AUFS(Another Union File System)</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">Docker usage example</a></li>
+<li><a href="#sec-3">Use docker without sudo</a></li>
+<li><a href="#sec-4">Handling container</a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1">Docker usage example</h2>
+<h2 id="sec-1">技术基础</h2>
 <div class="outline-text-2" id="text-1">
+
+<p>基于LXC（Linux Containers），它将应用软件代码及其所需的操作系统核心和库打包成一个container。
+通过namespace来隔离不同的container，使用cgroup来管理container可用的硬件资源，从而为应用程序创造出一个独立沙箱。
+</p>
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1">进程隔离</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<p>PID namespace
+</p></div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2">网络隔离</h3>
+<div class="outline-text-3" id="text-1-2">
+
+<p>使用一个私有网段，虚拟一个网卡（docker0）作为网关，每个container作为该网段中的一台主机。可以使用NAT方式实现。
+</p></div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3">文件系统隔离</h3>
+<div class="outline-text-3" id="text-1-3">
+
+<p>Mount namespace
+</p></div>
+
+</div>
+
+<div id="outline-container-1-4" class="outline-3">
+<h3 id="sec-1-4">用户隔离</h3>
+<div class="outline-text-3" id="text-1-4">
+
+<p>User namespace
+每个container有自己的用户（组）
+</p></div>
+
+</div>
+
+<div id="outline-container-1-5" class="outline-3">
+<h3 id="sec-1-5">独立的hostname, domain</h3>
+<div class="outline-text-3" id="text-1-5">
+
+<p>通过UTS（UNIX Time-sharing System） namespace，可以为设置容器的hostname。
+</p></div>
+
+</div>
+
+<div id="outline-container-1-6" class="outline-3">
+<h3 id="sec-1-6">CGroup</h3>
+<div class="outline-text-3" id="text-1-6">
+
+<p>Linux Control Group用来限制，控制与分离一个进程组群的资源（限制CPU、IO使用等）。
+</p></div>
+
+</div>
+
+<div id="outline-container-1-7" class="outline-3">
+<h3 id="sec-1-7">AUFS(Another Union File System)</h3>
+<div class="outline-text-3" id="text-1-7">
+
+<p>UFS就是把不同物理位置的目录合并mount到同一个目录中。
+其中一个目录是可读可写（rw）的，其余的只读（ro）。
+这样所有修改都只应用在rw的目录上，ro目录中的文件不会被破坏。
+</p>
+<p>
+Docker使用UFS时，ro的称为image，rw的称为container。所以image是可以共享的，所有对该image的操作全部反映在container中。
+<img src="./images/docker-filesystems-multilayer.png"  alt="./images/docker-filesystems-multilayer.png" />
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Docker usage example</h2>
+<div class="outline-text-2" id="text-2">
 
 
 
@@ -64,13 +158,71 @@ docker push learn/ping
 Share it to others.
 </pre>
 
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Use docker without sudo</h2>
+<div class="outline-text-2" id="text-3">
+
+
+
+
+<pre class="src src-bash">sudo gpasswd -a ${USER} docker
+sudo service docker restart
+newgrp docker
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">Handling container</h2>
+<div class="outline-text-2" id="text-4">
+
+
+
+
+<pre class="src src-bash"># List image info
+docker ps -a
+
+# Remove containers
+docker rm container_id
+# Remove all containers
+docker rm `docker ps --no-trunc -aq`
+
+# Run container
+docker run -i -t image
+
+# Docker build
+docker build -t name .
+
+# Find container ip
+docker inspect &lt;container id&gt; # use <span style="color: #2aa198;">"docker ps -a"</span> to find container id
+
+# Mount host directory to container
+docker run -v &lt;host dir&gt;:&lt;container dir&gt;
+
+# Remove all images
+docker rmi $(docker images -qf <span style="color: #2aa198;">"dangling=true"</span>)
+
+# Kill containers and remove them:
+docker rm $(docker ps -aq)
+
+# Connect to running container
+sudo docker exec -i -t &lt;CONTAINER_ID&gt; bash
+</pre>
+
 </div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-25T14:14+0800</p>
-<p class="author">Author: Rex.Houy</p>
+<p class="date">Date: 2016-02-28T11:00+0800</p>
+<p class="author">Author: rexhouy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
 

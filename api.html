@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>api</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="api"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2016-04-19T11:04+0800"/>
+<meta name="author" content="rexhouy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style.css' media='only screen' />
+<link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-min-640px.css' media='only screen and (min-width: 640px) and (max-width: 960px)' />
+<link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-max-640px.css' media='only screen and (max-width: 640px)' />
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
+<script src='emacs-org-html-style/nav.js'></script>
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">api</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">设备信息</a>
+<ul>
+<li><a href="#sec-1-1">查询接口</a></li>
+<li><a href="#sec-1-2">新增接口</a></li>
+<li><a href="#sec-1-3">修改接口</a></li>
+<li><a href="#sec-1-4">删除接口</a></li>
+<li><a href="#sec-1-5">维护管理</a>
+<ul>
+<li><a href="#sec-1-5-1">增</a></li>
+<li><a href="#sec-1-5-2">删</a></li>
+<li><a href="#sec-1-5-3">改</a></li>
+<li><a href="#sec-1-5-4">查</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-6">GPS设备</a>
+<ul>
+<li><a href="#sec-1-6-1">增</a></li>
+<li><a href="#sec-1-6-2">删</a></li>
+<li><a href="#sec-1-6-3">改</a></li>
+<li><a href="#sec-1-6-4">查</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-7">GPS数据</a>
+<ul>
+<li><a href="#sec-1-7-1">增</a></li>
+<li><a href="#sec-1-7-2">删</a></li>
+<li><a href="#sec-1-7-3">改</a></li>
+<li><a href="#sec-1-7-4">查</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-8">设施管理</a>
+<ul>
+<li><a href="#sec-1-8-1">增</a></li>
+<li><a href="#sec-1-8-2">删</a></li>
+<li><a href="#sec-1-8-3">改</a></li>
+<li><a href="#sec-1-8-4">查</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-2">获取行政区域</a></li>
+<li><a href="#sec-3">交通警力</a></li>
+<li><a href="#sec-4">营运车辆</a></li>
+<li><a href="#sec-5">辅助决策</a></li>
+<li><a href="#sec-6">部门</a>
+<ul>
+<li><a href="#sec-6-1">查询</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">查询接口filter规则</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">设备信息</h2>
+<div class="outline-text-2" id="text-1">
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1">查询接口</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Devise Type</th><th scope="col" class="left">URL</th><th scope="col" class="left">Method</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">卡口</td><td class="left">/InfoManage/ashx/data.ashx?action=kakou</td><td class="left">GET</td></tr>
+<tr><td class="left">电子警察</td><td class="left">/InfoManage/ashx/data.ashx?action=dianjing</td><td class="left">GET</td></tr>
+<tr><td class="left">视频监控</td><td class="left">/InfoManage/ashx/data.ashx?action=jiankong</td><td class="left">GET</td></tr>
+<tr><td class="left">固定测速</td><td class="left">/InfoManage/ashx/data.ashx?action=cesu</td><td class="left">GET</td></tr>
+<tr><td class="left">区间终端</td><td class="left">/InfoManage/ashx/data.ashx?action=qjcesu</td><td class="left">GET</td></tr>
+<tr><td class="left">路口全景</td><td class="left">/InfoManage/ashx/data.ashx?action=360view</td><td class="left">GET</td></tr>
+<tr><td class="left">所有设备信息</td><td class="left">/InfoManage/ashx?EQUIPMENTINFOHandler.ashx</td><td class="left">GET</td></tr>
+<tr><td class="left">设备统计信息</td><td class="left">/infoManage/ashx/data.ashx?action=total</td><td class="left">GET</td></tr>
+<tr><td class="left">道路信息</td><td class="left">/InfoManage/ashx/data.ashx?action=roadcode</td><td class="left">GET</td></tr>
+<tr><td class="left">路口信息</td><td class="left">/InfoManage/ashx/data.ashx?action=roadfac</td><td class="left">GET</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2">新增接口</h3>
+<div class="outline-text-3" id="text-1-2">
+
+
+
+
+<pre class="src src-bash">/InfoManage/EQUIPMENTIINFO.aspx
+</pre>
+
+
+<pre class="src src-javascript">json: <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{</span>
+        POINTID: <span style="color: #2aa198;">'&#32463;&#32428;&#24230;'</span>,
+        DEVICETYPE: <span style="color: #2aa198;">'&#35270;&#39057;&#30417;&#25511; | &#21345;&#21475; | &#30005;&#23376;&#35686;&#23519; | &#21345;&#21475;&#30005;&#35686; | &#35825;&#23548;&#23631; | &#22266;&#23450;&#27979;&#36895;'</span>,
+        DEVICECODE: <span style="color: #2aa198;">'&#35774;&#22791;&#32534;&#30721;'</span>,
+        DEVICENAME: <span style="color: #2aa198;">'&#35774;&#22791;&#21517;&#31216;'</span>,
+        PROVIDER: <span style="color: #2aa198;">'&#25552;&#20379;&#21830;'</span>,
+        DEVICEMODEL: <span style="color: #2aa198;">'&#22411;&#21495;'</span>,
+        THIRDSYSCODE: <span style="color: #2aa198;">'&#31532;&#19977;&#26041;&#32534;&#30721;'</span>,
+        REMARK: <span style="color: #2aa198;">'&#22791;&#27880;'</span>,
+        PROVIDEDATE: <span style="color: #2aa198;">'&#25552;&#20379;&#26102;&#38388;'</span>,
+        DEPARTMENTID: <span style="color: #2aa198;">'&#25152;&#23646;&#37096;&#38376;'</span>,
+        DEVICEIP: <span style="color: #2aa198;">'IP'</span>,
+        RoadCode: <span style="color: #2aa198;">'&#25152;&#22312;&#36947;&#36335;ID'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#36890;&#36807;&#26597;&#35810;&#25509;&#21475;&#33719;&#21462;&#36947;&#36335;&#20449;&#24687;</span>
+        RoadFac: <span style="color: #2aa198;">'&#36335;&#21475;ID'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#36890;&#36807;&#26597;&#35810;&#25509;&#21475;&#33719;&#21462;&#36335;&#21475;&#20449;&#24687;</span>
+        BELONGTOPROJ: <span style="color: #2aa198;">'&#25152;&#23646;&#39033;&#30446;'</span>,
+        IFUSE: <span style="color: #2aa198;">'0 | 1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#29366;&#24577;</span>
+        VEDIOFUNC: <span style="color: #2aa198;">'1'</span><span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#35270;&#39057;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        PASSFUNC: <span style="color: #2aa198;">'1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#21345;&#21475;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        GPSFUNC: <span style="color: #2aa198;">'1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">GPS&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        EPFUNC: <span style="color: #2aa198;">'1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#30005;&#35686;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        INDUCEFUNC: <span style="color: #2aa198;">'1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#35825;&#23548;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        SIGNALFUNC: <span style="color: #2aa198;">'1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#20449;&#21495;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        FLOWFUNC: <span style="color: #2aa198;">'1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#27969;&#37327;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        EVENTFUNC: <span style="color: #2aa198;">'1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#20107;&#20214;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        OSFUNC: <span style="color: #2aa198;">'1'</span> <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#36229;&#36895;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+    <span style="color: #2aa198;">}</span>,
+    action: <span style="color: #2aa198;">'add'</span>,
+    keyid: <span style="color: #2aa198;">'0'</span>
+<span style="color: #657b83;">}</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3">修改接口</h3>
+<div class="outline-text-3" id="text-1-3">
+
+
+
+
+<pre class="src src-bash">/InfoManage/EQUIPMENTIINFO.aspx
+POST
+</pre>
+
+
+<pre class="src src-javascript">json: <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{</span>
+        POINTID: <span style="color: #2aa198;">'&#32463;&#32428;&#24230;'</span>,
+        DEVICETYPE: <span style="color: #2aa198;">'&#35270;&#39057;&#30417;&#25511; | &#21345;&#21475; | &#30005;&#23376;&#35686;&#23519; | &#21345;&#21475;&#30005;&#35686; | &#35825;&#23548;&#23631; | &#22266;&#23450;&#27979;&#36895;'</span>,
+        DEVICECODE: <span style="color: #2aa198;">'&#35774;&#22791;&#32534;&#30721;'</span>,
+        DEVICENAME: <span style="color: #2aa198;">'&#35774;&#22791;&#21517;&#31216;'</span>,
+        PROVIDER: <span style="color: #2aa198;">'&#25552;&#20379;&#21830;'</span>,
+        DEVICEMODEL: <span style="color: #2aa198;">'&#22411;&#21495;'</span>,
+        THIRDSYSCODE: <span style="color: #2aa198;">'&#31532;&#19977;&#26041;&#32534;&#30721;'</span>,
+        REMARK: <span style="color: #2aa198;">'&#22791;&#27880;'</span>,
+        PROVIDEDATE: <span style="color: #2aa198;">'&#25552;&#20379;&#26102;&#38388;'</span>,
+        DEPARTMENTID: <span style="color: #2aa198;">'&#25152;&#23646;&#37096;&#38376;'</span>,
+        DEVICEIP: <span style="color: #2aa198;">'IP'</span>,
+        RoadCode: <span style="color: #2aa198;">'&#25152;&#22312;&#36947;&#36335;ID'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#36890;&#36807;&#26597;&#35810;&#25509;&#21475;&#33719;&#21462;&#36947;&#36335;&#20449;&#24687;</span>
+        RoadFac: <span style="color: #2aa198;">'&#36335;&#21475;ID'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#36890;&#36807;&#26597;&#35810;&#25509;&#21475;&#33719;&#21462;&#36335;&#21475;&#20449;&#24687;</span>
+        BELONGTOPROJ: <span style="color: #2aa198;">'&#25152;&#23646;&#39033;&#30446;'</span>,
+        IFUSE: <span style="color: #2aa198;">'0 | 1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#29366;&#24577;</span>
+        VEDIOFUNC: <span style="color: #2aa198;">'1'</span><span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#35270;&#39057;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        PASSFUNC: <span style="color: #2aa198;">'1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#21345;&#21475;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        GPSFUNC: <span style="color: #2aa198;">'1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">GPS&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        EPFUNC: <span style="color: #2aa198;">'1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#30005;&#35686;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        INDUCEFUNC: <span style="color: #2aa198;">'1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#35825;&#23548;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        SIGNALFUNC: <span style="color: #2aa198;">'1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#20449;&#21495;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        FLOWFUNC: <span style="color: #2aa198;">'1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#27969;&#37327;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        EVENTFUNC: <span style="color: #2aa198;">'1'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#20107;&#20214;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+        OSFUNC: <span style="color: #2aa198;">'1'</span> <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#36229;&#36895;&#21151;&#33021;&#65288;&#20540;&#22266;&#23450;&#20026;1&#26377;&#35813;&#21151;&#33021;&#22312;&#20256;&#36882;&#35813;&#21442;&#25968;&#65289;</span>
+    <span style="color: #2aa198;">}</span>,
+    action: <span style="color: #2aa198;">'edit'</span>,
+    keyid: <span style="color: #2aa198;">'&#25968;&#25454;&#24211;ID'</span>
+<span style="color: #657b83;">}</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-4" class="outline-3">
+<h3 id="sec-1-4">删除接口</h3>
+<div class="outline-text-3" id="text-1-4">
+
+
+
+
+<pre class="src src-bash">/InfoManage/ashx/EQUIPMENTINFOHandler.ashx
+POST
+</pre>
+
+
+<pre class="src src-javascript">json: <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{}</span>,
+    action: <span style="color: #2aa198;">'delete'</span>,
+    keyid: <span style="color: #2aa198;">'&#25968;&#25454;&#24211;ID'</span>
+<span style="color: #657b83;">}</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-5" class="outline-3">
+<h3 id="sec-1-5">维护管理</h3>
+<div class="outline-text-3" id="text-1-5">
+
+<p>URL
+</p>
+
+
+<pre class="src src-bash">/InfoManage/ashx/EQUIPMENTMAINTENANCEHandler.ashx
+</pre>
+
+
+
+</div>
+
+<div id="outline-container-1-5-1" class="outline-4">
+<h4 id="sec-1-5-1">增</h4>
+<div class="outline-text-4" id="text-1-5-1">
+
+
+
+
+<pre class="src src-javascript">json: <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{</span>
+        CPLATFORMEQUIPMENTID: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#32534;&#21495;</span>
+        CEQUIPMENTID: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#21517;&#31216;</span>
+        CEQUIPMENTTYPE: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#31867;&#22411;</span>
+        DTFINDTIME: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#21457;&#29616;&#26102;&#38388;</span>
+        CEQUIPMENTDETAIL: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#35814;&#24773;</span>
+        DTEXPECTEDDATE: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#39044;&#35745;&#32500;&#20462;&#26085;&#26399;</span>
+        DTMAINTENNANCETIME: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#32500;&#20462;&#26102;&#38388;</span>
+        CSERVICEDEPT: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#32500;&#20462;&#21333;&#20301;</span>
+        CSERVICESTAFF: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#32500;&#20462;&#20154;&#21592;</span>
+        CMAINTENRESULT: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#32500;&#20462;&#32467;&#26524;</span>
+        CTELEPHONE: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#30005;&#35805;</span>
+        CEMAIL: <span style="color: #2aa198;">''</span> <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#37038;&#20214;</span>
+    <span style="color: #2aa198;">}</span>,
+    action: <span style="color: #2aa198;">'add'</span>,
+    keyid: <span style="color: #2aa198;">'0'</span>
+<span style="color: #657b83;">}</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-5-2" class="outline-4">
+<h4 id="sec-1-5-2">删</h4>
+<div class="outline-text-4" id="text-1-5-2">
+
+
+
+
+<pre class="src src-javascript">json: <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{}</span>,
+    action: <span style="color: #2aa198;">'delete'</span>,
+    keyid: <span style="color: #2aa198;">'&#25968;&#25454;&#24211;ID'</span>
+<span style="color: #657b83;">}</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-5-3" class="outline-4">
+<h4 id="sec-1-5-3">改</h4>
+<div class="outline-text-4" id="text-1-5-3">
+
+
+
+
+<pre class="src src-javascript">json: <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{</span>
+        CPLATFORMEQUIPMENTID: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#32534;&#21495;</span>
+        CEQUIPMENTID: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#21517;&#31216;</span>
+        CEQUIPMENTTYPE: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#31867;&#22411;</span>
+        DTFINDTIME: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#21457;&#29616;&#26102;&#38388;</span>
+        CEQUIPMENTDETAIL: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#35814;&#24773;</span>
+        DTEXPECTEDDATE: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#39044;&#35745;&#32500;&#20462;&#26085;&#26399;</span>
+        DTMAINTENNANCETIME: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#32500;&#20462;&#26102;&#38388;</span>
+        CSERVICEDEPT: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#32500;&#20462;&#21333;&#20301;</span>
+        CSERVICESTAFF: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#32500;&#20462;&#20154;&#21592;</span>
+        CMAINTENRESULT: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#32500;&#20462;&#32467;&#26524;</span>
+        CTELEPHONE: <span style="color: #2aa198;">''</span>, <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#30005;&#35805;</span>
+        CEMAIL: <span style="color: #2aa198;">''</span> <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#37038;&#20214;</span>
+    <span style="color: #2aa198;">}</span>,
+    action: edit<span style="color: #2aa198;">',</span>
+<span style="color: #2aa198;">    keyid: '</span>&#25968;&#25454;&#24211;ID<span style="color: #2aa198;">'</span>
+<span style="color: #2aa198;">}</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-5-4" class="outline-4">
+<h4 id="sec-1-5-4">查</h4>
+<div class="outline-text-4" id="text-1-5-4">
+
+<p>Form data: filter,page,rows
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-6" class="outline-3">
+<h3 id="sec-1-6">GPS设备</h3>
+<div class="outline-text-3" id="text-1-6">
+
+<p>URL
+</p>
+
+
+<pre class="src src-bash">/InfoManage/ashx/GPSConfigHandler.ashx
+</pre>
+
+
+</div>
+
+<div id="outline-container-1-6-1" class="outline-4">
+<h4 id="sec-1-6-1">增</h4>
+<div class="outline-text-4" id="text-1-6-1">
+
+
+
+
+<pre class="src src-javascript">json <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{</span>
+        DeviceID: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#32534;&#21495;</span>
+        DisplayName: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#26174;&#31034;&#21517;&#31216;</span>
+        DescriptInfo: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#25551;&#36848;</span>
+        DisplayGroup: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#26174;&#31034;&#32452;</span>
+        DeviceType: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#31867;&#22411;&#65288;&#25968;&#23383;&#23545;&#35762;&#26426;&#65292;&#35686;&#36710;&#65289;</span>
+        OrgNumber: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35686;&#29992;&#32534;&#21495;</span>
+        OrgID: <span style="color: #2aa198;">''</span><span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#25152;&#23646;&#37096;&#38376;ID</span>
+    <span style="color: #2aa198;">}</span>,
+    action: <span style="color: #2aa198;">'add'</span>,
+    keyid: <span style="color: #2aa198;">'0'</span>
+<span style="color: #657b83;">}</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-6-2" class="outline-4">
+<h4 id="sec-1-6-2">删</h4>
+<div class="outline-text-4" id="text-1-6-2">
+
+
+
+
+<pre class="src src-javascript">json <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{}</span>,
+    action: <span style="color: #2aa198;">'delete'</span>,
+    keyid: <span style="color: #2aa198;">'&#25968;&#25454;&#24211;ID'</span>
+<span style="color: #657b83;">}</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-6-3" class="outline-4">
+<h4 id="sec-1-6-3">改</h4>
+<div class="outline-text-4" id="text-1-6-3">
+
+
+
+
+<pre class="src src-javascript">json <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{</span>
+        DeviceID: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#32534;&#21495;</span>
+        DisplayName: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#26174;&#31034;&#21517;&#31216;</span>
+        DescriptInfo: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#25551;&#36848;</span>
+        DisplayGroup: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#26174;&#31034;&#32452;</span>
+        DeviceType: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#31867;&#22411;&#65288;&#25968;&#23383;&#23545;&#35762;&#26426;&#65292;&#35686;&#36710;&#65289;</span>
+        OrgNumber: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35686;&#29992;&#32534;&#21495;</span>
+        OrgID: <span style="color: #2aa198;">''</span><span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#25152;&#23646;&#37096;&#38376;ID</span>
+    <span style="color: #2aa198;">}</span>,
+    action: <span style="color: #2aa198;">'edit'</span>,
+    keyid: <span style="color: #2aa198;">'&#25968;&#25454;&#24211;ID'</span>
+<span style="color: #657b83;">}</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-6-4" class="outline-4">
+<h4 id="sec-1-6-4">查</h4>
+<div class="outline-text-4" id="text-1-6-4">
+
+<p>Form Data: page, rows, filter
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-7" class="outline-3">
+<h3 id="sec-1-7">GPS数据</h3>
+<div class="outline-text-3" id="text-1-7">
+
+<p>URL
+</p>
+
+
+<pre class="src src-bash">/Infomanage/ashx/GPSDATAHandler.ashx
+</pre>
+
+
+</div>
+
+<div id="outline-container-1-7-1" class="outline-4">
+<h4 id="sec-1-7-1">增</h4>
+<div class="outline-text-4" id="text-1-7-1">
+
+
+
+
+<pre class="src src-javascript">json <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{</span>
+        CVEHID: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#32534;&#21495;</span>
+        DECARLONG: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#32463;&#24230;</span>
+        DECARLAT: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#32428;&#24230;</span>
+        NCARKIND: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#31867;&#22411;</span>
+        DTRECORDTIME: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35760;&#24405;&#26102;&#38388;</span>
+        NCARSTATUS: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#29366;&#24577;</span>
+        NVEHSPEED: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#36895;&#24230;</span>
+        NDIRECTION: <span style="color: #2aa198;">''</span><span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#26041;&#21521;</span>
+    <span style="color: #2aa198;">}</span>,
+    action: <span style="color: #2aa198;">'add'</span>,
+    keyid: <span style="color: #2aa198;">'0'</span>
+<span style="color: #657b83;">}</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-7-2" class="outline-4">
+<h4 id="sec-1-7-2">删</h4>
+<div class="outline-text-4" id="text-1-7-2">
+
+
+
+
+<pre class="src src-javascript">json <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{}</span>,
+    action: <span style="color: #2aa198;">'delete'</span>,
+    keyid: <span style="color: #2aa198;">'&#25968;&#25454;&#24211;ID'</span>
+<span style="color: #657b83;">}</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-7-3" class="outline-4">
+<h4 id="sec-1-7-3">改</h4>
+<div class="outline-text-4" id="text-1-7-3">
+
+
+
+
+<pre class="src src-javascript">json <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{</span>
+        CVEHID: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#32534;&#21495;</span>
+        DECARLONG: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#32463;&#24230;</span>
+        DECARLAT: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#32428;&#24230;</span>
+        NCARKIND: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#22791;&#31867;&#22411;</span>
+        DTRECORDTIME: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35760;&#24405;&#26102;&#38388;</span>
+        NCARSTATUS: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#29366;&#24577;</span>
+        NVEHSPEED: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#36895;&#24230;</span>
+        NDIRECTION: <span style="color: #2aa198;">''</span><span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#26041;&#21521;</span>
+    <span style="color: #2aa198;">}</span>,
+    action: <span style="color: #2aa198;">'edit'</span>,
+    keyid: <span style="color: #2aa198;">'&#25968;&#25454;&#24211;ID'</span>
+<span style="color: #657b83;">}</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-7-4" class="outline-4">
+<h4 id="sec-1-7-4">查</h4>
+<div class="outline-text-4" id="text-1-7-4">
+
+
+
+
+<pre class="src src-bash">Form Data: page, rows
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-8" class="outline-3">
+<h3 id="sec-1-8">设施管理</h3>
+<div class="outline-text-3" id="text-1-8">
+
+<p>URL
+</p>
+
+
+<pre class="src src-bash">/InfoManage/ashx/FaciInfoHandler.ashx
+</pre>
+
+
+</div>
+
+<div id="outline-container-1-8-1" class="outline-4">
+<h4 id="sec-1-8-1">增</h4>
+<div class="outline-text-4" id="text-1-8-1">
+
+
+
+
+<pre class="src src-javascript">json: <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{</span>
+        FaciPoint: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#32463;&#32428;&#24230;</span>
+        Pic0: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#22270;&#29255;</span>
+        FaciCode: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#26045;&#32534;&#30721;</span>
+        FaciName: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#26045;&#21517;&#31216;</span>
+        FaciType: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#26045;&#31867;&#22411;&#65288;&#25351;&#31034;&#26631;&#24535;&#65292;&#31105;&#20196;&#26631;&#24535;&#65292;&#25351;&#36335;&#26631;&#29260;&#65292;&#23548;&#21521;&#26631;&#29260;&#65292;&#36335;&#21475;&#20840;&#26223;&#65292;&#28783;&#26438;&#65292;&#23703;&#20141;&#65292;&#25191;&#21220;&#28857;&#65289;</span>
+        DepartmentID: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#37096;&#38376;ID</span>
+        RoadID: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#36947;&#36335;ID</span>
+        RoadLocationID: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#36335;&#21475;ID</span>
+        FaciSupport: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#21378;&#23478;</span>
+        ThirdRequirID: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#31532;&#19977;&#26041;ID</span>
+        FaciRemark: <span style="color: #2aa198;">''</span><span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#22791;&#27880;</span>
+    <span style="color: #2aa198;">}</span>,
+    action: <span style="color: #2aa198;">'add'</span>,
+    keyid: <span style="color: #2aa198;">'0'</span>
+<span style="color: #657b83;">}</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-8-2" class="outline-4">
+<h4 id="sec-1-8-2">删</h4>
+<div class="outline-text-4" id="text-1-8-2">
+
+
+
+
+<pre class="src src-javascript">json: <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{}</span>,
+    action: <span style="color: #2aa198;">'delete'</span>,
+    keyid: <span style="color: #2aa198;">'&#25968;&#25454;&#24211;ID'</span>
+<span style="color: #657b83;">}</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-8-3" class="outline-4">
+<h4 id="sec-1-8-3">改</h4>
+<div class="outline-text-4" id="text-1-8-3">
+
+
+
+
+<pre class="src src-javascript">json: <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{</span>
+        FaciPoint: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#32463;&#32428;&#24230;</span>
+        Pic0: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#22270;&#29255;</span>
+        FaciCode: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#26045;&#32534;&#30721;</span>
+        FaciName: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#26045;&#21517;&#31216;</span>
+        FaciType: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#35774;&#26045;&#31867;&#22411;&#65288;&#25351;&#31034;&#26631;&#24535;&#65292;&#31105;&#20196;&#26631;&#24535;&#65292;&#25351;&#36335;&#26631;&#29260;&#65292;&#23548;&#21521;&#26631;&#29260;&#65292;&#36335;&#21475;&#20840;&#26223;&#65292;&#28783;&#26438;&#65292;&#23703;&#20141;&#65292;&#25191;&#21220;&#28857;&#65289;</span>
+        DepartmentID: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#37096;&#38376;ID</span>
+        RoadID: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#36947;&#36335;ID</span>
+        RoadLocationID: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#36335;&#21475;ID</span>
+        FaciSupport: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#21378;&#23478;</span>
+        ThirdRequirID: <span style="color: #2aa198;">''</span>,<span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#31532;&#19977;&#26041;ID</span>
+        FaciRemark: <span style="color: #2aa198;">''</span><span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">&#22791;&#27880;</span>
+    <span style="color: #2aa198;">}</span>,
+    action: <span style="color: #2aa198;">'edit'</span>,
+    keyid: <span style="color: #2aa198;">'&#25968;&#25454;&#24211;ID'</span>
+<span style="color: #657b83;">}</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-8-4" class="outline-4">
+<h4 id="sec-1-8-4">查</h4>
+<div class="outline-text-4" id="text-1-8-4">
+
+
+
+
+<pre class="src src-bash">Form Data: page, rows
+</pre>
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">获取行政区域</h2>
+<div class="outline-text-2" id="text-2">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Type</th><th scope="col" class="left">URL</th><th scope="col" class="left">Method</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">行政划分</td><td class="left">/manage/road/qujingmap.ashx?action=getGisAreaOneJson</td><td class="left">GET</td></tr>
+<tr><td class="left">组织结构</td><td class="left">/manage/road/qujingmap.ashx?action=getGisAreaTwoJson</td><td class="left">GET</td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">交通警力</h2>
+<div class="outline-text-2" id="text-3">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Type</th><th scope="col" class="left">URL</th><th scope="col" class="left">Method</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">交通岗亭</td><td class="left">/InfoManage/ashx/data.ashx?action=jtgt</td><td class="left">GET</td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">营运车辆</h2>
+<div class="outline-text-2" id="text-4">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Type</th><th scope="col" class="left">URL</th><th scope="col" class="left">Method</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">出租车</td><td class="left">/InfoManage/ashx/data.ashx?action=fcdtaxi</td><td class="left">GET</td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">辅助决策</h2>
+<div class="outline-text-2" id="text-5">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Type</th><th scope="col" class="left">URL</th><th scope="col" class="left">Method</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">点位</td><td class="left">/manage/road/qujingmap.ashx?action=getGisLocationJson</td><td class="left">GET</td></tr>
+<tr><td class="left">道路</td><td class="left">/manage/road/qujingmap.ashx?action=getOneRoadListJson</td><td class="left">GET</td></tr>
+<tr><td class="left">实时路况</td><td class="left">/InfoManage/ashx/data.ashx?action=roadstatus</td><td class="left">GET</td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">部门</h2>
+<div class="outline-text-2" id="text-6">
+
+
+</div>
+
+<div id="outline-container-6-1" class="outline-3">
+<h3 id="sec-6-1">查询</h3>
+<div class="outline-text-3" id="text-6-1">
+
+
+
+
+<pre class="src src-bash">/sys/ashx/userhandler.ashx
+POST
+</pre>
+
+
+<pre class="src src-javascript">json: <span style="color: #657b83;">{</span>
+    jsonEntity: <span style="color: #2aa198;">{}</span>,
+    action: <span style="color: #2aa198;">'deps'</span>
+<span style="color: #657b83;">}</span>
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">查询接口filter规则</h2>
+<div class="outline-text-2" id="text-7">
+
+
+
+
+<pre class="src src-javascript">filter: <span style="color: #657b83;">{</span>
+    groupOp : <span style="color: #2aa198;">'AND'</span>, <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">AND | OR</span>
+    rules: <span style="color: #2aa198;">[</span><span style="color: #b58900;">{</span>
+        field: <span style="color: #2aa198;">'field id'</span>,
+        op: <span style="color: #2aa198;">'in'</span>,
+        <span style="color: #93a1a1; font-style: italic;">/*</span><span style="color: #93a1a1; font-style: italic;">op&#21442;&#25968;&#35828;&#26126;</span>
+<span style="color: #93a1a1; font-style: italic;">         * eq: &#31561;&#20110;</span>
+<span style="color: #93a1a1; font-style: italic;">         * ne: &#19981;&#31561;&#20110;</span>
+<span style="color: #93a1a1; font-style: italic;">         * gt: &#22823;&#20110;</span>
+<span style="color: #93a1a1; font-style: italic;">         * ge: &#22823;&#20110;&#31561;&#20110;</span>
+<span style="color: #93a1a1; font-style: italic;">         * op: &#23567;&#20110;</span>
+<span style="color: #93a1a1; font-style: italic;">         * le: &#23567;&#20110;&#31561;&#20110;</span>
+<span style="color: #93a1a1; font-style: italic;">         * cn: &#21253;&#21547;</span>
+<span style="color: #93a1a1; font-style: italic;">         * bw: &#20197;xx&#24320;&#22987;</span>
+<span style="color: #93a1a1; font-style: italic;">         * ew: &#20197;xx&#32467;&#26463;</span>
+<span style="color: #93a1a1; font-style: italic;">         */</span>
+        data: <span style="color: #2aa198;">'xxx'</span>
+    <span style="color: #b58900;">}</span><span style="color: #2aa198;">]</span>
+<span style="color: #657b83;">}</span>
+
+</pre>
+
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2016-04-19T11:04+0800</p>
+<p class="author">Author: rexhouy</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

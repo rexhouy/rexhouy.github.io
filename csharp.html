@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>csharp</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="csharp"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2016-01-15T11:48+0800"/>
+<meta name="author" content="rexhouy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style.css' media='only screen' />
+<link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-min-640px.css' media='only screen and (min-width: 640px) and (max-width: 960px)' />
+<link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-max-640px.css' media='only screen and (max-width: 640px)' />
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
+<script src='emacs-org-html-style/nav.js'></script>
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">csharp</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Visual Studio hot key</a></li>
+<li><a href="#sec-2">类和结构</a>
+<ul>
+<li><a href="#sec-2-1">字段与getter，setter</a></li>
+<li><a href="#sec-2-2">访问修饰符</a></li>
+<li><a href="#sec-2-3">方法覆盖</a></li>
+<li><a href="#sec-2-4">类与结构的区别</a></li>
+<li><a href="#sec-2-5">参数</a>
+<ul>
+<li><a href="#sec-2-5-1">按值传递与按引用传递</a></li>
+<li><a href="#sec-2-5-2">命名参数</a></li>
+<li><a href="#sec-2-5-3">可选参数与参数默认值</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-6">隐式类型</a></li>
+<li><a href="#sec-2-7">为类新增方法</a></li>
+<li><a href="#sec-2-8">构造函数</a>
+<ul>
+<li><a href="#sec-2-8-1">静态构造函数</a></li>
+<li><a href="#sec-2-8-2">复制构造函数</a></li>
+<li><a href="#sec-2-8-3">析构函数</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-9">初始化</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">委托(delegate)</a>
+<ul>
+<li><a href="#sec-3-1">多路广播委托</a></li>
+<li><a href="#sec-3-2">匿名函数</a>
+<ul>
+<li><a href="#sec-3-2-1">匿名方法</a></li>
+<li><a href="#sec-3-2-2">Lambda</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-4">异步</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">Visual Studio hot key</h2>
+<div class="outline-text-2" id="text-1">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Key</th><th scope="col" class="left">explaination</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">Ctrl + Shift + B</td><td class="left">生成项目</td></tr>
+<tr><td class="left">Ctrl + Alt + L</td><td class="left">显示Solution Explorer（解决方案资源管理器）</td></tr>
+<tr><td class="left">Shift + Alt+ C</td><td class="left">添加新类</td></tr>
+<tr><td class="left">Shift + Alt + A</td><td class="left">添加新项目到项目</td></tr>
+<tr><td class="left">Ctrl + Enter</td><td class="left">在当前行插入空行</td></tr>
+<tr><td class="left">Ctrl + Shift + Enter</td><td class="left">在当前行下方插入空行</td></tr>
+<tr><td class="left">Ctrl +空格键</td><td class="left">使用IntelliSense（智能感知）自动完成</td></tr>
+<tr><td class="left">Alt + Shift +箭头键(←,↑,↓,→)</td><td class="left">选择代码的自定义部分</td></tr>
+<tr><td class="left">Ctrl + }</td><td class="left">匹配大括号、括号</td></tr>
+<tr><td class="left">Ctrl + Shift +}</td><td class="left">在匹配的括号、括号内选择文本</td></tr>
+<tr><td class="left">Ctrl + Shift + S</td><td class="left">保存所有文件和项目</td></tr>
+<tr><td class="left">Ctrl + K，Ctrl + C</td><td class="left">注释选定行</td></tr>
+<tr><td class="left">Ctrl + K，Ctrl + U</td><td class="left">取消选定行的注释</td></tr>
+<tr><td class="left">Ctrl + K，Ctrl + D</td><td class="left">正确对齐所有代码</td></tr>
+<tr><td class="left">Shift + End</td><td class="left">从头到尾选择整行</td></tr>
+<tr><td class="left">Shift + Home</td><td class="left">从尾到头选择整行</td></tr>
+<tr><td class="left">Ctrl + Delete</td><td class="left">删除光标右侧的所有字</td></tr>
+<tr><td class="left">导航相关的键盘快捷键</td><td class="left"></td></tr>
+<tr><td class="left">Ctrl +Up/Down</td><td class="left">滚动窗口但不移动光标</td></tr>
+<tr><td class="left">Ctrl + -</td><td class="left">让光标移动到它先前的位置</td></tr>
+<tr><td class="left">Ctrl ++</td><td class="left">让光标移动到下一个位置</td></tr>
+<tr><td class="left">F12</td><td class="left">转到定义</td></tr>
+<tr><td class="left">调试相关的键盘快捷键</td><td class="left"></td></tr>
+<tr><td class="left">Ctrl + Alt + P</td><td class="left">附加到进程</td></tr>
+<tr><td class="left">F10</td><td class="left">调试单步执行</td></tr>
+<tr><td class="left">F5</td><td class="left">开始调试</td></tr>
+<tr><td class="left">Shift + F5</td><td class="left">停止调试</td></tr>
+<tr><td class="left">Ctrl + Alt + Q</td><td class="left">添加快捷匹配</td></tr>
+<tr><td class="left">F9</td><td class="left">设置或删除断点</td></tr>
+<tr><td class="left">Ctrl + K  Ctrl + K</td><td class="left">将当前行添加书签</td></tr>
+<tr><td class="left">Ctrl + K  Ctrl + N</td><td class="left">导航至下一个书签</td></tr>
+<tr><td class="left">Ctrl + .</td><td class="left">如果你键入一个类名如Collection&lt;string&gt;，且命名空间导入不正确的话，那么这个快捷方式组合将自动插入导入</td></tr>
+<tr><td class="left">Ctrl + Shift + F</td><td class="left">在文件中查找</td></tr>
+<tr><td class="left">Shift  + F12</td><td class="left">查找所有引用</td></tr>
+<tr><td class="left">Ctrl + F</td><td class="left">显示查找对话框</td></tr>
+<tr><td class="left">Ctrl + H</td><td class="left">显示替换对话框</td></tr>
+<tr><td class="left">Ctrl + G</td><td class="left">跳转到行号或行</td></tr>
+<tr><td class="left">Ctrl + Shift + F</td><td class="left">查找所选条目在整个解决方案中的引用</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">类和结构</h2>
+<div class="outline-text-2" id="text-2">
+
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1">字段与getter，setter</h3>
+<div class="outline-text-3" id="text-2-1">
+
+
+
+
+<pre class="src src-c#">string day {
+    get;set{day = value}
+}
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2">访问修饰符</h3>
+<div class="outline-text-3" id="text-2-2">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">public</td><td class="left">全局可见</td></tr>
+<tr><td class="left">protected</td><td class="left">子类可见</td></tr>
+<tr><td class="left">private</td><td class="left">自己可见</td></tr>
+<tr><td class="left">internal</td><td class="left">当前程序集可见</td></tr>
+</tbody>
+</table>
+
+类与结构默认为internal
+
+<p>
+类与结构成员默认为private
+</p></div>
+
+</div>
+
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3">方法覆盖</h3>
+<div class="outline-text-3" id="text-2-3">
+
+<p>父类使用virtual或abstract声明，子类使用override进行覆盖
+</p>
+<p>
+如果使用new，将会创建一个新的方法（子类可访问，无法实现多态）
+</p></div>
+
+</div>
+
+<div id="outline-container-2-4" class="outline-3">
+<h3 id="sec-2-4">类与结构的区别</h3>
+<div class="outline-text-3" id="text-2-4">
+
+<p>struct是值类型，class是引用类型
+</p>
+<p>
+struct继承System.ValueType， class继承System.Object
+</p>
+<p>
+struct无法被继承
+</p>
+<p>
+struct无需使用new创建，声明了就能用
+</p></div>
+
+</div>
+
+<div id="outline-container-2-5" class="outline-3">
+<h3 id="sec-2-5">参数</h3>
+<div class="outline-text-3" id="text-2-5">
+
+
+</div>
+
+<div id="outline-container-2-5-1" class="outline-4">
+<h4 id="sec-2-5-1">按值传递与按引用传递</h4>
+<div class="outline-text-4" id="text-2-5-1">
+
+<p>可以指定值类型使用引用传递参数（ref 和out关键字）
+</p>
+<p>
+由ref申明的参数必须由调用方初始化，由out声明的参数必须有被调用方初始化
+</p></div>
+
+</div>
+
+<div id="outline-container-2-5-2" class="outline-4">
+<h4 id="sec-2-5-2">命名参数</h4>
+<div class="outline-text-4" id="text-2-5-2">
+
+
+
+
+<pre class="src src-c#">int CalculateBMI(int weight, int height)
+{
+    return (weight * 703) / (height * height);
+}
+CalculateBMI(weight: 100, height: 200);
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-5-3" class="outline-4">
+<h4 id="sec-2-5-3">可选参数与参数默认值</h4>
+<div class="outline-text-4" id="text-2-5-3">
+
+
+
+
+<pre class="src src-c#">void Test(int required, string optional = <span style="color: #2aa198;">"123"</span>)
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2-6" class="outline-3">
+<h3 id="sec-2-6">隐式类型</h3>
+<div class="outline-text-3" id="text-2-6">
+
+<p>可以使用var来定义变量（不声明变量类型），编译器在编译的时候会决定该变量的类型
+</p></div>
+
+</div>
+
+<div id="outline-container-2-7" class="outline-3">
+<h3 id="sec-2-7">为类新增方法</h3>
+<div class="outline-text-3" id="text-2-7">
+
+<p>可以为现有类型增加新方法
+</p>
+
+
+<pre class="src src-c#">namespace Extensions
+{
+    public static class StringExtension
+    {
+        public static int WordCount(this String str)
+        {
+            return str.Split(<span style="color: #2aa198;">" "</span>).Length;
+        }
+    }
+}
+using Extentions;
+int i = <span style="color: #2aa198;">"Hello World"</span>.WordCount();
+</pre>
+
+<p>
+该扩展方法无法访问类的私有变量与方法，并且优先级很低，如果类中有同名方法，调用时不会调用该扩展方法。
+</p></div>
+
+</div>
+
+<div id="outline-container-2-8" class="outline-3">
+<h3 id="sec-2-8">构造函数</h3>
+<div class="outline-text-3" id="text-2-8">
+
+<p>调用父类构造函数，不显式调用父类构造函数则默认调用父类的无参数构造函数。
+</p>
+
+
+<pre class="src src-c#">class Base {}
+class Derived : Base
+{
+    public Derived() : base() {}
+}
+</pre>
+
+<p>
+调用同一对象中的另一个构造函数
+</p>
+
+
+<pre class="src src-c#">public Constructor() : this(1, 2) {}
+public Constructor(int a, intb) {}
+</pre>
+
+
+</div>
+
+<div id="outline-container-2-8-1" class="outline-4">
+<h4 id="sec-2-8-1">静态构造函数</h4>
+<div class="outline-text-4" id="text-2-8-1">
+
+<p>static构造函数，用于初始化static变量，类在创建第一个实例或是静态变量被使用时会被调用一次。
+</p></div>
+
+</div>
+
+<div id="outline-container-2-8-2" class="outline-4">
+<h4 id="sec-2-8-2">复制构造函数</h4>
+<div class="outline-text-4" id="text-2-8-2">
+
+
+
+
+<pre class="src src-c#">public Person(Person a)
+{
+    Name = a.Name;
+}
+Person p1 = new Person(<span style="color: #2aa198;">"x"</span>)
+Person p2 = new Person(p1)
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-8-3" class="outline-4">
+<h4 id="sec-2-8-3">析构函数</h4>
+<div class="outline-text-4" id="text-2-8-3">
+
+<p>析构函数无法被继承、重载，无法显式调用。在需要显式释放资源的时候，推荐实现IDisposable接口。
+</p>
+
+
+<pre class="src src-c#">~Person() {}
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2-9" class="outline-3">
+<h3 id="sec-2-9">初始化</h3>
+<div class="outline-text-3" id="text-2-9">
+
+
+
+
+<pre class="src src-c#">class Person
+{
+    public int name { get; set; }
+}
+Person p1 = new Person{ Name = <span style="color: #2aa198;">"x"</span> }
+
+new List&lt;int&gt; { 1, 2, 3, 4, 5 }
+new Dictionary&lt;int, string&gt; { [1] = <span style="color: #2aa198;">"x"</span>, [2] = <span style="color: #2aa198;">"y"</span> }
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">委托(delegate)</h2>
+<div class="outline-text-2" id="text-3">
+
+<p>委托类型派生自Delegate类，该类无法被继承。委托对象封装了方法，用于支持函数式编程。
+</p>
+
+
+<pre class="src src-c#">public delegate int DoSomething(string message); // &#23450;&#20041;&#19968;&#20010;&#22996;&#25176;&#65292;&#35813;&#22996;&#25176;&#25509;&#25910;&#19968;&#20010;string&#65292;&#36820;&#22238;int
+public class Person
+{
+    public static int SayHello(string name) { // Method Definition };
+}
+public static Test(DoSomething ds) // &#22996;&#25176;&#65288;&#20989;&#25968;&#65289;&#20316;&#20026;&#21442;&#25968;
+{
+    System.Console.WriteLine(ds(<span style="color: #2aa198;">"++++"</span>));
+}
+// &#23558;Person&#31867;&#30340;SayHello&#20316;&#20026;&#22996;&#25176;&#20256;&#36882;&#32473;Test
+Test(Person.SayHello);
+</pre>
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1">多路广播委托</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<p>委托对象可以包含一个或多个方法，使用“+”，“-”向委托对象中添加，删除方法。调用时将会按顺序调用委托中的所有方法。
+</p>
+
+
+<pre class="src src-c#">DoSomething multiDS = Person.SayHello + Person.SayHello;
+Test(multiDS);
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2">匿名函数</h3>
+<div class="outline-text-3" id="text-3-2">
+
+
+</div>
+
+<div id="outline-container-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1">匿名方法</h4>
+<div class="outline-text-4" id="text-3-2-1">
+
+
+
+
+<pre class="src src-c#">delegate string value();
+void SayHello(value v)
+{
+    System.Console.WriteLine(<span style="color: #2aa198;">"Hello {0}"</span>, v());
+}
+static void Main()
+{
+    SayHello(delegate() { return <span style="color: #2aa198;">"Mr x"</span> })
+}
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2-2" class="outline-4">
+<h4 id="sec-3-2-2">Lambda</h4>
+<div class="outline-text-4" id="text-3-2-2">
+
+
+
+
+<pre class="src src-c#">delegate string value();
+void SayHello(value v)
+{
+    System.Console.WriteLine(<span style="color: #2aa198;">"Hello {0}"</span>, v());
+}
+static void Main()
+{
+    SayHello(() =&gt; { return <span style="color: #2aa198;">"Mr x"</span> })
+}
+</pre>
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">异步</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>使用async和await关键字进行异步处理
+</p>
+
+
+<pre class="src src-c#">async Taks&lt;string&gt; GetNameAsync() { // Method Definition };
+string name = await GetNameAsync();
+</pre>
+
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2016-01-15T11:48+0800</p>
+<p class="author">Author: rexhouy</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

@@ -7,14 +7,15 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="java"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-01-25T14:12+0800"/>
-<meta name="author" content="Rex.Houy"/>
+<meta name="generated" content="2015-11-04T10:44+0800"/>
+<meta name="author" content="rexhouy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 <link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style.css' media='only screen' />
 <link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-min-640px.css' media='only screen and (min-width: 640px) and (max-width: 960px)' />
 <link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-max-640px.css' media='only screen and (max-width: 640px)' />
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
 <script src='emacs-org-html-style/nav.js'></script>
 
@@ -73,6 +74,12 @@
 </ul>
 </li>
 <li><a href="#sec-14">Debug</a></li>
+<li><a href="#sec-15">LInux Install</a>
+<ul>
+<li><a href="#sec-15-1">Change default java</a></li>
+<li><a href="#sec-15-2">No such file or directory error</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -597,12 +604,54 @@ Add thread id, trasaction id into log can be helpful.
 <p>
 Logstash may helpful handling log output.
 </p></div>
+
+</div>
+
+<div id="outline-container-15" class="outline-2">
+<h2 id="sec-15">LInux Install</h2>
+<div class="outline-text-2" id="text-15">
+
+
+</div>
+
+<div id="outline-container-15-1" class="outline-3">
+<h3 id="sec-15-1">Change default java</h3>
+<div class="outline-text-3" id="text-15-1">
+
+
+
+
+<pre class="src src-bash">sudo update-alternatives --install <span style="color: #2aa198;">"/usr/bin/java"</span> <span style="color: #2aa198;">"java"</span> <span style="color: #2aa198;">"/usr/local/jdk1.8.0_65/bin/java"</span> 1
+sudo update-alternatives --install <span style="color: #2aa198;">"/usr/bin/javac"</span> <span style="color: #2aa198;">"javac"</span> <span style="color: #2aa198;">"/usr/local/jdk1.8.0_65/bin/javac"</span> 1
+sudo update-alternatives --install <span style="color: #2aa198;">"/usr/bin/javaws"</span> <span style="color: #2aa198;">"javaws"</span> <span style="color: #2aa198;">"/usr/local/jdk1.8.0_65/bin/javaws"</span> 1
+sudo update-alternatives --set java /usr/local/java/jdk1.8.0_65/bin/java
+sudo update-alternatives --set javac /usr/local/java/jdk1.8.0_65/bin/javac
+sudo update-alternatives --set javaws /usr/local/java/jdk1.8.0_65/bin/javaws
+source /etc/profile
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-15-2" class="outline-3">
+<h3 id="sec-15-2">No such file or directory error</h3>
+<div class="outline-text-3" id="text-15-2">
+
+
+
+
+<pre class="src src-bash">sudo aptitude install libc6-i386
+</pre>
+
+</div>
+</div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-01-25T14:12+0800</p>
-<p class="author">Author: Rex.Houy</p>
+<p class="date">Date: 2015-11-04T10:44+0800</p>
+<p class="author">Author: rexhouy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
 

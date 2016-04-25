@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="linux"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2015-07-08T08:49+0800"/>
+<meta name="generated" content="2016-02-16T11:55+0800"/>
 <meta name="author" content="rexhouy"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -58,6 +58,7 @@
 <li><a href="#sec-5-2">Transport files to remote machine display progress</a></li>
 <li><a href="#sec-5-3">Execute local script on remote machine</a></li>
 <li><a href="#sec-5-4">Get back to last position</a></li>
+<li><a href="#sec-5-5">Change file encoding</a></li>
 </ul>
 </li>
 <li><a href="#sec-6">Standard command line options</a></li>
@@ -477,6 +478,20 @@ inode保存文件的的字节数，userid，groupid，authorize，timestamp，�
 
 
 <pre class="src src-bash">$ cd -
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-5-5" class="outline-3">
+<h3 id="sec-5-5">Change file encoding</h3>
+<div class="outline-text-3" id="text-5-5">
+
+
+
+
+<pre class="src src-bash">iconv -f gbk -t utf8 file &gt; out.file
 </pre>
 
 </div>
@@ -906,12 +921,21 @@ Make sure /etc/iptables.firewall.rules is executable.
 
 <p>When configuring network, we always meet something like "127.0.0.1/8", "192.168.0.1/16" etc.
 The "/8","/16" are for the subnet mast. /8 is class A (255.0.0.0), /16 is class B (255.255.0.0), and class C is /24 (255.255.255.0). the number after the / is the number of bits used to make the number.
-</p></div>
+</p>
+<p>
+Find port usage info
+</p>
+
+
+<pre class="src src-bash">lsof -i :3000
+</pre>
+
+</div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2015-07-08T08:49+0800</p>
+<p class="date">Date: 2016-02-16T11:55+0800</p>
 <p class="author">Author: rexhouy</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

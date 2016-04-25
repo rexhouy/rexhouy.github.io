@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>android</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="android"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2015-11-13T16:59+0800"/>
+<meta name="author" content="rexhouy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style.css' media='only screen' />
+<link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-min-640px.css' media='only screen and (min-width: 640px) and (max-width: 960px)' />
+<link rel='stylesheet' type='text/css' href='emacs-org-html-style/org-style-max-640px.css' media='only screen and (max-width: 640px)' />
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
+<script src='emacs-org-html-style/nav.js'></script>
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">android</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Fundamentals</a></li>
+<li><a href="#sec-2">Components</a>
+<ul>
+<li><a href="#sec-2-1">Activities</a>
+<ul>
+<li><a href="#sec-2-1-1">Life circle</a></li>
+<li><a href="#sec-2-1-2">User interface</a></li>
+<li><a href="#sec-2-1-3">Start &amp; stop an activity</a></li>
+<li><a href="#sec-2-1-4">Save activity status</a></li>
+<li><a href="#sec-2-1-5">Fragments</a></li>
+<li><a href="#sec-2-1-6">Loaders</a></li>
+<li><a href="#sec-2-1-7">Tasks</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-2">Services</a></li>
+<li><a href="#sec-2-3">Content Providers</a></li>
+<li><a href="#sec-2-4">Broadcast receivers</a></li>
+<li><a href="#sec-2-5">Intent</a>
+<ul>
+<li><a href="#sec-2-5-1">Start an activity</a></li>
+<li><a href="#sec-2-5-2">Start a service</a></li>
+<li><a href="#sec-2-5-3">Deliver broadcast</a></li>
+<li><a href="#sec-2-5-4">Example</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-6">App resources</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">System permissions</a>
+<ul>
+<li><a href="#sec-3-1">Define requirements</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">Fundamentals</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>The Android operating system is a multi-user Linux system in which each app is a different user.
+</p>
+<p>
+By default, the system assigns each app a unique Linux user ID (the ID is used only by the system and is unknown to the app). The system sets permissions for all the files in an app so that only the user ID assigned to that app can access them.
+</p>
+<p>
+Each process has its own virtual machine (VM), so an app's code runs in isolation from other apps.
+</p>
+<p>
+By default, every app runs in its own Linux process. Android starts the process when any of the app's components need to be executed, then shuts down the process when it's no longer needed or when the system must recover memory for other apps.
+</p>
+<p>
+It's possible to arrange for two apps to share the same Linux user ID, in which case they are able to access each other's files.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Components</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>Activities, services, and content providers that you include in your source but do not declare in the manifest are not visible to the system and, consequently, can never run.However, broadcast receivers can be either declared in the manifest or created dynamically in code.
+</p>
+
+
+<pre class="src src-xml">&lt;<span style="color: #b58900;">manifest</span>&gt;
+    &lt;<span style="color: #b58900;">application</span>&gt;
+        &lt;<span style="color: #b58900;">activity</span> <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">This attribute is required and should not be changed after publish</span><span style="color: #2aa198;">"</span>&gt;&lt;/<span style="color: #b58900;">activity</span>&gt;
+        &lt;<span style="color: #b58900;">service</span>&gt;&lt;/<span style="color: #b58900;">service</span>&gt;
+        &lt;<span style="color: #b58900;">receiver</span>&gt;&lt;/<span style="color: #b58900;">receiver</span>&gt;
+        &lt;<span style="color: #b58900;">provider</span>&gt;&lt;/<span style="color: #b58900;">provider</span>&gt;
+    &lt;/<span style="color: #b58900;">application</span>&gt;
+&lt;/<span style="color: #b58900;">manifest</span>&gt;
+</pre>
+
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1">Activities</h3>
+<div class="outline-text-3" id="text-2-1">
+
+<p>An activity represents a single screen with a user interface
+</p>
+</div>
+
+<div id="outline-container-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1">Life circle</h4>
+<div class="outline-text-4" id="text-2-1-1">
+
+<ul>
+<li id="sec-2-1-1-1">Resumed<br/>
+The activity is active
+</li>
+</ul>
+<ul>
+<li id="sec-2-1-1-2">Paused<br/>
+Another activity is in the foreground and has focus, but this one is still visible.
+</li>
+</ul>
+<ul>
+<li id="sec-2-1-1-3">Stopped<br/>
+The activity is completely obscured by another activity (the activity is now in the "background"). It still alive but no longer visible to the user.
+</li>
+</ul>
+<ul>
+<li id="sec-2-1-1-4">Life circle listeners<br/>
+
+
+
+<pre class="src src-java"><span style="color: #268bd2;">@Override</span>
+    <span style="color: #859900;">public</span> <span style="color: #268bd2;">void</span> <span style="color: #b58900;">onCreate</span>(<span style="color: #268bd2;">Bundle</span> <span style="color: #6c71c4;">savedInstanceState</span>) {
+        <span style="color: #859900;">super</span>.onCreate(savedInstanceState);
+        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">The activity is being created. must call setContentView() to define the layout for the activity's user interface.</span>
+    }
+    <span style="color: #268bd2;">@Override</span>
+    <span style="color: #859900;">protected</span> <span style="color: #268bd2;">void</span> <span style="color: #b58900;">onStart</span>() {
+        <span style="color: #859900;">super</span>.onStart();
+        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">The activity is about to become visible.</span>
+    }
+    <span style="color: #268bd2;">@Override</span>
+    <span style="color: #859900;">protected</span> <span style="color: #268bd2;">void</span> <span style="color: #b58900;">onResume</span>() {
+        <span style="color: #859900;">super</span>.onResume();
+        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">The activity has become visible (it is now "resumed").</span>
+    }
+    <span style="color: #268bd2;">@Override</span>
+    <span style="color: #859900;">protected</span> <span style="color: #268bd2;">void</span> <span style="color: #b58900;">onPause</span>() {
+        <span style="color: #859900;">super</span>.onPause();
+        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Another activity is taking focus (this activity is about to be "paused"). should commit any changes that should be persisted beyond the current user session</span>
+    }
+    <span style="color: #268bd2;">@Override</span>
+    <span style="color: #859900;">protected</span> <span style="color: #268bd2;">void</span> <span style="color: #b58900;">onStop</span>() {
+        <span style="color: #859900;">super</span>.onStop();
+        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">The activity is no longer visible (it is now "stopped")</span>
+    }
+    <span style="color: #268bd2;">@Override</span>
+    <span style="color: #859900;">protected</span> <span style="color: #268bd2;">void</span> <span style="color: #b58900;">onDestroy</span>() {
+        <span style="color: #859900;">super</span>.onDestroy();
+        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">The activity is about to be destroyed.</span>
+    }
+</pre>
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-2-1-2" class="outline-4">
+<h4 id="sec-2-1-2">User interface</h4>
+<div class="outline-text-4" id="text-2-1-2">
+
+<p>The user interface for an activity is provided by a hierarchy of views—objects derived from the View class.
+</p>
+<p>
+System default provide two kinds of views "Widgets" &amp; "Layouts".
+</p></div>
+
+</div>
+
+<div id="outline-container-2-1-3" class="outline-4">
+<h4 id="sec-2-1-3">Start &amp; stop an activity</h4>
+<div class="outline-text-4" id="text-2-1-3">
+
+
+
+
+<pre class="src src-java"><span style="color: #268bd2;">Intent</span> <span style="color: #6c71c4;">intent</span> = <span style="color: #859900;">new</span> <span style="color: #268bd2;">Intent</span>(<span style="color: #859900;">this</span>, SignInActivity.<span style="color: #859900;">class</span>);
+startActivity(intent); <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">start</span>
+finish(); <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">stop</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-4" class="outline-4">
+<h4 id="sec-2-1-4">Save activity status</h4>
+<div class="outline-text-4" id="text-2-1-4">
+
+<p>An activity may be killed when another activity comes into forground (system does not guarantee the activity object is still alive).
+When the activity comes into forground again, it is good to restore status.
+In such situation, use onSaveInstantSate() to save status and in onCreate() or onRestoreInstanceState(), recover the states.
+System will pass a Bundle object to onSaveInstantState method, save status into the Bundle object.
+This work is done by system(should provide an id for every view).
+</p>
+<p>
+Use screen orientation changes to test these methods.
+</p></div>
+
+</div>
+
+<div id="outline-container-2-1-5" class="outline-4">
+<h4 id="sec-2-1-5">Fragments</h4>
+<div class="outline-text-4" id="text-2-1-5">
+
+<p>A resusable view, it has its own life circle.
+All fragments extends Fragment class.
+</p><ul>
+<li id="sec-2-1-5-1">Life circle<br/>
+<ul>
+<li id="sec-2-1-5-1-1">onCreate()<br/>
+The system calls this when creating the fragment. Within your implementation, you should initialize essential components of the fragment that you want to retain when the fragment is paused or stopped, then resumed.
+</li>
+</ul>
+<ul>
+<li id="sec-2-1-5-1-2">onCreateView()<br/>
+The system calls this when it's time for the fragment to draw its user interface for the first time. To draw a UI for your fragment, you must return a View from this method that is the root of your fragment's layout. You can return null if the fragment does not provide a UI.
+</li>
+</ul>
+<ul>
+<li id="sec-2-1-5-1-3">onPause()<br/>
+The system calls this method as the first indication that the user is leaving the fragment (though it does not always mean the fragment is being destroyed). This is usually where you should commit any changes that should be persisted beyond the current user session (because the user might not come back).
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li id="sec-2-1-5-2">Using fragments<br/>
+
+
+
+<pre class="src src-xml">&lt;<span style="color: #b58900;">LinearLayout</span> <span style="color: #6c71c4;">xmlns</span>:<span style="color: #6c71c4;">android</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">http://schemas.android.com/apk/res/android</span><span style="color: #2aa198;">"</span>
+    <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">orientation</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">horizontal</span><span style="color: #2aa198;">"</span>
+    <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">layout_width</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">match_parent</span><span style="color: #2aa198;">"</span>
+    <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">layout_height</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">match_parent</span><span style="color: #2aa198;">"</span>&gt;
+    &lt;<span style="color: #b58900;">fragment</span> <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">com.example.news.ArticleListFragment</span><span style="color: #2aa198;">"</span>
+            <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">id</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">@+id/list</span><span style="color: #2aa198;">"</span>
+            <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">layout_weight</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">1</span><span style="color: #2aa198;">"</span>
+            <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">layout_width</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">0dp</span><span style="color: #2aa198;">"</span>
+            <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">layout_height</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">match_parent</span><span style="color: #2aa198;">"</span> /&gt;
+    &lt;<span style="color: #b58900;">fragment</span> <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">com.example.news.ArticleReaderFragment</span><span style="color: #2aa198;">"</span>
+            <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">id</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">@+id/viewer</span><span style="color: #2aa198;">"</span>
+            <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">layout_weight</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">2</span><span style="color: #2aa198;">"</span>
+            <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">layout_width</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">0dp</span><span style="color: #2aa198;">"</span>
+            <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">layout_height</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">match_parent</span><span style="color: #2aa198;">"</span> /&gt;
+&lt;/<span style="color: #b58900;">LinearLayout</span>&gt;
+</pre>
+
+</li>
+</ul>
+<ul>
+<li id="sec-2-1-5-3">Transactions<br/>
+Using transactions to save fragment status.
+
+
+
+<pre class="src src-java"><span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Create new fragment and transaction</span>
+<span style="color: #268bd2;">Fragment</span> <span style="color: #6c71c4;">newFragment</span> = <span style="color: #859900;">new</span> <span style="color: #268bd2;">ExampleFragment</span>();
+<span style="color: #268bd2;">FragmentTransaction</span> <span style="color: #6c71c4;">transaction</span> = getFragmentManager().beginTransaction();
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Replace whatever is in the fragment_container view with this fragment,</span>
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">and add the transaction to the back stack.</span>
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Saved status can be restored when user click back button.</span>
+transaction.replace(R.id.fragment_container, newFragment);
+transaction.addToBackStack(<span style="color: #268bd2;">null</span>);
+transaction.commit();<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Commit the transaction.</span>
+</pre>
+
+</li>
+</ul>
+<ul>
+<li id="sec-2-1-5-4">Create event callbacks<br/>
+Create an interface in Fragment, Container activity implments the interface.
+
+
+
+<pre class="src src-java"><span style="color: #859900;">public</span> <span style="color: #859900;">static</span> <span style="color: #859900;">class</span> <span style="color: #268bd2;">FragmentA</span> <span style="color: #859900;">extends</span> <span style="color: #268bd2;">ListFragment</span> {
+    <span style="color: #268bd2;">OnArticleSelectedListener</span> <span style="color: #6c71c4;">mListener</span>;
+    <span style="color: #859900;">public</span> <span style="color: #859900;">interface</span> <span style="color: #268bd2;">OnArticleSelectedListener</span> {
+        <span style="color: #859900;">public</span> <span style="color: #268bd2;">void</span> <span style="color: #b58900;">onArticleSelected</span>(<span style="color: #268bd2;">Uri</span> <span style="color: #6c71c4;">articleUri</span>);
+    }
+    <span style="color: #268bd2;">@Override</span>
+    <span style="color: #859900;">public</span> <span style="color: #268bd2;">void</span> <span style="color: #b58900;">onAttach</span>(<span style="color: #268bd2;">Activity</span> <span style="color: #6c71c4;">activity</span>) {
+        <span style="color: #859900;">super</span>.onAttach(activity);
+        mListener = (<span style="color: #268bd2;">OnArticleSelectedListener</span>) activity; <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">set the mListener to container activity</span>
+    }
+    <span style="color: #268bd2;">@Override</span>
+    <span style="color: #859900;">public</span> <span style="color: #268bd2;">void</span> <span style="color: #b58900;">onListItemClick</span>(<span style="color: #268bd2;">ListView</span> <span style="color: #6c71c4;">l</span>, <span style="color: #268bd2;">View</span> <span style="color: #6c71c4;">v</span>, <span style="color: #268bd2;">int</span> <span style="color: #6c71c4;">position</span>, <span style="color: #268bd2;">long</span> <span style="color: #6c71c4;">id</span>) {
+        mListener.onArticleSelected(something); <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">send the event to activity</span>
+    }
+}
+<span style="color: #859900;">public</span> <span style="color: #859900;">class</span> <span style="color: #268bd2;">ActivityA</span> <span style="color: #859900;">extends</span> <span style="color: #268bd2;">Activity</span> <span style="color: #859900;">implements</span> <span style="color: #268bd2;">OnArticleSelectedListener</span> {
+    <span style="color: #268bd2;">@Override</span>
+    <span style="color: #859900;">public</span> <span style="color: #268bd2;">void</span> <span style="color: #b58900;">onArticleSelected</span>(<span style="color: #268bd2;">Uri</span> <span style="color: #6c71c4;">articleUri</span>) {
+        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Do something.</span>
+    }
+}
+</pre>
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-2-1-6" class="outline-4">
+<h4 id="sec-2-1-6">Loaders</h4>
+<div class="outline-text-4" id="text-2-1-6">
+
+<p>Loaders asynchronously load data in an activity or fragment.
+</p>
+
+
+<pre class="src src-java"><span style="color: #859900;">public</span> <span style="color: #859900;">static</span> <span style="color: #859900;">class</span> <span style="color: #268bd2;">CursorLoaderListFragment</span> <span style="color: #859900;">extends</span> <span style="color: #268bd2;">ListFragment</span>
+        <span style="color: #859900;">implements</span> <span style="color: #268bd2;">LoaderManager</span>.<span style="color: #268bd2;">LoaderCallbacks</span>&lt;Cursor&gt; {
+    <span style="color: #268bd2;">SimpleCursorAdapter</span> <span style="color: #6c71c4;">mAdapter</span>;
+    <span style="color: #859900;">public</span> <span style="color: #268bd2;">Loader</span>&lt;Cursor&gt; onCreateLoader(<span style="color: #268bd2;">int</span> <span style="color: #6c71c4;">id</span>, <span style="color: #268bd2;">Bundle</span> <span style="color: #6c71c4;">args</span>) {
+        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">This is called when a new Loader needs to be created.</span>
+        <span style="color: #859900;">return</span> <span style="color: #859900;">new</span> <span style="color: #268bd2;">CursorLoader</span>(getActivity(), baseUri,
+                CONTACTS_SUMMARY_PROJECTION, select, <span style="color: #268bd2;">null</span>,
+                <span style="color: #268bd2;">Contacts</span>.DISPLAY_NAME + <span style="color: #2aa198;">" COLLATE LOCALIZED ASC"</span>);
+    }
+    <span style="color: #859900;">public</span> <span style="color: #268bd2;">void</span> <span style="color: #6c71c4;">onLoadFinished</span>(Loader&lt;Cursor&gt; loader, <span style="color: #268bd2;">Cursor</span> <span style="color: #6c71c4;">data</span>) {
+        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Swap the new cursor in.  (The framework will take care of closing the old cursor once we return.)</span>
+        mAdapter.swapCursor(data);
+    }
+    <span style="color: #859900;">public</span> <span style="color: #268bd2;">void</span> <span style="color: #6c71c4;">onLoaderReset</span>(Loader&lt;Cursor&gt; loader) {
+        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">This is called when the last Cursor provided to onLoadFinished()</span>
+        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">above is about to be closed.  We need to make sure we are no longer using it.</span>
+        mAdapter.swapCursor(<span style="color: #268bd2;">null</span>);
+    }
+}
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-7" class="outline-4">
+<h4 id="sec-2-1-7">Tasks</h4>
+<div class="outline-text-4" id="text-2-1-7">
+
+<p>A task is a collection of activities that users interact with when performing a certain job.
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2">Services</h3>
+<div class="outline-text-3" id="text-2-2">
+
+<p>A service is a component that runs in the background to perform long-running operations or to perform work for remote processes.
+</p></div>
+
+</div>
+
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3">Content Providers</h3>
+<div class="outline-text-3" id="text-2-3">
+
+<p>A content provider manages a shared set of app data.
+</p></div>
+
+</div>
+
+<div id="outline-container-2-4" class="outline-3">
+<h3 id="sec-2-4">Broadcast receivers</h3>
+<div class="outline-text-3" id="text-2-4">
+
+<p>A broadcast receiver is a component that responds to system-wide broadcast announcements.
+</p></div>
+
+</div>
+
+<div id="outline-container-2-5" class="outline-3">
+<h3 id="sec-2-5">Intent</h3>
+<div class="outline-text-3" id="text-2-5">
+
+<p>Activities, services, and broadcast receivers—are activated by an asynchronous message called an intent.
+</p>
+<p>
+There are two kinds of intents, explicit intent &amp; implicit intent. An explicit intent starts the activity(service) by name. An implicity intent simply describes the type of action to perform, the system will find and start the proper action, or let the user choose which action to start if more than one proper actions are found.
+</p>
+
+</div>
+
+<div id="outline-container-2-5-1" class="outline-4">
+<h4 id="sec-2-5-1">Start an activity</h4>
+<div class="outline-text-4" id="text-2-5-1">
+
+
+
+
+<pre class="src src-java">context.startActivity();
+context.startActivityForResult(); <span style="color: #93a1a1; font-style: italic;">//</span><span style="color: #93a1a1; font-style: italic;">receives the result as a separate Intent object in activity's onActivityResult() callback</span>
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-5-2" class="outline-4">
+<h4 id="sec-2-5-2">Start a service</h4>
+<div class="outline-text-4" id="text-2-5-2">
+
+
+
+
+<pre class="src src-java">context.startService();
+context.bindService()
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-5-3" class="outline-4">
+<h4 id="sec-2-5-3">Deliver broadcast</h4>
+<div class="outline-text-4" id="text-2-5-3">
+
+
+
+
+<pre class="src src-java">context.sendBroadcast();
+context.sendOrderedBroadcast();
+context.sendStickyBroadcast();
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-5-4" class="outline-4">
+<h4 id="sec-2-5-4">Example</h4>
+<div class="outline-text-4" id="text-2-5-4">
+
+<p>Explicit intent
+</p>
+
+
+<pre class="src src-java"><span style="color: #268bd2;">Intent</span> <span style="color: #6c71c4;">downloadIntent</span> = <span style="color: #859900;">new</span> <span style="color: #268bd2;">Intent</span>(<span style="color: #859900;">this</span>, DownloadService.<span style="color: #859900;">class</span>);
+downloadIntent.setData(Uri.parse(fileUrl));
+startService(downloadIntent);
+</pre>
+
+<p>
+Implicit intent
+</p>
+
+
+<pre class="src src-java"><span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Create the text message with a string</span>
+<span style="color: #268bd2;">Intent</span> <span style="color: #6c71c4;">sendIntent</span> = <span style="color: #859900;">new</span> <span style="color: #268bd2;">Intent</span>();
+sendIntent.setAction(<span style="color: #268bd2;">Intent</span>.ACTION_SEND);
+sendIntent.putExtra(<span style="color: #268bd2;">Intent</span>.EXTRA_TEXT, textMessage);
+sendIntent.setType(<span style="color: #2aa198;">"text/plain"</span>);
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Verify that the intent will resolve to an activity</span>
+<span style="color: #859900;">if</span> (sendIntent.resolveActivity(getPackageManager()) != <span style="color: #268bd2;">null</span>) {
+    startActivity(sendIntent);
+}
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2-6" class="outline-3">
+<h3 id="sec-2-6">App resources</h3>
+<div class="outline-text-3" id="text-2-6">
+
+
+<p>
+&lt;manifest &hellip; &gt;
+    &lt;uses-feature android:name="android.hardware.sensor.compass"
+                  android:required="true" /&gt;
+&lt;/manifest&gt;
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">System permissions</h2>
+<div class="outline-text-2" id="text-3">
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1">Define requirements</h3>
+<div class="outline-text-3" id="text-3-1">
+
+
+
+
+<pre class="src src-xml">&lt;<span style="color: #b58900;">manifest</span>&gt;
+    &lt;<span style="color: #b58900;">uses-feature</span> <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">name</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">android.hardware.sensor.compass</span><span style="color: #2aa198;">"</span>
+                  <span style="color: #6c71c4;">android</span>:<span style="color: #6c71c4;">required</span>=<span style="color: #2aa198;">"</span><span style="color: #2aa198;">true</span><span style="color: #2aa198;">"</span> /&gt;
+&lt;/<span style="color: #b58900;">manifest</span>&gt;
+</pre>
+
+<p>
+Devises doesn't have required features can not install the app. If the feature is optional, set "required=false" to make it available(check requirements in code).
+</p></div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2015-11-13T16:59+0800</p>
+<p class="author">Author: rexhouy</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>
